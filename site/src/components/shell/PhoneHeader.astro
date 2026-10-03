@@ -1,0 +1,44 @@
+---
+// Phones: a floating glass header (YC, name, Résumé). Case studies swap it for round back and share buttons.
+import { ChevronLeft, Share } from 'lucide-react';
+import { site } from '../../content/site';
+
+interface Props {
+  variant?: 'default' | 'case';
+  isHome?: boolean;
+  backHref?: string;
+  backLabel?: string;
+}
+
+const { variant = 'default', isHome = false, backHref = '/work', backLabel = 'Back to work' } = Astro.props;
+---
+
+{
+  variant === 'default' ? (
+    <div class="pointer-events-none fixed inset-x-0 top-0 z-50 flex px-3 md:hidden">
+      <header class="glass-thin pointer-events-auto mt-2.5 flex h-14 flex-1 items-center gap-2 rounded-[28px] py-1.5 pr-1.5 pl-2">
+        <a href={isHome ? '#top' : '/'} class="flex h-11 min-w-0 flex-1 items-center gap-2.5 text-[15px] font-semibold tracking-[-0.012em]">
+          <span class="yc-mark" aria-hidden="true">
+            {site.initials}
+          </span>
+          {site.name}
+        </a>
+        <a
+          href={site.links.resume}
+          class="pill flex h-11 items-center rounded-full bg-accent px-4 text-[14px] font-semibold tracking-[-0.016em] text-on-accent"
+        >
+          Résumé
+        </a>
+      </header>
+    </div>
+  ) : (
+    <div class="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-between px-3 md:hidden">
+      <a href={backHref} aria-label={backLabel} class="glass-round pointer-events-auto mt-2.5">
+        <ChevronLeft size={22} strokeWidth={2.2} aria-hidden="true" />
+      </a>
+      <button type="button" aria-label="Share this case study" data-share class="glass-round pointer-events-auto mt-2.5">
+        <Share size={20} strokeWidth={2} aria-hidden="true" />
+      </button>
+    </div>
+  )
+}

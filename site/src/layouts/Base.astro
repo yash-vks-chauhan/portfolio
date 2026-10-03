@@ -1,0 +1,89 @@
+---
+// Every page: the no-flash theme script, metadata, the floating chrome (nav capsule or phone header and tab bar),
+// and the shared islands (source sheet, ⌘K command bar, toaster). Pages pass their footer via the "footer" slot.
+import '../styles/global.css';
+import themeInit from '../lib/theme-init.js?raw';
+import NavCapsule from '../components/shell/NavCapsule.astro';
+import PhoneHeader from '../components/shell/PhoneHeader.astro';
+import TabBar from '../components/shell/TabBar.astro';
+import SourceSheet from '../components/shell/SourceSheet';
+import CommandBar from '../components/shell/CommandBar';
+import Toaster from '../components/shell/Toaster';
+import GradualBlur from '../components/bits/GradualBlur';
+import { site } from '../content/site';
+import type { Section } from '../lib/nav';
+
+interface Props {
+  title: string;
+  description: string;
+  section?: Section;
+  isHome?: boolean;
+  /** Phones: the default header, or round back/share buttons (case studies). */
+  phoneHeader?: 'default' | 'case';
+  /** Open Graph image path (absolute, under /og/). */
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
+}
+
+const { title, description, section = 'none', isHome = false, phoneHeader = 'default', ogImage = '/og/default.png', ogType = 'website', noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site);
+const ogUrl = new URL(ogImage, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#F5F5F7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <script is:inline set:html={themeInit} />
+    <meta name="color-scheme" content="light dark" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="author" content={site.name} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="me" href={site.links.github} />
+    <noscript>
+      <style>
+        .js-only {
+          display: none !important;
+        }
+        .reveal-on-js {
+          opacity: 1 !important;
+          filter: none !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <GradualBlur position="top" height="6rem" target="page" style={{ zIndex: 45 }} />
+    <NavCapsule current={section} isHome={isHome} />
+    <PhoneHeader variant={phoneHeader} isHome={isHome} />
+    <main id="main">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <TabBar current={section} isHome={isHome} />
+    <SourceSheet client:idle />
+    <CommandBar client:idle />
+    <Toaster client:idle />
+  </body>
+</html>

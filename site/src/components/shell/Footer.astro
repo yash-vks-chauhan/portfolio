@@ -1,0 +1,66 @@
+---
+// Footer: numbered footnotes for every sourced number on the page (in citation order), then copyright and links.
+// Phones get the terser footnote wording drawn on the mobile artboard, and a row with search and the appearance switch
+// (the phone chrome has no other place for them).
+import { Search } from 'lucide-react';
+import ThemeSwitch from './ThemeSwitch';
+import { site } from '../../content/site';
+import type { Source } from '../../content/types';
+
+interface Props {
+  notes?: { n: number; source: Source }[];
+  /** "site" → "Every number on this site is sourced."; "page" → "… on this page …". */
+  claim?: 'site' | 'page';
+  /** Where the "Sources" link points; omit to hide it. */
+  sourcesHref?: string;
+  /** Top margin on desktop (120 on home, 96 elsewhere). */
+  gap?: 96 | 120;
+}
+
+const { notes = [], claim = 'site', sourcesHref, gap = 96 } = Astro.props;
+const claimText = claim === 'page' ? site.footerPage : site.footer;
+---
+
+<footer class:list={['mx-auto box-border w-full max-w-[1120px] px-6 pb-14 max-md:mt-[72px] max-md:px-4 max-md:pb-[120px]', gap === 120 ? 'md:mt-[120px]' : 'md:mt-24']}>
+  {
+    notes.length > 0 && (
+      <ol
+        id="footnotes"
+        aria-label="Sources"
+        class="m-0 flex list-none flex-col gap-2.5 border-t border-sep p-0 pt-6 text-[12px] leading-[1.5] tracking-[-0.004em] text-label2 max-md:gap-2 max-md:pt-[18px] max-md:tracking-normal"
+      >
+        {notes.map(({ n, source }) => (
+          <li id={`fn-${n}`} class="flex gap-2 max-md:gap-1.5">
+            <span class="min-w-3.5 font-semibold">{n}.</span>
+            <span class="max-md:hidden">{source.note}</span>
+            <span class="md:hidden">{source.notePhone ?? source.noteShort ?? source.note}</span>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+  <div
+    class:list={[
+      'flex flex-wrap justify-between gap-3 text-[12px] tracking-[-0.004em] text-label2 max-md:hidden',
+      notes.length > 0 ? 'mt-6 border-t border-sep pt-[18px]' : 'border-t border-sep pt-[18px]',
+    ]}
+  >
+    <span>{site.copyright} {claimText}</span>
+    <span class="flex flex-wrap gap-x-[18px] gap-y-1.5">
+      <a href={site.links.resume} class="hover:text-label">Résumé</a>
+      <a href={site.links.github} rel="me" class="hover:text-label">GitHub</a>
+      <a href={site.links.linkedin} rel="me" class="hover:text-label">LinkedIn</a>
+      {sourcesHref && <a href={sourcesHref} class="hover:text-label">Sources</a>}
+    </span>
+  </div>
+  <div class="md:hidden">
+    <p class:list={['m-0 text-[12px] tracking-normal text-label2', notes.length > 0 ? 'mt-4' : 'border-t border-sep pt-[18px]']}>{site.copyright}</p>
+    <div class="mt-5 flex items-center justify-between gap-3">
+      <button type="button" data-command class="flex h-11 items-center gap-2 rounded-full bg-fill2 px-4 text-[15px] tracking-[-0.012em] text-label2">
+        <Search size={16} strokeWidth={2} aria-hidden="true" />
+        Search
+      </button>
+      <ThemeSwitch client:visible className="m-0" />
+    </div>
+  </div>
+</footer>

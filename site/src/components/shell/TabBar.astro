@@ -1,0 +1,41 @@
+---
+// Phones: the floating tab bar (Home, Work, About, Contact) with a separate round Ask button, 16 px above the bottom.
+import { House, LayoutGrid, Mail, Sparkles, User } from 'lucide-react';
+import { tabLinks, type Section } from '../../lib/nav';
+
+interface Props {
+  current: Section;
+  isHome?: boolean;
+}
+
+const { current, isHome = false } = Astro.props;
+const icons = { house: House, 'layout-grid': LayoutGrid, user: User, mail: Mail };
+const tabs = tabLinks(isHome);
+---
+
+<nav aria-label="Tabs" class="tab-bar fixed inset-x-3 z-40 flex items-center gap-2.5 md:hidden">
+  <div class="tab-group flex h-16 flex-1 gap-0.5 rounded-[32px] p-1">
+    {
+      tabs.map((t) => {
+        const Icon = icons[t.icon];
+        const on = t.key === current;
+        return (
+          <a
+            href={t.href}
+            aria-current={on ? 'page' : undefined}
+            class:list={[
+              'flex flex-1 flex-col items-center justify-center gap-0.5 rounded-[28px] text-[10px] tracking-normal',
+              on ? 'bg-fill2 font-semibold text-link' : 'font-medium text-label',
+            ]}
+          >
+            <Icon size={22} strokeWidth={2} aria-hidden="true" />
+            {t.label}
+          </a>
+        );
+      })
+    }
+  </div>
+  <a href={isHome ? '#ask' : '/#ask'} aria-label="Ask my portfolio" class="tab-group flex size-16 flex-none items-center justify-center rounded-full text-[#AF52DE]">
+    <Sparkles size={24} strokeWidth={2} aria-hidden="true" />
+  </a>
+</nav>

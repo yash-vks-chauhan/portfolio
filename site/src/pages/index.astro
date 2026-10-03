@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/shell/Footer.astro';
+import { numberSources, footnotes } from '../lib/citations';
+
+const n = numberSources(['gridee-downloads', 'glassbox-eval-v4', 'glassbox-ci', 'iitm-internship']);
+---
+
+<Base title="Yash Chauhan · AI/ML Engineer" description="Shell test" section="home" isHome>
+  <section id="top" class="mx-auto max-w-[1120px] px-6 pt-[184px] pb-[300px]">
+    <h1 class="text-display">Shell</h1>
+    <p>Cite test <a href="#fn-2" class="cite" data-cite="glassbox-eval-v4" data-n="2" aria-label="Source 2: glassbox-eval-v4 report">2</a></p>
+  </section>
+  <section id="ask" class="h-[600px]">Ask</section>
+  <section id="work" class="h-[600px]">Work</section>
+  <section id="about" class="h-[600px]">About</section>
+  <section id="contact" class="h-[600px]">Contact</section>
+  <Footer slot="footer" notes={footnotes(n)} sourcesHref="#footnotes" gap={120} />
+</Base>

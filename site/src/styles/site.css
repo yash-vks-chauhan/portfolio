@@ -1,0 +1,416 @@
+/* Site-level styles the token files don't cover. Sizes come from design/prototype (the inline styles there).
+   Phones are anything narrower than 48rem (768 px): Tailwind's max-md / md variants use the same breakpoint. */
+
+html {
+  scroll-padding-top: 104px; /* clears the floating nav capsule */
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+@media (width < 48rem) {
+  html {
+    scroll-padding-top: 84px;
+  }
+}
+
+::selection {
+  background: var(--blue-wash);
+}
+
+/* The command bar's input sits in a row that is already the focus context: no extra ring. */
+.cmdk-input-row [cmdk-input]:focus-visible {
+  outline: none;
+}
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -80px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: var(--on-accent);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* View Transitions cross-fade for the theme switch (ThemeSwitch.tsx). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
+@layer components {
+  /* Section heads: eyebrow, Title 1, lead. */
+  .eyebrow {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    color: var(--link);
+  }
+  .title1 {
+    margin: 8px 0 0;
+    font-size: clamp(36px, 4.4vw, 56px);
+    line-height: 1.07;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+  }
+  .section-lead {
+    margin: 16px 0 0;
+    font-size: 21px;
+    line-height: 1.42;
+    letter-spacing: 0;
+    color: var(--label2);
+  }
+  @media (width < 48rem) {
+    .eyebrow {
+      font-size: 15px;
+    }
+    .title1 {
+      margin-top: 6px;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: -0.006em;
+    }
+    .section-lead {
+      margin-top: 10px;
+      font-size: 17px;
+      line-height: 1.45;
+      letter-spacing: -0.012em;
+    }
+  }
+
+  /* Interaction states from the prototypes. */
+  .nl {
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  .nl:hover {
+    background: var(--fill2);
+    color: var(--label);
+  }
+  .pill {
+    transition:
+      filter 0.2s,
+      transform 0.2s;
+  }
+  .pill:hover {
+    filter: brightness(1.08);
+  }
+  .pill:active {
+    transform: scale(0.97);
+  }
+  .tap {
+    transition: background-color 0.2s;
+  }
+  .tap:hover {
+    background: var(--fill2);
+  }
+  .row {
+    transition: background-color 0.2s;
+  }
+  .row:hover {
+    background: var(--fill);
+  }
+  .toc-link {
+    transition: color 0.2s;
+  }
+  .toc-link:hover {
+    color: var(--label);
+  }
+  .snap {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .snap::-webkit-scrollbar {
+    display: none;
+  }
+  .snap > * {
+    scroll-snap-align: start;
+  }
+
+  /* The numbered source marker. A real button: it opens the source sheet. */
+  .cite {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    padding: 0 6px;
+    margin-left: 4px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--blue-wash);
+    color: var(--cite);
+    font-family: var(--font-system);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1;
+    vertical-align: 2px;
+    cursor: pointer;
+  }
+  .cite:hover {
+    filter: brightness(0.96);
+  }
+
+  /* The YC squircle in the nav, the phone header and the Ask panel. */
+  .yc-mark {
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #3a3a3c, #0b0b0c);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  /* Phone chrome: round glass buttons (case-study back and share) and the tab bar. */
+  .glass-round {
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+      inset 0 0 0 1px var(--glass-border),
+      var(--shadow);
+    color: var(--label);
+    cursor: pointer;
+  }
+  .tab-bar {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+  .tab-group {
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+      inset 0 0 0 1px var(--glass-border),
+      var(--shadow-lg);
+  }
+
+  /* The appearance switch: a thumb that slides between sun and moon. */
+  .theme-switch {
+    position: relative;
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    margin: 0 4px;
+    border-radius: 999px;
+    background: var(--fill2);
+  }
+  .theme-switch button {
+    position: relative;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--label2);
+    cursor: pointer;
+    transition: color 0.25s;
+  }
+  .theme-switch button:hover {
+    color: var(--label);
+  }
+  .theme-switch-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: var(--seg-on);
+    box-shadow: var(--seg-on-shadow);
+    transition: transform 0.32s var(--ease-out);
+  }
+  :root[data-theme='dark'] .theme-switch-thumb {
+    transform: translateX(42px);
+  }
+  :root:not([data-theme='dark']) .theme-switch button[data-value='light'],
+  :root[data-theme='dark'] .theme-switch button[data-value='dark'] {
+    color: var(--label);
+  }
+
+
+  /* ⌘K command bar (cmdk), as drawn on the Components artboard. */
+  .cmdk-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: rgba(0, 0, 0, 0.2);
+    animation: glass-fade 0.3s ease-out;
+  }
+  .cmdk-content {
+    position: fixed;
+    z-index: 71;
+    left: 50%;
+    top: 14vh;
+    width: min(480px, calc(100vw - 32px));
+    translate: -50% 0;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    box-shadow:
+      inset 0 0 0 1px var(--hair),
+      var(--shadow-lg);
+    color: var(--label);
+    animation: glass-rise 0.45s var(--ease-out);
+  }
+  .cmdk-input-row {
+    height: 52px;
+    box-sizing: border-box;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--sep);
+  }
+  .cmdk-input-row [cmdk-input] {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font: inherit;
+    font-size: 17px;
+    letter-spacing: -0.022em;
+    color: var(--label);
+  }
+  .cmdk-input-row [cmdk-input]::placeholder {
+    color: var(--label2);
+  }
+  .cmdk-esc {
+    height: 26px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--fill2);
+    color: var(--label2);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .cmdk-content [cmdk-list] {
+    padding: 8px;
+    max-height: min(60vh, 440px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .cmdk-content [cmdk-group-heading] {
+    padding: 10px 10px 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--label2);
+  }
+  .cmdk-content [cmdk-item] {
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    letter-spacing: -0.012em;
+    cursor: pointer;
+  }
+  .cmdk-content [cmdk-item][data-selected='true'] {
+    background: var(--blue);
+    color: var(--on-accent);
+  }
+  .cmdk-hint {
+    font-size: 12px;
+    opacity: 0;
+  }
+  .cmdk-content [cmdk-item][data-selected='true'] .cmdk-hint {
+    opacity: 0.8;
+  }
+  .cmdk-content [cmdk-empty] {
+    padding: 14px 10px;
+    font-size: 15px;
+    color: var(--label2);
+  }
+
+  /* The toast pill (sonner). */
+  .glass-toast {
+    margin-inline: auto;
+    width: 280px;
+    max-width: calc(100vw - 32px);
+    height: 52px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+      inset 0 0 0 1px var(--hair),
+      var(--shadow-lg);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    color: var(--label);
+  }
+
+  /* Rounded numerals: widgets, stat strips, ranks (SF Pro Rounded on Apple devices). */
+  .num {
+    font-family: var(--font-rounded-stack);
+  }
+}
+
+@keyframes glass-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes glass-rise {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill,
+  .lift {
+    transition: none;
+  }
+  .cmdk-overlay,
+  .cmdk-content {
+    animation: none;
+  }
+}
