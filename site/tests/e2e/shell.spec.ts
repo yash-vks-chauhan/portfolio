@@ -2,6 +2,16 @@
 // the command bar and source sheet open and close by keyboard; the "Email copied" toast appears.
 import { test, expect, type Page } from '@playwright/test';
 
+/** Presses ⌘K until the command bar opens (its listener attaches in an effect just after hydration). */
+async function openCommandBar(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Search the site' });
+  await expect(async () => {
+    if (!(await dialog.isVisible())) await page.keyboard.press('ControlOrMeta+k');
+    await expect(dialog).toBeVisible({ timeout: 500 });
+  }).toPass({ timeout: 5_000 });
+  return dialog;
+}
+
 /** Waits until the named islands have hydrated (Astro drops the ssr attribute). */
 async function hydrated(page: Page, ...names: string[]) {
   for (const name of names) {
@@ -72,9 +82,7 @@ test.describe('command bar', () => {
   test('⌘K opens it, it filters, Esc closes it', async ({ page }) => {
     await page.goto('/');
     await hydrated(page, 'CommandBar');
-    await page.keyboard.press('ControlOrMeta+k');
-    const dialog = page.getByRole('dialog', { name: 'Search the site' });
-    await expect(dialog).toBeVisible();
+    const dialog = await openCommandBar(page);
     await page.keyboard.type('gridee');
     await expect(dialog.getByRole('option', { name: /Gridee/ })).toBeVisible();
     await expect(dialog.getByRole('option', { name: /GlassBox/ })).toHaveCount(0);
@@ -86,7 +94,7 @@ test.describe('command bar', () => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto('/');
     await hydrated(page, 'CommandBar', 'Toaster');
-    await page.keyboard.press('ControlOrMeta+k');
+    await openCommandBar(page);
     await page.keyboard.type('copy email');
     await page.keyboard.press('Enter');
     await expect(page.getByRole('status').filter({ hasText: 'Email copied' })).toBeVisible();
