@@ -5,9 +5,11 @@ This repo holds everything collected for the personal portfolio site: the facts,
 | Phase | Status |
 |---|---|
 | 1. Collect information (resume, GitHub, local projects) | **~90%.** Flagship repos read in depth (Oct 3). AgentEval and timeentropy are still only on the Mac, so they're unread. |
-| 2. Deep research (best practices, design, stack, hosting, SEO) | **In progress.** The report will land in `reports/`, with notes in `research_notes/`. |
+| 2. Deep research (best practices, design, stack, hosting, SEO) | **Done (Oct 3).** Report: [`reports/Portfolio best practices 2026.md`](reports/Portfolio%20best%20practices%202026.md). Notes: [`research_notes/`](research_notes/Portfolio%20best%20practices%202026/). |
 | 3. Content + design decisions | **Next.** See [Decisions needed](#decisions-needed). |
 | 4. Development | Not started |
+
+**Start here:** [Decisions needed](#decisions-needed) · [UI styling directions](#ui-styling-directions-to-choose-from) · [Research summary](#research-summary) · [Claims audit](#claims-audit) · [Project deep-dives](#project-deep-dives)
 
 ---
 
@@ -27,7 +29,7 @@ This repo holds everything collected for the personal portfolio site: the facts,
 - **Email:** yash.vks.chauhan@gmail.com
 - **LinkedIn:** ⚠️ two different handles are in use. The resume and this README use `linkedin.com/in/yashvschauhan`. The GitHub profile README links `linkedin.com/in/yash-vks-chauhan`. **Confirm which one is real** and use it everywhere (it matters for name SEO).
 - **GitHub:** https://github.com/yash-vks-chauhan. The bio, website and location fields are empty; fill them once the site is live.
-- **Phone:** on the resume. ⚠️ **It is also public in the GitHub profile HUD image** (`assets/hud-header.svg`, bottom "COMMS" row). If you don't want it public, remove it there too. Recommendation for the site: no phone; email + LinkedIn + a contact form are enough.
+- **Phone:** on the resume. ⚠️ **It is also public in the GitHub profile HUD image** (`assets/hud-header.svg`, bottom "COMMS" row). If you don't want it public, remove it there too. Recommendation for the site: no phone in the HTML (keep it on the PDF only); a visible `mailto:` link + LinkedIn are enough, and a form is optional.
 
 ## Education
 
@@ -212,10 +214,12 @@ Every number on the site must match a repo, a paper or a document you can show. 
 
 ## Proposed project tiering
 
-1. **Featured case studies (3):** GlassBox → Pulse → Autoscaler. Each gets its own page: problem, constraints, architecture, key decisions, results with caveats, what's next.
-2. **Experience with real-world proof:** Gridee (users), IIT Madras (research at scale), Hindalco (industry).
-3. **Research:** EMS drift paper, DCI paper, and Time-Entropy once confirmed.
-4. **More work (cards):** Kalakraft (framed as the security self-audit), CT denoising (with the slider), AgentEval once read.
+Updated after the research (see the report's lineup table):
+
+1. **Flagship case studies:** **GlassBox → Pulse → Gridee → Research** (IIT Madras EMS + DCI). Each flagship page follows one template: a TL;DR with the result and its caveat in the same sentence, problem and users, constraints, one architecture diagram, 2–4 key decisions with the rejected alternative, results with the measurement method, evals and tests, what broke, what I'd do differently, and a short note on AI-tool use.
+2. **More work:** Autoscaler, Kalakraft (framed as the security self-audit), CT denoising (with the before/after slider), and AgentEval once read.
+   - **Autoscaler moves down for now** because a self-healing system with no tests contradicts the "inspectable systems" thesis. Add tests on the safety rails (cooldown, circuit breaker, approval gate, replica cap) and fix the SHAP/LSTM wording, and it can move back up.
+3. **Experience:** Gridee, IIT Madras and Hindalco on a timeline, linking to the case studies.
 
 ---
 
@@ -251,16 +255,100 @@ Every number on the site must match a repo, a paper or a document you can show. 
 
 ## Research summary
 
-*In progress. This section will summarize the report once it's written.*
+Full report: [`reports/Portfolio best practices 2026.md`](reports/Portfolio%20best%20practices%202026.md) (~6,500 words, 86 citations). One caveat runs through all of it: the research container's proxy blocked most direct page fetches, so many figures come from search-result extracts. The notes flag which ones. There is also no 2024–2026 study of how recruiters use portfolio sites; the advice rests on 2026 hiring surveys, practitioner consensus and platform docs.
+
+**1. What hiring teams want in 2026: checkable evidence of judgment, not polish.**
+- AI-polished applications have made resumes less trusted. In CoderPad's 2026 survey, 69% of recruiters use resume review but only 16% think it predicts performance.
+- The signals hiring teams trust when AI is allowed are catching and fixing AI mistakes (66%) and explaining trade-offs (56%).
+- Karat (Jan 2026, 400 engineering leaders in the US, India and China): 71% say AI makes skills harder to assess.
+- The site therefore needs **two layers**: a homepage that survives a ~10-second recruiter skim (name, positioning line, B.Tech AI/ML 2027, three proof points, resume PDF at a stable `/resume.pdf`, email, GitHub, LinkedIn), and **3–4 deep case studies** that reward a 5-minute engineer audit.
+- India specifics: campus placements run on online assessments, so the site rarely moves cut-offs there. Startups, GCCs and AI-first companies (via Wellfound/Cutshort) screen on projects, so it matters a lot. For international roles it works best as the link in a referral or cold email.
+
+**2. ML projects: frame each around a guarantee, and make every number checkable.**
+- Use Eugene Yan's ML design-doc structure for case studies.
+- Present evals the way Hamel Husain and Shreya Shankar recommend: per-category pass rates with **Wilson intervals** (90% on 183 questions ≈ 84.8–93.6%; on a 20-question category ≈ 70–97%), refusals as two numbers (correct refusals and over-refusals), and a table of failure types.
+- **Pulse's `AI_WORKFLOW.md` is the most under-used asset in the portfolio.** Lift 2–3 concrete "AI got this wrong, I caught it" examples onto the page.
+- Every demo needs layers: a GIF, a 90-second video, a "try live (may take ~45 s to wake)" link, and screenshots.
+- Wording: say "tamper-evident", never "tamper-proof". Keep "under review" papers in a separate section, never under "Publications".
+
+**3. Design: keep the warm-paper editorial look (it is already GlassBox's language).**
+- Source Serif 4 + Geist + Geist Mono are free (OFL) and on-trend; no font change is needed.
+- Bring the GitHub "mission control" style in as **one instrument-panel module** (Geist Mono readout, tabular numbers), not as a dark terminal theme.
+- References to borrow from: Steph Ango's Flexoki palette, Lilian Weng / Eugene Yan / Karpathy (plain, fast, writing-first), Lee Robinson / Paco Coursey (restraint), and one signature micro-interaction in the style of Emil Kowalski or Rauno Freiberg.
+- **Avoid:** Brittany Chiang clones (so widely copied it reads as a template), site-wide 3D/WebGPU, terminal boot screens, glassmorphism.
+- Accessibility: WCAG 2.2 AA. Small grey micro-labels must reach 4.5:1, and the dark theme needs a lighter accent than navy.
+
+**4. Stack: Astro 7 fits a content site; Next.js 16 fits your muscle memory.** Recruiters don't judge the framework.
+- **Astro 7.3** ships near-zero JS on case-study pages, has typed MDX content collections built in, and supports React islands for the CT slider, trace replay and charts. Watch out: its new Rust Markdown engine doesn't run remark/rehype plugins, so keep the remark pipeline on for KaTeX. It had two majors in 2026, so pin the version. Cloudflare acquired the Astro team in Jan 2026; it stays MIT.
+- **Next.js 16.3:** no ramp-up for you. But its MDX tooling has fragmented (Contentlayer abandoned, `next-mdx-remote` archived Apr 2026), and static export loses `next/image` optimization.
+- Don't fork paid or NC-licensed templates (Spotlight is commercial; Magic Portfolio is CC BY-NC). AstroPaper (MIT) is fine as a reference.
+
+**5. Hosting, domain, SEO, analytics: about $12/year in total.**
+- **Hosting:** Cloudflare Workers static assets (free, unlimited static requests); GitHub Pages as the fallback. Vercel Hobby is non-commercial only. Netlify's free plan now runs out after about 20 deploys/month.
+- ⚠️ **Since July 2025, new Cloudflare domains block AI crawlers by default. Turn that off.**
+- **Domain:** `yashchauhan.dev` (~$9 first year, ~$13 renewal; availability not checked). Prepay several years, because RBI auto-debit rules can make card renewals fail silently.
+- **Name SEO** ("Yash Chauhan" is a common name):
+  - JSON-LD `ProfilePage` + `Person` with `sameAs` links, plus `rel="me"`;
+  - Search Console, Bing Webmaster Tools and IndexNow;
+  - the same name, role qualifier and handle everywhere.
+  - Expect LinkedIn to compete for the top result.
+- **AI search:** allow GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot and the rest in robots.txt. llms.txt is optional (97% of them got zero requests in an Ahrefs sample). Add a plain-HTML bio paragraph assistants can quote.
+- **Analytics:** Cloudflare Web Analytics or Umami (cookieless, so no banner). No GA4.
+
+## UI styling directions to choose from
+
+All three use the same content. The research favours **A**; **C** is a middle path if you want the HUD personality on the site.
+
+| | A. Paper & ink (recommended) | B. Mission control | C. Paper + instrument panel |
+|---|---|---|---|
+| Feel | Editorial, calm, like a well-typeset engineering paper | Dark HUD / telemetry console, like your GitHub profile | A, plus one dark-on-paper "telemetry" module on the home page |
+| Type | Source Serif 4 headings, Geist body, Geist Mono labels | Geist Mono throughout, uppercase letter-spaced labels | As A; the module uses Geist Mono with tabular numbers |
+| Colour | Warm paper (#FAF8F3-ish), ink, navy accent; designed warm dark mode | Near-black, cyan / green / amber status colours | As A, with status colours only inside the module |
+| Motion | View transitions, one signature micro-interaction | Live counters, blinking status dots | As A; the module's numbers count up once (respecting reduced motion) |
+| Pros | Credible, fast, ages well, matches GlassBox | Memorable, ties to the GitHub profile | Distinctive without hurting readability |
+| Risks | Can feel plain if the writing is weak | Reads as a gimmick to some reviewers; contrast and accessibility are harder; dated quickly | Must keep the module small |
 
 ---
 
 ## Decisions needed
 
-*To be filled in after the research summary.*
+**Build decisions (yours to make; my recommendation first):**
+1. **Positioning headline:** "AI/ML engineer who builds AI systems you can audit", or keep the GitHub line "turning model demos into inspectable systems"? Or lead with founder-engineer instead?
+2. **Stack:** Astro 7 (recommended for a content site) or Next.js 16 (zero ramp-up, best if you want it live in days or plan server features)?
+3. **Visual direction:** A, B or C above.
+4. **Domain and host:** `yashchauhan.dev` on Cloudflare (check availability first), or something else you already own?
+5. **Flagship set:** GlassBox, Pulse, Gridee, Research, with Autoscaler under "More work" until it has tests. Agree?
+6. **Writing section:** launch with 2–3 short notes (e.g. "why GlassBox's log is tamper-evident, not tamper-proof", "how Pulse keeps the LLM away from SQL", "what I corrected while directing Claude Code"), or skip notes for v1?
+
+**Facts only you can confirm:**
+1. Which LinkedIn handle is right: `yashvschauhan` or `yash-vks-chauhan`?
+2. Should the phone number stay in the GitHub HUD image?
+3. EMS paper: the current venue (ESWA? TR-C? BMC?), and what the PI allows you to show (the 3.6M-record count, maps, the institution name).
+4. DELCON: has the decision come out? (Check EDAS; the conference is Nov 19–21.)
+5. Kalakraft: a real business with real orders, or a portfolio build? Who else worked on it?
+6. Pulse: did the Xeno assignment lead anywhere, and do its terms allow public posting?
+7. AWS ML Specialty: earned or in progress? The resume and the GitHub profile disagree.
+8. Time-Entropy paper: what is its status, and should it be featured? Can you push it and AgentEval to private GitHub repos so I can read them?
+9. Profile photo: use `~/Desktop/DOCS/Yash.jpeg` or none?
+10. Gridee: the split of work between you and your co-founder, and whether 8,000+ is downloads or active users.
 
 ## Next steps
 
-1. Finish the research report and summarize it here.
-2. Decide on positioning, stack, hosting and visual direction.
-3. Write the content plan and site map, then start development.
+Placements run Aug–Dec, so a credible site in two weeks beats a perfect one in two months. The report's three passes:
+
+1. **Pass 1 (days 1–4):**
+   - fix the claims in the [claims audit](#claims-audit) in the repos and the resume;
+   - add Autoscaler safety-rail tests (or keep it under "More work");
+   - tidy the Kalakraft root and the Gridee-android README;
+   - register the domain;
+   - ship a one-page site: hero, four flagship cards, resume PDF, contacts.
+2. **Pass 2 (week 2):**
+   - GlassBox and Pulse case studies (evals with intervals, trade-offs, AI-workflow excerpts, diagrams, 90-second videos);
+   - JSON-LD, Search Console, Bing, preview images, robots.txt, uptime monitors.
+   - Target: Lighthouse mobile ≥ 95.
+3. **Pass 3 (weeks 3–4):**
+   - Research page (after the DELCON decision and PI sign-off);
+   - Gridee and "More work" pages, the CT slider, the designed dark theme;
+   - the first 2–3 notes.
+
+Before Pass 1: answer the decisions above. Then I'll write the content plan and site map (page list, the copy for each section, and a component list) and scaffold the project.
