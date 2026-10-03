@@ -54,7 +54,12 @@ async function waitFor(url, ms = 30_000) {
   throw new Error(`Server at ${url} didn't start`);
 }
 
-const server = spawn('npx', ['astro', 'preview', '--port', String(port), '--ignore-lock'], { cwd: root, stdio: 'ignore' });
+const server = spawn('npx', ['astro', 'preview', '--port', String(port), '--ignore-lock'], { cwd: root, stdio: 'ignore', detached: true });
+const stopServer = () => {
+  try {
+    process.kill(-server.pid, 'SIGTERM');
+  } catch {}
+};
 try {
   await waitFor(base);
   const executablePath = process.env.PW_CHROMIUM || (fs.existsSync('/opt/pw-browsers/chromium') ? '/opt/pw-browsers/chromium' : undefined);
@@ -89,5 +94,5 @@ try {
   }
   await browser.close();
 } finally {
-  server.kill();
+  stopServer();
 }

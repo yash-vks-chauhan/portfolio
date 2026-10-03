@@ -672,6 +672,274 @@ html {
     }
   }
 
+
+  /* ── Home: sections ─────────────────────────────────────────────────────── */
+  .home-section {
+    width: 100%;
+    max-width: 1120px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 160px 24px 0;
+  }
+  .section-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  @media (width < 48rem) {
+    .home-section {
+      padding: 96px 16px 0;
+    }
+    .section-centered.phone-left {
+      align-items: stretch;
+      text-align: left;
+    }
+  }
+
+  /* ── Home: Ask my portfolio ─────────────────────────────────────────────── */
+  .ask-panel {
+    margin-top: 48px;
+    width: 100%;
+    max-width: 880px;
+    box-sizing: border-box;
+    padding: 28px;
+    border-radius: 32px;
+    background: var(--card);
+    box-shadow:
+      var(--shadow-sm),
+      var(--shadow-lg);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .ask-field {
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 10px 0 18px;
+    background: var(--fill);
+  }
+  .ask-spark {
+    color: #af52de;
+  }
+  .ask-input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 17px;
+    letter-spacing: -0.022em;
+    color: var(--label);
+  }
+  .ask-send {
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--blue);
+    color: var(--on-accent);
+    cursor: pointer;
+  }
+  .ask-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ask-suggestion {
+    height: 36px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--fill);
+    color: var(--label2);
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: -0.016em;
+    cursor: pointer;
+  }
+  .ask-suggestion.is-on {
+    background: var(--blue);
+    color: #fff;
+    font-weight: 600;
+  }
+  .ask-thread {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ask-turn {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ask-turn + .ask-turn {
+    margin-top: 6px;
+  }
+  .ask-question {
+    margin: 0;
+    align-self: flex-end;
+    max-width: 72%;
+    padding: 11px 18px;
+    border-radius: 22px;
+    background: var(--blue);
+    color: var(--on-accent);
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  .ask-answer-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .ask-avatar {
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #3a3a3c, #0b0b0c);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  .ask-bubble {
+    flex: 1;
+    min-width: 0;
+    padding: 18px 20px;
+    border-radius: 22px;
+    background: var(--fill);
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .ask-bubble-refusal {
+    padding: 16px 20px;
+  }
+  .ask-refused {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--mute-wash);
+    color: var(--mute);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .ask-chips {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ask-source-chip {
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--card);
+    box-shadow: inset 0 0 0 1px var(--sep);
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: -0.006em;
+    color: var(--label2);
+    cursor: pointer;
+  }
+  .ask-source-chip strong {
+    font-weight: 600;
+    color: var(--cite);
+  }
+  .ask-fade {
+    animation: glass-fade 0.3s ease-out;
+  }
+  @media (width < 48rem) {
+    .ask-panel {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 28px;
+      box-shadow:
+        var(--shadow-sm),
+        var(--shadow);
+      gap: 12px;
+    }
+    .ask-field {
+      height: 52px;
+      border-radius: 18px;
+      gap: 10px;
+      padding: 0 6px 0 14px;
+    }
+    .ask-field::before {
+      border-radius: 20px;
+    }
+    .ask-field::after {
+      inset: -8px;
+      border-radius: 26px;
+      filter: blur(18px);
+      opacity: 0.24;
+    }
+    .ask-spark {
+      width: 18px;
+      height: 18px;
+    }
+    .ask-send svg {
+      width: 19px;
+      height: 19px;
+    }
+    .ask-thread {
+      margin-top: 4px;
+    }
+    .ask-question {
+      max-width: 84%;
+      padding: 10px 14px;
+      border-radius: 20px 20px 6px 20px;
+      font-size: 16px;
+      letter-spacing: -0.016em;
+    }
+    .ask-answer-row {
+      gap: 0;
+    }
+    .ask-avatar {
+      display: none;
+    }
+    .ask-bubble,
+    .ask-bubble-refusal {
+      padding: 14px 16px;
+      border-radius: 20px 20px 20px 6px;
+      font-size: 16px;
+      letter-spacing: -0.016em;
+    }
+    .ask-chips {
+      margin-top: 10px;
+      gap: 6px;
+    }
+    .ask-source-chip {
+      height: 28px;
+      gap: 6px;
+      padding: 0 10px;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+  }
+
   /* Rounded numerals: widgets, stat strips, ranks (SF Pro Rounded on Apple devices). */
   .num {
     font-family: var(--font-rounded-stack);

@@ -11,7 +11,12 @@ const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const out = path.join(root, 'shots', 'states');
 fs.mkdirSync(out, { recursive: true });
 const port = 4330;
-const server = spawn('npx', ['astro', 'preview', '--port', String(port), '--ignore-lock'], { cwd: root, stdio: 'ignore' });
+const server = spawn('npx', ['astro', 'preview', '--port', String(port), '--ignore-lock'], { cwd: root, stdio: 'ignore', detached: true });
+const stopServer = () => {
+  try {
+    process.kill(-server.pid, 'SIGTERM');
+  } catch {}
+};
 const base = `http://localhost:${port}`;
 for (let i = 0; i < 120; i++) {
   try { if ((await fetch(base)).ok) break; } catch {}
@@ -52,5 +57,5 @@ try {
   }
 } finally {
   await browser.close();
-  server.kill();
+  stopServer();
 }

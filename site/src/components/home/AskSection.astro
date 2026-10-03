@@ -1,0 +1,13 @@
+---
+// "Ask my portfolio": the signature section. Centred on desktop, left-aligned on phones, as drawn.
+import AskPanel from './AskPanel';
+---
+
+<section id="ask" class="home-section section-centered phone-left">
+  <p class="eyebrow">Ask my portfolio</p>
+  <h2 class="title1">Every answer, sourced.</h2>
+  <p class="section-lead max-w-[640px]">
+    <span class="max-md:hidden">A small GlassBox over this site. </span>It answers from my projects and cites them, or it tells you it doesn’t know.
+  </p>
+  <AskPanel client:idle />
+</section>
