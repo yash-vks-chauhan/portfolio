@@ -13,7 +13,7 @@ export const sources: Source[] = [
     checked: '[screenshot date]',
     url: '[store-console screenshot]',
     note: 'Gridee downloads: Google Play Console and App Store Connect, combined, as of [screenshot date].',
-    notePhone: 'Play Console and App Store Connect, combined, as of [screenshot date].',
+    notePhone: 'Play Console and App Store Connect, combined, as of [date].',
     chip: 'Play Console + App Store Connect · [screenshot date]',
   },
   {

@@ -19,7 +19,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - [x] **2. Hero and widgets:** `HeroBackground`, `LiveChip`, BlurText headline, buttons, four `glass-regular` widgets with `Cite`. *Done when:* matches `preview-home-light.jpg` and `preview-home-dark.jpg`; reduced motion shows the still frame; the source sheet opens and closes by keyboard
 - [x] **3. Ask my portfolio:** `AskPanel` (v1, no server); optional CallChip "searching sources" step. *Done when:* the four suggestions behave like the Components artboard: three cited answers and one refusal
 - [x] **4. Selected work:** GlassBox card (TiltedCard screenshot plus the "Flagged for compliance" toast), Pulse DSL card, Gridee phone card, Research card with Folder, More-work `InsetList` with `StatusChip`. *Done when:* matches the middle of `home-light.jpg` and `home-dark.jpg`
-- [ ] **5. Experience, toolkit, contact:** inset lists plus a vaul side sheet (bottom sheet on phones), GlassIcons with a "used in" panel, the contact card and Dock. *Done when:* matches the bottom of `home-light.jpg`
+- [x] **5. Experience, toolkit, contact:** inset lists plus a vaul side sheet (bottom sheet on phones), GlassIcons with a "used in" panel, the contact card and Dock. *Done when:* matches the bottom of `home-light.jpg`
 - [ ] **6. Case study template:** app header, stat strip, Embla preview carousel, summary, sticky "On this page" (IntersectionObserver), diagram, decision cards, evaluation (`wilson.ts`), CI chain, information list, more work. *Done when:* GlassBox matches `case-study-light.jpg` and `case-study-dark.jpg`; Pulse, Gridee and EMS reuse it; short pages for Autoscaler, Kalakraft and CT denoising
 - [ ] **7. Work index:** RubberSegment filter from `projects.ts` categories, two featured cards, the numbered list, the status legend. *Done when:* matches `work-index.jpg`; the filter counts read 8 · 3 · 3 · 2 · 1 · 1
 - [ ] **8. Phones:** 390 px layouts from the mobile artboards; tab bar; the first screen. *Done when:* matches `mobile-first-screen-light.jpg`, `mobile-first-screen-dark.jpg`, `mobile-home.jpg` and `mobile-case-study-dark.jpg`
@@ -27,7 +27,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 
 ## Pages (light and dark, 1440 and 390 px)
 
-- [ ] Home (`/`)
+- [x] Home (`/`)
 - [ ] Work index (`/work`)
 - [ ] Case studies: GlassBox, Pulse, Gridee, EMS research (`/work/<slug>`)
 - [ ] Short pages: Autoscaler, Kalakraft, CT denoising (`/work/<slug>`)
@@ -35,10 +35,10 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 
 ## Features
 
-- [ ] Theme switch (no flash, remembered, follows the OS until chosen)
-- [ ] Source sheets (vaul) and footnotes, numbered per page; build fails on an unknown source
+- [x] Theme switch (no flash, remembered, follows the OS until chosen)
+- [x] Source sheets (vaul) and footnotes, numbered per page; build fails on an unknown source
 - [x] Ask my portfolio v1 (cited answers or a refusal)
-- [ ] ⌘K search (cmdk): projects, pages and actions
+- [x] ⌘K search (cmdk): projects, pages and actions
 - [ ] Work filter (RubberSegment)
 - [ ] React Bits backgrounds and components, each with a reduced-motion fallback
 
@@ -79,6 +79,9 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - **Selected work:** the GlassBox screenshot tilts (TiltedCard) only with a fine pointer and without reduced motion; on phones each card is one link, and the More-work rows are React Bits SwipeRows (swipe or the row's "actions" toggle for Code and Demo; a tap opens the project). The home rows use the drawn, shorter wording for Autoscaler and CT denoising. The Research folder (React Bits Folder) is a real toggle with the drawn closed and open poses.
 - **Box sizing:** the prototypes have no global `border-box`, so their chat bubbles' percentage `max-width` excludes padding; the site sets `content-box` on those bubbles to wrap exactly as drawn.
 - **Private notes stay out of the bundle:** the starter's per-project `todo` notes (one named the double-blind venue) were reaching the command bar's JavaScript. They now live under "Blocked on Yash" below, and a unit test fails if the venue's name appears anywhere in `src/`, `public/` or the build.
+- **Experience:** the detail sheet stays docked beside the lists on desktop, as drawn (Gridee open), and a row selects into it; phones open the same details in a vaul bottom sheet (the spec's "side sheet on desktop" is drawn docked, so the drawing wins). Rows link to `/about#<id>` without JavaScript. Certifications link out to each credential, as drawn. The home footer lists six notes, not the drawn four: the Hindalco and SRM details cite two more sources, and every number needs its note.
+- **Toolkit:** React Bits GlassIcons reshaped to the drawn tiles (72 px, 6 columns; 60 px, 4 columns and eight tools on phones); each tile is a toggle and the "used in" panel is a live region. Only public fields reach the page: `toolkit.ts`'s `verify` notes stay out (a unit test checks the build).
+- **Contact and Dock:** the Dock items are real links; the panel keeps its height and a magnified icon rises out of it. It rests at 54 px (the home artboard draws the pointer over GitHub; the Components artboard draws it at rest). No magnification without a fine pointer or under reduced motion. "Copy" copies the address with the "Email copied" toast.
 - `Yash_Chauhan_Master_Resume.pdf` is never copied into `site/`. The site links `/resume.pdf`; that file is Yash's to add (a test fails if the master résumé ever lands in `public/`).
 
 ## Blocked on Yash
@@ -94,3 +97,9 @@ Notes from the starter's project files (moved here so they never ship in the sit
 - Autoscaler: add tests on the safety rails; say "SHAP-style attribution", not SHAP; the LSTM is planned, not built.
 - Kalakraft: clarify ownership and whether it has real orders.
 - CT denoising: fix the noisy/clean pairing and re-run the metrics before quoting any number.
+
+Toolkit usages to confirm (from `src/content/toolkit.ts`, `verify`):
+- Python in the IEEE manuscript (the README names XGBoost and SHAP but not the language).
+- TypeScript: add GlassBox if its Next.js front end is TypeScript.
+- PostgreSQL: the Autoscaler uses TimescaleDB (a Postgres extension); add Pulse if its Prisma database is Postgres.
+- scikit-learn: add the Autoscaler if its Isolation Forest and Random Forest use scikit-learn.

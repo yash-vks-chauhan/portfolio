@@ -1,0 +1,27 @@
+---
+// Toolkit: twelve tools as glass icons; tapping one shows where it was used. Only the fields the island needs are
+// passed to it (toolkit.ts also holds notes to confirm, which stay out of the page).
+import ToolkitGrid, { type ToolProp } from './ToolkitGrid';
+import { toolkit, usedInLabel } from '../../content/toolkit';
+import { projectBySlug } from '../../content/projects';
+
+const tools: ToolProp[] = toolkit.map((t) => ({
+  name: t.name,
+  shortName: t.shortName,
+  icon: t.icon,
+  color: t.color,
+  glow: t.glow,
+  phone: t.phone,
+  usedIn: t.usedIn.map((slug) => {
+    const project = projectBySlug[slug];
+    if (!project) throw new Error(`toolkit.ts: "${t.name}" is used in an unknown project "${slug}"`);
+    return { label: usedInLabel[slug] ?? project.name, href: project.href };
+  }),
+}));
+---
+
+<section aria-labelledby="toolkit-h" class="home-section section-centered phone-left">
+  <p class="eyebrow">Toolkit</p>
+  <h2 id="toolkit-h" class="title1">Tap a tool to see where I used it.</h2>
+  <ToolkitGrid client:visible tools={tools} />
+</section>

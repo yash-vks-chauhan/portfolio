@@ -1,0 +1,91 @@
+---
+// Experience (section #about): Work and Education rows with the detail sheet, then Certifications, which link out to
+// each credential (desktop only, as drawn). Rows 76 px (certifications 68), separators inset to the text.
+import { getImage } from 'astro:assets';
+import { ArrowUpRight } from 'lucide-react';
+import ExperienceSection, { type DetailItem } from './ExperienceSection';
+import { Brand } from '../ui/Brand';
+import { glyph } from '../ui/glyphs';
+import { images } from '../../lib/images';
+import { citeNumber, getSource, type Numbering } from '../../lib/citations';
+import { certifications, education, work } from '../../content/experience';
+import type { ExperienceItem } from '../../content/types';
+
+interface Props {
+  n: Numbering;
+}
+const { n } = Astro.props;
+
+const grideeIcon = await getImage({ src: images['gridee-icon'], width: 120, height: 120, format: 'webp' });
+
+// Monogram sizes, as drawn: [desktop row, phone row, detail sheet].
+const monoSizes: Record<string, [number, number, number]> = { IIT: [13, 11, 18], H: [16, 15, 22], SRM: [12, 11, 16] };
+
+/** "Jan 2026 – now", "Jun – Jul 2025", "Aug 2023 – 2027" */
+function span(start: string, end: string | null) {
+  if (!end) return `${start} – now`;
+  const [sm, sy] = start.split(' ');
+  const [em, ey] = end.split(' ');
+  return ey && sy === ey ? `${sm} – ${em} ${ey}` : `${start} – ${end}`;
+}
+
+function detail(x: ExperienceItem): DetailItem {
+  const icon: DetailItem['icon'] =
+    'image' in x.icon ? { src: grideeIcon.src } : { monogram: x.icon.monogram, gradient: x.icon.gradient, sizes: monoSizes[x.icon.monogram] ?? [13, 11, 18] };
+  return {
+    id: x.id,
+    title: x.org,
+    titleShort: x.orgShort,
+    role: x.role,
+    roleShort: x.roleShort,
+    range: x.range,
+    rangeShort: x.rangeShort,
+    subtitle: `${x.role} · ${span(x.start, x.end)}`,
+    summary: x.summary,
+    bullets: (x.bullets ?? []).map((text, i) => {
+      const id = x.bulletSources?.[i];
+      return id ? { text, cite: { id, n: citeNumber(n, id, 'the home page'), title: getSource(id).title } } : { text };
+    }),
+    stack: x.stack,
+    links: x.links,
+    icon,
+    href: `/about#${x.id}`,
+  };
+}
+
+const certs = certifications.map((c) => ({ ...c, year: c.issued.split(' ').pop(), sub: c.validUntil ? `Valid to ${c.validUntil}` : c.issuer }));
+---
+
+<section id="about" class="home-section">
+  <p class="eyebrow">Experience</p>
+  <h2 class="title1">Where I’ve done the work.</h2>
+  <ExperienceSection client:visible work={work.map(detail)} education={education.map(detail)}>
+    <div class="max-md:hidden">
+      <h3 class="exp-group">Certifications</h3>
+      <div class="exp-list">
+        {
+          certs.map((c, i) => {
+            const Glyph = 'glyph' in c.icon ? glyph(c.icon.glyph) : null;
+            return (
+              <a class="row exp-row exp-row-cert" href={c.url} target="_blank" rel="noreferrer">
+                <span class="exp-icon flex items-center justify-center text-white" style={{ background: c.icon.gradient, color: c.icon.color }} aria-hidden="true">
+                  {'brand' in c.icon ? <Brand name={c.icon.brand} size={24} /> : Glyph && <Glyph size={22} strokeWidth={2} />}
+                </span>
+                <span class:list={['exp-row-body', i > 0 && 'border-t border-sep']}>
+                  <span class="flex min-w-0 flex-1 flex-col">
+                    <span class="exp-row-title">{c.name}</span>
+                    <span class="exp-row-sub">{c.sub}</span>
+                  </span>
+                  <span class="exp-row-range">{c.year}</span>
+                  <span class="flex text-label3" aria-hidden="true">
+                    <ArrowUpRight size={16} strokeWidth={2} />
+                  </span>
+                </span>
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </ExperienceSection>
+</section>

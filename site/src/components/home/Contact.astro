@@ -1,0 +1,81 @@
+---
+// Contact: the iOS Contacts-style card (avatar, Email me, Résumé, copyable rows) and the magnifying Dock, as drawn.
+// Phones get the card's four tiles and the email row instead, and no Dock. A "Copy" control copies the address and
+// shows the "Email copied" toast; the Toaster island handles [data-copy-email], so it needs no island of its own.
+import { ArrowUpRight, Copy, Download, FileText, Mail } from 'lucide-react';
+import ContactDock from './ContactDock';
+import { Brand } from '../ui/Brand';
+import { site } from '../../content/site';
+
+const mailto = `mailto:${site.email}`;
+const tiles = [
+  { label: 'email', href: mailto, icon: 'mail' },
+  { label: 'GitHub', href: site.links.github, icon: 'github', external: true },
+  { label: 'LinkedIn', href: site.links.linkedin, icon: 'linkedin', external: true },
+  { label: 'résumé', href: site.links.resume, icon: 'resume' },
+];
+const profiles = [
+  { label: 'LinkedIn', href: site.links.linkedin, display: site.display.linkedin },
+  { label: 'GitHub', href: site.links.github, display: site.display.github },
+];
+---
+
+<section id="contact" class="home-section section-centered phone-left">
+  <p class="eyebrow">Contact</p>
+  <h2 class="title1">Let’s build something.</h2>
+  <p class="section-lead max-w-[640px]">{site.availability}</p>
+
+  <div class="contact-card">
+    <div class="contact-head">
+      <span aria-hidden="true" class="contact-avatar">{site.initials}</span>
+      <span class="contact-name">{site.name}</span>
+      <span class="contact-role">{site.role} · {site.location}</span>
+      <div class="contact-actions max-md:hidden">
+        <a class="pill contact-primary" href={mailto}><Mail size={17} strokeWidth={2} aria-hidden="true" />Email me</a>
+        <a class="pill contact-secondary" href={site.links.resume}><Download size={17} strokeWidth={2} aria-hidden="true" />Résumé (PDF)</a>
+      </div>
+      <div class="contact-tiles md:hidden">
+        {
+          tiles.map((t) => (
+            <a class="contact-tile" href={t.href} target={t.external ? '_blank' : undefined} rel={t.external ? 'noreferrer' : undefined}>
+              {t.icon === 'mail' && <Mail size={20} strokeWidth={2} aria-hidden="true" />}
+              {t.icon === 'github' && <Brand name="SiGithub" size={19} />}
+              {t.icon === 'linkedin' && <Brand name="SiLinkedin" size={18} />}
+              {t.icon === 'resume' && <FileText size={20} strokeWidth={2} aria-hidden="true" />}
+              {t.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="row contact-row">
+      <span class="contact-row-body">
+        <a href={mailto} class="contact-row-main card-stretch">
+          <span class="contact-row-label">email</span>
+          <span class="contact-row-value">{site.email}</span>
+        </a>
+        <button type="button" class="contact-copy" data-copy-email aria-label="Copy email address">
+          <Copy size={16} strokeWidth={2} aria-hidden="true" className="max-md:size-[17px]" /><span class="max-md:hidden">Copy</span>
+        </button>
+      </span>
+    </div>
+    {
+      profiles.map((p) => (
+        <a class="row contact-row max-md:hidden" href={p.href} target="_blank" rel="noreferrer">
+          <span class="contact-row-body">
+            <span class="contact-row-main">
+              <span class="contact-row-label">{p.label}</span>
+              <span class="contact-row-value">{p.display}</span>
+            </span>
+            <span class="flex text-label3" aria-hidden="true">
+              <ArrowUpRight size={16} strokeWidth={2} />
+            </span>
+          </span>
+        </a>
+      ))
+    }
+  </div>
+
+  <ContactDock client:visible className="max-md:hidden" email={site.email} github={site.links.github} linkedin={site.links.linkedin} resume={site.links.resume} />
+</section>

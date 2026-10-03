@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Screenshots of the interactive open states (command bar, source sheet, toast) for comparison with
-// design/screenshots/components-open-states.jpg. Run after `npm run build`.
+// Screenshots of the interactive open states (command bar, source sheet, toast; the Experience sheet on phones and
+// the Dock under the pointer on desktop) for comparison with design/screenshots/components-open-states.jpg and the
+// home artboards. Run after `npm run build`.
 import { chromium } from '@playwright/test';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -51,6 +52,26 @@ try {
       await page.keyboard.press('Enter');
       await page.waitForTimeout(500);
       await page.screenshot({ path: path.join(out, `toast-${w}-${scheme}.png`) });
+      await page.waitForTimeout(2600);
+      if (w < 768) {
+        await page.locator('#about').scrollIntoViewIfNeeded();
+        await hydrated(page, 'ExperienceSection');
+        await page.locator('#about a.exp-row', { hasText: 'IIT Madras' }).click();
+        await page.waitForTimeout(500);
+        await page.screenshot({ path: path.join(out, `experience-${w}-${scheme}.png`) });
+        await page.keyboard.press('Escape');
+      } else {
+        // The Dock as drawn on the home artboard: the pointer over GitHub (motion on for this one).
+        await page.emulateMedia({ reducedMotion: 'no-preference' });
+        await page.goto(base + '/#contact', { waitUntil: 'networkidle' });
+        const dock = page.getByRole('navigation', { name: 'Elsewhere' });
+        await dock.scrollIntoViewIfNeeded();
+        await hydrated(page, 'ContactDock');
+        const gh = (await dock.getByRole('link', { name: 'GitHub' }).boundingBox());
+        await page.mouse.move(gh.x + gh.width / 2, gh.y + gh.height / 2, { steps: 6 });
+        await page.waitForTimeout(700);
+        await page.screenshot({ path: path.join(out, `dock-${w}-${scheme}.png`) });
+      }
       console.log('states', w, scheme);
       await ctx.close();
     }

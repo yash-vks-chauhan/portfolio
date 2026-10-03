@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { toolkit } from '../../src/content/toolkit';
 
 const site = path.resolve(__dirname, '../..');
 const master = path.resolve(site, '../Yash_Chauhan_Master_Resume.pdf');
@@ -39,4 +40,15 @@ test('no source file, page or script names the double-blind venue', () => {
   const text = /\.(astro|tsx?|jsx?|mjs|css|html|json|md|txt|xml|svg|webmanifest)$/;
   const files = ['src', 'public', 'dist'].flatMap((d) => walk(path.join(site, d))).filter((f) => text.test(f));
   for (const f of files) assert.doesNotMatch(fs.readFileSync(f, 'utf8'), /delcon/i, `${path.relative(site, f)} names the venue`);
+});
+
+test('notes to confirm (toolkit `verify`) stay out of the built site', () => {
+  const dist = path.join(site, 'dist');
+  if (!fs.existsSync(dist)) return;
+  const notes = toolkit.flatMap((t) => (t.verify ? [t.verify] : []));
+  const files = walk(dist).filter((f) => /\.(html|js|json|txt|xml)$/.test(f));
+  for (const f of files) {
+    const text = fs.readFileSync(f, 'utf8');
+    for (const note of notes) assert.ok(!text.includes(note), `${path.relative(site, f)} contains a toolkit note to confirm`);
+  }
 });

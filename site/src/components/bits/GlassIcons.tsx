@@ -2,76 +2,75 @@
  * GlassIcons, from React Bits (https://reactbits.dev · github.com/DavidHDev/react-bits @ ca44b3f, TS + Tailwind variant).
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
+ *
+ * Site changes: the grid and tiles take the Toolkit's drawn geometry (72 px tiles in a 6-column grid of 112 px minimum;
+ * 60 px tiles in 4 columns on phones) instead of em sizes; each tile is a toggle (`aria-pressed`) with its label shown
+ * under it, a coloured glow from `glow`, and a phone order (`phoneOrder`; tiles without one are desktop-only). The
+ * hover lift is the design's (effects.css `.gi`), which also covers reduced motion.
  */
 
 import React from 'react';
 
 export interface GlassIconsItem {
   icon: React.ReactElement;
+  /** Any CSS background for the back tile. */
   color: string;
   label: string;
+  /** Shorter label on phones. */
+  shortLabel?: string;
+  /** The back tile's coloured shadow (desktop). */
+  glow?: string;
+  /** Icon size in px on desktop; phones draw it 4 px smaller. */
+  iconSize?: number;
+  /** Position in the phone grid; items without one are hidden on phones. */
+  phoneOrder?: number;
   customClass?: string;
 }
 
 export interface GlassIconsProps {
   items: GlassIconsItem[];
+  /** The pressed item's index. */
+  selected?: number;
+  onSelect?: (index: number) => void;
   className?: string;
+  /** id of the element the selection describes (the "used in" panel). */
+  controls?: string;
 }
 
-const gradientMapping: Record<string, string> = {
-  blue: 'linear-gradient(hsl(223, 90%, 50%), hsl(208, 90%, 50%))',
-  purple: 'linear-gradient(hsl(283, 90%, 50%), hsl(268, 90%, 50%))',
-  red: 'linear-gradient(hsl(3, 90%, 50%), hsl(348, 90%, 50%))',
-  indigo: 'linear-gradient(hsl(253, 90%, 50%), hsl(238, 90%, 50%))',
-  orange: 'linear-gradient(hsl(43, 90%, 50%), hsl(28, 90%, 50%))',
-  green: 'linear-gradient(hsl(123, 90%, 40%), hsl(108, 90%, 40%))'
-};
-
-const GlassIcons: React.FC<GlassIconsProps> = ({ items, className }) => {
-  const getBackgroundStyle = (color: string): React.CSSProperties => {
-    if (gradientMapping[color]) {
-      return { background: gradientMapping[color] };
-    }
-    return { background: color };
-  };
-
-  return (
-    <div className={`grid gap-[5em] grid-cols-2 md:grid-cols-3 mx-auto py-[3em] overflow-visible ${className || ''}`}>
-      {items.map((item, index) => (
+const GlassIcons: React.FC<GlassIconsProps> = ({ items, selected, onSelect, className, controls }) => (
+  <div className={`gi-grid ${className || ''}`}>
+    {items.map((item, index) => {
+      const on = index === selected;
+      return (
         <button
-          key={index}
+          key={item.label}
           type="button"
-          aria-label={item.label}
-          className={`relative bg-transparent outline-none border-none cursor-pointer w-[4.5em] h-[4.5em] [perspective:24em] [transform-style:preserve-3d] [-webkit-tap-highlight-color:transparent] group ${
-            item.customClass || ''
-          }`}
+          aria-pressed={on}
+          aria-controls={controls}
+          onClick={() => onSelect?.(index)}
+          className={`gi gi-item ${on ? 'is-on' : ''} ${item.phoneOrder ? '' : 'max-md:hidden'} ${item.customClass || ''}`}
+          style={{ '--gi-order': item.phoneOrder ?? 99 } as React.CSSProperties}
         >
-          <span
-            className="absolute top-0 left-0 w-full h-full rounded-[1.25em] block transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] origin-[100%_100%] rotate-[15deg] [will-change:transform] group-hover:[transform:rotate(25deg)_translate3d(-0.5em,-0.5em,0.5em)]"
-            style={{
-              ...getBackgroundStyle(item.color),
-              boxShadow: '0.5em -0.5em 0.75em hsla(223, 10%, 10%, 0.15)'
-            }}
-          ></span>
-
-          <span
-            className="absolute top-0 left-0 w-full h-full rounded-[1.25em] bg-[hsla(0,0%,100%,0.15)] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] origin-[80%_50%] flex backdrop-blur-[0.75em] [-webkit-backdrop-filter:blur(0.75em)] [-moz-backdrop-filter:blur(0.75em)] [will-change:transform] transform group-hover:[transform:translate3d(0,0,2em)]"
-            style={{
-              boxShadow: '0 0 0 0.1em hsla(0, 0%, 100%, 0.3) inset'
-            }}
-          >
-            <span className="m-auto flex h-[1.5em] w-[1.5em] items-center justify-center text-white" aria-hidden="true">
-              {item.icon}
+          <span className="gi-tile" aria-hidden="true">
+            <span className="gb" style={{ background: item.color, '--gi-glow': item.glow ?? 'transparent' } as React.CSSProperties} />
+            <span className="gf">
+              <span className="gi-glyph" style={{ '--gi-s': item.iconSize ?? 28 } as React.CSSProperties}>
+                {item.icon}
+              </span>
             </span>
           </span>
-
-          <span className="absolute top-full left-0 right-0 text-center whitespace-nowrap leading-[2] text-base opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] translate-y-0 group-hover:opacity-100 group-hover:[transform:translateY(20%)]">
-            {item.label}
-          </span>
+          {item.shortLabel ? (
+            <>
+              <span className="gi-label max-md:hidden">{item.label}</span>
+              <span className="gi-label md:hidden">{item.shortLabel}</span>
+            </>
+          ) : (
+            <span className="gi-label">{item.label}</span>
+          )}
         </button>
-      ))}
-    </div>
-  );
-};
+      );
+    })}
+  </div>
+);
 
 export default GlassIcons;
