@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mobile case study — GlassBox, Graphite</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Ranade";src:url(/_blob/f5e6d5500342a9fd98ffebb034863df4) format("woff2");font-weight:100 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Tabular";src:url(/_blob/9b0be6304a8929bff4571de2f1c29d5b) format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+body{margin:0}
+a{color:inherit}
+a:hover{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lnk{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
+</style>
+</helmet>
+<div style="--bg:#0E0E0D; --bg-sunken:#090908; --surface:#161615; --surface-2:#1D1D1B; --ink:#EEEDE8; --ink-2:#C2C0B9; --muted:#8E8B83; --faint:#5F5D57; --line:#272725; --line-strong:#3A3935; --ok:#4CC38A; --accent:#FF6A2B; --accent-ink:#FF8C59; --accent-wash:#301B11; position: relative; width: 390px; min-height: 3600px; box-sizing: border-box; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'Ranade', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased">
+
+<header style="position: sticky; top: 0; z-index: 10; height: 56px; box-sizing: border-box; padding: 0 12px 0 20px; display: flex; align-items: center; gap: 12px; background: rgba(14,14,13,0.86); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line)">
+<a href="#top" aria-label="Yash Chauhan — home" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+<svg width="44" height="28" viewBox="0 0 44 28" role="img" aria-label="YC monogram"><circle cx="2.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="6.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="2.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="6.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="2.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="10.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="18.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="14.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="18.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="30.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="34.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="38.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="42.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="26.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="14.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="18.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="26.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="30.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="34.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="38.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="42.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/></svg>
+<span>Yash Chauhan</span>
+</a>
+<button type="button" aria-label="Switch to light theme" style="margin-left: auto; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: var(--ink); padding: 0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+<button type="button" aria-label="Open menu" aria-expanded="false" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: var(--ink); padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16"/><path d="M4 16h16"/></svg></button>
+</header>
+
+<main id="top" style="flex: 1 0 auto">
+<section aria-labelledby="mc-title" style="padding: 24px 20px 0">
+<nav aria-label="Breadcrumb" style="display: flex; gap: 8px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><a href="#work" class="lnk">Work</a><span aria-hidden="true">/</span><span aria-current="page" style="color: var(--ink)">01 — GlassBox</span></nav>
+<h1 id="mc-title" style="margin: 28px 0 0; font-size: 44px; line-height: 0.96; letter-spacing: -0.04em; font-weight: 500">GlassBox</h1>
+<p style="margin: 16px 0 0; font-size: 19px; line-height: 1.35; letter-spacing: -0.01em; color: var(--ink-2)">Auditable wealth-advisory AI. Every answer is cited or refused; every decision is hash-chained.</p>
+<p style="margin: 16px 0 0; display: flex; gap: 8px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase"><span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok)"></span>Live</span><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong)">MIT</span></p>
+<aside aria-label="TL;DR" style="margin-top: 24px; padding: 20px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line-strong); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">TL;DR</p>
+<p style="margin: 8px 0 0; font-size: 17px; line-height: 1.45">183/183 on questions I wrote alongside the engine (95% CI 97.9–100%). A development set, not an independent benchmark.<button type="button" aria-label="Source 1: glassbox-eval-v4" style="margin-left: 2px; padding: 6px 3px; border: 0; background: transparent; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1; vertical-align: super; color: var(--accent-ink)">[1]</button></p>
+</aside>
+<dl style="margin: 24px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--ink)">
+<div style="padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Role</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.4">[Your role]</dd></div>
+<div style="padding: 14px 0 14px 12px; border-bottom: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Timeline</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.4">Feb – Oct 2026</dd></div>
+<div style="padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Stack</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.4">FastAPI · Next.js · Postgres</dd></div>
+<div style="padding: 14px 0 14px 12px; border-bottom: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Infra</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.4">t4g.small · ~$14/mo</dd></div>
+<div style="padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Tests</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.4">254 · 11 e2e</dd></div>
+<div style="padding: 14px 0 14px 12px; border-bottom: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Links</dt><dd style="margin: 6px 0 0; display: flex; gap: 12px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.4"><a href="https://glassbox.15-252-203-137.sslip.io/login" class="lnk">Live ↗</a><a href="https://github.com/yash-vks-chauhan/Glassbox" class="lnk">Code ↗</a></dd></div>
+</dl>
+<figure style="margin: 28px 0 0">
+<div style="padding: 8px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line-strong)"><img src="/_blob/6faf0a3ec5d2bfb565118fcca8af42fd" alt="GlassBox ask screen with a flagged answer and four numbered citations." style="display: block; width: 100%; height: auto; border-radius: 8px"></div>
+<figcaption style="margin-top: 10px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Fig. 1 — Every claim carries a numbered citation</figcaption>
+<a href="#video" style="margin-top: 14px; height: 48px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; border: 1px solid var(--line-strong); text-decoration: none; font-size: 15px; font-weight: 500; box-sizing: border-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4"/></svg>Watch the 90 s walkthrough</a>
+</figure>
+</section>
+
+<section aria-labelledby="mc-arch" style="padding: 64px 20px 0">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">03</p>
+<h2 id="mc-arch" style="margin: 6px 0 0; font-size: 30px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Architecture</h2>
+<ol aria-label="Request flow" style="list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; align-items: stretch; font-size: 15px; line-height: 1.35">
+<li style="padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)"><b style="font-weight: 600">Advisor asks</b> about a client</li>
+<li aria-hidden="true" style="height: 20px; margin-left: 24px; border-left: 1px solid var(--muted)"></li>
+<li style="padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)"><b style="font-weight: 600">Retrieve</b> from approved documents only</li>
+<li aria-hidden="true" style="height: 20px; margin-left: 24px; border-left: 1px solid var(--muted)"></li>
+<li style="padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)"><b style="font-weight: 600">Draft</b> the answer as claims, <b style="font-weight: 600">score</b> each one</li>
+<li aria-hidden="true" style="height: 20px; margin-left: 24px; border-left: 1px solid var(--muted)"></li>
+<li style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<span style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">supported</span><span style="padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)"><b style="font-weight: 600">Answer</b>, every claim cited</span></span>
+<span style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">unsupported</span><span style="padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)"><b style="font-weight: 600">Refuse</b>, name the missing source</span></span>
+</li>
+<li aria-hidden="true" style="height: 20px; margin-left: 24px; border-left: 1px solid var(--muted)"></li>
+<li style="padding: 12px 14px; border-radius: 8px; border: 1.5px solid var(--accent); background: var(--surface)"><b style="font-weight: 600">Audit log</b>, hash-chained per tenant, no DELETE</li>
+<li aria-hidden="true" style="height: 20px; margin-left: 24px; border-left: 1px solid var(--muted)"></li>
+<li style="padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)"><b style="font-weight: 600">Compliance</b> reviews under a four-eyes rule</li>
+</ol>
+</section>
+
+<section aria-labelledby="mc-eval" style="padding: 64px 20px 0">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">05</p>
+<h2 id="mc-eval" style="margin: 6px 0 0; font-size: 30px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Evaluation</h2>
+<p style="margin: 16px 0 0; font-size: 15px; color: var(--ink-2)">glassbox-eval-v4 · 2 Oct 2026 · 183 questions · Wilson 95% intervals.</p>
+<ul style="list-style: none; margin: 20px 0 0; padding: 0; border-radius: 14px; border: 1px solid var(--line-strong); background: var(--surface)">
+<li style="padding: 14px 16px; border-bottom: 1px solid var(--line)"><div style="display: flex; justify-content: space-between; gap: 12px"><span>Outcome accuracy</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">183/183</span></div><div style="margin-top: 10px; display: flex; align-items: center; gap: 8px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; color: var(--muted)">90</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 79%; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: calc(100% - 5px); top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; color: var(--muted)">100</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ink-2)">97.9–100</span></div></li>
+<li style="padding: 14px 16px; border-bottom: 1px solid var(--line)"><div style="display: flex; justify-content: space-between; gap: 12px"><span>Citation accuracy</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">183/183</span></div><div style="margin-top: 10px; display: flex; align-items: center; gap: 8px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; color: var(--muted)">90</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 79%; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: calc(100% - 5px); top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--ink)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; color: var(--muted)">100</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ink-2)">97.9–100</span></div></li>
+<li style="padding: 14px 16px; border-bottom: 1px solid var(--line)"><div style="display: flex; justify-content: space-between; gap: 12px"><span>Hallucination rate</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">0/183</span></div><div style="margin-top: 10px; display: flex; align-items: center; gap: 8px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; color: var(--muted); min-width: 12px">0</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 0; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: -5px; top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--ink)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; color: var(--muted)">10</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ink-2)">0–2.1</span></div></li>
+<li style="padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px"><span>Faithfulness <span style="font-size: 13px; color: var(--muted)">(score)</span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">0.98</span></li>
+<li style="padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px"><span>Determinism</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">1.00</span></li>
+<li style="padding: 14px 16px; display: flex; justify-content: space-between; gap: 12px"><span>p95 latency</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">1 ms</span></li>
+</ul>
+<div style="margin-top: 16px; padding: 16px 18px; border-radius: 14px; background: var(--bg-sunken); border: 1px solid var(--line)">
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent)"></span>Caveat</p>
+<p style="margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-2)">I wrote these questions while building the engine. Read 100% as “no failures found yet”.</p>
+</div>
+</section>
+
+<section aria-labelledby="mc-tests" style="padding: 64px 20px 0">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">06</p>
+<h2 id="mc-tests" style="margin: 6px 0 0; font-size: 30px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Tests &amp; ops</h2>
+<div style="margin-top: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px">
+<div style="border-top: 1px solid var(--ink); padding-top: 12px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 28px; line-height: 1.1">254</p><p style="margin: 6px 0 0; font-size: 13px; line-height: 1.4; color: var(--muted)">backend tests, Postgres 15</p></div>
+<div style="border-top: 1px solid var(--ink); padding-top: 12px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 28px; line-height: 1.1">11</p><p style="margin: 6px 0 0; font-size: 13px; line-height: 1.4; color: var(--muted)">Playwright e2e specs</p></div>
+<div style="border-top: 1px solid var(--ink); padding-top: 12px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 28px; line-height: 1.1">~$14</p><p style="margin: 6px 0 0; font-size: 13px; line-height: 1.4; color: var(--muted)">a month, one t4g.small</p></div>
+<div style="border-top: 1px solid var(--ink); padding-top: 12px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 28px; line-height: 1.1">OIDC</p><p style="margin: 6px 0 0; font-size: 13px; line-height: 1.4; color: var(--muted)">deploys, no stored keys</p></div>
+</div>
+</section>
+
+<section aria-label="Next project" style="padding: 64px 20px 140px">
+<a href="#pulse" style="display: block; padding: 20px; border-radius: 14px; border: 1px solid var(--line-strong); text-decoration: none">
+<span style="display: block; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Next · 02</span>
+<span style="display: block; margin-top: 8px; font-size: 32px; line-height: 1; letter-spacing: -0.03em; font-weight: 500">Pulse →</span>
+<span style="display: block; margin-top: 10px; font-size: 15px; line-height: 1.45; color: var(--ink-2)">The LLM never writes SQL or sees PII.</span>
+</a>
+</section>
+</main>
+
+<footer style="border-top: 1px solid var(--line); padding: 20px 20px 32px; display: flex; flex-direction: column; gap: 6px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+<span>© 2026 Yash Chauhan · Every claim cited</span>
+<span>Ledger head #9032982</span>
+</footer>
+
+<nav aria-label="Section progress" style="position: absolute; z-index: 20; left: 50%; top: 768px; transform: translateX(-50%); width: 300px; height: 52px; box-sizing: border-box; padding: 0 8px 0 10px; display: flex; align-items: center; gap: 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line-strong); box-shadow: 0 12px 32px rgba(0,0,0,0.55)">
+<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" style="flex: 0 0 auto"><circle cx="14" cy="14" r="11" fill="none" stroke="#3A3935" stroke-width="2.5"/><circle cx="14" cy="14" r="11" fill="none" stroke="#FF6A2B" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="69.1" stroke-dashoffset="38" transform="rotate(-90 14 14)"/></svg>
+<span style="min-width: 0; flex: 1; display: flex; flex-direction: column; line-height: 1.2"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">05 of 09</span><span style="font-size: 15px; font-weight: 500">Evaluation</span></span>
+<button type="button" aria-label="Show all sections" aria-expanded="false" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: var(--ink); color: var(--bg); padding: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

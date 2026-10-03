@@ -1,0 +1,16 @@
+{
+  "name": "glass-design-source",
+  "private": true,
+  "description": "Generator for the Glass design: canvas artboards, standalone prototypes, token files and screenshots.",
+  "scripts": {
+    "build": "node build.js",
+    "build:canvas": "node build.js --canvas --strict",
+    "build:open-states": "STATE='{\"q\":\"film\",\"sheet\":true,\"filter\":\"Research\",\"toast\":true,\"palette\":true,\"folder\":true}' SUFFIX=open node build.js Components",
+    "tokens": "node gen-tokens.js",
+    "shots": "node tools/shoot-all.js",
+    "measure": "node tools/measure.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
+  }
+}

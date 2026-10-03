@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Direction A — Proof</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Ranade";src:url(/_blob/f5e6d5500342a9fd98ffebb034863df4) format("woff2");font-weight:100 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Tabular";src:url(/_blob/9b0be6304a8929bff4571de2f1c29d5b) format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1200px; box-sizing: border-box; display: flex; flex-direction: column; background: #F4F4F1; color: #121211; font-family: 'Ranade', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow: hidden">
+
+<div style="height: 52px; box-sizing: border-box; padding: 0 80px; display: flex; align-items: center; gap: 28px; border-bottom: 1px solid #E0DFD8; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+<span style="--line-strong: #C9C7BF; display: flex; align-items: center; gap: 12px; color: #121211"><svg width="44" height="28" viewBox="0 0 44 28" role="img" aria-label="YC monogram"><circle cx="2.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="6.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="2.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="6.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="2.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="10.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="18.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="14.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="18.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="30.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="34.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="38.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="42.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="26.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="14.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="18.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="26.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="30.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="34.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="38.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="42.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/></svg>Yash Chauhan</span>
+<span style="color: #6A6862">AI/ML Engineer</span>
+<span style="color: #6A6862">Chennai · 21:04 IST</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #F24B00"></span>Open to 2027 roles</span>
+<span style="margin-left: auto; display: flex; gap: 24px; color: #46453F"><span>Work</span><span>Research</span><span>Notes</span><span>About</span></span>
+<span style="height: 32px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px; background: #121211; color: #F4F4F1">Résumé ↓</span>
+</div>
+
+<div style="padding: 88px 80px 0; display: flex; gap: 64px; align-items: flex-end">
+<div style="flex: 1; min-width: 0">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862">Index · Rev. 2026.10.03</p>
+<h1 style="margin: 24px 0 0; font-size: 104px; line-height: 0.92; letter-spacing: -0.045em; font-weight: 500">Yash Chauhan</h1>
+<p style="margin: 28px 0 0; max-width: 760px; font-size: 36px; line-height: 1.12; letter-spacing: -0.025em">I build AI systems you can audit. <span style="color: #46453F">Every answer cited, every decision logged.</span></p>
+</div>
+<div style="flex: 0 0 380px; box-sizing: border-box; padding: 20px 22px; border-radius: 14px; border: 1px solid #E0DFD8; background: #FBFBF9; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px">
+<p style="margin: 0; display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862"><span>Ledger · tail −3</span><span>head #9032982</span></p>
+<p style="margin: 14px 0 0; display: flex; gap: 14px; padding: 9px 0; border-top: 1px solid #E0DFD8"><span style="color: #C23A00">9032982</span><span style="color: #6A6862">2026-01</span><span>Gridee · co-founder</span></p>
+<p style="margin: 0; display: flex; gap: 14px; padding: 9px 0; border-top: 1px solid #E0DFD8"><span style="color: #6A6862">a693186</span><span style="color: #6A6862">2025-06</span><span>Hindalco · intern</span></p>
+<p style="margin: 0; display: flex; gap: 14px; padding: 9px 0; border-top: 1px solid #E0DFD8; border-bottom: 1px solid #E0DFD8"><span style="color: #6A6862">8c88a1b</span><span style="color: #6A6862">2025-03</span><span>IIT Madras · research</span></p>
+</div>
+</div>
+
+<div style="padding: 64px 80px 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px">
+<div style="position: relative; border-top: 1px solid #121211; padding-top: 18px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862">Gridee · Android + iOS</p><p style="margin: 12px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 52px; line-height: 1; letter-spacing: -0.03em">8,000+<span style="margin-left: 4px; font-size: 12px; vertical-align: top; color: #C23A00">[1]</span></p></div>
+<div style="position: relative; border-top: 1px solid #121211; padding-top: 18px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862">GlassBox · eval v4</p><p style="margin: 12px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 52px; line-height: 1; letter-spacing: -0.03em">183/183<span style="margin-left: 4px; padding: 2px 3px; border-radius: 4px; font-size: 12px; vertical-align: top; color: #C23A00; background: #F4E3D9">[2]</span></p>
+<div style="position: absolute; left: 150px; top: 92px; z-index: 2; width: 300px; box-sizing: border-box; padding: 16px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0DFD8; box-shadow: 0 1px 2px rgba(18,18,17,.06), 0 12px 32px rgba(18,18,17,.10)"><p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862"><span>Source 2 · Eval report</span><span style="color: #1F7A4D">Verified</span></p><p style="margin: 8px 0 0; font-size: 15px; font-weight: 500">glassbox-eval-v4 — 183 questions</p><p style="margin: 4px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: #46453F">Glassbox / README › Evaluation</p></div>
+</div>
+<div style="border-top: 1px solid #121211; padding-top: 18px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862">GlassBox · tests</p><p style="margin: 12px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 52px; line-height: 1; letter-spacing: -0.03em">254<span style="margin-left: 4px; font-size: 12px; vertical-align: top; color: #C23A00">[3]</span></p></div>
+</div>
+
+<div style="margin-top: auto; padding: 32px 80px 40px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; background: #ECEBE6">
+<div style="padding: 20px; border-radius: 14px; background: #F4F4F1">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862">Palette</p>
+<div style="margin-top: 14px; display: flex; gap: 6px"><span style="flex: 1; height: 56px; border-radius: 8px; background: #F4F4F1; box-shadow: inset 0 0 0 1px #C9C7BF"></span><span style="flex: 1; height: 56px; border-radius: 8px; background: #121211"></span><span style="flex: 1; height: 56px; border-radius: 8px; background: #6A6862"></span><span style="flex: 1; height: 56px; border-radius: 8px; background: #0E0E0D"></span><span style="flex: 0 0 28px; height: 56px; border-radius: 8px; background: #F24B00"></span></div>
+<p style="margin: 12px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: #46453F">Paper · Graphite · International Orange</p>
+</div>
+<div style="padding: 20px; border-radius: 14px; background: #F4F4F1">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862">Type</p>
+<p style="margin: 8px 0 0; display: flex; align-items: baseline; gap: 16px"><span style="font-size: 56px; line-height: 1; letter-spacing: -0.04em; font-weight: 500">Aa</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 26px; letter-spacing: -0.02em">97.9</span></p>
+<p style="margin: 10px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: #46453F">Ranade + Tabular · ITF</p>
+</div>
+<div style="padding: 20px; border-radius: 14px; background: #F4F4F1">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6A6862">Signature</p>
+<div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px">
+<span style="display: flex; gap: 10px; align-items: center"><span style="width: 9px; height: 9px; border-radius: 50%; background: #F24B00"></span>9032982 ← a693186</span>
+<span style="display: flex; gap: 10px; align-items: center"><span style="width: 9px; height: 9px; border-radius: 50%; box-sizing: border-box; border: 1.5px solid #121211"></span>a693186 ← 8c88a1b</span>
+<span style="display: flex; gap: 10px; align-items: center; color: #1F7A4D">✓ chain intact</span>
+</div>
+<p style="margin: 10px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: #46453F">Cited claims · hash-chained ledger</p>
+</div>
+<div style="padding: 20px; border-radius: 14px; background: #0E0E0D; color: #EEEDE8">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #8E8B83">Graphite</p>
+<p style="margin: 10px 0 0; font-size: 30px; line-height: 0.95; letter-spacing: -0.04em; font-weight: 500">Yash Chauhan</p>
+<p style="margin: 10px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 22px; letter-spacing: -0.02em">183/183<span style="font-size: 10px; vertical-align: super; color: #FF8C59">[2]</span></p>
+<p style="margin: 6px 0 0; display: flex; align-items: center; gap: 6px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8E8B83"><span style="width: 6px; height: 6px; border-radius: 50%; background: #FF6A2B"></span>Open to 2027 roles</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

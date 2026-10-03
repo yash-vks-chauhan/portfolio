@@ -1,0 +1,226 @@
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+:focus-visible{outline:3px solid rgba(0,113,227,0.5);outline-offset:3px}
+.hbg{background-position:center;background-size:cover;background-repeat:no-repeat}
+.hbg-iridescence{background-image:url([[asset:hero-iridescence]])}
+.hbg-aurora{background-image:url([[asset:hero-aurora]])}
+.hbg-silk{background-image:url([[asset:hero-silk]])}
+.hbg-grainient{background-image:url([[asset:hero-grainient]])}
+.hbg-none{background:none}
+.live{animation:live 2.4s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes live{0%{box-shadow:0 0 0 0 rgba(52,199,89,.55)}70%{box-shadow:0 0 0 8px rgba(52,199,89,0)}100%{box-shadow:0 0 0 0 rgba(52,199,89,0)}}
+.pill{transition:filter .2s,transform .2s}
+.pill:active{transform:scale(.97)}
+.ai-ring{position:relative;isolation:isolate}
+.ai-ring::before{content:"";position:absolute;inset:-2px;border-radius:20px;padding:2px;background:linear-gradient(90deg,#5AC8FA,#AF52DE 36%,#FF2D55 68%,#FF9500);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.ai-ring::after{content:"";position:absolute;inset:-8px;border-radius:26px;background:linear-gradient(90deg,#5AC8FA,#AF52DE 36%,#FF2D55 68%,#FF9500);filter:blur(18px);opacity:.24;z-index:-1;pointer-events:none}
+@media (prefers-reduced-motion: reduce){.live{animation:none}}
+</style>
+</helmet>
+<div style="[[tokens]] --blue: {{a.blue}}; --link: {{a.link}}; --blue-wash: {{a.wash}}; --on-accent: {{a.on}}; --cite: {{a.cite}}; position: relative; width: 390px; [[if:first:height: 844px; overflow: hidden~~min-height: 5420px; overflow-x: hidden]]; display: block; background: var(--bg); color: var(--label); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', system-ui, sans-serif; font-size: 17px; line-height: 1.47; letter-spacing: -0.022em; -webkit-font-smoothing: antialiased">
+
+<div style="position: sticky; top: 0; z-index: 50; height: 0; display: flex; align-items: flex-start; padding: 0 12px">
+<header style="margin-top: 10px; flex: 1; height: 56px; box-sizing: border-box; padding: 6px 6px 6px 8px; border-radius: 28px; display: flex; align-items: center; gap: 8px; background: var(--glass); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-hi), var(--shadow)">
+<a href="#top" style="height: 44px; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.012em"><span style="width: 36px; height: 36px; flex: none; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #3A3A3C, #0B0B0C); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); color: #FFFFFF; font-size: 13px; font-weight: 700; letter-spacing: 0">YC</span>Yash Chauhan</a>
+<a class="pill" href="#resume" style="height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; background: var(--blue); color: var(--on-accent); font-size: 14px; font-weight: 600; letter-spacing: -0.016em">Résumé</a>
+</header>
+</div>
+
+<section id="top" style="position: relative; overflow: hidden">
+<div class="hbg {{bgClass}}" aria-hidden="true" style="position: absolute; inset: -20px"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: var(--veil)"></div>
+<div style="position: relative; padding: 112px 16px 210px; display: flex; flex-direction: column; align-items: center; text-align: center">
+<a href="#contact" style="height: 32px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 10px; border-radius: 999px; background: [[theme:#0B0B0C~~rgba(255,255,255,0.14)]]; color: #FFFFFF; font-size: 12px; font-weight: 600; letter-spacing: 0; box-shadow: [[theme:0 8px 24px rgba(0,0,0,0.18)~~inset 0 0 0 1px rgba(255,255,255,0.18)]]; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px)"><span class="live" style="width: 7px; height: 7px; border-radius: 50%; background: #34C759"></span>Open to 2027 roles<span style="color: rgba(255,255,255,0.64); font-weight: 500">· Chennai</span></a>
+<p style="margin: 22px 0 0; font-size: 17px; line-height: 1.3; font-weight: 600; letter-spacing: -0.012em">Yash Chauhan · AI/ML Engineer</p>
+<h1 style="margin: 10px 0 0; font-size: 44px; line-height: 1.06; font-weight: 600; letter-spacing: -0.018em">I build AI systems you can audit.</h1>
+<p style="margin: 16px 0 0; font-size: 17px; line-height: 1.45; letter-spacing: -0.012em; color: var(--ink2)">Final-year B.Tech CSE (AI/ML) at SRM, graduating 2027. Co-founder of Gridee. Previously a research intern at IIT Madras.</p>
+<a class="pill" href="#resume" style="margin-top: 26px; align-self: stretch; height: 50px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; background: var(--blue); color: var(--on-accent); font-size: 17px; font-weight: 600; letter-spacing: -0.016em">[[i:download:18:2]]Download résumé</a>
+<a href="#work" style="margin-top: 6px; height: 44px; display: inline-flex; align-items: center; gap: 2px; font-size: 17px; color: var(--link)">See the work[[i:chevron-right:18:2]]</a>
+</div>
+</section>
+
+<section aria-label="Highlights" style="position: relative; z-index: 2; margin-top: -170px; padding: 0 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<a href="#fn-1" style="height: 168px; box-sizing: border-box; padding: 14px 14px 16px; border-radius: 24px; display: flex; flex-direction: column; background: var(--glass-w); -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-hi), var(--shadow)">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--label2)"><img src="[[asset:gridee-icon]]" alt="" style="width: 26px; height: 26px; border-radius: 6px">Gridee<span style="margin-left: auto; min-width: 20px; height: 20px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: var(--fill2); font-size: 11px">1</span></span>
+<span style="margin-top: auto; font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 34px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">8,000+</span>
+<span style="margin-top: 6px; font-size: 12px; line-height: 1.3; letter-spacing: 0; color: var(--label2)">downloads, Android and iOS</span>
+</a>
+<a href="#fn-2" style="height: 168px; box-sizing: border-box; padding: 14px 14px 16px; border-radius: 24px; display: flex; flex-direction: column; background: var(--glass-w); -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-hi), var(--shadow)">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--label2)"><span style="width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #4C8DFF, #1E3A8A); color: #FFFFFF">[[i:box:14:2]]</span>GlassBox<span style="margin-left: auto; min-width: 20px; height: 20px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: var(--fill2); font-size: 11px">2</span></span>
+<span style="margin-top: auto; font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 34px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">183/183</span>
+<span style="margin-top: 6px; font-size: 12px; line-height: 1.3; letter-spacing: 0; color: var(--label2)">correct · CI <span style="white-space: nowrap">97.9–100%</span></span>
+</a>
+<a href="#fn-3" style="height: 168px; box-sizing: border-box; padding: 14px 14px 16px; border-radius: 24px; display: flex; flex-direction: column; background: var(--glass-w); -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-hi), var(--shadow)">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--label2)"><span style="width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #4CD964, #1F8F3A); color: #FFFFFF">[[i:check:15:2.6]]</span>Tests<span style="margin-left: auto; min-width: 20px; height: 20px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: var(--fill2); font-size: 11px">3</span></span>
+<span style="margin-top: auto; font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 34px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">254</span>
+<span style="margin-top: 6px; font-size: 12px; line-height: 1.3; letter-spacing: 0; color: var(--label2)">GlassBox backend tests in CI</span>
+</a>
+<a href="#fn-4" style="height: 168px; box-sizing: border-box; padding: 14px 14px 16px; border-radius: 24px; display: flex; flex-direction: column; background: var(--glass-w); -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-hi), var(--shadow)">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--label2)"><span style="width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #8E8BFF, #5149C9); color: #FFFFFF">[[i:graduation-cap:15:2]]</span>Research<span style="margin-left: auto; min-width: 20px; height: 20px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: var(--fill2); font-size: 11px">4</span></span>
+<span style="margin-top: auto; font-size: 26px; line-height: 1.05; font-weight: 600; letter-spacing: -0.01em">IIT Madras</span>
+<span style="margin-top: 6px; font-size: 12px; line-height: 1.3; letter-spacing: 0; color: var(--label2)">Research intern, 2025–26</span>
+</a>
+</section>
+
+<section id="ask" style="padding: 96px 16px 0">
+<p style="margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.012em; color: var(--link)">Ask my portfolio</p>
+<h2 style="margin: 6px 0 0; font-size: 34px; line-height: 1.1; font-weight: 600; letter-spacing: -0.006em">Every answer, sourced.</h2>
+<p style="margin: 10px 0 0; font-size: 17px; line-height: 1.45; letter-spacing: -0.012em; color: var(--label2)">It answers from my projects and cites them, or it tells you it doesn’t know.</p>
+<div style="margin-top: 24px; box-sizing: border-box; padding: 16px; border-radius: 28px; background: var(--card); box-shadow: var(--shadow-sm), var(--shadow); display: flex; flex-direction: column; gap: 12px">
+<div class="ai-ring" role="search" style="height: 52px; border-radius: 18px; display: flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; background: var(--fill)">
+<span style="display: flex; color: #AF52DE">[[i:sparkles:18:1.8]]</span>
+<label for="m-ask" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Ask a question about Yash’s work</label>
+<input id="m-ask" type="text" placeholder="Ask about my work" style="flex: 1; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; font-family: inherit; font-size: 17px; letter-spacing: -0.022em; color: var(--label)">
+<button type="button" aria-label="Send question" style="width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--blue); color: var(--on-accent)">[[i:arrow-up:19:2.4]]</button>
+</div>
+<p style="margin: 4px 0 0; align-self: flex-end; max-width: 84%; padding: 10px 14px; border-radius: 20px 20px 6px 20px; background: var(--blue); color: var(--on-accent); font-size: 16px; line-height: 1.4; letter-spacing: -0.016em">How do you know GlassBox doesn’t hallucinate?</p>
+<div style="padding: 14px 16px; border-radius: 20px 20px 20px 6px; background: var(--fill); font-size: 16px; line-height: 1.5; letter-spacing: -0.016em">
+<p style="margin: 0">On 183 questions I wrote alongside the engine, it made <strong style="font-weight: 600">zero</strong> unsupported claims: a 95% interval of <span style="white-space: nowrap">0–2.1%.</span><a href="#fn-2" style="display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 6px; margin-left: 4px; border-radius: 999px; background: var(--blue-wash); color: var(--cite); font-size: 12px; font-weight: 600; letter-spacing: 0; line-height: 1; vertical-align: 2px">1</a> That’s a development set: “no failures found yet”.</p>
+<div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px"><a href="#fn-2" style="height: 28px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; background: var(--card); box-shadow: inset 0 0 0 1px var(--sep); font-size: 12px; letter-spacing: 0; color: var(--label2)"><strong style="font-weight: 600; color: var(--cite)">1</strong>glassbox-eval-v4 · README</a></div>
+</div>
+</div>
+</section>
+
+<section id="work" style="padding: 96px 16px 0">
+<p style="margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.012em; color: var(--link)">Selected work</p>
+<h2 style="margin: 6px 0 0; font-size: 34px; line-height: 1.1; font-weight: 600; letter-spacing: -0.006em">Built, shipped, measured.</h2>
+<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 14px">
+<a href="GlassMobileCaseDark.dc.html" style="position: relative; height: 470px; box-sizing: border-box; padding: 24px; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; background: radial-gradient(120% 90% at 90% 0%, #3B6CF6 0%, rgba(59,108,246,0) 55%), linear-gradient(160deg, #0A1633 0%, #0D1F4D 55%, #132E6B 100%); color: #FFFFFF">
+<span style="display: flex; align-items: center; gap: 10px"><span style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #5B97FF, #1E3A8A); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); color: #FFFFFF">[[i:box:22:1.8]]</span><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: rgba(255,255,255,0.74)">AI systems · Live</span></span>
+<span style="margin-top: 16px; font-size: 34px; line-height: 1.05; font-weight: 600; letter-spacing: -0.006em">GlassBox</span>
+<span style="margin-top: 8px; font-size: 16px; line-height: 1.45; letter-spacing: -0.016em; color: rgba(255,255,255,0.86)">Auditable wealth-advisory AI. Every answer cited or refused; every decision hash-chained.</span>
+<span style="margin-top: 16px; align-self: flex-start; height: 40px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 999px; background: #FFFFFF; color: #0A1633; font-size: 15px; font-weight: 600; letter-spacing: -0.012em">View case study</span>
+<span style="position: absolute; left: 24px; right: -60px; bottom: -40px; height: 170px; border-radius: 14px 0 0 0; overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.12)"><img src="[[asset:glassbox-ask]]" alt="GlassBox answer with citations" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 30% top[[theme:~~; filter: brightness(0.9)]]"></span>
+</a>
+<a href="#pulse" style="position: relative; box-sizing: border-box; padding: 24px; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; background: var(--pulse-bg); color: var(--pulse-ink)">
+<span style="display: flex; align-items: center; gap: 10px"><span style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #8E8BFF, #4B44C4); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); color: #FFFFFF">[[i:activity:22:2]]</span><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--pulse-k)">AI systems · Live</span></span>
+<span style="margin-top: 16px; font-size: 34px; line-height: 1.05; font-weight: 600; letter-spacing: -0.006em">Pulse</span>
+<span style="margin-top: 8px; font-size: 16px; line-height: 1.45; letter-spacing: -0.016em; color: var(--pulse-sub)">The LLM writes a validated DSL. Never SQL, never PII.</span>
+<span style="margin-top: 18px; padding: 14px; border-radius: 18px; background: [[theme:rgba(255,255,255,0.78)~~rgba(255,255,255,0.06)]]; box-shadow: inset 0 0 0 1px [[theme:rgba(255,255,255,0.9)~~rgba(255,255,255,0.1)]]; display: flex; flex-direction: column; gap: 10px">
+<span style="display: flex; flex-wrap: wrap; gap: 6px"><code style="height: 30px; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 8px; background: [[theme:#FFFFFF~~rgba(255,255,255,0.08)]]; box-shadow: inset 0 0 0 1px var(--sep); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0">total_spend &gt; ₹2,000</code><code style="height: 30px; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 8px; background: [[theme:#FFFFFF~~rgba(255,255,255,0.08)]]; box-shadow: inset 0 0 0 1px var(--sep); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0">last_order_at &gt; 60 days</code></span>
+<span style="display: flex; align-items: baseline; gap: 8px"><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 28px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">1,284</span><span style="font-size: 14px; color: var(--pulse-sub); letter-spacing: -0.016em">customers match</span></span>
+</span>
+</a>
+<a href="#gridee" style="position: relative; height: 470px; box-sizing: border-box; padding: 24px; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; background: radial-gradient(90% 70% at 80% 100%, rgba(52,199,89,0.32) 0%, rgba(52,199,89,0) 60%), linear-gradient(170deg, #24272B 0%, #141618 100%); color: #FFFFFF">
+<span style="display: flex; align-items: center; gap: 10px"><img src="[[asset:gridee-icon]]" alt="" style="width: 44px; height: 44px; border-radius: 10px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: rgba(255,255,255,0.74)">Mobile · In stores</span></span>
+<span style="margin-top: 16px; font-size: 34px; line-height: 1.05; font-weight: 600; letter-spacing: -0.006em">Gridee</span>
+<span style="margin-top: 8px; font-size: 16px; line-height: 1.45; letter-spacing: -0.016em; color: rgba(255,255,255,0.84)">Smart parking I co-founded. 8,000+ downloads on Android and iOS.</span>
+<span style="position: absolute; left: 50%; bottom: -186px; margin-left: -110px; width: 220px; height: 470px; box-sizing: border-box; padding: 9px; border-radius: 42px; background: #0B0B0C; box-shadow: 0 24px 48px rgba(0,0,0,0.5), 0 0 0 2px #34373B"><span style="display: block; height: 100%; border-radius: 34px; overflow: hidden; background: #000000"><img src="[[asset:gridee-dark]]" alt="Gridee home screen with live parking availability" style="display: block; width: 100%"></span></span>
+</a>
+</div>
+<div style="margin-top: 14px; border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-sm)">
+<a href="#autoscaler" style="min-height: 64px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 38px; height: 38px; flex: none; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #64D2FF, #0A7CFF); color: #FFFFFF">[[i:gauge:19:2]]</span><span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 12px 14px 12px 0"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; letter-spacing: -0.016em">Autoscaler</span><span style="font-size: 13px; letter-spacing: -0.006em; color: var(--label2)">Guarded Kubernetes self-healing</span></span><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 999px; background: var(--warn-wash); color: var(--warn); font-size: 11px; font-weight: 600; letter-spacing: 0">In progress</span></span></a>
+<a href="#kalakraft" style="min-height: 64px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 38px; height: 38px; flex: none; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #FFB340, #FF5E3A); color: #FFFFFF">[[i:palette:19:2]]</span><span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep)"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; letter-spacing: -0.016em">Kalakraft</span><span style="font-size: 13px; letter-spacing: -0.006em; color: var(--label2)">Self-audit: six critical fixes</span></span><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 999px; background: var(--ok-wash); color: var(--ok); font-size: 11px; font-weight: 600; letter-spacing: 0">Live</span></span></a>
+<a href="#ct" style="min-height: 64px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 38px; height: 38px; flex: none; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #AEAEB2, #636366); color: #FFFFFF">[[i:scan-line:19:2]]</span><span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep)"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; letter-spacing: -0.016em">CT denoising U-Net</span><span style="font-size: 13px; letter-spacing: -0.006em; color: var(--label2)">Metrics withheld, re-checking</span></span><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 999px; background: var(--mute-wash); color: var(--mute); font-size: 11px; font-weight: 600; letter-spacing: 0">On hold</span></span></a>
+</div>
+</section>
+
+<section id="about" style="padding: 96px 16px 0">
+<p style="margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.012em; color: var(--link)">Experience</p>
+<h2 style="margin: 6px 0 0; font-size: 34px; line-height: 1.1; font-weight: 600; letter-spacing: -0.006em">Where I’ve done the work.</h2>
+<h3 style="margin: 24px 0 0; padding: 0 16px 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--label2)">Work</h3>
+<div style="border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-sm)">
+<a href="#gridee" style="min-height: 64px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><img src="[[asset:gridee-icon]]" alt="" style="align-self: center; width: 38px; height: 38px; flex: none; border-radius: 9px"><span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px 12px 0"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; letter-spacing: -0.016em">Gridee</span><span style="font-size: 13px; letter-spacing: -0.006em; color: var(--label2)">Co-Founder &amp; Founding Engineer</span></span><span style="font-size: 13px; color: var(--label2)">2026–</span><span style="display: flex; color: var(--label3)">[[i:chevron-right:16:2]]</span></span></a>
+<a href="#iitm" style="min-height: 64px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 38px; height: 38px; flex: none; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #8E8BFF, #5149C9); color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: 0">IIT</span><span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep)"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; letter-spacing: -0.016em">IIT Madras</span><span style="font-size: 13px; letter-spacing: -0.006em; color: var(--label2)">Research Intern</span></span><span style="font-size: 13px; color: var(--label2)">2025–26</span><span style="display: flex; color: var(--label3)">[[i:chevron-right:16:2]]</span></span></a>
+<a href="#hindalco" style="min-height: 64px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 38px; height: 38px; flex: none; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #FFB340, #F08A00); color: #FFFFFF; font-size: 15px; font-weight: 700; letter-spacing: 0">H</span><span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep)"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; letter-spacing: -0.016em">Hindalco Industries</span><span style="font-size: 13px; letter-spacing: -0.006em; color: var(--label2)">Summer Intern, E&amp;I</span></span><span style="font-size: 13px; color: var(--label2)">2025</span><span style="display: flex; color: var(--label3)">[[i:chevron-right:16:2]]</span></span></a>
+</div>
+<h3 style="margin: 22px 0 0; padding: 0 16px 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--label2)">Education</h3>
+<div style="border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-sm)">
+<a href="#srm" style="min-height: 64px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 38px; height: 38px; flex: none; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #409CFF, #0A60D6); color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: 0">SRM</span><span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px 12px 0"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; letter-spacing: -0.016em">SRM IST</span><span style="font-size: 13px; letter-spacing: -0.006em; color: var(--label2)">B.Tech CSE (AI/ML) · CGPA 8.5</span></span><span style="font-size: 13px; color: var(--label2)">2023–27</span><span style="display: flex; color: var(--label3)">[[i:chevron-right:16:2]]</span></span></a>
+</div>
+</section>
+
+<section aria-labelledby="m-toolkit" style="padding: 96px 16px 0">
+<p style="margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.012em; color: var(--link)">Toolkit</p>
+<h2 id="m-toolkit" style="margin: 6px 0 0; font-size: 34px; line-height: 1.1; font-weight: 600; letter-spacing: -0.006em">Tap a tool to see where I used it.</h2>
+<div style="margin-top: 28px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px 8px">
+<button type="button" aria-pressed="true" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #4B8BBE, #306998); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiPython:26]]</span></span><span style="font-size: 12px; font-weight: 600; letter-spacing: 0">Python</span></button>
+<button type="button" aria-pressed="false" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label2)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #4A90E2, #2D6FBF); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiTypescript:24]]</span></span><span style="font-size: 12px; letter-spacing: 0">TypeScript</span></button>
+<button type="button" aria-pressed="false" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label2)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #26A69A, #00796B); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiFastapi:26]]</span></span><span style="font-size: 12px; letter-spacing: 0">FastAPI</span></button>
+<button type="button" aria-pressed="false" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label2)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #48484A, #1C1C1E); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiNextdotjs:26]]</span></span><span style="font-size: 12px; letter-spacing: 0">Next.js</span></button>
+<button type="button" aria-pressed="false" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label2)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #A47BFF, #7F52FF); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiKotlin:22]]</span></span><span style="font-size: 12px; letter-spacing: 0">Kotlin</span></button>
+<button type="button" aria-pressed="false" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label2)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #5B7FE8, #336791); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiPostgresql:26]]</span></span><span style="font-size: 12px; letter-spacing: 0">Postgres</span></button>
+<button type="button" aria-pressed="false" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label2)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #4FB3FF, #1D8FE1); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiDocker:28]]</span></span><span style="font-size: 12px; letter-spacing: 0">Docker</span></button>
+<button type="button" aria-pressed="false" style="border: 0; padding: 0; background: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--label2)"><span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #FFB02E, #FF8A00); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiAmazonwebservices:28]]</span></span><span style="font-size: 12px; letter-spacing: 0">AWS</span></button>
+</div>
+<div style="margin-top: 22px; box-sizing: border-box; padding: 14px 16px; border-radius: 20px; background: var(--card); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 600; letter-spacing: -0.012em">Python <span style="font-weight: 400; color: var(--label2)">· used in 5 projects</span></span>
+<span style="display: flex; flex-wrap: wrap; gap: 6px"><a href="#case-glassbox" style="height: 30px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: var(--blue-wash); color: var(--cite); font-size: 13px; font-weight: 600; letter-spacing: -0.006em">GlassBox</a><a href="#autoscaler" style="height: 30px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: var(--blue-wash); color: var(--cite); font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Autoscaler</a><a href="#iitm" style="height: 30px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: var(--blue-wash); color: var(--cite); font-size: 13px; font-weight: 600; letter-spacing: -0.006em">IIT Madras EMS</a><a href="#research" style="height: 30px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: var(--blue-wash); color: var(--cite); font-size: 13px; font-weight: 600; letter-spacing: -0.006em">IEEE manuscript</a><a href="#ct" style="height: 30px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: var(--blue-wash); color: var(--cite); font-size: 13px; font-weight: 600; letter-spacing: -0.006em">CT denoising</a></span>
+</div>
+</section>
+
+<section id="contact" style="padding: 96px 16px 0">
+<p style="margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.012em; color: var(--link)">Contact</p>
+<h2 style="margin: 6px 0 0; font-size: 34px; line-height: 1.1; font-weight: 600; letter-spacing: -0.006em">Let’s build something.</h2>
+<p style="margin: 10px 0 0; font-size: 17px; line-height: 1.45; letter-spacing: -0.012em; color: var(--label2)">Open to full-time AI/ML and software roles from [month] 2027.</p>
+<div style="margin-top: 22px; border-radius: 28px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-sm), var(--shadow)">
+<div style="padding: 24px 16px 18px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center">
+<span aria-hidden="true" style="width: 76px; height: 76px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, #A1A1A6, #636366); color: #FFFFFF; font-size: 30px; font-weight: 600; letter-spacing: 0">YC</span>
+<span style="margin-top: 4px; font-size: 22px; font-weight: 600; letter-spacing: 0">Yash Chauhan</span>
+<span style="font-size: 14px; letter-spacing: -0.016em; color: var(--label2)">AI/ML Engineer · Chennai, India</span>
+<div style="margin-top: 12px; align-self: stretch; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<a href="mailto:yash.vks.chauhan@gmail.com" style="height: 60px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: var(--fill); color: var(--link); font-size: 11px; font-weight: 600; letter-spacing: 0">[[i:mail:20:2]]email</a>
+<a href="#github" style="height: 60px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: var(--fill); color: var(--link); font-size: 11px; font-weight: 600; letter-spacing: 0">[[si:SiGithub:19]]GitHub</a>
+<a href="#linkedin" style="height: 60px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: var(--fill); color: var(--link); font-size: 11px; font-weight: 600; letter-spacing: 0">[[si:SiLinkedin:18]]LinkedIn</a>
+<a href="#resume" style="height: 60px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: var(--fill); color: var(--link); font-size: 11px; font-weight: 600; letter-spacing: 0">[[i:file-text:20:2]]résumé</a>
+</div>
+</div>
+<a href="mailto:yash.vks.chauhan@gmail.com" style="min-height: 60px; box-sizing: border-box; padding: 10px 16px; display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--sep)"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 12px; letter-spacing: 0; color: var(--label2)">email</span><span style="font-size: 16px; color: var(--link); letter-spacing: -0.016em">yash.vks.chauhan@gmail.com</span></span><span style="display: flex; color: var(--link)">[[i:copy:17:2]]</span></a>
+</div>
+</section>
+
+<footer style="margin-top: 72px; padding: 0 16px [[if:first:40px~~120px]]">
+<ol style="margin: 0; padding: 18px 0 0; list-style: none; border-top: 1px solid var(--sep); display: flex; flex-direction: column; gap: 8px; font-size: 12px; line-height: 1.5; letter-spacing: 0; color: var(--label2)">
+<li id="fn-1" style="display: flex; gap: 6px"><span style="min-width: 14px; font-weight: 600">1.</span><span>Play Console and App Store Connect, combined, as of [date].</span></li>
+<li id="fn-2" style="display: flex; gap: 6px"><span style="min-width: 14px; font-weight: 600">2.</span><span>glassbox-eval-v4, 2 Oct 2026; a development set. Wilson 95% intervals.</span></li>
+<li id="fn-3" style="display: flex; gap: 6px"><span style="min-width: 14px; font-weight: 600">3.</span><span>GitHub Actions: SQLite and Postgres 15 jobs. [run link]</span></li>
+<li id="fn-4" style="display: flex; gap: 6px"><span style="min-width: 14px; font-weight: 600">4.</span><span>Mar 2025 – Mar 2026. Manuscripts unnamed until decisions.</span></li>
+</ol>
+<p style="margin: 16px 0 0; font-size: 12px; letter-spacing: 0; color: var(--label2)">Copyright © 2026 Yash Chauhan.</p>
+</footer>
+
+<nav aria-label="Tabs" style="position: [[if:first:absolute; left: 0; right: 0~~sticky]]; bottom: 16px; z-index: 40; margin: 0 12px; display: flex; align-items: center; gap: 10px">
+<div style="flex: 1; height: 64px; box-sizing: border-box; padding: 4px; border-radius: 32px; display: flex; gap: 2px; background: var(--glass-strong); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: inset 0 0 0 1px var(--glass-border), var(--shadow-lg)">
+<a href="#top" aria-current="page" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: var(--fill2); color: var(--link); font-size: 10px; font-weight: 600; letter-spacing: 0">[[i:house:22:2]]Home</a>
+<a href="GlassMobileCaseDark.dc.html" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--label); font-size: 10px; font-weight: 500; letter-spacing: 0">[[i:layout-grid:22:2]]Work</a>
+<a href="#about" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--label); font-size: 10px; font-weight: 500; letter-spacing: 0">[[i:user:22:2]]About</a>
+<a href="#contact" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--label); font-size: 10px; font-weight: 500; letter-spacing: 0">[[i:mail:22:2]]Contact</a>
+</div>
+<a href="#ask" aria-label="Ask my portfolio" style="width: 64px; height: 64px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--glass-strong); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: inset 0 0 0 1px var(--glass-border), var(--shadow-lg); color: #AF52DE">[[i:sparkles:24:2]]</a>
+</nav>
+</div>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"enum","options":["Blue","Indigo","Graphite"],"default":"Blue","section":"Theme"},"background":{"editor":"enum","options":["Iridescence","Soft Aurora","Silk","Grainient","None"],"default":"[[def:bg]]","section":"Hero"},"$preview":{"width":390,"height":[[def:h]]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = [[theme:false~~true]];
+    const accent = this.props.accent ?? 'Blue';
+    const bg = this.props.background ?? '[[def:bg]]';
+    const accents = {
+      Blue: dark
+        ? { blue: '#0071E3', link: '#2997FF', wash: 'rgba(41,151,255,0.18)', on: '#FFFFFF', cite: '#7CC0FF' }
+        : { blue: '#0071E3', link: '#0066CC', wash: 'rgba(0,113,227,0.12)', on: '#FFFFFF', cite: '#0058B0' },
+      Indigo: dark
+        ? { blue: '#5E5CE6', link: '#A5A3FF', wash: 'rgba(94,92,230,0.24)', on: '#FFFFFF', cite: '#C2C1FF' }
+        : { blue: '#5856D6', link: '#4E4BC6', wash: 'rgba(88,86,214,0.12)', on: '#FFFFFF', cite: '#4340B8' },
+      Graphite: dark
+        ? { blue: '#F5F5F7', link: '#F5F5F7', wash: 'rgba(255,255,255,0.12)', on: '#1D1D1F', cite: '#F5F5F7' }
+        : { blue: '#1D1D1F', link: '#1D1D1F', wash: 'rgba(0,0,0,0.07)', on: '#FFFFFF', cite: '#1D1D1F' },
+    };
+    const backgrounds = {
+      'Iridescence': 'hbg-iridescence',
+      'Soft Aurora': 'hbg-aurora',
+      'Silk': 'hbg-silk',
+      'Grainient': 'hbg-grainient',
+      'None': 'hbg-none',
+    };
+    return {
+      a: accents[accent] || accents.Blue,
+      bgClass: backgrounds[bg] || backgrounds['[[def:bg]]'],
+    };
+  }
+}
+</script>

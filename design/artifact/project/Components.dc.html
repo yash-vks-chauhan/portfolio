@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Proof — components</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Ranade";src:url(/_blob/f5e6d5500342a9fd98ffebb034863df4) format("woff2");font-weight:100 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Tabular";src:url(/_blob/9b0be6304a8929bff4571de2f1c29d5b) format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+body{margin:0}
+a{color:inherit}
+a:hover{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lnk{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--line-strong);transition:text-decoration-color .12s}
+.lnk:hover{text-decoration-color:var(--accent)}
+.btn-p{transition:background-color .12s}
+.btn-p:hover{background:var(--ink-2)}
+.btn-s{transition:background-color .12s,border-color .12s}
+.btn-s:hover{background:var(--surface);border-color:var(--ink-2)}
+.row{transition:background-color .22s cubic-bezier(.16,1,.3,1)}
+.row:hover{background:var(--surface)}
+.row .nm{transition:transform .22s cubic-bezier(.16,1,.3,1)}
+.row:hover .nm{transform:translateX(6px)}
+.row .arw{transition:transform .22s cubic-bezier(.16,1,.3,1)}
+.row:hover .arw{transform:rotate(-45deg)}
+.tocitem{cursor:pointer}
+.tocitem:hover .lbl{color:var(--ink)}
+input[type=range].ba{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:ew-resize}
+input[type=range].ba::-webkit-slider-runnable-track{height:2px;background:var(--line-strong)}
+input[type=range].ba::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-10px;border-radius:50%;background:var(--ink);border:3px solid var(--bg)}
+input[type=range].ba::-moz-range-track{height:2px;background:var(--line-strong)}
+input[type=range].ba::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:3px solid var(--bg)}
+@media (prefers-reduced-motion: reduce){.row .nm,.row .arw{transition:none}}
+</style>
+</helmet>
+<div style="--bg:#F4F4F1; --bg-sunken:#ECEBE6; --surface:#FBFBF9; --surface-2:#FFFFFF; --ink:#121211; --ink-2:#46453F; --muted:#6A6862; --faint:#A3A19A; --line:#E0DFD8; --line-strong:#C9C7BF; --ok:#1F7A4D; --accent:#F24B00; --accent-ink:#C23A00; --accent-wash:#F4E3D9; position: relative; width: 1440px; min-height: 4200px; box-sizing: border-box; padding: 72px 80px 96px; background: var(--bg); color: var(--ink); font-family: 'Ranade', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--ink)">
+<div>
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Proof · component library · v1</p>
+<h1 style="margin: 10px 0 0; font-size: 72px; line-height: 0.96; letter-spacing: -0.04em; font-weight: 500">Components</h1>
+</div>
+<p style="margin: 0; max-width: 520px; font-size: 17px; color: var(--ink-2)">Every component works in both themes from tokens alone. Cards marked <span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink)">Try it</span> are interactive: press Play.</p>
+</div>
+
+<div style="margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+
+<section aria-labelledby="c-buttons" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.4</p>
+<h2 id="c-buttons" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Buttons &amp; links</h2>
+<div style="margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<a href="#resume" class="btn-p" style="height: 44px; display: inline-flex; align-items: center; gap: 10px; padding: 0 22px; border-radius: 999px; background: var(--ink); color: var(--bg); text-decoration: none; font-size: 15px; font-weight: 500">Download résumé<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
+<a href="#email" class="btn-s" style="height: 44px; display: inline-flex; align-items: center; gap: 10px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500; box-sizing: border-box">Email</a>
+<a href="#github" class="lnk" style="font-size: 15px">GitHub ↗</a>
+<button type="button" aria-label="Copy email address" class="btn-s" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); padding: 0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
+</div>
+<p style="margin: 22px 0 10px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">States · default · hover · focus-visible · pressed</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<span style="height: 44px; display: inline-flex; align-items: center; padding: 0 22px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 15px; font-weight: 500">Default</span>
+<span style="height: 44px; display: inline-flex; align-items: center; padding: 0 22px; border-radius: 999px; background: var(--ink-2); color: var(--bg); font-size: 15px; font-weight: 500">Hover</span>
+<span style="height: 44px; display: inline-flex; align-items: center; padding: 0 22px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 15px; font-weight: 500; outline: 2px solid var(--accent); outline-offset: 2px">Focus</span>
+<span style="height: 44px; display: inline-flex; align-items: center; padding: 0 22px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 15px; font-weight: 500; transform: scale(0.97)">Pressed</span>
+</div>
+</section>
+
+<section aria-labelledby="c-pills" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.9</p>
+<h2 id="c-pills" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Status pills &amp; chips</h2>
+<div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+<span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok)"></span>Live</span>
+<span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--muted)"></span>Demo may sleep</span>
+<span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent-ink)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent)"></span>In progress</span>
+<span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px solid var(--ink)">Under review</span>
+<span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--ink)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Double-blind</span>
+<span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px dashed var(--line-strong); color: var(--muted)">Not yet implemented</span>
+<span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px dashed var(--line-strong); color: var(--muted)">On hold</span>
+</div>
+<div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px">
+<span style="padding: 3px 8px; border-radius: 8px; border: 1px solid var(--line); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2)">FastAPI</span>
+<span style="padding: 3px 8px; border-radius: 8px; border: 1px solid var(--line); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2)">GraphSAGE</span>
+<span style="padding: 3px 8px; border-radius: 8px; border: 1px solid var(--line); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2)">Nested LOO-CV</span>
+</div>
+<div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" aria-pressed="true" style="height: 36px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">All <span style="opacity: 0.7">08</span></button>
+<button type="button" aria-pressed="false" style="height: 36px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink-2); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Research <span style="color: var(--muted)">02</span></button>
+</div>
+</section>
+
+<section aria-labelledby="c-cite" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.1 · Signature</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-cite" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Citations, source card &amp; Inspect</h2>
+<div style="margin-top: 16px; display: flex; align-items: center; gap: 12px">
+<button type="button" onClick="{{toggleInspect}}" aria-pressed="{{inspectPressed}}" style="height: 32px; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border-radius: 999px; border: 1px solid {{inspectBorder}}; background: {{inspectBg}}; color: {{inspectColor}}; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>{{inspectLabel}}</button>
+<span style="font-size: 13px; color: var(--muted)">Click a marker to open its source.</span>
+</div>
+<div style="position: relative; margin-top: 18px">
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: var(--ink-2)">Gridee, which I co-founded, has <span style="padding: 1px 3px; border-radius: 4px; background: {{hl}}; color: var(--ink)">8,000+ combined downloads</span><button type="button" onClick="{{openCite1}}" aria-expanded="{{cite1Open}}" aria-label="Source 1" style="margin-left: 2px; padding: 3px 4px; border: 0; border-radius: 4px; background: {{cite1Bg}}; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1; vertical-align: super; color: var(--accent-ink); cursor: pointer">[1]</button>, and GlassBox passes <span style="padding: 1px 3px; border-radius: 4px; background: {{hl}}; color: var(--ink)">183 of 183 author-written questions</span><button type="button" onClick="{{openCite2}}" aria-expanded="{{cite2Open}}" aria-label="Source 2" style="margin-left: 2px; padding: 3px 4px; border: 0; border-radius: 4px; background: {{cite2Bg}}; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1; vertical-align: super; color: var(--accent-ink); cursor: pointer">[2]</button>.</p>
+<sc-if value="{{cite1Open}}" hint-placeholder-val="{{ false }}">
+<div role="tooltip" style="margin-top: 14px; width: 330px; box-sizing: border-box; padding: 18px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(18,18,17,.06), 0 12px 32px rgba(18,18,17,.10)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>Source 1 · Store consoles</span><span style="color: var(--ok)">Verified</span></p>
+<p style="margin: 10px 0 0; font-size: 16px; font-weight: 500">Combined downloads, Android + iOS</p>
+<p style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--ink-2)">Play Console · App Store Connect</p>
+<p style="margin: 10px 0 0; font-size: 14px; color: var(--ink-2)">Downloads, not active users. Screenshot kept on file.</p>
+</div>
+</sc-if>
+<sc-if value="{{cite2Open}}" hint-placeholder-val="{{ false }}">
+<div role="tooltip" style="margin-top: 14px; margin-left: auto; width: 330px; box-sizing: border-box; padding: 18px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(18,18,17,.06), 0 12px 32px rgba(18,18,17,.10)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>Source 2 · Eval report</span><span style="color: var(--ok)">Verified</span></p>
+<p style="margin: 10px 0 0; font-size: 16px; font-weight: 500">glassbox-eval-v4 — 183 questions</p>
+<p style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--ink-2)">Glassbox / README › Evaluation</p>
+<p style="margin: 10px 0 0; font-size: 14px; color: var(--ink-2)">Written alongside the engine. Wilson 95% CI 97.9–100%.</p>
+</div>
+</sc-if>
+</div>
+</section>
+
+<section aria-labelledby="c-readout" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.5</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-readout" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Readout · odometer roll</h2>
+<div style="margin-top: 24px; border-top: 1px solid var(--ink); padding-top: 18px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">GlassBox · eval v4</p>
+<div role="img" aria-label="183 of 183" style="margin-top: 14px; display: flex; align-items: flex-start; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 56px; line-height: 56px; letter-spacing: -0.03em">
+<sc-for list="{{digits}}" as="d" hint-placeholder-count="3">
+<span aria-hidden="true" style="display: inline-block; height: 56px; overflow: hidden"><span style="display: flex; flex-direction: column; transform: translateY({{d.y}}px); transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1) {{d.delay}}ms"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span>
+</sc-for>
+<span aria-hidden="true">/183</span>
+</div>
+<p style="margin: 12px 0 0; font-size: 15px; color: var(--muted)">95% CI 97.9–100%. A development set, not an external benchmark.</p>
+</div>
+<div style="margin-top: 20px; display: flex; align-items: center; gap: 12px">
+<button type="button" onClick="{{replay}}" class="btn-s" style="height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font-family: 'Ranade', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; font-weight: 500; cursor: pointer">Replay roll</button>
+<span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">900 ms · expo-out · 40 ms stagger, right to left</span>
+</div>
+</section>
+
+<section aria-labelledby="c-theme" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.20 · §8</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-theme" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Theme toggle · Paper / Graphite</h2>
+<div role="group" aria-label="Theme" style="margin-top: 18px; height: 36px; width: max-content; display: flex; align-items: center; gap: 2px; padding: 2px; border-radius: 999px; border: 1px solid var(--line-strong); box-sizing: border-box">
+<button type="button" onClick="{{setPaper}}" aria-pressed="{{paperPressed}}" style="height: 30px; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border: 0; border-radius: 999px; background: {{paperBtnBg}}; color: {{paperBtnInk}}; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>Paper</button>
+<button type="button" onClick="{{setGraphite}}" aria-pressed="{{graphitePressed}}" style="height: 30px; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border: 0; border-radius: 999px; background: {{graphiteBtnBg}}; color: {{graphiteBtnInk}}; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>Graphite</button>
+</div>
+<div style="{{previewVars}} margin-top: 18px; padding: 22px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); transition: background-color 220ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms cubic-bezier(0.16, 1, 0.3, 1)">
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent)"></span>Open to 2027 roles · Chennai 21:04 IST</p>
+<p style="margin: 14px 0 0; font-size: 40px; line-height: 0.95; letter-spacing: -0.04em; font-weight: 500">Yash Chauhan</p>
+<p style="margin: 12px 0 0; font-size: 18px; line-height: 1.3; letter-spacing: -0.01em">I build AI systems you can audit. <span style="color: var(--ink-2)">Every answer cited.</span></p>
+<div style="margin-top: 16px; display: flex; gap: 20px; border-top: 1px solid var(--ink); padding-top: 12px; font-family: 'Tabular', ui-monospace, Menlo, monospace"><span style="font-size: 26px; letter-spacing: -0.02em">8,000+<span style="font-size: 11px; vertical-align: super; color: var(--accent-ink)">[1]</span></span><span style="font-size: 26px; letter-spacing: -0.02em">183/183<span style="font-size: 11px; vertical-align: super; color: var(--accent-ink)">[2]</span></span></div>
+</div>
+</section>
+
+<section aria-labelledby="c-ledger" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.7 · Signature</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-ledger" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Ledger · verify chain</h2>
+<ol style="list-style: none; margin: 20px 0 0; padding: 0">
+<sc-for list="{{ledger}}" as="e" hint-placeholder-count="4">
+<li style="position: relative; display: flex; gap: 18px; padding-bottom: 18px">
+<span aria-hidden="true" style="position: absolute; left: 5px; top: 16px; bottom: 0; width: 1px; background: {{e.rail}}; transition: background-color 360ms cubic-bezier(0.16, 1, 0.3, 1) {{e.delay}}ms"></span>
+<span aria-hidden="true" style="position: relative; flex: 0 0 11px; height: 11px; margin-top: 5px; border-radius: 50%; box-sizing: border-box; border: 1.5px solid {{e.node}}; background: {{e.fill}}; transition: background-color 360ms cubic-bezier(0.16, 1, 0.3, 1) {{e.delay}}ms, border-color 360ms cubic-bezier(0.16, 1, 0.3, 1) {{e.delay}}ms"></span>
+<span style="min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">{{e.date}}</span><span style="font-size: 17px; font-weight: 500">{{e.title}}</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">#{{e.id}} ← #{{e.prev}}</span></span>
+</li>
+</sc-for>
+</ol>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<button type="button" onClick="{{verify}}" class="btn-s" style="height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font-family: 'Ranade', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; font-weight: 500; cursor: pointer">Verify chain</button>
+<span role="status" style="font-size: 14px; color: {{verifyColor}}">{{verifyText}}</span>
+</div>
+</section>
+
+<section aria-labelledby="c-rows" style="grid-column: 1 / -1; padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.6</p>
+<h2 id="c-rows" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Work row · default and hover (hover any row)</h2>
+<ol style="list-style: none; margin: 20px 0 0; padding: 0; border-top: 1px solid var(--line); background: var(--bg)">
+<li><a href="#glassbox" class="row" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 24px 16px; border-bottom: 1px solid var(--line); text-decoration: none">
+<span style="flex: 0 0 40px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--muted)">01</span>
+<span class="nm" style="flex: 999 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 500">GlassBox</span><span style="color: var(--ink-2)">Every answer is cited or refused; every decision is hash-chained.</span></span>
+<span style="flex: 1 1 360px; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 20px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted)">FastAPI · Next.js · Postgres</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted)">2026</span><span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok)"></span>Live</span><span class="arw" aria-hidden="true" style="display: inline-flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span>
+</a></li>
+<li style="position: relative"><a href="#pulse" class="row" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 24px 16px; border-bottom: 1px solid var(--line); text-decoration: none; background: var(--surface)">
+<span style="flex: 0 0 40px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--muted)">02</span>
+<span class="nm" style="flex: 999 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 4px; transform: translateX(6px)"><span style="font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 500">Pulse <span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); vertical-align: middle">· hover state</span></span><span style="color: var(--ink-2)">The LLM proposes a validated DSL; it never writes SQL or sees PII.</span></span>
+<span style="flex: 1 1 360px; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 20px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted)">NestJS · BullMQ · Prisma</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted)">2026</span><span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok)"></span>Live</span><span class="arw" aria-hidden="true" style="display: inline-flex; transform: rotate(-45deg)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span>
+</a>
+<div aria-hidden="true" style="position: absolute; z-index: 3; right: 330px; top: -20px; width: 300px; height: 188px; box-sizing: border-box; padding: 6px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(18,18,17,.06), 0 16px 40px rgba(18,18,17,.14); pointer-events: none"><img src="/_blob/446387cec1c11d8d96f8c5a2481b4337" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: left center; border-radius: 9px; display: block"></div>
+</li>
+</ol>
+</section>
+
+<section aria-labelledby="c-toc" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.14 · Desktop</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-toc" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Proximity table of contents</h2>
+<p style="margin: 8px 0 0; font-size: 14px; color: var(--muted)">Ticks near the active section grow and reveal labels. Click to jump.</p>
+<ol style="list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{toc}}" as="t" hint-placeholder-count="7">
+<li><button type="button" class="tocitem" onClick="{{t.pick}}" aria-current="{{t.current}}" style="width: 100%; min-height: 30px; display: flex; align-items: center; gap: 12px; padding: 0; border: 0; background: transparent; text-align: left; font: inherit"><span aria-hidden="true" style="flex: 0 0 auto; width: {{t.w}}px; height: {{t.h}}px; background: {{t.bg}}; transition: width 220ms cubic-bezier(0.16, 1, 0.3, 1), background-color 220ms"></span><span class="lbl" style="font-size: 14px; font-weight: {{t.weight}}; color: {{t.color}}; opacity: {{t.opacity}}; transition: opacity 220ms, color 220ms">{{t.label}}</span></button></li>
+</sc-for>
+</ol>
+</section>
+
+<section aria-labelledby="c-pill" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.14 · Mobile</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-pill" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Progress pill</h2>
+<div style="margin-top: 20px; min-height: 300px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 10px; padding: 20px; border-radius: 14px; background: var(--bg-sunken)">
+<sc-if value="{{pillOpen}}" hint-placeholder-val="{{ false }}">
+<ol style="list-style: none; margin: 0; padding: 8px; width: 300px; box-sizing: border-box; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(18,18,17,.12)">
+<li style="display: flex; justify-content: space-between; padding: 8px 10px; font-size: 14px; color: var(--muted)"><span>03 Architecture</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px">done</span></li>
+<li style="display: flex; justify-content: space-between; padding: 8px 10px; font-size: 14px; color: var(--muted)"><span>04 Decisions</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px">done</span></li>
+<li style="display: flex; justify-content: space-between; padding: 8px 10px; border-radius: 8px; background: var(--accent-wash); font-size: 14px; font-weight: 500"><span>05 Evaluation</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--accent-ink)">reading</span></li>
+<li style="display: flex; justify-content: space-between; padding: 8px 10px; font-size: 14px"><span>06 Tests &amp; ops</span></li>
+<li style="display: flex; justify-content: space-between; padding: 8px 10px; font-size: 14px"><span>07 What broke</span></li>
+</ol>
+</sc-if>
+<div style="width: 300px; height: 52px; box-sizing: border-box; padding: 0 8px 0 10px; display: flex; align-items: center; gap: 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line-strong); box-shadow: 0 12px 32px rgba(18,18,17,.12)">
+<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" style="flex: 0 0 auto"><circle cx="14" cy="14" r="11" fill="none" stroke="#C9C7BF" stroke-width="2.5"/><circle cx="14" cy="14" r="11" fill="none" stroke="#F24B00" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="69.1" stroke-dashoffset="38" transform="rotate(-90 14 14)"/></svg>
+<span style="min-width: 0; flex: 1; display: flex; flex-direction: column; line-height: 1.2"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">05 of 09</span><span style="font-size: 15px; font-weight: 500">Evaluation</span></span>
+<button type="button" onClick="{{togglePill}}" aria-expanded="{{pillOpen}}" aria-label="Show all sections" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: var(--ink); color: var(--bg); padding: 0; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{pillRot}}deg); transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1)"><path d="m18 15-6-6-6 6"/></svg></button>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="c-spec" style="grid-column: 1 / -1; padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.10</p>
+<h2 id="c-spec" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Spec strip</h2>
+<dl style="margin: 20px 0 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line)">
+<div style="padding: 16px 16px 18px 0; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Role</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">[Your role]</dd></div>
+<div style="padding: 16px 16px 18px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Timeline</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">Feb – Oct 2026</dd></div>
+<div style="padding: 16px 16px 18px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Stack</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">FastAPI · Next.js 16</dd></div>
+<div style="padding: 16px 16px 18px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Infra</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">t4g.small · ~$14/mo</dd></div>
+<div style="padding: 16px 16px 18px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Tests</dt><dd style="margin: 6px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px">254 · 11 e2e</dd></div>
+<div style="padding: 16px 0 18px 16px"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Links</dt><dd style="margin: 6px 0 0; display: flex; gap: 12px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px"><a href="#live" class="lnk">Live ↗</a><a href="#code" class="lnk">Code ↗</a></dd></div>
+</dl>
+</section>
+
+<section aria-labelledby="c-tldr" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.11</p>
+<h2 id="c-tldr" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">TL;DR card &amp; caveat</h2>
+<div style="margin-top: 20px; padding: 22px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">TL;DR</p>
+<p style="margin: 8px 0 0; font-size: 18px; line-height: 1.45">183/183 on questions I wrote alongside the engine (95% CI 97.9–100%), a development set, not an independent benchmark.<span style="margin-left: 2px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; vertical-align: super; color: var(--accent-ink)">[1]</span></p>
+</div>
+<div style="margin-top: 14px; padding: 18px 20px; border-radius: 14px; background: var(--bg-sunken)">
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent)"></span>Caveat</p>
+<p style="margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-2)">Read 100% as “no failures found yet”, not “perfect”. No coloured left border, ever.</p>
+</div>
+</section>
+
+<section aria-labelledby="c-adr" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.12</p>
+<h2 id="c-adr" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Decision card</h2>
+<article style="margin-top: 20px; padding: 22px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface-2)">
+<div style="display: flex; align-items: center; gap: 12px"><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px solid var(--ink); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Accepted</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">Decision 1</span></div>
+<h3 style="margin: 12px 0 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Refuse instead of guessing</h3>
+<dl style="margin: 14px 0 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 8px 14px; font-size: 15px; line-height: 1.5">
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Chose</dt><dd style="margin: 0; color: var(--ink-2)">Refuse out-of-scope questions; name the missing source.</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Over</dt><dd style="margin: 0; color: var(--ink-2)">[The alternative you weighed]</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Cost</dt><dd style="margin: 0; color: var(--ink-2)">Lower coverage; more escalations.</dd>
+</dl>
+</article>
+</section>
+
+<section aria-labelledby="c-eval" style="grid-column: 1 / -1; padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.13</p>
+<h2 id="c-eval" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Eval panel row · Wilson interval</h2>
+<div style="margin-top: 20px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface-2)">
+<div style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(240px, 2fr); gap: 16px; padding: 12px 20px; border-bottom: 1px solid var(--line); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>Metric</span><span>Result</span><span>95% CI</span><span>Interval</span></div>
+<div style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(240px, 2fr); gap: 16px; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line)"><span>Outcome accuracy</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">183/183</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--ink-2)">97.9–100</span><span style="display: flex; align-items: center; gap: 10px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">90</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 79%; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: calc(100% - 5px); top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">100</span></span></div>
+<div style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(240px, 2fr); gap: 16px; align-items: center; padding: 14px 20px"><span>Hallucination rate</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">0/183</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--ink-2)">0–2.1</span><span style="display: flex; align-items: center; gap: 10px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted); min-width: 14px">0</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 0; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: -5px; top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--ink)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">10</span></span></div>
+</div>
+<p style="margin: 12px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">Track = zoomed scale (labelled) · bar = 95% Wilson interval · dot = point estimate · accent = the headline metric</p>
+</section>
+
+<section aria-labelledby="c-ba" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.16</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-ba" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Before / after slider</h2>
+<p style="margin: 8px 0 0; font-size: 14px; color: var(--muted)">Placeholder textures until the CT noisy/clean pairing is fixed.</p>
+<div style="margin-top: 18px; padding: 10px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface-2)">
+<div style="position: relative; height: 240px; border-radius: 8px; overflow: hidden; background-color: #2A2926; background-image: radial-gradient(rgba(255,255,255,0.55) 1px, transparent 1.4px), radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1.4px); background-size: 7px 7px, 5px 5px; background-position: 0 0, 2px 3px">
+<div style="position: absolute; inset: 0; width: {{slider}}%; overflow: hidden; border-right: 2px solid #121211; background: linear-gradient(135deg, #3B3A36, #8E8B83 55%, #C2C0B9)"></div>
+<span style="position: absolute; left: 10px; top: 10px; padding: 3px 8px; border-radius: 6px; background: rgba(244,244,241,0.92); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #121211">[Denoised]</span>
+<span style="position: absolute; right: 10px; top: 10px; padding: 3px 8px; border-radius: 6px; background: rgba(244,244,241,0.92); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #121211">[Noisy]</span>
+</div>
+<label style="display: block; margin-top: 10px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Compare noisy and denoised</span><input type="range" class="ba" min="0" max="100" value="{{slider}}" onChange="{{onSlide}}"></label>
+</div>
+</section>
+
+<section aria-labelledby="c-code" style="padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; display: flex; justify-content: space-between; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span>7.17 · 7.19</span><span style="color: var(--accent-ink)">Try it</span></p>
+<h2 id="c-code" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Code block, copy &amp; toast</h2>
+<div style="position: relative; margin-top: 18px; padding: 16px 20px; border-radius: 8px; background: var(--bg-sunken); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.7">
+<p style="margin: 0 0 6px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">TypeScript · lib/hashchain.ts</p>
+<p style="margin: 0"><span style="color: var(--faint)">1</span>  <span style="color: var(--muted)">export const</span> link = (prev, entry) =&gt;</p>
+<p style="margin: 0"><span style="color: var(--faint)">2</span>    sha256(prev + JSON.stringify(entry))</p>
+<p style="margin: 0"><span style="color: var(--faint)">3</span>  <span style="color: var(--muted)">// SRM → IITM → Hindalco → Gridee</span></p>
+<p style="margin: 0"><span style="color: var(--faint)">4</span>  <span style="color: var(--muted)">// 700478b → 8c88a1b → a693186 → 9032982</span></p>
+<button type="button" onClick="{{copy}}" aria-label="Copy code" style="position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); color: var(--ink); padding: 0; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
+</div>
+<div style="margin-top: 18px; min-height: 52px; display: flex; justify-content: center; align-items: center">
+<sc-if value="{{copied}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="height: 36px; display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 14px; font-weight: 500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Copied</div>
+</sc-if>
+</div>
+</section>
+
+<section aria-labelledby="c-foot" style="grid-column: 1 / -1; padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">7.8 · 7.18</p>
+<h2 id="c-foot" style="margin: 6px 0 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500">Section header &amp; colophon</h2>
+<div style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px">
+<span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">§01</span>
+<span style="font-size: 44px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Selected work</span>
+<span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--muted)">(04)</span>
+<a href="#all" class="lnk" style="margin-left: auto; font-size: 15px">All work (08) →</a>
+</div>
+<div style="margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+<span>© 2026 Yash Chauhan</span>
+<span>Set in Ranade &amp; Tabular by the Indian Type Foundry · Built with React · Every claim cited</span>
+<span>Ledger head #9032982 · Updated 3 Oct 2026</span>
+</div>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cite: 0, inspect: false, roll: 1, theme: 'paper', verifying: false, verified: false, toc: 4, pillOpen: false, slider: 52, copied: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const accent = '#F24B00';
+    const paperVars = '--bg:#F4F4F1; --ink:#121211; --ink-2:#46453F; --muted:#6A6862; --line:#E0DFD8; --accent:#F24B00; --accent-ink:#C23A00;';
+    const graphiteVars = '--bg:#0E0E0D; --ink:#EEEDE8; --ink-2:#C2C0B9; --muted:#8E8B83; --line:#272725; --accent:#FF6A2B; --accent-ink:#FF8C59;';
+    const target = [1, 8, 3];
+    const digits = target.map((d, i) => ({ y: s.roll ? -d * 56 : 0, delay: (target.length - 1 - i) * 40 }));
+    const entries = [
+      { date: 'Jan 2026 — present', title: 'Co-Founder · Gridee', id: '9032982', prev: 'a693186' },
+      { date: 'Jun — Jul 2025', title: 'Summer Intern · Hindalco', id: 'a693186', prev: '8c88a1b' },
+      { date: 'Mar 2025 — Mar 2026', title: 'Research Intern · IIT Madras', id: '8c88a1b', prev: '700478b' },
+      { date: 'Aug 2023 — 2027', title: 'B.Tech CSE (AI/ML) · SRM IST', id: '700478b', prev: 'genesis' }
+    ];
+    const ledger = entries.map((e, i) => ({
+      ...e,
+      rail: s.verified ? accent : '#C9C7BF',
+      node: s.verified ? accent : '#121211',
+      fill: s.verified ? accent : '#F4F4F1',
+      delay: i * 120
+    }));
+    const labels = ['Problem', 'Constraints', 'Architecture', 'Decisions', 'Evaluation', 'Tests & ops', 'What broke'];
+    const toc = labels.map((label, i) => {
+      const dist = Math.abs(i - s.toc);
+      const active = dist === 0;
+      return {
+        label,
+        current: active ? 'location' : 'false',
+        w: active ? 34 : dist === 1 ? 26 : 16,
+        h: active ? 2 : 1,
+        bg: active ? accent : dist === 1 ? '#46453F' : '#C9C7BF',
+        color: active ? '#121211' : dist === 1 ? '#46453F' : '#6A6862',
+        weight: active ? 500 : 400,
+        opacity: dist <= 2 ? 1 : 0.55,
+        pick: () => this.setState({ toc: i })
+      };
+    });
+    return {
+      toggleInspect: () => this.setState({ inspect: !s.inspect }),
+      inspectPressed: s.inspect ? 'true' : 'false',
+      inspectLabel: s.inspect ? 'Inspect · on' : 'Inspect',
+      inspectBorder: s.inspect ? accent : '#C9C7BF',
+      inspectBg: s.inspect ? '#F4E3D9' : 'transparent',
+      inspectColor: s.inspect ? '#C23A00' : '#121211',
+      hl: s.inspect ? '#F4E3D9' : 'transparent',
+      openCite1: () => this.setState({ cite: s.cite === 1 ? 0 : 1 }),
+      openCite2: () => this.setState({ cite: s.cite === 2 ? 0 : 2 }),
+      cite1Open: s.cite === 1,
+      cite2Open: s.cite === 2,
+      cite1Bg: s.cite === 1 ? '#F4E3D9' : 'transparent',
+      cite2Bg: s.cite === 2 ? '#F4E3D9' : 'transparent',
+      digits,
+      replay: () => { this.setState({ roll: 0 }); setTimeout(() => this.setState({ roll: 1 }), 80); },
+      setPaper: () => this.setState({ theme: 'paper' }),
+      setGraphite: () => this.setState({ theme: 'graphite' }),
+      paperPressed: s.theme === 'paper' ? 'true' : 'false',
+      graphitePressed: s.theme === 'graphite' ? 'true' : 'false',
+      paperBtnBg: s.theme === 'paper' ? '#121211' : 'transparent',
+      paperBtnInk: s.theme === 'paper' ? '#F4F4F1' : '#6A6862',
+      graphiteBtnBg: s.theme === 'graphite' ? '#121211' : 'transparent',
+      graphiteBtnInk: s.theme === 'graphite' ? '#F4F4F1' : '#6A6862',
+      previewVars: s.theme === 'paper' ? paperVars : graphiteVars,
+      ledger,
+      verify: () => { this.setState({ verifying: true, verified: false }); setTimeout(() => this.setState({ verifying: false, verified: true }), 700); },
+      verifyText: s.verifying ? 'Recomputing 4 hashes…' : s.verified ? '✓ 4 entries · chain intact' : 'Not checked yet',
+      verifyColor: s.verified ? '#1F7A4D' : '#6A6862',
+      toc,
+      togglePill: () => this.setState({ pillOpen: !s.pillOpen }),
+      pillOpen: s.pillOpen,
+      pillRot: s.pillOpen ? 180 : 0,
+      slider: s.slider,
+      onSlide: (e) => this.setState({ slider: Number(e.target.value) }),
+      copy: () => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1600); },
+      copied: s.copied
+    };
+  }
+}
+</script>
+</body>
+</html>

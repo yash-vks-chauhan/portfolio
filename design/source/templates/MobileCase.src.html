@@ -1,0 +1,155 @@
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+:focus-visible{outline:3px solid rgba(0,113,227,0.5);outline-offset:3px}
+.pill{transition:filter .2s,transform .2s}
+.pill:active{transform:scale(.97)}
+.snap{scroll-snap-type:x mandatory;scrollbar-width:none}
+.snap::-webkit-scrollbar{display:none}
+.snap > figure{scroll-snap-align:start}
+</style>
+</helmet>
+<div style="[[tokens]] --blue: {{a.blue}}; --link: {{a.link}}; --blue-wash: {{a.wash}}; --on-accent: {{a.on}}; --cite: {{a.cite}}; position: relative; width: 390px; min-height: 3040px; overflow-x: hidden; display: block; background: var(--bg); color: var(--label); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', system-ui, sans-serif; font-size: 17px; line-height: 1.47; letter-spacing: -0.022em; -webkit-font-smoothing: antialiased">
+
+<div style="position: sticky; top: 0; z-index: 50; height: 0; display: flex; align-items: flex-start; justify-content: space-between; padding: 0 12px">
+<a href="GlassMobile.dc.html" aria-label="Back to work" style="margin-top: 10px; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--glass); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: inset 0 0 0 1px var(--glass-border), var(--shadow); color: var(--label)">[[i:chevron-left:22:2.2]]</a>
+<button type="button" aria-label="Share this case study" style="margin-top: 10px; width: 48px; height: 48px; border: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--glass); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: inset 0 0 0 1px var(--glass-border), var(--shadow); color: var(--label)">[[i:share:20:2]]</button>
+</div>
+
+<header style="padding: 84px 16px 0">
+<div style="display: flex; gap: 16px; align-items: center">
+<span aria-hidden="true" style="width: 104px; height: 104px; flex: none; border-radius: 24px; display: flex; align-items: center; justify-content: center; background: radial-gradient(120% 120% at 20% 0%, #6EA8FF 0%, rgba(110,168,255,0) 55%), linear-gradient(150deg, #2F6BFF 0%, #1E3A8A 60%, #0B1F4D 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -8px 18px rgba(0,0,0,0.25), 0 14px 30px rgba(30,58,138,0.35); color: #FFFFFF">[[i:box:50:1.5]]</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<h1 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 600; letter-spacing: 0">GlassBox</h1>
+<p style="margin: 4px 0 0; font-size: 15px; line-height: 1.35; letter-spacing: -0.012em; color: var(--label2)">Auditable wealth-advisory AI</p>
+<div style="margin-top: 12px; display: flex; gap: 8px">
+<a class="pill" href="#demo" style="height: 36px; display: inline-flex; align-items: center; gap: 4px; padding: 0 16px; border-radius: 999px; background: var(--blue); color: var(--on-accent); font-size: 15px; font-weight: 600; letter-spacing: -0.012em">Open[[i:arrow-up-right:15:2.2]]</a>
+<a class="pill" href="#code" style="height: 36px; display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; border-radius: 999px; background: var(--fill2); color: var(--link); font-size: 15px; font-weight: 600; letter-spacing: -0.012em">[[si:SiGithub:15]]Code</a>
+</div>
+</div>
+</div>
+<div class="snap" style="margin: 22px -16px 0; overflow-x: auto; border-top: 1px solid var(--sep); border-bottom: 1px solid var(--sep)">
+<div style="width: 640px; display: flex; padding: 0 8px">
+<div style="flex: 1 0 104px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">Eval</span><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 19px; line-height: 1.2; font-weight: 600; letter-spacing: 0">183/183</span><span style="font-size: 11px; letter-spacing: 0; color: var(--label2)">CI 97.9–100%</span></div>
+<div style="flex: 1 0 104px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; box-shadow: inset 1px 0 0 var(--sep)"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">Hallucinations</span><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 19px; line-height: 1.2; font-weight: 600; letter-spacing: 0">0/183</span><span style="font-size: 11px; letter-spacing: 0; color: var(--label2)">CI 0–2.1%</span></div>
+<div style="flex: 1 0 104px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; box-shadow: inset 1px 0 0 var(--sep)"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">Tests</span><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 19px; line-height: 1.2; font-weight: 600; letter-spacing: 0">254</span><span style="font-size: 11px; letter-spacing: 0; color: var(--label2)">+ 11 e2e</span></div>
+<div style="flex: 1 0 104px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; box-shadow: inset 1px 0 0 var(--sep)"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">p95</span><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 19px; line-height: 1.2; font-weight: 600; letter-spacing: 0">1 ms</span><span style="font-size: 11px; letter-spacing: 0; color: var(--label2)">local engine</span></div>
+<div style="flex: 1 0 104px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; box-shadow: inset 1px 0 0 var(--sep)"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">Hosting</span><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 19px; line-height: 1.2; font-weight: 600; letter-spacing: 0">~$14</span><span style="font-size: 11px; letter-spacing: 0; color: var(--label2)">a month</span></div>
+<div style="flex: 1 0 104px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; box-shadow: inset 1px 0 0 var(--sep)"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">Licence</span><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 19px; line-height: 1.2; font-weight: 600; letter-spacing: 0">MIT</span><span style="font-size: 11px; letter-spacing: 0; color: var(--label2)">open source</span></div>
+</div>
+</div>
+</header>
+
+<section aria-labelledby="m-preview" style="padding: 26px 0 0">
+<h2 id="m-preview" style="margin: 0; padding: 0 16px; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Preview</h2>
+<div class="snap" style="margin-top: 12px; overflow-x: auto; scroll-padding: 0 16px; display: flex; gap: 12px; padding: 0 16px 6px">
+<figure style="margin: 0; flex: none; width: 300px"><img src="[[asset:glassbox-ask]]" alt="Answer with numbered citations" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--hair)[[theme:~~; filter: brightness(0.9)]]"><figcaption style="margin-top: 8px; font-size: 13px; line-height: 1.35; letter-spacing: -0.006em; color: var(--label2)"><strong style="font-weight: 600; color: var(--label)">Ask.</strong> Every claim cited; flagged against the IPS.</figcaption></figure>
+<figure style="margin: 0; flex: none; width: 300px"><img src="[[asset:glassbox-refusal]]" alt="Refusal naming the missing source" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--hair)[[theme:~~; filter: brightness(0.9)]]"><figcaption style="margin-top: 8px; font-size: 13px; line-height: 1.35; letter-spacing: -0.006em; color: var(--label2)"><strong style="font-weight: 600; color: var(--label)">Refuse.</strong> The missing source, named.</figcaption></figure>
+<figure style="margin: 0; flex: none; width: 300px"><img src="[[asset:glassbox-audit-replay]]" alt="Decision replay" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--hair)[[theme:~~; filter: brightness(0.9)]]"><figcaption style="margin-top: 8px; font-size: 13px; line-height: 1.35; letter-spacing: -0.006em; color: var(--label2)"><strong style="font-weight: 600; color: var(--label)">Replay.</strong> Claims, scores, row hash.</figcaption></figure>
+</div>
+</section>
+
+<section aria-label="Summary" style="padding: 22px 16px 0">
+<div style="box-sizing: border-box; padding: 18px; border-radius: 22px; background: var(--card); box-shadow: var(--shadow-sm)">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--label2)">In short</p>
+<p style="margin: 6px 0 0; font-size: 18px; line-height: 1.42; font-weight: 500; letter-spacing: -0.012em">On 183 questions I wrote alongside the engine, GlassBox answered or refused correctly every time (95% CI <span style="white-space: nowrap">97.9–100%</span>). A development set, not an independent benchmark.<a href="#src-1" style="display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 6px; margin-left: 4px; border-radius: 999px; background: var(--blue-wash); color: var(--cite); font-size: 12px; font-weight: 600; letter-spacing: 0; line-height: 1; vertical-align: 2px">1</a></p>
+</div>
+</section>
+
+<section id="problem" style="padding: 40px 16px 0">
+<h2 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Problem</h2>
+<p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55; letter-spacing: -0.012em; color: var(--ink2)">Advisors answer clients under suitability rules. A confident wrong answer is a compliance problem, and a chat assistant can’t show where an answer came from. GlassBox answers only from a client’s approved documents and refuses everything else.</p>
+</section>
+
+<section id="architecture" style="padding: 40px 16px 0">
+<h2 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: 0">How an answer is made</h2>
+<ol style="margin: 12px 0 0; padding: 0; list-style: none; border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-sm)">
+<li style="min-height: 56px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--fill2); font-size: 13px; font-weight: 600; letter-spacing: 0">1</span><span style="flex: 1; display: flex; align-items: center; padding: 12px 14px 12px 0; font-size: 16px; letter-spacing: -0.016em"><span><strong style="font-weight: 600">Advisor asks</strong> about a client</span></span></li>
+<li style="min-height: 56px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--fill2); font-size: 13px; font-weight: 600; letter-spacing: 0">2</span><span style="flex: 1; display: flex; align-items: center; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep); font-size: 16px; letter-spacing: -0.016em"><span><strong style="font-weight: 600">Retrieve</strong> approved documents only</span></span></li>
+<li style="min-height: 56px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--fill2); font-size: 13px; font-weight: 600; letter-spacing: 0">3</span><span style="flex: 1; display: flex; align-items: center; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep); font-size: 16px; letter-spacing: -0.016em"><span><strong style="font-weight: 600">Draft</strong> the answer as claims, and <strong style="font-weight: 600">score</strong> each one</span></span></li>
+<li style="min-height: 56px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--ok-wash); color: var(--ok)">[[i:circle-check:16:2.2]]</span><span style="flex: 1; display: flex; align-items: center; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep); font-size: 16px; letter-spacing: -0.016em"><span><strong style="font-weight: 600">Supported:</strong> answer, every claim cited</span></span></li>
+<li style="min-height: 56px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--warn-wash); color: var(--warn)">[[i:ban:16:2.2]]</span><span style="flex: 1; display: flex; align-items: center; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep); font-size: 16px; letter-spacing: -0.016em"><span><strong style="font-weight: 600">Unsupported:</strong> refuse, naming the missing source</span></span></li>
+<li style="min-height: 56px; box-sizing: border-box; padding-left: 14px; display: flex; align-items: stretch; gap: 12px"><span style="align-self: center; width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--blue-wash); color: var(--cite)">[[i:link:15:2.2]]</span><span style="flex: 1; display: flex; align-items: center; padding: 12px 14px 12px 0; border-top: 1px solid var(--sep); font-size: 16px; letter-spacing: -0.016em"><span><strong style="font-weight: 600">Either way:</strong> appended to a hash-chained audit log; compliance reviews flags</span></span></li>
+</ol>
+</section>
+
+<section id="evaluation" style="padding: 40px 16px 0">
+<h2 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Evaluation</h2>
+<p style="margin: 8px 0 0; font-size: 15px; line-height: 1.45; letter-spacing: -0.012em; color: var(--label2)">glassbox-eval-v4, 2 Oct 2026. Wilson 95% intervals.</p>
+<div style="margin-top: 12px; border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-sm)">
+<div style="padding: 18px; display: flex; align-items: center; gap: 16px">
+<div style="position: relative; width: 92px; height: 92px; flex: none"><svg width="92" height="92" viewBox="0 0 92 92" aria-hidden="true" style="display: block; color: var(--blue)"><circle cx="46" cy="46" r="39" fill="none" stroke="currentColor" stroke-opacity="0.16" stroke-width="10"></circle><circle cx="46" cy="46" r="39" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-dasharray="245 245" transform="rotate(-90 46 46)"></circle></svg><span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0">183/183</span></div>
+<span style="display: flex; flex-direction: column"><span style="font-size: 17px; font-weight: 600; letter-spacing: -0.016em">Answered or refused correctly</span><span style="font-size: 13px; line-height: 1.4; letter-spacing: -0.006em; color: var(--label2)">95% CI 97.9–100%. Read it as “no failures found yet”.</span></span>
+</div>
+<div style="padding: 13px 18px; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep); font-size: 15px; letter-spacing: -0.012em"><span>Hallucination rate</span><span style="font-weight: 600">0/183 <span style="font-weight: 400; color: var(--label2)">· CI 0–2.1%</span></span></div>
+<div style="padding: 13px 18px; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep); font-size: 15px; letter-spacing: -0.012em"><span>Citation accuracy</span><span style="font-weight: 600">183/183</span></div>
+<div style="padding: 13px 18px; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep); font-size: 15px; letter-spacing: -0.012em"><span>Faithfulness</span><span style="font-weight: 600">0.98</span></div>
+<div style="padding: 13px 18px; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep); font-size: 15px; letter-spacing: -0.012em"><span>Determinism</span><span style="font-weight: 600">1.00</span></div>
+<div style="padding: 13px 18px; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep); font-size: 15px; letter-spacing: -0.012em"><span>p95 latency</span><span style="font-weight: 600">1 ms</span></div>
+</div>
+<div style="margin-top: 12px; box-sizing: border-box; padding: 14px 16px; border-radius: 18px; display: flex; gap: 10px; align-items: flex-start; background: var(--warn-wash)">
+<span style="display: flex; padding-top: 2px; color: var(--warn)">[[i:info:18:2]]</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; letter-spacing: -0.012em">I wrote the questions while building the engine, so this is a development set, not a held-out benchmark.</p>
+</div>
+</section>
+
+<section id="decisions" style="padding: 40px 16px 0">
+<h2 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Decisions</h2>
+<div style="margin-top: 12px; border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-sm)">
+<div style="padding: 16px 18px 12px; display: flex; flex-direction: column; gap: 8px"><span style="align-self: flex-start; height: 24px; display: inline-flex; align-items: center; gap: 5px; padding: 0 9px; border-radius: 999px; background: var(--ok-wash); color: var(--ok); font-size: 11px; font-weight: 600; letter-spacing: 0">[[i:check:12:2.6]]Accepted</span><h3 style="margin: 0; font-size: 18px; line-height: 1.25; font-weight: 600; letter-spacing: -0.012em">Refuse instead of guessing</h3></div>
+<div style="padding: 12px 18px; border-top: 1px solid var(--sep); font-size: 15px; line-height: 1.45; letter-spacing: -0.012em"><span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">Because</span>An advisor can act on a refusal. They can’t check a guess.</div>
+<div style="padding: 12px 18px 14px; border-top: 1px solid var(--sep); font-size: 15px; line-height: 1.45; letter-spacing: -0.012em"><span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--label2)">Cost</span>Lower coverage, and more escalations for compliance.</div>
+</div>
+<a href="#decisions-all" style="margin-top: 12px; min-height: 52px; box-sizing: border-box; padding: 0 16px; border-radius: 18px; display: flex; align-items: center; justify-content: space-between; background: var(--card); box-shadow: var(--shadow-sm); font-size: 16px; letter-spacing: -0.016em; color: var(--link)">2 more decisions<span style="display: flex; color: var(--label3)">[[i:chevron-right:18:2]]</span></a>
+</section>
+
+<section aria-labelledby="m-info" style="padding: 40px 16px 0">
+<h2 id="m-info" style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Information</h2>
+<div style="margin-top: 10px; font-size: 15px; letter-spacing: -0.012em">
+<div style="padding: 12px 0; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep)"><span style="color: var(--label2)">Role</span><span style="color: var(--label2)">[Your role]</span></div>
+<div style="padding: 12px 0; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep)"><span style="color: var(--label2)">Timeline</span><span>Feb – Oct 2026</span></div>
+<div style="padding: 12px 0; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep)"><span style="color: var(--label2)">Stack</span><span style="text-align: right">FastAPI · Next.js 16 · Postgres</span></div>
+<div style="padding: 12px 0; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep)"><span style="color: var(--label2)">Infra</span><span>AWS t4g.small · OIDC</span></div>
+<div style="padding: 12px 0; display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--sep); border-bottom: 1px solid var(--sep)"><span style="color: var(--label2)">Licence</span><span>MIT</span></div>
+</div>
+<ol style="margin: 22px 0 0; padding: 0; list-style: none; font-size: 12px; line-height: 1.5; letter-spacing: 0; color: var(--label2)">
+<li id="src-1" style="display: flex; gap: 6px"><span style="min-width: 14px; font-weight: 600">1.</span><span>glassbox-eval-v4 report, 2 Oct 2026. Glassbox / README › Evaluation.</span></li>
+</ol>
+</section>
+
+<div style="height: 120px"></div>
+
+<nav aria-label="Tabs" style="position: sticky; bottom: 16px; z-index: 40; margin: 0 12px; display: flex; align-items: center; gap: 10px">
+<div style="flex: 1; height: 64px; box-sizing: border-box; padding: 4px; border-radius: 32px; display: flex; gap: 2px; background: var(--glass-strong); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: inset 0 0 0 1px var(--glass-border), var(--shadow-lg)">
+<a href="GlassMobile.dc.html" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--label); font-size: 10px; font-weight: 500; letter-spacing: 0">[[i:house:22:2]]Home</a>
+<a href="#work" aria-current="page" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: var(--fill2); color: var(--link); font-size: 10px; font-weight: 600; letter-spacing: 0">[[i:layout-grid:22:2]]Work</a>
+<a href="#about" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--label); font-size: 10px; font-weight: 500; letter-spacing: 0">[[i:user:22:2]]About</a>
+<a href="#contact" style="flex: 1; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--label); font-size: 10px; font-weight: 500; letter-spacing: 0">[[i:mail:22:2]]Contact</a>
+</div>
+<a href="#ask" aria-label="Ask my portfolio" style="width: 64px; height: 64px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--glass-strong); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: inset 0 0 0 1px var(--glass-border), var(--shadow-lg); color: #AF52DE">[[i:sparkles:24:2]]</a>
+</nav>
+<div style="height: 16px"></div>
+</div>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"enum","options":["Blue","Indigo","Graphite"],"default":"Blue","section":"Theme"},"$preview":{"width":390,"height":[[def:h]]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = [[theme:false~~true]];
+    const accent = this.props.accent ?? 'Blue';
+    const accents = {
+      Blue: dark
+        ? { blue: '#0071E3', link: '#2997FF', wash: 'rgba(41,151,255,0.18)', on: '#FFFFFF', cite: '#7CC0FF' }
+        : { blue: '#0071E3', link: '#0066CC', wash: 'rgba(0,113,227,0.12)', on: '#FFFFFF', cite: '#0058B0' },
+      Indigo: dark
+        ? { blue: '#5E5CE6', link: '#A5A3FF', wash: 'rgba(94,92,230,0.24)', on: '#FFFFFF', cite: '#C2C1FF' }
+        : { blue: '#5856D6', link: '#4E4BC6', wash: 'rgba(88,86,214,0.12)', on: '#FFFFFF', cite: '#4340B8' },
+      Graphite: dark
+        ? { blue: '#F5F5F7', link: '#F5F5F7', wash: 'rgba(255,255,255,0.12)', on: '#1D1D1F', cite: '#F5F5F7' }
+        : { blue: '#1D1D1F', link: '#1D1D1F', wash: 'rgba(0,0,0,0.07)', on: '#FFFFFF', cite: '#1D1D1F' },
+    };
+    return { a: accents[accent] || accents.Blue };
+  }
+}
+</script>

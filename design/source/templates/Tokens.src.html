@@ -1,0 +1,195 @@
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<style>
+body{margin:0}
+a{color:#0066CC;text-decoration:none}
+a:hover{color:#004C99}
+.bgi{background-position:center;background-size:cover;background-repeat:no-repeat}
+.bg-iri{background-image:url([[asset:hero-iridescence]])}
+.bg-aur{background-image:url([[asset:hero-aurora]])}
+.bg-silk{background-image:url([[asset:hero-silk]])}
+.bg-grain{background-image:url([[asset:hero-grainient]])}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 4000px; box-sizing: border-box; padding: 80px; display: flex; flex-direction: column; gap: 72px; background: #F5F5F7; color: #1D1D1F; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', system-ui, sans-serif; font-size: 17px; line-height: 1.47; letter-spacing: -0.022em; -webkit-font-smoothing: antialiased">
+
+<header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<div>
+<p style="margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.012em; color: #0066CC">Glass · design tokens</p>
+<h1 style="margin: 8px 0 0; font-size: 64px; line-height: 1.05; font-weight: 600; letter-spacing: -0.014em">Built like an iOS app.</h1>
+<p style="margin: 14px 0 0; max-width: 760px; font-size: 21px; line-height: 1.42; letter-spacing: 0; color: #6E6E73">SF Pro, system colours, and glass used only for floating controls: the nav, widgets over the hero, sheets and the dock. Content sits on solid surfaces so it stays readable.</p>
+</div>
+<div style="display: flex; gap: 10px; font-size: 13px; letter-spacing: -0.006em; color: #6E6E73"><span style="height: 32px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: #FFFFFF">WCAG 2.2 AA</span><span style="height: 32px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: #FFFFFF">Light + dark</span><span style="height: 32px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: #FFFFFF">Reduced motion</span></div>
+</header>
+
+<section>
+<h2 style="margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: 0">Colour</h2>
+<p style="margin: 8px 0 0; font-size: 17px; color: #6E6E73">Contrast is measured on the page background unless noted. Tertiary grey is for large or decorative text only.</p>
+<div style="margin-top: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+<div style="box-sizing: border-box; padding: 28px; border-radius: 28px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)">
+<h3 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: 0">Light</h3>
+<div style="margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #F5F5F7; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06)"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Background</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#F5F5F7 · page</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08)"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Card</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#FFFFFF · solid surfaces</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: rgba(120,120,128,0.12)"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Fill</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">120 120 128 / 12% · controls</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #1D1D1F"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Label</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#1D1D1F · 15.5:1</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #6E6E73"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Secondary</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#6E6E73 · 4.7:1</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #86868B"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Tertiary</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#86868B · 3.3:1, large only</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #0071E3; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 13px; font-weight: 600">Button</span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Accent fill</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#0071E3 · white text 4.7:1</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #0066CC"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Link</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#0066CC · 5.1:1</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: rgba(0,113,227,0.12); display: flex; align-items: center; justify-content: center; color: #0058B0; font-size: 15px; font-weight: 600">1</span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Citation</span><span style="font-size: 12px; color: #6E6E73; letter-spacing: 0">#0058B0 on 12% wash · 5.4:1</span></div>
+</div>
+<div style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(52,199,89,0.14); color: #1E7B34; font-size: 13px; font-weight: 600; letter-spacing: 0">Live · #1E7B34</span>
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(255,149,0,0.14); color: #A04A00; font-size: 13px; font-weight: 600; letter-spacing: 0">In progress · #A04A00</span>
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(0,113,227,0.12); color: #0058B0; font-size: 13px; font-weight: 600; letter-spacing: 0">Manuscript · #0058B0</span>
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(120,120,128,0.12); color: #636366; font-size: 13px; font-weight: 600; letter-spacing: 0">On hold · #636366</span>
+</div>
+</div>
+<div style="box-sizing: border-box; padding: 28px; border-radius: 28px; background: #000000; color: #F5F5F7">
+<h3 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: 0">Dark</h3>
+<div style="margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #000000; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14)"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Background</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#000000 · page</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #1C1C1E"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Card</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#1C1C1E · solid surfaces</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #2C2C2E"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Fill</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#2C2C2E · controls</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #F5F5F7"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Label</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#F5F5F7 · 19.3:1</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #A1A1A6"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Secondary</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#A1A1A6 · 8.2:1</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #8E8E93"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Tertiary</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#8E8E93 · icons, chevrons</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #0071E3; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 13px; font-weight: 600">Button</span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Accent fill</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#0071E3 · not #0A84FF (3.7:1)</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: #2997FF"></span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Link</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#2997FF · 7.0:1</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="height: 64px; border-radius: 14px; background: rgba(41,151,255,0.18); display: flex; align-items: center; justify-content: center; color: #7CC0FF; font-size: 15px; font-weight: 600">1</span><span style="font-size: 13px; font-weight: 600; letter-spacing: -0.006em">Citation</span><span style="font-size: 12px; color: #A1A1A6; letter-spacing: 0">#7CC0FF on 18% wash · 5.6:1</span></div>
+</div>
+<div style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(48,209,88,0.16); color: #30D158; font-size: 13px; font-weight: 600; letter-spacing: 0">Live · #30D158</span>
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(255,159,10,0.16); color: #FFB340; font-size: 13px; font-weight: 600; letter-spacing: 0">In progress · #FFB340</span>
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(41,151,255,0.18); color: #7CC0FF; font-size: 13px; font-weight: 600; letter-spacing: 0">Manuscript · #7CC0FF</span>
+<span style="height: 28px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(118,118,128,0.24); color: #A1A1A6; font-size: 13px; font-weight: 600; letter-spacing: 0">On hold · #A1A1A6</span>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<h2 style="margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: 0">Typography</h2>
+<p style="margin: 8px 0 0; font-size: 17px; color: #6E6E73">-apple-system (SF Pro, with optical sizes) → Inter from Google Fonts on Windows and Android → Segoe UI → system-ui. Numbers in widgets use SF Pro Rounded where the browser has it.</p>
+<div style="margin-top: 24px; border-radius: 28px; overflow: hidden; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)">
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Display</strong>96 / 1.04 · 600 · −0.02em</span><span style="font-size: 96px; line-height: 1.04; font-weight: 600; letter-spacing: -0.02em">AI you can audit.</span></div>
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px; border-top: 1px solid rgba(60,60,67,0.14)"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Title 1</strong>56 / 1.07 · 600 · −0.012em</span><span style="font-size: 56px; line-height: 1.07; font-weight: 600; letter-spacing: -0.012em">Every answer, sourced.</span></div>
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px; border-top: 1px solid rgba(60,60,67,0.14)"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Title 2</strong>44 / 1.05 · 600 · −0.01em</span><span style="font-size: 44px; line-height: 1.05; font-weight: 600; letter-spacing: -0.01em">GlassBox</span></div>
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px; border-top: 1px solid rgba(60,60,67,0.14)"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Title 3</strong>32 / 1.15 · 600 · 0</span><span style="font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: 0">Evaluation</span></div>
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px; border-top: 1px solid rgba(60,60,67,0.14)"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Lead</strong>21 / 1.42 · 400 · 0</span><span style="font-size: 21px; line-height: 1.42; letter-spacing: 0; color: #6E6E73">A small GlassBox over this site. It cites its sources, or it says it doesn’t know.</span></div>
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px; border-top: 1px solid rgba(60,60,67,0.14)"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Body</strong>17 / 1.47 · 400 · −0.022em</span><span style="font-size: 17px; line-height: 1.47; letter-spacing: -0.022em">Wealth advisors answer client questions under suitability rules. A wrong answer is a compliance problem.</span></div>
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px; border-top: 1px solid rgba(60,60,67,0.14)"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Callout · Footnote · Caption</strong>15 · 13 · 12</span><span style="display: flex; align-items: baseline; gap: 28px"><span style="font-size: 15px; letter-spacing: -0.012em">Co-Founder &amp; Founding Engineer</span><span style="font-size: 13px; letter-spacing: -0.006em; color: #6E6E73">95% CI 97.9–100%</span><span style="font-size: 12px; letter-spacing: -0.004em; color: #6E6E73">Copyright © 2026 Yash Chauhan</span></span></div>
+<div style="padding: 22px 28px; display: flex; align-items: baseline; gap: 24px; border-top: 1px solid rgba(60,60,67,0.14)"><span style="width: 200px; flex: none; font-size: 13px; line-height: 1.4; color: #6E6E73; letter-spacing: -0.006em"><strong style="display: block; color: #1D1D1F; font-weight: 600">Numbers · Mono</strong>Rounded 46 · SF Mono 13</span><span style="display: flex; align-items: baseline; gap: 32px"><span style="font-family: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-size: 46px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">183/183</span><code style="height: 32px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 8px; background: #F5F5F7; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; letter-spacing: 0">total_spend &gt; ₹2,000</code></span></div>
+</div>
+</section>
+
+<section>
+<h2 style="margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: 0">Materials</h2>
+<p style="margin: 8px 0 0; font-size: 17px; color: #6E6E73">Glass only floats: nav, widgets over the hero, sheets, the dock and the tab bar. Everything you read sits on a solid card.</p>
+<div style="margin-top: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+<div class="bgi bg-iri" style="position: relative; height: 300px; box-sizing: border-box; padding: 28px; border-radius: 28px; overflow: hidden; display: flex; align-items: flex-end; gap: 14px">
+<div style="flex: 1; height: 150px; box-sizing: border-box; padding: 16px; border-radius: 22px; background: rgba(255,255,255,0.6); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.8); box-shadow: inset 0 1px 0 rgba(255,255,255,0.9); display: flex; flex-direction: column; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">Thin</span><span style="font-size: 12px; line-height: 1.4; color: #424245; letter-spacing: 0">white 60% · blur 24 · sat 180%<br>Nav capsule, dock</span></div>
+<div style="flex: 1; height: 150px; box-sizing: border-box; padding: 16px; border-radius: 22px; background: rgba(255,255,255,0.72); -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); border: 1px solid rgba(255,255,255,0.85); box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 18px 40px rgba(17,24,39,0.08); display: flex; flex-direction: column; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">Regular</span><span style="font-size: 12px; line-height: 1.4; color: #424245; letter-spacing: 0">white 72% · blur 30 · sat 190%<br>Widgets</span></div>
+<div style="flex: 1; height: 150px; box-sizing: border-box; padding: 16px; border-radius: 22px; background: rgba(255,255,255,0.8); -webkit-backdrop-filter: blur(30px) saturate(180%); backdrop-filter: blur(30px) saturate(180%); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06), 0 30px 60px rgba(17,24,39,0.10); display: flex; flex-direction: column; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">Strong</span><span style="font-size: 12px; line-height: 1.4; color: #424245; letter-spacing: 0">white 80% · blur 30<br>Sheets, tab bar</span></div>
+</div>
+<div class="bgi bg-aur" style="position: relative; height: 300px; box-sizing: border-box; padding: 28px; border-radius: 28px; overflow: hidden; display: flex; align-items: flex-end; gap: 14px; background-color: #000000; color: #F5F5F7">
+<div style="flex: 1; height: 150px; box-sizing: border-box; padding: 16px; border-radius: 22px; background: rgba(28,28,30,0.55); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">Thin</span><span style="font-size: 12px; line-height: 1.4; color: #D1D1D6; letter-spacing: 0">#1C1C1E 55% · blur 24</span></div>
+<div style="flex: 1; height: 150px; box-sizing: border-box; padding: 16px; border-radius: 22px; background: rgba(28,28,30,0.6); -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 18px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">Regular</span><span style="font-size: 12px; line-height: 1.4; color: #D1D1D6; letter-spacing: 0">#1C1C1E 60% · blur 30</span></div>
+<div style="flex: 1; height: 150px; box-sizing: border-box; padding: 16px; border-radius: 22px; background: rgba(44,44,46,0.72); -webkit-backdrop-filter: blur(30px) saturate(180%); backdrop-filter: blur(30px) saturate(180%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 30px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">Strong</span><span style="font-size: 12px; line-height: 1.4; color: #D1D1D6; letter-spacing: 0">#2C2C2E 72% · blur 30</span></div>
+</div>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+<div style="box-sizing: border-box; padding: 28px; border-radius: 28px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)">
+<h2 style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Shape</h2>
+<div style="margin-top: 20px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px; font-size: 12px; color: #6E6E73; letter-spacing: 0">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><span style="width: 96px; height: 40px; border-radius: 999px; background: #0071E3"></span>Pill 999</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><span style="width: 96px; height: 96px; border-radius: 32px; background: #F5F5F7; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08)"></span>Card 32</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><span style="width: 96px; height: 96px; border-radius: 28px; background: #F5F5F7; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08)"></span>Widget 28</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><span style="width: 96px; height: 96px; border-radius: 24px; background: #F5F5F7; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08)"></span>List 24</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><span style="width: 72px; height: 72px; border-radius: 22.5%; background: linear-gradient(145deg, #5AC8FA, #0A7CFF)"></span>Icon 22.5%</div>
+</div>
+<h2 style="margin: 32px 0 0; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Space</h2>
+<div style="margin-top: 16px; display: flex; align-items: flex-end; gap: 12px; font-size: 11px; color: #6E6E73; letter-spacing: 0">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 4px; background: #0071E3; border-radius: 2px"></span>4</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 8px; background: #0071E3; border-radius: 2px"></span>8</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 12px; background: #0071E3; border-radius: 2px"></span>12</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; background: #0071E3; border-radius: 2px"></span>16</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 20px; background: #0071E3; border-radius: 2px"></span>20</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 24px; background: #0071E3; border-radius: 2px"></span>24</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 32px; background: #0071E3; border-radius: 2px"></span>32</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 48px; background: #0071E3; border-radius: 2px"></span>48</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 56px; background: #0071E3; border-radius: 2px"></span>56</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 96px; background: #5AC8FA; border-radius: 2px"></span>96</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 120px; background: #5AC8FA; border-radius: 2px"></span>120</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 16px; height: 160px; background: #5AC8FA; border-radius: 2px"></span>160</div>
+</div>
+<p style="margin: 16px 0 0; font-size: 13px; line-height: 1.5; color: #6E6E73; letter-spacing: -0.006em">Container 1120 with 24 gutters (16 on phones). Sections 160 apart on desktop, 96 on phones. Card padding 48–56, 24 on phones. Grid gap 20.</p>
+</div>
+<div style="box-sizing: border-box; padding: 28px; border-radius: 28px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)">
+<h2 style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Elevation</h2>
+<div style="margin-top: 20px; padding: 28px; border-radius: 22px; background: #F5F5F7; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; font-size: 12px; color: #6E6E73; letter-spacing: 0">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="height: 80px; border-radius: 18px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)"></span>Resting · lists, cards</div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="height: 80px; border-radius: 18px; background: #FFFFFF; box-shadow: 0 18px 40px rgba(17,24,39,0.08)"></span>Raised · widgets, nav</div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="height: 80px; border-radius: 18px; background: #FFFFFF; box-shadow: 0 30px 60px rgba(17,24,39,0.10)"></span>Floating · sheets, Ask</div>
+</div>
+<h2 style="margin: 32px 0 0; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: 0">Motion</h2>
+<ul style="margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.45; letter-spacing: -0.012em">
+<li style="display: flex; gap: 10px"><span style="display: flex; padding-top: 2px; color: #0071E3">[[i:circle-check:16:2.2]]</span><span><strong style="font-weight: 600">Springs</strong> for sheets, segmented controls and the dock: stiffness 300, damping 30 (Motion).</span></li>
+<li style="display: flex; gap: 10px"><span style="display: flex; padding-top: 2px; color: #0071E3">[[i:circle-check:16:2.2]]</span><span><strong style="font-weight: 600">Lift</strong> on cards: 4px over 500 ms, cubic-bezier(.2,.8,.2,1).</span></li>
+<li style="display: flex; gap: 10px"><span style="display: flex; padding-top: 2px; color: #0071E3">[[i:circle-check:16:2.2]]</span><span><strong style="font-weight: 600">One live moment</strong> per screen: the hero background. Counters roll once, in view.</span></li>
+<li style="display: flex; gap: 10px"><span style="display: flex; padding-top: 2px; color: #0071E3">[[i:circle-check:16:2.2]]</span><span><strong style="font-weight: 600">Reduced motion:</strong> a still frame replaces WebGL, numbers appear final, no tilt or parallax.</span></li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2 style="margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: 0">Icons</h2>
+<div style="margin-top: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<div style="box-sizing: border-box; padding: 28px; border-radius: 28px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)">
+<h3 style="margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.016em">Interface · Lucide</h3>
+<div style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 18px; color: #1D1D1F">[[i:house:24:2]][[i:layout-grid:24:2]][[i:sparkles:24:2]][[i:mail:24:2]][[i:download:24:2]][[i:arrow-up-right:24:2]][[i:chevron-right:24:2]][[i:circle-check:24:2]][[i:ban:24:2]][[i:share:24:2]][[i:copy:24:2]][[i:link:24:2]]</div>
+<p style="margin: 18px 0 0; font-size: 13px; line-height: 1.5; color: #6E6E73; letter-spacing: -0.006em">Stroke 2 at 16–24 px, current colour. ISC licence.</p>
+</div>
+<div style="box-sizing: border-box; padding: 28px; border-radius: 28px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)">
+<h3 style="margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.016em">Project icons · squircles</h3>
+<div style="margin-top: 18px; display: flex; gap: 14px">
+<span style="width: 60px; height: 60px; border-radius: 22.5%; display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #2F6BFF 0%, #1E3A8A 60%, #0B1F4D 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); color: #FFFFFF">[[i:box:28:1.8]]</span>
+<span style="width: 60px; height: 60px; border-radius: 22.5%; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #8E8BFF, #4B44C4); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); color: #FFFFFF">[[i:activity:28:2]]</span>
+<img src="[[asset:gridee-icon]]" alt="Gridee app icon" style="width: 60px; height: 60px; border-radius: 22.5%">
+<span style="width: 60px; height: 60px; border-radius: 22.5%; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #64D2FF, #0A7CFF); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); color: #FFFFFF">[[i:gauge:28:1.8]]</span>
+</div>
+<p style="margin: 18px 0 0; font-size: 13px; line-height: 1.5; color: #6E6E73; letter-spacing: -0.006em">A light-to-dark diagonal gradient, a 1 px top highlight, one white glyph. Gridee uses its real icon.</p>
+</div>
+<div style="box-sizing: border-box; padding: 28px; border-radius: 28px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.04)">
+<h3 style="margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.016em">Tools · GlassIcons</h3>
+<div style="margin-top: 18px; display: flex; gap: 22px">
+<span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #4B8BBE, #306998); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiPython:26]]</span></span>
+<span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #4FB3FF, #1D8FE1); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiDocker:28]]</span></span>
+<span style="position: relative; width: 60px; height: 60px; display: block"><span style="position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(145deg, #5A8DEE, #326CE5); transform: rotate(15deg); transform-origin: 100% 100%"></span><span style="position: absolute; inset: 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); color: #FFFFFF">[[si:SiKubernetes:26]]</span></span>
+</div>
+<p style="margin: 18px 0 0; font-size: 13px; line-height: 1.5; color: #6E6E73; letter-spacing: -0.006em">React Bits GlassIcons: a brand-coloured tile rotated 15°, a frosted tile on top. Simple Icons glyphs (CC0); marks belong to their owners.</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2 style="margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: 0">Hero backgrounds · React Bits</h2>
+<p style="margin: 8px 0 0; font-size: 17px; color: #6E6E73">Live WebGL in the build, lazy-loaded and paused off-screen. These stills are the fallback and the reduced-motion version. Switch them with each home artboard’s Background tweak.</p>
+<div style="margin-top: 24px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+<figure style="margin: 0"><div class="bgi bg-iri" style="height: 200px; border-radius: 22px"></div><figcaption style="margin-top: 10px; font-size: 15px; letter-spacing: -0.012em"><strong style="font-weight: 600">Iridescence</strong> <span style="color: #6E6E73">· light default</span></figcaption></figure>
+<figure style="margin: 0"><div class="bgi bg-aur" style="height: 200px; border-radius: 22px; background-color: #000000"></div><figcaption style="margin-top: 10px; font-size: 15px; letter-spacing: -0.012em"><strong style="font-weight: 600">Soft Aurora</strong> <span style="color: #6E6E73">· dark default</span></figcaption></figure>
+<figure style="margin: 0"><div class="bgi bg-silk" style="height: 200px; border-radius: 22px"></div><figcaption style="margin-top: 10px; font-size: 15px; letter-spacing: -0.012em"><strong style="font-weight: 600">Silk</strong> <span style="color: #6E6E73">· dark alternative</span></figcaption></figure>
+<figure style="margin: 0"><div class="bgi bg-grain" style="height: 200px; border-radius: 22px"></div><figcaption style="margin-top: 10px; font-size: 15px; letter-spacing: -0.012em"><strong style="font-weight: 600">Grainient</strong> <span style="color: #6E6E73">· light alternative</span></figcaption></figure>
+</div>
+</section>
+</div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":[[def:h]]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>

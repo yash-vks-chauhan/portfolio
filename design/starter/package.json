@@ -1,0 +1,12 @@
+{
+  "name": "glass-starter",
+  "private": true,
+  "type": "module",
+  "description": "Framework-agnostic building blocks for the Glass portfolio (content, logic, a few React components). Copy into the app.",
+  "scripts": {
+    "test": "node --experimental-strip-types --test lib/*.test.ts content/*.test.ts"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

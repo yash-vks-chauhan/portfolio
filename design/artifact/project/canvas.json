@@ -1,0 +1,306 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "CaseStudy.dc.html": {
+      "expand": "fill",
+      "h": 8000,
+      "page": "pages",
+      "title": "Case study — GlassBox (light)",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "CaseStudyDark.dc.html": {
+      "expand": "fill",
+      "h": 8000,
+      "page": "pages",
+      "title": "Case study — GlassBox (dark)",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
+    },
+    "Components.dc.html": {
+      "h": 4200,
+      "is_interactive": true,
+      "page": "system",
+      "title": "Components (interactive)",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "DirA.dc.html": {
+      "h": 1200,
+      "page": "directions",
+      "title": "A · Proof (recommended)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "DirB.dc.html": {
+      "h": 1200,
+      "page": "directions",
+      "title": "B · Specimen",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "DirC.dc.html": {
+      "h": 1200,
+      "page": "directions",
+      "title": "C · Signal",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "GlassCase.dc.html": {
+      "expand": "fill",
+      "h": 7540,
+      "page": "glass",
+      "title": "Case study — GlassBox, light",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "GlassCaseDark.dc.html": {
+      "expand": "fill",
+      "h": 7540,
+      "page": "glass",
+      "title": "Case study — GlassBox, dark",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
+    },
+    "GlassComponents.dc.html": {
+      "h": 2300,
+      "is_interactive": true,
+      "page": "glass-system",
+      "title": "Components (interactive)",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "GlassHome.dc.html": {
+      "expand": "fill",
+      "h": 7160,
+      "page": "glass",
+      "title": "Home — light (Iridescence)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "GlassHomeDark.dc.html": {
+      "expand": "fill",
+      "h": 7160,
+      "page": "glass",
+      "title": "Home — dark (Soft Aurora)",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "GlassMobile.dc.html": {
+      "h": 5420,
+      "page": "glass",
+      "title": "Mobile — home, full scroll",
+      "w": 390,
+      "x": 8540,
+      "y": 0
+    },
+    "GlassMobileCaseDark.dc.html": {
+      "h": 3040,
+      "page": "glass",
+      "title": "Mobile — case study, dark",
+      "w": 390,
+      "x": 9010,
+      "y": 0
+    },
+    "GlassMobileFirst.dc.html": {
+      "h": 844,
+      "page": "glass",
+      "title": "Mobile — first screen, light",
+      "w": 390,
+      "x": 7600,
+      "y": 0
+    },
+    "GlassMobileFirstDark.dc.html": {
+      "h": 844,
+      "page": "glass",
+      "title": "Mobile — first screen, dark",
+      "w": 390,
+      "x": 8070,
+      "y": 0
+    },
+    "GlassTokens.dc.html": {
+      "h": 4000,
+      "page": "glass-system",
+      "title": "Tokens",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "GlassWork.dc.html": {
+      "expand": "fill",
+      "h": 1930,
+      "page": "glass",
+      "title": "Work index",
+      "w": 1440,
+      "x": 6080,
+      "y": 0
+    },
+    "HomeDark.dc.html": {
+      "expand": "fill",
+      "h": 5600,
+      "page": "pages",
+      "title": "Home — Graphite (dark, Inspect on)",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 5600,
+      "page": "pages",
+      "title": "Home — Paper (light)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "MobileCase.dc.html": {
+      "h": 3600,
+      "page": "pages",
+      "title": "Mobile case study — Graphite",
+      "w": 390,
+      "x": 8070,
+      "y": 0
+    },
+    "MobileHome.dc.html": {
+      "h": 4200,
+      "page": "pages",
+      "title": "Mobile home — Paper",
+      "w": 390,
+      "x": 7600,
+      "y": 0
+    },
+    "Tokens.dc.html": {
+      "h": 3800,
+      "page": "system",
+      "title": "Tokens — Paper & Graphite",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Work.dc.html": {
+      "expand": "fill",
+      "h": 2600,
+      "page": "pages",
+      "title": "Work index — Graphite",
+      "w": 1440,
+      "x": 6080,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-03T16:52:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "page": "glass",
+    "view": "canvas"
+  },
+  "notes": {
+    "titleDirections": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "directions",
+      "text": "Three directions, same content",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    },
+    "titleGlass": {
+      "kind": "title1",
+      "maxW": 8000,
+      "page": "glass",
+      "text": "Glass — iOS-inspired pages (desktop 1440 · mobile 390)",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    },
+    "titleGlassSystem": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "glass-system",
+      "text": "Glass — tokens & components",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    },
+    "titlePages": {
+      "kind": "title1",
+      "maxW": 8000,
+      "page": "pages",
+      "text": "Proof — pages (desktop 1440 · mobile 390)",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    },
+    "titleSystem": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "system",
+      "text": "Proof — tokens & components",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "HomeDark.dc.html",
+    "CaseStudy.dc.html",
+    "CaseStudyDark.dc.html",
+    "Work.dc.html",
+    "MobileHome.dc.html",
+    "MobileCase.dc.html",
+    "Tokens.dc.html",
+    "Components.dc.html",
+    "DirA.dc.html",
+    "DirB.dc.html",
+    "DirC.dc.html",
+    "GlassHome.dc.html",
+    "GlassHomeDark.dc.html",
+    "GlassCase.dc.html",
+    "GlassCaseDark.dc.html",
+    "GlassWork.dc.html",
+    "GlassMobileFirst.dc.html",
+    "GlassMobileFirstDark.dc.html",
+    "GlassMobile.dc.html",
+    "GlassMobileCaseDark.dc.html",
+    "GlassTokens.dc.html",
+    "GlassComponents.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "glass",
+      "name": "Glass — Pages"
+    },
+    {
+      "id": "glass-system",
+      "name": "Glass — System"
+    },
+    {
+      "id": "pages",
+      "name": "Proof — Pages (previous)"
+    },
+    {
+      "id": "system",
+      "name": "Proof — System (previous)"
+    },
+    {
+      "id": "directions",
+      "name": "Directions (previous)"
+    }
+  ],
+  "title": "Yash Chauhan — Portfolio UI"
+}

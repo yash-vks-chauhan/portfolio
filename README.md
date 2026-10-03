@@ -6,10 +6,10 @@ This repo holds everything collected for the personal portfolio site: the facts,
 |---|---|
 | 1. Collect information (resume, GitHub, local projects) | **~90%.** Flagship repos read in depth (Oct 3). AgentEval and timeentropy are still only on the Mac, so they're unread. |
 | 2. Deep research (best practices, design, stack, hosting, SEO) | **Done (Oct 3).** Report: [`reports/Portfolio best practices 2026.md`](reports/Portfolio%20best%20practices%202026.md). Notes: [`research_notes/`](research_notes/Portfolio%20best%20practices%202026/). |
-| 3. Content + design decisions | **Next.** See [Decisions needed](#decisions-needed). |
-| 4. Development | Not started |
+| 3. Content + design decisions | **Design done (Oct 4): "Glass" approved as final.** Everything for the build is in [`design/`](design/): the spec, an implementation guide, tokens, starter code and content, assets, screenshots, browser prototypes, and a copy of the Design canvas "Yash Chauhan — Portfolio UI". The remaining [decisions](#decisions-needed) and facts don't block the build. |
+| 4. Development | Not started. Start with [`design/IMPLEMENTATION.md`](design/IMPLEMENTATION.md). |
 
-**Start here:** [Decisions needed](#decisions-needed) · [UI styling directions](#ui-styling-directions-to-choose-from) · [Research summary](#research-summary) · [Claims audit](#claims-audit) · [Project deep-dives](#project-deep-dives)
+**Start here:** [Decisions needed](#decisions-needed) · [UI direction](#ui-direction-glass) · [Research summary](#research-summary) · [Claims audit](#claims-audit) · [Project deep-dives](#project-deep-dives)
 
 ---
 
@@ -47,7 +47,7 @@ Smart-parking platform: live availability, advance and instant reservations, wal
 - **Stack:** Kotlin, CameraX, ML Kit, ZXing, Retrofit, OkHttp, JWT, Razorpay, React, TypeScript, Vite.
 - **Links:** https://www.gridee.in/ · [Play Store](https://play.google.com/store/apps/details?id=com.gridee.parking) · [App Store](https://apps.apple.com/us/app/grideeapp/id6757460398)
 - **What's public:** the GitHub repo **`Gridee-android` isn't the Android app.** It is the React + Vite site for `docs.gridee.in` (About, Privacy, Data Safety pages) and still has the default Vite template README. The Kotlin app is local only (`~/gridee-android`). The backend is the co-founder's repo (`itsmerajeev11/Gridee`, 321 commits). Perf artifacts are in `~/gridee-perf029-artifacts`.
-- **Portfolio angle:** the only work here with real users at scale. Show store links, app screenshots (`~/Desktop/appshots.pdf`), your exact role split with the co-founder, and one hard engineering story (e.g. OCR check-in reliability or payment refunds).
+- **Portfolio angle:** the only work here with real users at scale. Show store links, real app screenshots (`~/gridee-android/Gridee_Android/android-app/output/`; crop out the AdMob test ads), your exact role split with the co-founder, and one hard engineering story (e.g. OCR check-in reliability or payment refunds).
 
 ### Research Intern — IIT Madras (Mar 2025 – Mar 2026)
 Tamil Nadu 108 ambulance (EMS) analytics. See the EMS paper under Research.
@@ -205,6 +205,7 @@ Every number on the site must match a repo, a paper or a document you can show. 
 | Autoscaler "LSTM-AE" | HUD | Placeholder file; only the warm-up gate exists | "LSTM autoencoder planned behind a 7-day warm-up gate" |
 | CT "95% noise reduction" | Resume, HUD | 92.6% MSE reduction | "92.6% lower MSE; +12.2 dB PSNR on heavy synthetic noise" |
 | CT "~4× faster convergence" | Resume | No evidence in repo | Drop it, or add the training logs |
+| CT sample figure / all CT metrics | Repo (`are/lung_images.png`), resume | The "Clean (Ground Truth)" panels are unrelated edge-map images, not the matching X-rays, and the "Denoised" outputs are dark silhouettes. This looks like a noisy/clean pairing or indexing bug, which would also put PSNR/SSIM in doubt (found Oct 3) | Don't quote CT metrics or build the before/after slider until the pairing is checked and metrics re-run |
 | Kalakraft uses NextAuth.js | Resume | Not a dependency; Firebase Auth + JWT | "Firebase Auth + JWT, RBAC" |
 | Kalakraft "paying customers · real ops" | GitHub HUD | Unknown | Confirm (see questions) |
 | EMS paper venue | Old notes / resume | ESWA-formatted manuscript | Confirm |
@@ -246,7 +247,7 @@ Updated after the research (see the report's lineup table):
 - **GlassBox:** 8 screenshots + social preview in the repo (`docs/screenshots/`).
 - **Pulse:** `~/Desktop/pulse-demo.mp4` demo video.
 - **CT denoising:** result charts in `results/` and `training_history.png`; sample lung images in `are/`.
-- **Gridee:** `~/Desktop/appshots.pdf` and the iPhone 16 Pro Max simulator screenshot.
+- **Gridee:** real Android screenshots in `~/gridee-android/Gridee_Android/android-app/output/` (`gridee-home-native.png`, `gridee-samsung-home-final.png`) and the app icon (`~/gridee-android/Gridee_Android/icon gridee.png`). Both screenshots show AdMob **test ads** lower down, so crop above them (the canvas mocks do). ⚠️ Correction (Oct 4): `~/Desktop/appshots.pdf` and the iPhone simulator screenshot are **not Gridee**. They show "Schedulio" (salon booking and movie tickets), probably the `appointment-ticketing-app`.
 - **Autoscaler:** only the rough Phase 1 `docs/architecture.png`. Needs a fresh diagram and a screen recording.
 - **GitHub profile:** "mission control" HUD SVGs (`yash-vks-chauhan/assets/*.svg`), regenerated every 6 h by a GitHub Action.
 - **Other:** `~/Desktop/logo.png`, `~/Desktop/imageclock.png`, and many screenshots from 2025–2026 (not yet reviewed). `~/Desktop/DOCS/Yash.jpeg` is a possible profile photo.
@@ -271,7 +272,7 @@ Full report: [`reports/Portfolio best practices 2026.md`](reports/Portfolio%20be
 - Every demo needs layers: a GIF, a 90-second video, a "try live (may take ~45 s to wake)" link, and screenshots.
 - Wording: say "tamper-evident", never "tamper-proof". Keep "under review" papers in a separate section, never under "Publications".
 
-**3. Design: keep the warm-paper editorial look (it is already GlassBox's language).**
+**3. Design: keep the warm-paper editorial look (it is already GlassBox's language).** *Superseded twice. On Oct 3 the brief changed to "minimal but new" and the follow-up research recommended "Proof". On Oct 4, after feedback that Proof wasn't impressive enough, the direction became "Glass" (iOS-inspired). See [UI direction](#ui-direction-glass). The accessibility advice below still applies. The "avoid glassmorphism" advice is kept in spirit: Glass uses translucent material only for floating controls, never under body text.*
 - Source Serif 4 + Geist + Geist Mono are free (OFL) and on-trend; no font change is needed.
 - Bring the GitHub "mission control" style in as **one instrument-panel module** (Geist Mono readout, tabular numbers), not as a dark terminal theme.
 - References to borrow from: Steph Ango's Flexoki palette, Lilian Weng / Eugene Yan / Karpathy (plain, fast, writing-first), Lee Robinson / Paco Coursey (restraint), and one signature micro-interaction in the style of Emil Kowalski or Rauno Freiberg.
@@ -295,18 +296,15 @@ Full report: [`reports/Portfolio best practices 2026.md`](reports/Portfolio%20be
 - **AI search:** allow GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot and the rest in robots.txt. llms.txt is optional (97% of them got zero requests in an Ahrefs sample). Add a plain-HTML bio paragraph assistants can quote.
 - **Analytics:** Cloudflare Web Analytics or Umami (cookieless, so no banner). No GA4.
 
-## UI styling directions to choose from
+## UI direction: Glass
 
-All three use the same content. The research favours **A**; **C** is a middle path if you want the HUD personality on the site.
+**Final (approved Oct 4).** Replaces the Oct 3 "Proof / Specimen / Signal" options, which stay on the canvas under (previous) pages. Everything is in [`design/`](design/README.md); the full spec is [`design/portfolio.design.md`](design/portfolio.design.md).
 
-| | A. Paper & ink (recommended) | B. Mission control | C. Paper + instrument panel |
-|---|---|---|---|
-| Feel | Editorial, calm, like a well-typeset engineering paper | Dark HUD / telemetry console, like your GitHub profile | A, plus one dark-on-paper "telemetry" module on the home page |
-| Type | Source Serif 4 headings, Geist body, Geist Mono labels | Geist Mono throughout, uppercase letter-spaced labels | As A; the module uses Geist Mono with tabular numbers |
-| Colour | Warm paper (#FAF8F3-ish), ink, navy accent; designed warm dark mode | Near-black, cyan / green / amber status colours | As A, with status colours only inside the module |
-| Motion | View transitions, one signature micro-interaction | Live counters, blinking status dots | As A; the module's numbers count up once (respecting reduced motion) |
-| Pros | Credible, fast, ages well, matches GlassBox | Memorable, ties to the GitHub profile | Distinctive without hurting readability |
-| Risks | Can feel plain if the writing is weak | Reads as a gimmick to some reviewers; contrast and accessibility are harder; dated quickly | Must keep the module small |
+- **Idea:** a portfolio built like an iOS app, where every number can be checked. Familiar iOS patterns (widgets, inset grouped lists, sheets, segmented controls, an App Store-style case study, a floating tab bar on phones) filled with evidence: source numbers on every metric, Apple-style footnotes, and an **Ask my portfolio** panel that answers with citations or refuses.
+- **Type:** SF Pro through the system font stack (the iOS font, on Apple devices), with Inter as the open fallback on Windows and Android. Rounded numerals for widgets.
+- **Colour:** iOS greys (`#F5F5F7` / `#000`), solid white or `#1C1C1E` cards, system blue `#0071E3` (Accent tweak: Blue, Indigo or Graphite). Contrast measured for every text colour, including on glass.
+- **Open-source parts:** React Bits backgrounds (Iridescence in light, Soft Aurora in dark; Silk and Grainient as alternatives) and components (GlassSurface, BlurText, Counter, PromptBar, RubberSegment, TiltedCard, Folder, GlassIcons, Dock, SwipeRow), plus vaul (sheets), sonner (toasts), cmdk (⌘K), Embla (carousel), Motion and Lucide.
+- **On the canvas** (*Glass — Pages*, opens first): home light and dark, GlassBox case study light and dark, work index, mobile first screen light and dark, mobile home, mobile case study. *Glass — System* has the tokens and an interactive component sheet (press Play).
 
 ---
 
@@ -315,7 +313,7 @@ All three use the same content. The research favours **A**; **C** is a middle pa
 **Build decisions (yours to make; my recommendation first):**
 1. **Positioning headline:** "AI/ML engineer who builds AI systems you can audit", or keep the GitHub line "turning model demos into inspectable systems"? Or lead with founder-engineer instead?
 2. **Stack:** Astro 7 (recommended for a content site) or Next.js 16 (zero ramp-up, best if you want it live in days or plan server features)?
-3. **Visual direction:** A, B or C above.
+3. ~~**Visual direction**~~ **Decided Oct 4:** Glass, as drawn: Blue accent, Iridescence (light) and Soft Aurora (dark) hero backgrounds. See [`design/`](design/README.md).
 4. **Domain and host:** `yashchauhan.dev` on Cloudflare (check availability first), or something else you already own?
 5. **Flagship set:** GlassBox, Pulse, Gridee, Research, with Autoscaler under "More work" until it has tests. Agree?
 6. **Writing section:** launch with 2–3 short notes (e.g. "why GlassBox's log is tamper-evident, not tamper-proof", "how Pulse keeps the LLM away from SQL", "what I corrected while directing Claude Code"), or skip notes for v1?
@@ -351,4 +349,4 @@ Placements run Aug–Dec, so a credible site in two weeks beats a perfect one in
    - Gridee and "More work" pages, the CT slider, the designed dark theme;
    - the first 2–3 notes.
 
-Before Pass 1: answer the decisions above. Then I'll write the content plan and site map (page list, the copy for each section, and a component list) and scaffold the project.
+The design package covers the content plan, site map, copy and component list: [`design/IMPLEMENTATION.md`](design/IMPLEMENTATION.md) has the build order and launch checklist, and [`design/starter/content/`](design/starter/content/) has the copy and sources. Before Pass 1, settle the stack (decision 2) and the facts listed under [Decisions needed](#decisions-needed).

@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Case study — GlassBox, Paper</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Ranade";src:url(/_blob/f5e6d5500342a9fd98ffebb034863df4) format("woff2");font-weight:100 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Ranade";src:url(/_blob/fa12702e94795322dbf22f5f98871b45) format("woff2");font-weight:100 700;font-style:italic;font-display:swap}
+@font-face{font-family:"Tabular";src:url(/_blob/9b0be6304a8929bff4571de2f1c29d5b) format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+body{margin:0}
+a{color:inherit}
+a:hover{color:inherit}
+::selection{background:var(--accent-wash);color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lnk{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--line-strong);transition:text-decoration-color .12s}
+.lnk:hover{text-decoration-color:var(--accent)}
+.nav a{text-decoration:none;color:var(--ink-2);transition:color .12s}
+.nav a:hover{color:var(--ink)}
+.btn-p{transition:background-color .12s}
+.btn-p:hover{background:var(--ink-2)}
+.btn-s{transition:background-color .12s,border-color .12s}
+.btn-s:hover{background:var(--surface);border-color:var(--ink-2)}
+.cite{cursor:pointer;transition:background-color .12s}
+.cite:hover{background:var(--accent-wash)}
+.toc a{text-decoration:none}
+.toc a:hover .lbl{color:var(--ink)}
+.next{transition:background-color .22s cubic-bezier(.16,1,.3,1)}
+.next:hover{background:var(--surface)}
+</style>
+</helmet>
+<div style="--bg:#F4F4F1; --bg-sunken:#ECEBE6; --surface:#FBFBF9; --surface-2:#FFFFFF; --ink:#121211; --ink-2:#46453F; --muted:#6A6862; --faint:#A3A19A; --line:#E0DFD8; --line-strong:#C9C7BF; --ok:#1F7A4D; --accent:{{accent}}; --accent-ink:{{accentInk}}; --accent-wash:{{accentWash}}; min-height: 9200px; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'Ranade', 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased">
+
+<header style="position: sticky; top: 0; z-index: 20; background: rgba(244,244,241,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line)">
+<div style="max-width: 1280px; margin: 0 auto; padding: 8px clamp(20px, 5.5vw, 80px); min-height: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+<a href="#top" aria-label="Yash Chauhan — home" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink)">
+<svg width="44" height="28" viewBox="0 0 44 28" role="img" aria-label="YC monogram"><circle cx="2.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="6.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="2.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="6.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="2.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="10.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="14.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="18.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="14.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="18.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="2.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="6.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="10.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="14.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="18.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="30.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="34.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="38.0" cy="2.0" r="1.5" fill="currentColor"/><circle cx="42.0" cy="2.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="6.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="6.0" r="1.5" fill="currentColor"/><circle cx="26.0" cy="10.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="10.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="14.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="14.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="18.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="18.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="26.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="30.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="34.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="38.0" cy="22.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="42.0" cy="22.0" r="1.5" fill="currentColor"/><circle cx="26.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/><circle cx="30.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="34.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="38.0" cy="26.0" r="1.5" fill="currentColor"/><circle cx="42.0" cy="26.0" r="1.5" style="fill: var(--line-strong)"/></svg>
+<span>Yash Chauhan</span>
+</a>
+<span style="color: var(--muted)">§05 · Evaluation</span>
+<span style="color: var(--muted)">Chennai · 21:04 IST</span>
+<span style="display: flex; align-items: center; gap: 8px; color: var(--ink)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent)"></span>Open to 2027 roles</span>
+<nav class="nav" aria-label="Primary" style="margin-left: auto; display: flex; flex-wrap: wrap; gap: 4px 24px">
+<a href="#work" aria-current="page" style="color: var(--ink)">Work</a>
+<a href="#research">Research</a>
+<a href="#notes">Notes</a>
+<a href="#about">About</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 8px">
+<button type="button" aria-pressed="false" class="btn-s" style="height: 32px; display: flex; align-items: center; gap: 6px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>Inspect</button>
+<div role="group" aria-label="Theme" style="height: 32px; display: flex; align-items: center; padding: 2px; border-radius: 999px; border: 1px solid var(--line-strong); box-sizing: border-box">
+<button type="button" aria-label="Light theme" aria-pressed="true" style="width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: var(--ink); color: var(--bg); cursor: pointer; padding: 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+<button type="button" aria-label="Dark theme" aria-pressed="false" style="width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; padding: 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+</div>
+<a href="#resume" class="btn-p" style="height: 32px; display: flex; align-items: center; gap: 6px; padding: 0 14px; border-radius: 999px; background: var(--ink); color: var(--bg); text-decoration: none">Résumé<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
+</div>
+</div>
+</header>
+
+<main id="top" style="flex: 1 0 auto">
+
+<div style="max-width: 1280px; margin: 0 auto; padding: 40px clamp(20px, 5.5vw, 80px) 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+<nav aria-label="Breadcrumb" style="display: flex; gap: 10px; color: var(--muted)"><a href="#work" class="lnk" style="color: var(--muted)">Work</a><span aria-hidden="true">/</span><span aria-current="page" style="color: var(--ink)">01 — GlassBox</span></nav>
+<span style="height: 24px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 11px; color: var(--ink)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok)"></span>Live</span>
+<span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 11px; color: var(--ink)">MIT</span>
+<a href="#pulse" class="lnk" style="margin-left: auto; color: var(--ink)">Next: Pulse →</a>
+</div>
+
+<section aria-labelledby="cs-title" style="max-width: 1280px; margin: 0 auto; padding: 56px clamp(20px, 5.5vw, 80px) 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 40px 64px">
+<div style="flex: 999 1 560px; min-width: 0">
+<h1 id="cs-title" style="margin: 0; font-size: clamp(44px, 5vw, 72px); line-height: 0.96; letter-spacing: -0.04em; font-weight: 500">GlassBox</h1>
+<p style="margin: 24px 0 0; max-width: 30ch; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -0.015em; color: var(--ink-2); text-wrap: balance">Auditable wealth-advisory AI. Every answer is cited or refused; every decision is hash-chained per tenant.</p>
+</div>
+<aside aria-label="TL;DR" style="flex: 1 1 380px; max-width: 480px; box-sizing: border-box; padding: 24px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line)">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">TL;DR</p>
+<p style="margin: 10px 0 0; font-size: 19px; line-height: 1.45; letter-spacing: -0.005em">On 183 questions I wrote alongside the engine, GlassBox answered or refused correctly every time (95% CI 97.9–100%). That’s a development set, not an independent benchmark.<button type="button" class="cite" aria-label="Source 1: glassbox-eval-v4" style="margin-left: 2px; padding: 2px 3px; border: 0; border-radius: 4px; background: transparent; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1; vertical-align: super; color: var(--accent-ink)">[1]</button></p>
+</aside>
+</div>
+
+<dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line)">
+<div style="padding: 18px 20px 20px 0; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Role</dt><dd style="margin: 8px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; line-height: 1.45">[Your role — e.g. solo build]</dd></div>
+<div style="padding: 18px 20px 20px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Timeline</dt><dd style="margin: 8px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; line-height: 1.45">Feb – Oct 2026</dd></div>
+<div style="padding: 18px 20px 20px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Stack</dt><dd style="margin: 8px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; line-height: 1.45">FastAPI · Next.js 16 · Postgres · scikit-learn</dd></div>
+<div style="padding: 18px 20px 20px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Infra</dt><dd style="margin: 8px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; line-height: 1.45">AWS t4g.small · OIDC deploys · ~$14/mo</dd></div>
+<div style="padding: 18px 20px 20px; border-right: 1px solid var(--line)"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Tests</dt><dd style="margin: 8px 0 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; line-height: 1.45">254 backend · 11 e2e</dd></div>
+<div style="padding: 18px 0 20px 20px"><dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Links</dt><dd style="margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; line-height: 1.45"><a href="https://glassbox.15-252-203-137.sslip.io/login" class="lnk">Live ↗</a><a href="https://github.com/yash-vks-chauhan/Glassbox" class="lnk">Code ↗</a><a href="#video" class="lnk">Video ▶</a></dd></div>
+</dl>
+
+<figure style="margin: 56px 0 0">
+<div style="box-sizing: border-box; padding: 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line)">
+<img src="/_blob/6faf0a3ec5d2bfb565118fcca8af42fd" alt="GlassBox ask screen: an advisor asks whether client C001 can put 40% into fund F100. The answer is flagged as a mandate issue, with four numbered citations to the client’s IPS and two fund factsheets shown in an evidence panel." style="display: block; width: 100%; height: auto; border-radius: 8px">
+</div>
+<figcaption style="margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+<span>Fig. 1 — Every claim carries a numbered citation; the answer is flagged against the client’s IPS</span>
+<span style="display: flex; gap: 20px"><a href="https://glassbox.15-252-203-137.sslip.io/login" class="lnk" style="color: var(--ink)">Try live — may take ~45 s to wake ↗</a><a href="#video" class="lnk" style="color: var(--ink)">Watch 90 s ▶</a></span>
+</figcaption>
+</figure>
+</section>
+
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px clamp(20px, 5.5vw, 80px) 0; display: flex; flex-wrap: wrap; gap: 48px 72px; align-items: flex-start">
+
+<nav class="toc" aria-label="On this page" style="flex: 0 1 220px; position: sticky; top: 76px">
+<p style="margin: 0 0 18px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">On this page</p>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px">
+<li><a href="#problem" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 20px; height: 1px; background: var(--line-strong)"></span><span class="lbl" style="font-size: 14px; color: var(--muted)">Problem</span></a></li>
+<li><a href="#constraints" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 20px; height: 1px; background: var(--line-strong)"></span><span class="lbl" style="font-size: 14px; color: var(--muted)">Constraints</span></a></li>
+<li><a href="#architecture" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 20px; height: 1px; background: var(--line-strong)"></span><span class="lbl" style="font-size: 14px; color: var(--muted)">Architecture</span></a></li>
+<li><a href="#decisions" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 26px; height: 1px; background: var(--ink-2)"></span><span class="lbl" style="font-size: 14px; color: var(--ink-2)">Decisions</span></a></li>
+<li><a href="#evaluation" aria-current="location" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 34px; height: 2px; background: var(--accent)"></span><span class="lbl" style="font-size: 14px; font-weight: 500; color: var(--ink)">Evaluation</span></a></li>
+<li><a href="#tests" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 26px; height: 1px; background: var(--ink-2)"></span><span class="lbl" style="font-size: 14px; color: var(--ink-2)">Tests &amp; ops</span></a></li>
+<li><a href="#limits" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 20px; height: 1px; background: var(--line-strong)"></span><span class="lbl" style="font-size: 14px; color: var(--muted)">What broke</span></a></li>
+<li><a href="#next" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 20px; height: 1px; background: var(--line-strong)"></span><span class="lbl" style="font-size: 14px; color: var(--muted)">Next</span></a></li>
+<li><a href="#ai-tools" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 20px; height: 1px; background: var(--line-strong)"></span><span class="lbl" style="font-size: 14px; color: var(--muted)">AI-tool note</span></a></li>
+<li><a href="#sources" style="display: flex; align-items: center; gap: 12px; min-height: 28px"><span aria-hidden="true" style="flex: 0 0 auto; width: 20px; height: 1px; background: var(--line-strong)"></span><span class="lbl" style="font-size: 14px; color: var(--muted)">Sources</span></a></li>
+</ol>
+<div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">12 min read · 5 sources</div>
+</nav>
+
+<article style="flex: 999 1 560px; min-width: 0; max-width: 760px; font-size: 19px; line-height: 1.6">
+
+<section id="problem" aria-labelledby="h-problem">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">01</p>
+<h2 id="h-problem" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Problem</h2>
+<p style="margin: 24px 0 0; color: var(--ink-2); text-wrap: pretty">Wealth advisors answer client questions under suitability rules. A wrong answer is a compliance problem, and a confident wrong answer is worse. A general chat assistant can’t show where an answer came from, and it rarely says “I don’t know”.</p>
+<p style="margin: 18px 0 0; color: var(--ink-2); text-wrap: pretty">GlassBox answers only from a client’s approved documents (the investment policy statement, fund factsheets and regulation) and refuses everything else. A compliance seat reviews flagged answers under a four-eyes rule.</p>
+</section>
+
+<section id="constraints" aria-labelledby="h-constraints" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">02</p>
+<h2 id="h-constraints" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Constraints</h2>
+<ul style="list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--line)">
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 32px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted); padding-top: 4px">C1</span><span style="color: var(--ink-2)">Cite approved documents only. Anything else is refused, with the missing source named.</span></li>
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 32px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted); padding-top: 4px">C2</span><span style="color: var(--ink-2)">Every decision must be replayable later, by someone else.</span></li>
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 32px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted); padding-top: 4px">C3</span><span style="color: var(--ink-2)">Multi-tenant: one firm’s data and audit chain never touch another’s.</span></li>
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 32px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted); padding-top: 4px">C4</span><span style="color: var(--ink-2)">Run on one small instance for about $14 a month.</span></li>
+</ul>
+</section>
+
+<section id="architecture" aria-labelledby="h-arch" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">03</p>
+<h2 id="h-arch" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Architecture</h2>
+<p style="margin: 24px 0 0; color: var(--ink-2)">Every path ends in the audit log. A claim the scorers can’t ground turns the answer into a refusal.</p>
+<figure style="margin: 28px 0 0">
+<div style="overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); background: var(--bg-sunken)">
+<div style="position: relative; width: 724px; height: 392px; margin: 0 auto; font-size: 14px; line-height: 1.35">
+<svg width="46" height="8" viewBox="0 0 46 8" preserveAspectRatio="none" style="position: absolute; left: 200px; top: 56px; width: 46px; height: 8px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 0 4 L 46 4" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<svg width="94" height="8" viewBox="0 0 94 8" preserveAspectRatio="none" style="position: absolute; left: 428px; top: 56px; width: 94px; height: 8px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 0 4 L 94 4" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<svg width="8" height="62" viewBox="0 0 8 62" preserveAspectRatio="none" style="position: absolute; left: 610px; top: 96px; width: 8px; height: 62px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 4 0 L 4 62" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<svg width="94" height="8" viewBox="0 0 94 8" preserveAspectRatio="none" style="position: absolute; left: 430px; top: 192px; width: 94px; height: 8px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 94 4 L 0 4" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<svg width="8" height="62" viewBox="0 0 8 62" preserveAspectRatio="none" style="position: absolute; left: 610px; top: 232px; width: 8px; height: 62px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 4 0 L 4 62" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<svg width="8" height="62" viewBox="0 0 8 62" preserveAspectRatio="none" style="position: absolute; left: 334px; top: 232px; width: 8px; height: 62px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 4 0 L 4 62" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<svg width="94" height="8" viewBox="0 0 94 8" preserveAspectRatio="none" style="position: absolute; left: 430px; top: 328px; width: 94px; height: 8px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 94 4 L 0 4" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<svg width="46" height="8" viewBox="0 0 46 8" preserveAspectRatio="none" style="position: absolute; left: 202px; top: 328px; width: 46px; height: 8px; overflow: visible; fill: none; stroke: #6A6862; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled" orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6A6862" stroke="none" style="fill: context-stroke"/></marker></defs><path d="M 46 4 L 0 4" marker-end="url(#dc-arrow-head-filled)"></path></svg>
+<div style="position: absolute; left: 20px; top: 24px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px"><span><b style="font-weight: 600">Advisor asks</b><br>about a client</span></div>
+<div style="position: absolute; left: 248px; top: 24px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px"><span><b style="font-weight: 600">Retrieve</b><br>approved docs only</span></div>
+<div style="position: absolute; left: 524px; top: 24px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px"><span><b style="font-weight: 600">Draft</b><br>the answer as claims</span></div>
+<div style="position: absolute; left: 524px; top: 160px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px"><span><b style="font-weight: 600">Score each claim</b><br>grounding · refusal</span></div>
+<div style="position: absolute; left: 248px; top: 160px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px"><span><b style="font-weight: 600">Refuse</b><br>name the missing source</span></div>
+<div style="position: absolute; left: 524px; top: 296px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px"><span><b style="font-weight: 600">Answer</b><br>every claim cited</span></div>
+<div style="position: absolute; left: 248px; top: 296px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1.5px solid var(--accent); border-radius: 8px"><span><b style="font-weight: 600">Audit log</b><br>hash-chained, no DELETE</span></div>
+<div style="position: absolute; left: 20px; top: 296px; width: 180px; height: 72px; box-sizing: border-box; padding: 8px 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px"><span><b style="font-weight: 600">Compliance</b><br>four-eyes review</span></div>
+<div style="position: absolute; left: 432px; top: 168px; width: 88px; text-align: center; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; line-height: 16px; color: var(--muted)">unsupported</div>
+<div style="position: absolute; left: 626px; top: 255px; width: 76px; text-align: left; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; line-height: 16px; color: var(--muted)">supported</div>
+</div>
+</div>
+<figcaption style="margin-top: 14px; font-size: 15px; line-height: 1.55; color: var(--muted)"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Fig. 2 — Text version:</span> a question retrieves passages from approved documents only; the draft answer is split into claims and each is scored. Unsupported claims trigger a refusal that names the missing source; supported ones form a cited answer. Both are appended to a per-tenant, hash-chained audit log that compliance reviews.</figcaption>
+</figure>
+</section>
+
+<section id="decisions" aria-labelledby="h-decisions" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">04</p>
+<h2 id="h-decisions" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Decisions</h2>
+<div style="margin-top: 28px; display: flex; flex-direction: column; gap: 20px">
+<article style="padding: 24px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px"><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px solid var(--ink); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Accepted</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">Decision 1</span></div>
+<h3 style="margin: 14px 0 0; font-size: 26px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 500">Refuse instead of guessing</h3>
+<dl style="margin: 16px 0 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px 16px; font-size: 16px; line-height: 1.5">
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Chose</dt><dd style="margin: 0; color: var(--ink-2)">Out-of-scope questions are refused. The refusal names the missing source and offers one-click escalation to compliance.</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Over</dt><dd style="margin: 0; color: var(--ink-2)">[The alternative you weighed, e.g. answering with a disclaimer]</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Because</dt><dd style="margin: 0; color: var(--ink-2)">An advisor can act on a refusal. They can’t check a guess.</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Cost</dt><dd style="margin: 0; color: var(--ink-2)">Lower coverage, and more escalations for compliance to handle.</dd>
+</dl>
+</article>
+<figure style="margin: 4px 0 4px">
+<div style="box-sizing: border-box; padding: 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line)"><img src="/_blob/ccdeb845e712972d78f7f5773c95a872" alt="GlassBox refusal: asked about German capital gains tax, it answers ‘Out of approved scope’, names the missing source, shows zero sources and offers escalation to compliance." style="display: block; width: 100%; height: auto; border-radius: 8px"></div>
+<figcaption style="margin-top: 12px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Fig. 3 — Out of scope: refused, the missing source named, one click to escalate</figcaption>
+</figure>
+<article style="padding: 24px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px"><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px solid var(--ink); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Accepted</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">Decision 2</span></div>
+<h3 style="margin: 14px 0 0; font-size: 26px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 500">Small scikit-learn scorers, not an LLM judge</h3>
+<dl style="margin: 16px 0 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px 16px; font-size: 16px; line-height: 1.5">
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Chose</dt><dd style="margin: 0; color: var(--ink-2)">Three small models: a grounding scorer (logistic regression on embedding similarity plus numeric match), a refusal router and a fallback classifier.</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Over</dt><dd style="margin: 0; color: var(--ink-2)">[An LLM-as-judge, or another option you tried]</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Because</dt><dd style="margin: 0; color: var(--ink-2)">Deterministic and fast: determinism 1.00 and p95 latency 1 ms on the benchmark.</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Cost</dt><dd style="margin: 0; color: var(--ink-2)">Small training sets (320 / 240 / 160 rows), synthetic or bootstrapped.</dd>
+</dl>
+</article>
+<article style="padding: 24px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px"><span style="height: 24px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; border: 1px solid var(--ink); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Accepted</span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted)">Decision 3</span></div>
+<h3 style="margin: 14px 0 0; font-size: 26px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 500">Hash-chain the log per tenant; forbid DELETE</h3>
+<dl style="margin: 16px 0 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px 16px; font-size: 16px; line-height: 1.5">
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Chose</dt><dd style="margin: 0; color: var(--ink-2)">Each decision is stored with its passages, kept and dropped claims and trust scores, and chained per tenant. The database refuses DELETE on audit tables.</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Over</dt><dd style="margin: 0; color: var(--ink-2)">[Application-level logging only, or the option you weighed]</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Because</dt><dd style="margin: 0; color: var(--ink-2)">Tampering becomes detectable, and any answer can be replayed.</dd>
+<dt style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px">Cost</dt><dd style="margin: 0; color: var(--ink-2)">Tamper-evident, not tamper-proof, until the chain head is anchored outside the system.</dd>
+</dl>
+</article>
+</div>
+</section>
+
+<section id="evaluation" aria-labelledby="h-eval" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">05</p>
+<h2 id="h-eval" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Evaluation</h2>
+<p style="margin: 24px 0 0; color: var(--ink-2)">glassbox-eval-v4, run on 2 Oct 2026: 183 questions written alongside the engine. Intervals are Wilson 95%.<button type="button" class="cite" aria-label="Source 1: glassbox-eval-v4" style="margin-left: 2px; padding: 2px 3px; border: 0; border-radius: 4px; background: transparent; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1; vertical-align: super; color: var(--accent-ink)">[1]</button></p>
+<div style="margin-top: 28px; overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); background: var(--surface)">
+<div role="table" aria-label="GlassBox evaluation results" style="min-width: 640px">
+<div role="row" style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(180px, 1.6fr); gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)"><span role="columnheader">Metric</span><span role="columnheader">Result</span><span role="columnheader">95% CI</span><span role="columnheader">Interval</span></div>
+<div role="row" style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(180px, 1.6fr); gap: 16px; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line)">
+<span role="cell" style="font-size: 16px">Outcome accuracy</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">183/183</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--ink-2)">97.9–100</span>
+<span role="cell" style="display: flex; align-items: center; gap: 10px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">90</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 79%; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: calc(100% - 5px); top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">100</span></span>
+</div>
+<div role="row" style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(180px, 1.6fr); gap: 16px; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line)">
+<span role="cell" style="font-size: 16px">Citation accuracy</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">183/183</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--ink-2)">97.9–100</span>
+<span role="cell" style="display: flex; align-items: center; gap: 10px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">90</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 79%; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: calc(100% - 5px); top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--ink)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">100</span></span>
+</div>
+<div role="row" style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(180px, 1.6fr); gap: 16px; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line)">
+<span role="cell" style="font-size: 16px">Hallucination rate</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">0/183</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--ink-2)">0–2.1</span>
+<span role="cell" style="display: flex; align-items: center; gap: 10px"><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted); min-width: 14px">0</span><span style="position: relative; flex: 1; height: 12px"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--line)"></span><span style="position: absolute; left: 0; width: 21%; top: 3px; height: 6px; border-radius: 3px; background: var(--line-strong)"></span><span style="position: absolute; left: -5px; top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--ink)"></span></span><span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted)">10</span></span>
+</div>
+<div role="row" style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(180px, 1.6fr); gap: 16px; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line)">
+<span role="cell" style="font-size: 16px">Faithfulness</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">0.98</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--muted)">—</span>
+<span role="cell" style="font-size: 14px; color: var(--muted)">A score, not a proportion</span>
+</div>
+<div role="row" style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(180px, 1.6fr); gap: 16px; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line)">
+<span role="cell" style="font-size: 16px">Determinism</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">1.00</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--muted)">—</span>
+<span role="cell" style="font-size: 14px; color: var(--muted)">Same answer on repeat runs</span>
+</div>
+<div role="row" style="display: grid; grid-template-columns: minmax(160px, 1.3fr) 128px 104px minmax(180px, 1.6fr); gap: 16px; align-items: center; padding: 16px 20px">
+<span role="cell" style="font-size: 16px">p95 latency</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px">1 ms</span>
+<span role="cell" style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 15px; color: var(--muted)">—</span>
+<span role="cell" style="font-size: 14px; color: var(--muted)">Local evidence engine</span>
+</div>
+</div>
+</div>
+<div style="margin-top: 20px; padding: 20px 22px; border-radius: 14px; background: var(--bg-sunken)">
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink)"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent)"></span>Caveat</p>
+<p style="margin: 10px 0 0; font-size: 16px; line-height: 1.55; color: var(--ink-2)">This is a development set, not a held-out benchmark: I wrote the questions while building the engine. Read 100% as “no failures found yet”, not “perfect”. Per-category results and the over-refusal rate come next.</p>
+</div>
+<div style="margin-top: 20px; position: relative; padding: 16px 20px; border-radius: 8px; background: var(--bg-sunken); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 14px; line-height: 1.7">
+<p style="margin: 0 0 6px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Reproduce · shell</p>
+<p style="margin: 0"><span style="color: var(--muted)">$</span> make eval <span style="color: var(--muted)"># [confirm the real command]</span></p>
+<p style="margin: 0; color: var(--ink-2)">glassbox-eval-v4 · 183 questions · 183 correct · p95 1 ms</p>
+<button type="button" aria-label="Copy command" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; padding: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
+</div>
+</section>
+
+<section id="tests" aria-labelledby="h-tests" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">06</p>
+<h2 id="h-tests" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">Tests &amp; ops</h2>
+<div style="margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 0 32px">
+<div style="border-top: 1px solid var(--ink); padding-top: 16px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em">254<button type="button" class="cite" aria-label="Source 2: CI run" style="margin-left: 4px; padding: 2px 3px; border: 0; border-radius: 4px; background: transparent; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1; vertical-align: super; color: var(--accent-ink)">[2]</button></p><p style="margin: 8px 0 0; font-size: 15px; line-height: 1.45; color: var(--muted)">backend tests on Postgres 15 (249 on SQLite; 5 are Postgres-only)</p></div>
+<div style="border-top: 1px solid var(--ink); padding-top: 16px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em">11</p><p style="margin: 8px 0 0; font-size: 15px; line-height: 1.45; color: var(--muted)">Playwright end-to-end specs</p></div>
+<div style="border-top: 1px solid var(--ink); padding-top: 16px"><p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em">~$14<button type="button" class="cite" aria-label="Source 3: deployment notes" style="margin-left: 4px; padding: 2px 3px; border: 0; border-radius: 4px; background: transparent; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1; vertical-align: super; color: var(--accent-ink)">[3]</button></p><p style="margin: 8px 0 0; font-size: 15px; line-height: 1.45; color: var(--muted)">a month on one Graviton t4g.small in Mumbai</p></div>
+</div>
+<ol aria-label="Deploy pipeline" style="list-style: none; margin: 32px 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: 0.04em">
+<li style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)">push</li><li aria-hidden="true" style="color: var(--faint)">›</li>
+<li style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)">CI · SQLite + Postgres 15</li><li aria-hidden="true" style="color: var(--faint)">›</li>
+<li style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)">Docker smoke test</li><li aria-hidden="true" style="color: var(--faint)">›</li>
+<li style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)">AWS via OIDC · no stored keys</li><li aria-hidden="true" style="color: var(--faint)">›</li>
+<li style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)">arm64 image → ECR</li><li aria-hidden="true" style="color: var(--faint)">›</li>
+<li style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface)">rollout over SSM</li><li aria-hidden="true" style="color: var(--faint)">›</li>
+<li style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--accent); background: var(--surface)">smoke test</li>
+</ol>
+<p style="margin: 28px 0 0; color: var(--ink-2)">Also in the repo: a STRIDE threat model mapped to code and tests, 14 runbooks, TOTP MFA, rotating refresh tokens with reuse detection, and prompt-injection containment.</p>
+<figure style="margin: 32px 0 0">
+<div style="box-sizing: border-box; padding: 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line)"><img src="/_blob/8b067c9efe56bd600fa6f6626091f1d4" alt="GlassBox decision replay: the final answer, a claim audit with four kept claims, trust scores (grounding 97%), context, the decision ID and the row hash." style="display: block; width: 100%; height: auto; border-radius: 8px"></div>
+<figcaption style="margin-top: 12px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Fig. 4 — Decision replay: answer, claim audit, trust scores and the row hash</figcaption>
+</figure>
+</section>
+
+<section id="limits" aria-labelledby="h-limits" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">07</p>
+<h2 id="h-limits" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">What broke, and the limits</h2>
+<ul style="list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--line)">
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span aria-hidden="true" style="flex: 0 0 16px; color: var(--muted)">—</span><span style="color: var(--ink-2)">The benchmark is author-written, so it can’t measure what I didn’t think to test.</span></li>
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span aria-hidden="true" style="flex: 0 0 16px; color: var(--muted)">—</span><span style="color: var(--ink-2)">The scorers learned from small, synthetic or bootstrapped sets. Reviewer labels are now exported so they can be retrained on real judgments.</span></li>
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span aria-hidden="true" style="flex: 0 0 16px; color: var(--muted)">—</span><span style="color: var(--ink-2)">The hash chain is tamper-evident, not tamper-proof: the chain head isn’t anchored outside the system yet.</span></li>
+<li style="display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line)"><span aria-hidden="true" style="flex: 0 0 16px; color: var(--muted)">—</span><span style="color: var(--ink-2)">[A real bug you hit: how you found it and what changed]</span></li>
+</ul>
+</section>
+
+<section id="next" aria-labelledby="h-next" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">08</p>
+<h2 id="h-next" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">What I’d do next</h2>
+<ul style="list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<li style="display: flex; gap: 14px; color: var(--ink-2)"><span style="flex: 0 0 auto; margin-top: 4px; height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 999px; border: 1px dashed var(--line-strong); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Planned</span>Anchor the chain head outside the system, for example as a signed daily digest.</li>
+<li style="display: flex; gap: 14px; color: var(--ink-2)"><span style="flex: 0 0 auto; margin-top: 4px; height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 999px; border: 1px dashed var(--line-strong); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Planned</span>Move retrieval from the NumPy index to pgvector, and retrain the scorers on reviewer labels.</li>
+<li style="display: flex; gap: 14px; color: var(--ink-2)"><span style="flex: 0 0 auto; margin-top: 4px; height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 999px; border: 1px dashed var(--line-strong); font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Planned</span>Report per-category pass rates with intervals, and the over-refusal rate.</li>
+</ul>
+</section>
+
+<section id="ai-tools" aria-labelledby="h-ai" style="margin-top: 96px">
+<p style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">09</p>
+<h2 id="h-ai" style="margin: 8px 0 0; font-size: clamp(30px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500">How I used AI tools</h2>
+<p style="margin: 24px 0 0; color: var(--ink-2)">[What you delegated to AI tools on GlassBox, which decisions stayed yours, and one thing you caught and corrected in review.]</p>
+</section>
+
+<section id="sources" aria-labelledby="h-sources" style="margin-top: 96px; padding-top: 20px; border-top: 1px solid var(--line)">
+<h2 id="h-sources" style="margin: 0; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Sources</h2>
+<ol style="list-style: none; margin: 16px 0 0; padding: 0; font-size: 15px; line-height: 1.5">
+<li style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 28px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--accent-ink)">[1]</span><span style="color: var(--ink-2)">glassbox-eval-v4 report, 2 Oct 2026. Glassbox / README › Evaluation.</span></li>
+<li style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 28px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--accent-ink)">[2]</span><span style="color: var(--ink-2)">GitHub Actions CI: SQLite and Postgres 15 jobs plus a Docker smoke test. <span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted)">[run link]</span></span></li>
+<li style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 28px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--accent-ink)">[3]</span><span style="color: var(--ink-2)">Deployment notes: t4g.small (ap-south-1), Caddy TLS, SSM Parameter Store, daily EBS snapshots.</span></li>
+<li style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 28px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--accent-ink)">[4]</span><span style="color: var(--ink-2)">Screenshots: Glassbox / docs / screenshots (ask, refusal, audit replay), Oct 2026.</span></li>
+<li style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><span style="flex: 0 0 28px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--accent-ink)">[5]</span><span style="color: var(--ink-2)">Live demo with advisor and compliance demo seats. <span style="font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--muted)">glassbox.15-252-203-137.sslip.io</span></span></li>
+</ol>
+</section>
+
+</article>
+</div>
+
+<section aria-label="Next project" style="max-width: 1280px; margin: 0 auto; padding: 128px clamp(20px, 5.5vw, 80px) 112px; width: 100%; box-sizing: border-box">
+<a href="#pulse" class="next" style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px 48px; padding: 28px; border-radius: 14px; border: 1px solid var(--line); text-decoration: none; color: inherit">
+<span style="flex: 999 1 420px; min-width: 0">
+<span style="display: block; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Next · 02</span>
+<span style="display: block; margin-top: 12px; font-size: clamp(36px, 4vw, 56px); line-height: 1; letter-spacing: -0.035em; font-weight: 500">Pulse →</span>
+<span style="display: block; margin-top: 14px; max-width: 46ch; color: var(--ink-2)">The LLM proposes a validated DSL. It never writes SQL, never touches the database and never sees PII.</span>
+</span>
+<span style="flex: 1 1 320px; max-width: 420px; height: 236px; box-sizing: border-box; padding: 6px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface-2)"><img src="/_blob/446387cec1c11d8d96f8c5a2481b4337" alt="Pulse campaign copilot: a plain-English audience description compiled into two validated rules, with 1,284 customers matched." style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: left center; border-radius: 9px"></span>
+</a>
+</section>
+</main>
+
+<footer style="border-top: 1px solid var(--line)">
+<div style="max-width: 1280px; margin: 0 auto; padding: 28px clamp(20px, 5.5vw, 80px) 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; font-family: 'Tabular', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+<span>© 2026 Yash Chauhan</span>
+<span>Set in Ranade &amp; Tabular by the Indian Type Foundry · Every claim cited</span>
+<span>Ledger head #9032982 · Updated 3 Oct 2026</span>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"enum","options":["International Orange","Cobalt","Signal Green","Graphite only"],"default":"International Orange","section":"Theme"},"$preview":{"width":1440,"height":9200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const palettes = {
+      'International Orange': ['#F24B00', '#C23A00', '#F4E3D9'],
+      'Cobalt': ['#2F54EB', '#2343C9', '#E3E8F8'],
+      'Signal Green': ['#0E8A5F', '#0B7350', '#DCEFE6'],
+      'Graphite only': ['#121211', '#121211', '#E6E5DF']
+    };
+    const p = palettes[this.props.accent ?? 'International Orange'] || palettes['International Orange'];
+    return { accent: p[0], accentInk: p[1], accentWash: p[2] };
+  }
+}
+</script>
+</body>
+</html>
