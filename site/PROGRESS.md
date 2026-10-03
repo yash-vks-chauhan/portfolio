@@ -18,7 +18,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - [x] **1. Shell:** nav capsule (`glass-thin`; GlassSurface where supported), `ThemeSwitch`, footer with `Footnotes`, sonner `<Toaster />`, cmdk command bar, phone tab bar. *Done when:* theme survives reload with no flash; nav and tab bar work at 390 px; every control shows a focus ring
 - [x] **2. Hero and widgets:** `HeroBackground`, `LiveChip`, BlurText headline, buttons, four `glass-regular` widgets with `Cite`. *Done when:* matches `preview-home-light.jpg` and `preview-home-dark.jpg`; reduced motion shows the still frame; the source sheet opens and closes by keyboard
 - [x] **3. Ask my portfolio:** `AskPanel` (v1, no server); optional CallChip "searching sources" step. *Done when:* the four suggestions behave like the Components artboard: three cited answers and one refusal
-- [ ] **4. Selected work:** GlassBox card (TiltedCard screenshot plus the "Flagged for compliance" toast), Pulse DSL card, Gridee phone card, Research card with Folder, More-work `InsetList` with `StatusChip`. *Done when:* matches the middle of `home-light.jpg` and `home-dark.jpg`
+- [x] **4. Selected work:** GlassBox card (TiltedCard screenshot plus the "Flagged for compliance" toast), Pulse DSL card, Gridee phone card, Research card with Folder, More-work `InsetList` with `StatusChip`. *Done when:* matches the middle of `home-light.jpg` and `home-dark.jpg`
 - [ ] **5. Experience, toolkit, contact:** inset lists plus a vaul side sheet (bottom sheet on phones), GlassIcons with a "used in" panel, the contact card and Dock. *Done when:* matches the bottom of `home-light.jpg`
 - [ ] **6. Case study template:** app header, stat strip, Embla preview carousel, summary, sticky "On this page" (IntersectionObserver), diagram, decision cards, evaluation (`wilson.ts`), CI chain, information list, more work. *Done when:* GlassBox matches `case-study-light.jpg` and `case-study-dark.jpg`; Pulse, Gridee and EMS reuse it; short pages for Autoscaler, Kalakraft and CT denoising
 - [ ] **7. Work index:** RubberSegment filter from `projects.ts` categories, two featured cards, the numbered list, the status legend. *Done when:* matches `work-index.jpg`; the filter counts read 8 · 3 · 3 · 2 · 1 · 1
@@ -76,8 +76,21 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - **Headline and numbers:** BlurText animates the real `<h1>`; CSS shows the words at once under reduced motion, without JavaScript, or after 2.5 s if the script is slow. Widget numbers roll (Counter) only when `<html class="motion-ok">` (no reduced motion, no Save-Data).
 - **Ask panel:** opens with the drawn thread (the GlassBox answer and the film refusal); the chips are the other three suggestions; the last two turns stay on screen. A React Bits CallChip shows the lookup (`sources · glassbox-eval-v4`) before an answer streams in; screen readers hear the finished answer once. Phones show one turn and no chips, with the shorter GlassBox answer, as drawn.
 - **Line breaks with Inter:** "Co-founder" may break at its hyphen, as the prototype does when rendered with Inter; with SF Pro the lead wraps exactly as drawn.
+- **Selected work:** the GlassBox screenshot tilts (TiltedCard) only with a fine pointer and without reduced motion; on phones each card is one link, and the More-work rows are React Bits SwipeRows (swipe or the row's "actions" toggle for Code and Demo; a tap opens the project). The home rows use the drawn, shorter wording for Autoscaler and CT denoising. The Research folder (React Bits Folder) is a real toggle with the drawn closed and open poses.
+- **Box sizing:** the prototypes have no global `border-box`, so their chat bubbles' percentage `max-width` excludes padding; the site sets `content-box` on those bubbles to wrap exactly as drawn.
+- **Private notes stay out of the bundle:** the starter's per-project `todo` notes (one named the double-blind venue) were reaching the command bar's JavaScript. They now live under "Blocked on Yash" below, and a unit test fails if the venue's name appears anywhere in `src/`, `public/` or the build.
 - `Yash_Chauhan_Master_Resume.pdf` is never copied into `site/`. The site links `/resume.pdf`; that file is Yash's to add (a test fails if the master résumé ever lands in `public/`).
 
 ## Blocked on Yash
 
 Filled in as the build goes; the final list is at the end of the build.
+
+Notes from the starter's project files (moved here so they never ship in the site's JavaScript):
+- GlassBox: your role on the case study (solo build?); a real domain for the demo instead of sslip.io; the "Over" alternative in each decision.
+- Pulse: confirm the Xeno assignment terms allow public posting; make the README and ARCHITECTURE.md agree on the LLM provider chain.
+- Gridee: your role split with your co-founder; whether 8,000+ counts downloads or active users.
+- EMS research: confirm the venue and review status; ask the PI what you may show (aggregate results only; government data).
+- IEEE manuscript: no title, topic or PDF until the decision; after acceptance, change the line to the accepted wording in `design/starter/content/projects.ts`.
+- Autoscaler: add tests on the safety rails; say "SHAP-style attribution", not SHAP; the LSTM is planned, not built.
+- Kalakraft: clarify ownership and whether it has real orders.
+- CT denoising: fix the noisy/clean pairing and re-run the metrics before quoting any number.

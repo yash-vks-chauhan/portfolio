@@ -42,6 +42,22 @@ const pages = chosen.length ? chosen : Object.keys(PAGES);
 const port = Number(process.env.PORT || 4329);
 const base = `http://localhost:${port}`;
 
+/** Scrolls through the page so lazy images load and visible-hydrated islands run, then returns to the top. */
+async function loadEverything(page) {
+  await page.evaluate(async () => {
+    const step = window.innerHeight * 0.8;
+    for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+      window.scrollTo({ top: y, behavior: 'instant' });
+      await new Promise((r) => setTimeout(r, 120));
+    }
+    await Promise.all(
+      [...document.images].map((img) => (img.complete ? null : new Promise((r) => img.addEventListener('load', r, { once: true }) || img.addEventListener('error', r, { once: true })))),
+    );
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+  await page.waitForTimeout(400);
+}
+
 async function waitFor(url, ms = 30_000) {
   const end = Date.now() + ms;
   while (Date.now() < end) {
@@ -86,6 +102,7 @@ try {
         await page.waitForTimeout(motion ? 1500 : 400);
         const stem = `${name}-${w}-${theme}`;
         await page.screenshot({ path: path.join(out, `${stem}-first.png`) });
+        await loadEverything(page);
         await page.screenshot({ path: path.join(out, `${stem}-full.png`), fullPage: true });
         console.log('shot', stem);
         await ctx.close();

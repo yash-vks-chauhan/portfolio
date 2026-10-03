@@ -63,8 +63,6 @@ export interface Project {
   };
   featured?: boolean;
   sources?: SourceId[];
-  /** Facts to confirm before launch. Not rendered. */
-  todo?: string[];
 }
 
 export interface ExperienceItem {

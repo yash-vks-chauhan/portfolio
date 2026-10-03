@@ -27,7 +27,6 @@ export const projects: Project[] = [
     },
     featured: true,
     sources: ['glassbox-eval-v4', 'glassbox-ci', 'glassbox-deploy'],
-    todo: ['Your role on the case study (solo build?)', 'A real domain for the demo instead of sslip.io', 'The "Over" alternative in each decision'],
   },
   {
     slug: 'pulse',
@@ -49,7 +48,6 @@ export const projects: Project[] = [
     },
     featured: true,
     sources: ['pulse-architecture', 'pulse-tests'],
-    todo: ['Confirm the Xeno assignment terms allow public posting', 'Make the README and ARCHITECTURE.md agree on the LLM provider chain'],
   },
   {
     slug: 'gridee',
@@ -72,7 +70,6 @@ export const projects: Project[] = [
     },
     featured: true,
     sources: ['gridee-downloads'],
-    todo: ['Your role split with your co-founder', 'Whether 8,000+ counts downloads or active users'],
   },
   {
     slug: 'ems-research',
@@ -89,7 +86,6 @@ export const projects: Project[] = [
     href: '/work/ems-research',
     links: { caseStudy: '/work/ems-research' },
     sources: ['iitm-internship'],
-    todo: ['Confirm the venue and review status', 'Ask the PI what you may show (aggregate results only; government data)'],
   },
   {
     slug: 'ieee-manuscript',
@@ -106,7 +102,6 @@ export const projects: Project[] = [
     icon: { glyph: 'lock', gradient: 'linear-gradient(145deg, #8E8BFF, #5149C9)' },
     href: '/research#ieee-manuscript',
     links: {},
-    todo: ['No title, topic or PDF until the decision', 'After acceptance: "Accepted, IEEE DELCON 2026 (to appear)"'],
   },
   {
     slug: 'autoscaler',
@@ -124,7 +119,6 @@ export const projects: Project[] = [
     href: '/work/autoscaler',
     links: { code: 'https://github.com/yash-vks-chauhan/Autoscaler' },
     sources: ['autoscaler-readme'],
-    todo: ['Add tests on the safety rails', 'Say "SHAP-style attribution", not SHAP; the LSTM is planned, not built'],
   },
   {
     slug: 'kalakraft',
@@ -144,7 +138,6 @@ export const projects: Project[] = [
       code: 'https://github.com/yash-vks-chauhan/Kalakraftdev',
     },
     sources: ['kalakraft-security'],
-    todo: ['Clarify ownership and whether it has real orders'],
   },
   {
     slug: 'ct-denoising',
@@ -160,7 +153,6 @@ export const projects: Project[] = [
     icon: { glyph: 'scan-line', gradient: 'linear-gradient(145deg, #AEAEB2, #636366)' },
     href: '/work/ct-denoising',
     links: { code: 'https://github.com/yash-vks-chauhan/CT-Denoising-U-Net' },
-    todo: ['Fix the noisy/clean pairing and re-run the metrics before quoting any number'],
   },
 ];
 

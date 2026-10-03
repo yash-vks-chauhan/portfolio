@@ -1,0 +1,154 @@
+---
+// "Selected work": GlassBox full width (tilted screenshot and the "Flagged for compliance" toast from the real
+// screenshot), Pulse and Gridee side by side, the Research card with its folder, then the More-work list.
+// Values from design/prototype GlassHome.html and GlassMobile.html. On phones the cards are links as a whole (as drawn),
+// the toast, chips and the Research card drop away, and the list rows swipe for Code and Demo.
+import { Picture } from 'astro:assets';
+import { Activity, ArrowUpRight, Box, ChevronRight, Lock, ShieldCheck, Sparkles } from 'lucide-react';
+import TiltedCard from '../bits/TiltedCard';
+import ResearchFolder from '../bits/ResearchFolder';
+import MoreWork from './MoreWork.astro';
+import { Brand } from '../ui/Brand';
+import { images } from '../../lib/images';
+import { projectBySlug } from '../../content/projects';
+
+const glassbox = projectBySlug.glassbox;
+const pulse = projectBySlug.pulse;
+const gridee = projectBySlug.gridee;
+const ems = projectBySlug['ems-research'];
+---
+
+<section id="work" class="home-section">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <p class="eyebrow">Selected work</p>
+      <h2 class="title1">Built, shipped, measured.</h2>
+    </div>
+    <a href="/work" class="section-link max-md:hidden">All work (08)<ChevronRight size={18} strokeWidth={2} aria-hidden="true" /></a>
+  </div>
+
+  {/* ── GlassBox ── */}
+  <article class="card-glassbox lift">
+    <div class="card-glassbox-copy">
+      <span class="card-kicker-row">
+        <span class="card-icon" style="background: linear-gradient(145deg, #5B97FF, #1E3A8A); --icon-drop: 0 8px 20px rgba(0,0,0,0.25)">
+          <Box size={26} strokeWidth={1.8} aria-hidden="true" />
+        </span>
+        <span class="card-kicker text-white/74">AI systems · Live</span>
+      </span>
+      <h3 class="card-title-xl">{glassbox.name}</h3>
+      <p class="card-glassbox-lead">
+        <span class="max-md:hidden">Auditable wealth-advisory AI. Every answer is cited or refused, and every decision is hash-chained.</span>
+        <span class="md:hidden">Auditable wealth-advisory AI. Every answer cited or refused; every decision hash-chained.</span>
+      </p>
+      <ul class="card-chips max-md:hidden" aria-label="Stack">
+        {glassbox.stack.map((s) => <li class="chip-on-dark">{s}</li>)}
+      </ul>
+      <div class="card-actions">
+        <a href={glassbox.href} class="pill btn-white card-stretch">View case study</a>
+        <a href={glassbox.links.demo} class="pill btn-glass max-md:hidden" target="_blank" rel="noreferrer">
+          Live demo<ArrowUpRight size={16} strokeWidth={2.2} aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+    <div class="card-glassbox-art">
+      <div class="glassbox-shot">
+        <TiltedCard client:visible containerWidth="100%" containerHeight="100%" imageWidth="100%" imageHeight="100%" rotateAmplitude={6} scaleOnHover={1.02} showTooltip={false} showMobileWarning={false}>
+          <Picture
+            src={images['glassbox-ask']}
+            formats={['avif', 'webp']}
+            widths={[760, 1440]}
+            sizes="(max-width: 767px) 420px, 760px"
+            alt="GlassBox answering an advisor’s question with numbered citations to the client’s documents"
+            class="glassbox-shot-img"
+            loading="lazy"
+          />
+        </TiltedCard>
+      </div>
+      <div class="flag-toast max-md:hidden" aria-label="From the screenshot: flagged for compliance, 4 sources cited, logged #77191542">
+        <span class="flag-toast-icon" aria-hidden="true"><ShieldCheck size={20} strokeWidth={2} /></span>
+        <span class="flex min-w-0 flex-col" aria-hidden="true">
+          <span class="text-[15px] font-semibold tracking-[-0.012em]">Flagged for compliance</span>
+          <span class="flag-toast-sub">4 sources cited · logged #77191542</span>
+        </span>
+      </div>
+    </div>
+  </article>
+
+  <div class="mt-5 flex flex-wrap gap-5 max-md:mt-3.5 max-md:gap-3.5">
+    {/* ── Pulse ── */}
+    <article class="card-pulse lift">
+      <span class="card-kicker-row">
+        <span class="card-icon" style="background: linear-gradient(145deg, #8E8BFF, #4B44C4); --icon-drop: 0 8px 20px rgba(75,68,196,0.25)">
+          <Activity size={26} strokeWidth={2} aria-hidden="true" />
+        </span>
+        <span class="card-kicker text-pulse-k">AI systems · Live</span>
+      </span>
+      <h3 class="card-title-lg"><a href={pulse.href} class="card-stretch">{pulse.name}</a></h3>
+      <p class="card-sub text-pulse-sub">
+        <span class="max-md:hidden">AI-native campaign CRM. The LLM writes a validated DSL. Never SQL, never PII.</span>
+        <span class="md:hidden">The LLM writes a validated DSL. Never SQL, never PII.</span>
+      </p>
+      <div class="pulse-demo">
+        <p class="pulse-ask max-md:hidden">Win back customers who spent over ₹2,000 but haven’t ordered in 60 days.</p>
+        <span class="pulse-step max-md:hidden"><Sparkles size={16} strokeWidth={2} aria-hidden="true" />LLM proposes a validated Segment DSL</span>
+        <div class="pulse-result">
+          <div class="flex flex-wrap gap-2 max-md:gap-1.5">
+            <code class="dsl-chip">total_spend &gt; ₹2,000</code>
+            <code class="dsl-chip">last_order_at &gt; 60 days</code>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span class="flex items-baseline gap-2">
+              <span class="num pulse-count">1,284</span><span class="pulse-count-label">customers match</span>
+            </span>
+            <span class="status-ok max-md:hidden"><Lock size={12} strokeWidth={2.4} aria-hidden="true" />No SQL · no PII to the model</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    {/* ── Gridee ── */}
+    <article class="card-gridee lift">
+      <span class="card-kicker-row">
+        <Picture src={images['gridee-icon']} formats={['avif', 'webp']} widths={[52, 104]} sizes="52px" alt="" class="card-icon card-icon-img" loading="lazy" />
+        <span class="card-kicker text-white/74">Mobile · In stores</span>
+      </span>
+      <h3 class="card-title-lg"><a href={gridee.href} class="card-stretch">{gridee.name}</a></h3>
+      <p class="card-sub text-white/84">Smart parking I co-founded. 8,000+ downloads on Android and iOS.</p>
+      <div class="mt-5 flex flex-wrap gap-2 max-md:hidden">
+        <a href={gridee.links.playStore} class="pill store-pill" target="_blank" rel="noreferrer"><Brand name="SiGoogleplay" size={14} />Google Play</a>
+        <a href={gridee.links.appStore} class="pill store-pill" target="_blank" rel="noreferrer"><Brand name="SiAppstore" size={14} />App Store</a>
+      </div>
+      <div class="gridee-phone" aria-hidden="false">
+        <div class="gridee-screen">
+          <Picture
+            src={images['gridee-home-dark']}
+            formats={['avif', 'webp']}
+            widths={[240, 480]}
+            sizes="(max-width: 767px) 202px, 240px"
+            alt="Gridee home screen listing nearby parking with live availability"
+            class="block w-full"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </article>
+  </div>
+
+  {/* ── Research ── */}
+  <article class="card-research lift max-md:hidden">
+    <div class="card-research-copy">
+      <span class="card-kicker text-card-k">Research · 2 manuscripts</span>
+      <h3 class="card-research-title"><a href="/research">Drift and equity in emergency medical services.</a></h3>
+      <p class="card-research-lead">
+        At IIT Madras: graph embeddings, a VAE and counterfactual XGBoost separate real operational drift from context a district can’t control. Plus a first-author manuscript under double-blind review at an IEEE conference (2026).
+      </p>
+      <ul class="card-chips" aria-label="Methods">
+        {ems.stack.map((s) => <li class="chip">{s}</li>)}
+      </ul>
+    </div>
+    <ResearchFolder client:visible />
+  </article>
+
+  <MoreWork />
+</section>

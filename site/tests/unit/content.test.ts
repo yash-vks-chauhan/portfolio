@@ -45,11 +45,11 @@ test('the double-blind manuscript reveals nothing about its topic', () => {
   const m = projects.find((p) => p.slug === 'ieee-manuscript');
   assert.ok(m);
   assert.deepEqual(m.stack, []);
-  assert.doesNotMatch(JSON.stringify({ ...m, todo: [] }), /circular|digital|upi|inclusion|e-waste|delcon/i);
+  assert.doesNotMatch(JSON.stringify(m), /circular|digital|upi|inclusion|e-waste|delcon/i);
 });
 
 test('nothing on the site names the double-blind paper or its venue', () => {
-  const everything = JSON.stringify({ sources, projects: projects.map(({ todo, ...p }) => p), work, education, answers });
+  const everything = JSON.stringify({ sources, projects, work, education, answers });
   assert.doesNotMatch(everything, /circularity|DELCON|digital inclusion|e-waste/i);
 });
 
@@ -58,14 +58,14 @@ test('dates checked are ISO dates or [placeholders]', () => {
 });
 
 test('banned words stay out of the copy (portfolio.design.md §2)', () => {
-  const text = JSON.stringify({ sources, projects: projects.map(({ todo, ...p }) => p), work, education, answers });
+  const text = JSON.stringify({ sources, projects, work, education, answers });
   assert.doesNotMatch(text, /passionate|cutting-edge|leveraged|IEEE paper/i);
   // "tamper-proof" may only appear as a denial: "tamper-evident, not tamper-proof".
   assert.doesNotMatch(text, /(?<!not )tamper-proof/i);
 });
 
 test('list the placeholders still to fill (informational)', () => {
-  const text = JSON.stringify({ sources, projects: projects.map(({ todo, ...p }) => p), work, education, answers });
+  const text = JSON.stringify({ sources, projects, work, education, answers });
   const open = [...new Set(text.match(/\[[^\]"]+\]/g) ?? [])];
   console.log(`placeholders still open: ${open.join(', ') || 'none'}`);
   assert.ok(true);

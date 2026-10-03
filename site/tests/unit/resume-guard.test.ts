@@ -1,5 +1,6 @@
-// The master résumé shows a phone number and the double-blind paper's title, so it must never be published.
-// The site links /resume.pdf; that file is Yash's to add (a redacted version).
+// Publishing guards. The master résumé shows a phone number and the double-blind paper's title, so it must never be
+// published; the site links /resume.pdf, and that file is Yash's to add (a redacted version). The IEEE manuscript's
+// venue must not appear either, in a page or in a script bundle.
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -32,4 +33,10 @@ test('the built site has no copy of the master résumé either', () => {
   if (!fs.existsSync(dist) || !fs.existsSync(master)) return;
   const masterSha = sha(master);
   for (const f of walk(dist).filter((f) => f.toLowerCase().endsWith('.pdf'))) assert.notEqual(sha(f), masterSha, `${path.relative(site, f)} is the master résumé`);
+});
+
+test('no source file, page or script names the double-blind venue', () => {
+  const text = /\.(astro|tsx?|jsx?|mjs|css|html|json|md|txt|xml|svg|webmanifest)$/;
+  const files = ['src', 'public', 'dist'].flatMap((d) => walk(path.join(site, d))).filter((f) => text.test(f));
+  for (const f of files) assert.doesNotMatch(fs.readFileSync(f, 'utf8'), /delcon/i, `${path.relative(site, f)} names the venue`);
 });

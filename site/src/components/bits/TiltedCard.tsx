@@ -2,14 +2,19 @@
  * TiltedCard, from React Bits (https://reactbits.dev · github.com/DavidHDev/react-bits @ ca44b3f, TS + Tailwind variant).
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
+ *
+ * Site changes: `children` replace the built-in <img> (so Astro can pass an optimised <picture>); the tilt is off
+ * under reduced motion and on devices without hover; `className` styles the moving layer.
  */
 
 import type { SpringOptions } from 'motion/react';
-import { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
 
 interface TiltedCardProps {
-  imageSrc: React.ComponentProps<'img'>['src'];
+  children?: ReactNode;
+  className?: string;
+  imageSrc?: React.ComponentProps<'img'>['src'];
   altText?: string;
   captionText?: string;
   containerHeight?: React.CSSProperties['height'];
@@ -31,6 +36,8 @@ const springValues: SpringOptions = {
 };
 
 export default function TiltedCard({
+  children,
+  className = '',
   imageSrc,
   altText = 'Tilted card image',
   captionText = '',
@@ -59,9 +66,13 @@ export default function TiltedCard({
   });
 
   const [lastY, setLastY] = useState(0);
+  const reduced = useReducedMotion();
+  const [canHover, setCanHover] = useState(false);
+  useEffect(() => setCanHover(window.matchMedia('(hover: hover) and (pointer: fine)').matches), []);
+  const active = canHover && !reduced;
 
   function handleMouse(e: React.MouseEvent<HTMLElement>) {
-    if (!ref.current) return;
+    if (!ref.current || !active) return;
 
     const rect = ref.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left - rect.width / 2;
@@ -82,6 +93,7 @@ export default function TiltedCard({
   }
 
   function handleMouseEnter() {
+    if (!active) return;
     scale.set(scaleOnHover);
     opacity.set(1);
   }
@@ -113,7 +125,7 @@ export default function TiltedCard({
       )}
 
       <motion.div
-        className="relative [transform-style:preserve-3d]"
+        className={`relative [transform-style:preserve-3d] ${className}`}
         style={{
           width: imageWidth,
           height: imageHeight,
@@ -122,15 +134,17 @@ export default function TiltedCard({
           scale
         }}
       >
-        <motion.img
-          src={imageSrc}
-          alt={altText}
-          className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
-          style={{
-            width: imageWidth,
-            height: imageHeight
-          }}
-        />
+        {children ?? (
+          <motion.img
+            src={imageSrc}
+            alt={altText}
+            className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
+            style={{
+              width: imageWidth,
+              height: imageHeight
+            }}
+          />
+        )}
 
         {displayOverlayContent && overlayContent && (
           <motion.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]">

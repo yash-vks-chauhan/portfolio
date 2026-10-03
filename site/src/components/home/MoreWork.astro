@@ -1,0 +1,45 @@
+---
+// More work: Autoscaler (In progress), Kalakraft (Live) and CT denoising (On hold) as an inset grouped list.
+import { ChevronRight } from 'lucide-react';
+import MoreWorkSwipe from './MoreWorkSwipe';
+import { StatusChip } from '../ui/StatusChip';
+import { glyph } from '../ui/glyphs';
+import { projectBySlug } from '../../content/projects';
+
+const rows = ['autoscaler', 'kalakraft', 'ct-denoising'].map((s) => projectBySlug[s]);
+// The home rows' wording as drawn: two guarantees shortened to fit one line.
+const line: Record<string, string> = {
+  autoscaler: 'Guarded Kubernetes self-healing: dry-run, cooldowns, a circuit breaker and an approval gate.',
+  'ct-denoising': 'An early learning project. Metrics withheld until the data pairing is re-checked.',
+};
+---
+
+<div class="more-list max-md:hidden">
+  {
+    rows.map((p, i) => {
+      const Icon = 'glyph' in p.icon ? glyph(p.icon.glyph) : null;
+      return (
+        <a href={p.href} class="row more-row">
+          {Icon && 'gradient' in p.icon && (
+            <span class="more-icon" style={{ background: p.icon.gradient }} aria-hidden="true">
+              <Icon size={22} strokeWidth={2} />
+            </span>
+          )}
+          <span class:list={['more-row-body', i > 0 && 'border-t border-sep']}>
+            <span class="flex min-w-0 flex-1 flex-col">
+              <span class="text-[17px] font-semibold tracking-[-0.016em]">{p.name}</span>
+              <span class="text-[15px] tracking-[-0.012em] text-label2">{line[p.slug] ?? p.guarantee}</span>
+            </span>
+            <StatusChip status={p.status} />
+            <span class="flex text-label3" aria-hidden="true">
+              <ChevronRight size={18} strokeWidth={2} />
+            </span>
+          </span>
+        </a>
+      );
+    })
+  }
+</div>
+<div class="md:hidden">
+  <MoreWorkSwipe client:visible rows={rows.map(({ slug, name, tagline, status, href, icon, links }) => ({ slug, name, tagline, status, href, icon, links }))} />
+</div>

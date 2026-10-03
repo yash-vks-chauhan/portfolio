@@ -3,7 +3,10 @@
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
  *
- * Site changes: Hugeicons replaced with the equivalent Lucide icon, so the site has one icon set (spec §3.7).
+ * Site changes: Hugeicons replaced with the equivalent Lucide icon, so the site has one icon set (spec §3.7);
+ * `onTap` runs on a tap that didn't swipe (the row captures the pointer, so a link inside it never gets the click);
+ * the row's side padding reads --sr-pl / --sr-pr (default 16 px); `height="auto"` lets the row grow with its content
+ * from a minimum of --sr-min (rows that don't collapse only).
  */
 
 import React, { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
@@ -34,7 +37,7 @@ export interface SwipeRowProps {
   drawerColor?: string;
   rowColor?: string;
   textColor?: string;
-  height?: number;
+  height?: number | 'auto';
   radius?: number;
   actionWidth?: number;
   direction?: 'left' | 'right';
@@ -53,6 +56,7 @@ export interface SwipeRowProps {
   label?: string;
   className?: string;
   style?: CSSProperties;
+  onTap?: () => void;
 }
 
 type Sample = [number, number];
@@ -134,7 +138,8 @@ const SwipeRow: React.FC<SwipeRowProps> = ({
   haptic = true,
   label = 'List item',
   className = '',
-  style
+  style,
+  onTap
 }) => {
   const uid = useId();
   const reduce = useReducedMotion();
@@ -329,6 +334,8 @@ const SwipeRow: React.FC<SwipeRowProps> = ({
       if (open) {
         setOpen(false);
         settle(0);
+      } else {
+        onTap?.();
       }
       return;
     }
@@ -397,14 +404,14 @@ const SwipeRow: React.FC<SwipeRowProps> = ({
       ref={root}
       role="group"
       aria-label={label}
-      className={`group relative overflow-hidden [height:var(--sr-h)] [transition:height_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),margin-bottom_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),opacity_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1)] data-[phase=collapsing]:h-0! data-[phase=collapsing]:mb-0! data-[phase=collapsing]:opacity-0 data-[disabled]:pointer-events-none data-[disabled]:opacity-55${className ? ` ${className}` : ''}`}
+      className={`group relative overflow-hidden [height:var(--sr-h)] [min-height:var(--sr-min,0px)] [transition:height_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),margin-bottom_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),opacity_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1)] data-[phase=collapsing]:h-0! data-[phase=collapsing]:mb-0! data-[phase=collapsing]:opacity-0 data-[disabled]:pointer-events-none data-[disabled]:opacity-55${className ? ` ${className}` : ''}`}
       data-direction={direction}
       data-open={open ? '' : undefined}
       data-phase={phase}
       data-disabled={disabled ? '' : undefined}
       style={
         {
-          '--sr-h': `${height}px`,
+          '--sr-h': height === 'auto' ? 'auto' : `${height}px`,
           '--sr-r': `${radius}px`,
           '--sr-a': `${A}px`,
           '--sr-row': rowColor,
@@ -418,7 +425,7 @@ const SwipeRow: React.FC<SwipeRowProps> = ({
         } as CSSProperties
       }
     >
-      <div className="relative overflow-hidden [height:var(--sr-h)] [border-radius:var(--sr-r)] [background:var(--sr-row)]">
+      <div className="relative overflow-hidden [height:var(--sr-h)] [min-height:var(--sr-min,0px)] [border-radius:var(--sr-r)] [background:var(--sr-row)]">
         <motion.div
           id={railId}
           className="absolute inset-0 [background:var(--sr-drawer)]"
@@ -467,7 +474,7 @@ const SwipeRow: React.FC<SwipeRowProps> = ({
         </motion.div>
         <motion.div
           ref={surface}
-          className="relative z-[1] flex h-full touch-pan-y items-center gap-3 px-4 [background:var(--sr-row)] [color:var(--sr-text)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] [@media(hover:hover)_and_(pointer:fine)]:cursor-grab [@media(hover:hover)_and_(pointer:fine)]:group-data-[dragging]:cursor-grabbing [@media(pointer:coarse)]:select-none group-data-[dragging]:select-none group-data-[dragging]:[&_*]:select-none"
+          className="relative z-[1] flex h-full [min-height:var(--sr-min,0px)] touch-pan-y items-center gap-3 pr-[var(--sr-pr,16px)] pl-[var(--sr-pl,16px)] [background:var(--sr-row)] [color:var(--sr-text)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] [@media(hover:hover)_and_(pointer:fine)]:cursor-grab [@media(hover:hover)_and_(pointer:fine)]:group-data-[dragging]:cursor-grabbing [@media(pointer:coarse)]:select-none group-data-[dragging]:select-none group-data-[dragging]:[&_*]:select-none"
           style={{ transform: surfaceXf }}
           onPointerDown={down}
         >
