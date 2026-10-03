@@ -2,6 +2,9 @@
  * Iridescence, from React Bits (https://reactbits.dev · github.com/DavidHDev/react-bits @ ca44b3f, TS + Tailwind variant).
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
+ *
+ * Site changes: `paused` stops the render loop without losing the WebGL context (off-screen, hidden tab);
+ * `onReady` fires after the first frame so the hero can fade the canvas in over its still image.
  */
 
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
@@ -55,6 +58,9 @@ interface IridescenceProps {
   speed?: number;
   amplitude?: number;
   mouseReact?: boolean;
+  paused?: boolean;
+  onReady?: () => void;
+  className?: string;
 }
 
 export default function Iridescence({
@@ -62,10 +68,21 @@ export default function Iridescence({
   speed = 1.0,
   amplitude = 0.1,
   mouseReact = true,
-  ...rest
+  paused = false,
+  onReady,
+  className = 'w-full h-full'
 }: IridescenceProps) {
   const ctnDom = useRef<HTMLDivElement>(null);
   const mousePos = useRef({ x: 0.5, y: 0.5 });
+  const pausedRef = useRef(paused);
+  const startRef = useRef<() => void>(() => {});
+  const readyRef = useRef(onReady);
+  readyRef.current = onReady;
+
+  useEffect(() => {
+    pausedRef.current = paused;
+    if (!paused) startRef.current();
+  }, [paused]);
 
   useEffect(() => {
     if (!ctnDom.current) return;
@@ -107,14 +124,30 @@ export default function Iridescence({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId: number;
+    let animateId = 0;
+    let running = false;
+    let drawn = false;
 
     function update(t: number) {
+      if (pausedRef.current && drawn) {
+        running = false;
+        return;
+      }
       animateId = requestAnimationFrame(update);
       program.uniforms.uTime.value = t * 0.001;
       renderer.render({ scene: mesh });
+      if (!drawn) {
+        drawn = true;
+        readyRef.current?.();
+      }
     }
-    animateId = requestAnimationFrame(update);
+    function start() {
+      if (running) return;
+      running = true;
+      animateId = requestAnimationFrame(update);
+    }
+    startRef.current = start;
+    start();
     ctn.appendChild(gl.canvas);
 
     function handleMouseMove(e: MouseEvent) {
@@ -131,6 +164,7 @@ export default function Iridescence({
 
     return () => {
       cancelAnimationFrame(animateId);
+      startRef.current = () => {};
       window.removeEventListener('resize', resize);
       if (mouseReact) {
         ctn.removeEventListener('mousemove', handleMouseMove);
@@ -140,5 +174,5 @@ export default function Iridescence({
     };
   }, [color, speed, amplitude, mouseReact]);
 
-  return <div ref={ctnDom} className="w-full h-full" {...rest} />;
+  return <div ref={ctnDom} className={className} />;
 }

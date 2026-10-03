@@ -2,6 +2,9 @@
  * SoftAurora, from React Bits (https://reactbits.dev · github.com/DavidHDev/react-bits @ ca44b3f, TS + Tailwind variant).
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
+ *
+ * Site changes: `paused` stops the render loop without losing the WebGL context (off-screen, hidden tab);
+ * `onReady` fires after the first frame so the hero can fade the canvas in over its still image.
  */
 
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
@@ -23,6 +26,8 @@ interface SoftAuroraProps {
   enableMouseInteraction?: boolean;
   mouseInfluence?: number;
   lightMode?: boolean;
+  paused?: boolean;
+  onReady?: () => void;
 }
 
 function hexToVec3(hex: string): [number, number, number] {
@@ -202,9 +207,20 @@ export default function SoftAurora({
   colorSpeed = 1.0,
   enableMouseInteraction = true,
   mouseInfluence = 0.25,
-  lightMode = false
+  lightMode = false,
+  paused = false,
+  onReady
 }: SoftAuroraProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(paused);
+  const startRef = useRef<() => void>(() => {});
+  const readyRef = useRef(onReady);
+  readyRef.current = onReady;
+
+  useEffect(() => {
+    pausedRef.current = paused;
+    if (!paused) startRef.current();
+  }, [paused]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -272,9 +288,15 @@ export default function SoftAurora({
       gl.canvas.addEventListener('mouseleave', handleMouseLeave);
     }
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    let running = false;
+    let drawn = false;
 
     function update(time: number) {
+      if (pausedRef.current && drawn) {
+        running = false;
+        return;
+      }
       animationFrameId = requestAnimationFrame(update);
       program.uniforms.uTime.value = time * 0.001;
 
@@ -289,11 +311,22 @@ export default function SoftAurora({
       }
 
       renderer.render({ scene: mesh });
+      if (!drawn) {
+        drawn = true;
+        readyRef.current?.();
+      }
     }
-    animationFrameId = requestAnimationFrame(update);
+    function start() {
+      if (running) return;
+      running = true;
+      animationFrameId = requestAnimationFrame(update);
+    }
+    startRef.current = start;
+    start();
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      startRef.current = () => {};
       window.removeEventListener('resize', resize);
       if (enableMouseInteraction) {
         gl.canvas.removeEventListener('mousemove', handleMouseMove);

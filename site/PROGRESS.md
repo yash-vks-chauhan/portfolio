@@ -16,7 +16,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 ## Milestones (IMPLEMENTATION.md §3)
 
 - [x] **1. Shell:** nav capsule (`glass-thin`; GlassSurface where supported), `ThemeSwitch`, footer with `Footnotes`, sonner `<Toaster />`, cmdk command bar, phone tab bar. *Done when:* theme survives reload with no flash; nav and tab bar work at 390 px; every control shows a focus ring
-- [ ] **2. Hero and widgets:** `HeroBackground`, `LiveChip`, BlurText headline, buttons, four `glass-regular` widgets with `Cite`. *Done when:* matches `preview-home-light.jpg` and `preview-home-dark.jpg`; reduced motion shows the still frame; the source sheet opens and closes by keyboard
+- [x] **2. Hero and widgets:** `HeroBackground`, `LiveChip`, BlurText headline, buttons, four `glass-regular` widgets with `Cite`. *Done when:* matches `preview-home-light.jpg` and `preview-home-dark.jpg`; reduced motion shows the still frame; the source sheet opens and closes by keyboard
 - [ ] **3. Ask my portfolio:** `AskPanel` (v1, no server); optional CallChip "searching sources" step. *Done when:* the four suggestions behave like the Components artboard: three cited answers and one refusal
 - [ ] **4. Selected work:** GlassBox card (TiltedCard screenshot plus the "Flagged for compliance" toast), Pulse DSL card, Gridee phone card, Research card with Folder, More-work `InsetList` with `StatusChip`. *Done when:* matches the middle of `home-light.jpg` and `home-dark.jpg`
 - [ ] **5. Experience, toolkit, contact:** inset lists plus a vaul side sheet (bottom sheet on phones), GlassIcons with a "used in" panel, the contact card and Dock. *Done when:* matches the bottom of `home-light.jpg`
@@ -72,6 +72,9 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - **Theme switch on phones:** the phone chrome has no theme switch or search, so the phone footer carries both (a small addition to the drawn footer).
 - **Command bar:** cmdk with a word-prefix filter (cmdk's fuzzy default matched almost anything across long keywords).
 - **Nav glass:** the CSS `glass-thin` frost is the look everywhere; on Chromium, React Bits GlassSurface's refraction filter is added on top (`bits/NavGlass.tsx`).
+- **Hero background:** the still frame is a CSS background picked by the theme (only the active theme's AVIF loads); WebGL loads lazily, fades in after its first frame and pauses off-screen. Iridescence's `color` is `[0.5, 0.6, 0.8]`, fitted to `hero-iridescence.jpg` (the still's channels are the shader output scaled by about those factors).
+- **Headline and numbers:** BlurText animates the real `<h1>`; CSS shows the words at once under reduced motion, without JavaScript, or after 2.5 s if the script is slow. Widget numbers roll (Counter) only when `<html class="motion-ok">` (no reduced motion, no Save-Data).
+- **Line breaks with Inter:** "Co-founder" may break at its hyphen, as the prototype does when rendered with Inter; with SF Pro the lead wraps exactly as drawn.
 - `Yash_Chauhan_Master_Resume.pdf` is never copied into `site/`. The site links `/resume.pdf`; that file is Yash's to add (a test fails if the master résumé ever lands in `public/`).
 
 ## Blocked on Yash

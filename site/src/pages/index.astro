@@ -1,19 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
 import Footer from '../components/shell/Footer.astro';
+import Hero from '../components/home/Hero.astro';
+import Widgets from '../components/home/Widgets.astro';
 import { numberSources, footnotes } from '../lib/citations';
 
-const n = numberSources(['gridee-downloads', 'glassbox-eval-v4', 'glassbox-ci', 'iitm-internship']);
+// Citation order on the home page: the widgets, then the sources the Experience sheets cite.
+const n = numberSources(['gridee-downloads', 'glassbox-eval-v4', 'glassbox-ci', 'iitm-internship', 'hindalco-report', 'srm-record']);
 ---
 
-<Base title="Yash Chauhan · AI/ML Engineer" description="Shell test" section="home" isHome>
-  <section id="top" class="mx-auto max-w-[1120px] px-6 pt-[184px] pb-[300px]">
-    <h1 class="text-display">Shell</h1>
-    <p>Cite test <a href="#fn-2" class="cite" data-cite="glassbox-eval-v4" data-n="2" aria-label="Source 2: glassbox-eval-v4 report">2</a></p>
-  </section>
-  <section id="ask" class="h-[600px]">Ask</section>
-  <section id="work" class="h-[600px]">Work</section>
-  <section id="about" class="h-[600px]">About</section>
-  <section id="contact" class="h-[600px]">Contact</section>
+<Base
+  title="Yash Chauhan · AI/ML Engineer"
+  description="Yash Chauhan builds AI systems you can audit: cited answers, refusals when evidence is missing, and a log of every decision. Final-year B.Tech CSE (AI/ML) at SRM, co-founder of Gridee."
+  section="home"
+  isHome
+>
+  <Hero />
+  <Widgets n={n} />
+  <section id="ask" class="h-[600px]"></section>
+  <section id="work" class="h-[600px]"></section>
+  <section id="about" class="h-[600px]"></section>
+  <section id="contact" class="h-[600px]"></section>
   <Footer slot="footer" notes={footnotes(n)} sourcesHref="#footnotes" gap={120} />
 </Base>

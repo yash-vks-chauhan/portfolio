@@ -2,12 +2,20 @@
  * BlurText, from React Bits (https://reactbits.dev · github.com/DavidHDev/react-bits @ ca44b3f, TS + Tailwind variant).
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
+ *
+ * Site changes: renders as any heading (`as`), so the hero's <h1> is the animated element itself, with the full
+ * sentence as its accessible name; `breakAfter` adds line breaks on wide screens (`breakClassName` decides where);
+ * the wrapper gets data-hydrated once React runs, so site.css can reveal the words if JavaScript never arrives.
  */
 
 import { motion, type Transition, type Easing } from 'motion/react';
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { createElement, useEffect, useRef, useState, useMemo } from 'react';
 
 type BlurTextProps = {
+  as?: 'p' | 'h1' | 'h2' | 'span';
+  /** Word indices after which the line breaks (on screens where breakClassName shows the break). */
+  breakAfter?: number[];
+  breakClassName?: string;
   text?: string;
   delay?: number;
   className?: string;
@@ -36,6 +44,9 @@ const buildKeyframes = (
 };
 
 const BlurText: React.FC<BlurTextProps> = ({
+  as = 'p',
+  breakAfter = [],
+  breakClassName = '',
   text = '',
   delay = 200,
   className = '',
@@ -51,7 +62,10 @@ const BlurText: React.FC<BlurTextProps> = ({
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLParagraphElement>(null);
+  const [hydrated, setHydrated] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => setHydrated(true), []);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -93,9 +107,15 @@ const BlurText: React.FC<BlurTextProps> = ({
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
-  return (
-    <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
-      {elements.map((segment, index) => {
+  return createElement(
+    as,
+    {
+      ref,
+      className: `blur-text ${className} flex flex-wrap`,
+      'aria-label': text,
+      'data-hydrated': hydrated ? '' : undefined
+    },
+    elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
         const spanTransition: Transition = {
@@ -105,9 +125,11 @@ const BlurText: React.FC<BlurTextProps> = ({
           ease: easing
         };
 
-        return (
+        const word = (
           <motion.span
             key={index}
+            className="blur-word"
+            aria-hidden="true"
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
@@ -118,11 +140,13 @@ const BlurText: React.FC<BlurTextProps> = ({
             }}
           >
             {segment === ' ' ? '\u00A0' : segment}
-            {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
+            {animateBy === 'words' && index < elements.length - 1 && !breakAfter.includes(index) && '\u00A0'}
           </motion.span>
         );
-      })}
-    </p>
+        return breakAfter.includes(index)
+          ? [word, <span key={`br-${index}`} aria-hidden="true" className={`blur-break ${breakClassName}`} />]
+          : word;
+      })
   );
 };
 

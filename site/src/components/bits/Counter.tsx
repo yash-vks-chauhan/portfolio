@@ -2,9 +2,11 @@
  * Counter, from React Bits (https://reactbits.dev · github.com/DavidHDev/react-bits @ ca44b3f, TS + Tailwind variant).
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
+ *
+ * Site changes: `spring` sets the digits' spring (the design's motion spec is stiffness 300, damping 30).
  */
 
-import { MotionValue, motion, useSpring, useTransform } from 'motion/react';
+import { MotionValue, motion, useSpring, useTransform, type SpringOptions } from 'motion/react';
 import type React from 'react';
 import { useEffect } from 'react';
 
@@ -54,9 +56,10 @@ interface DigitProps {
   value: number;
   height: number;
   digitStyle?: React.CSSProperties;
+  spring?: SpringOptions;
 }
 
-function Digit({ place, value, height, digitStyle }: DigitProps) {
+function Digit({ place, value, height, digitStyle, spring }: DigitProps) {
   // Decimal point digit
   if (place === '.') {
     return (
@@ -71,7 +74,7 @@ function Digit({ place, value, height, digitStyle }: DigitProps) {
 
   // Numeric digit
   const valueRoundedToPlace = getValueRoundedToPlace(value, place);
-  const animatedValue = useSpring(valueRoundedToPlace);
+  const animatedValue = useSpring(valueRoundedToPlace, spring);
 
   useEffect(() => {
     animatedValue.set(valueRoundedToPlace);
@@ -117,6 +120,7 @@ interface CounterProps {
   gradientTo?: string;
   topGradientStyle?: React.CSSProperties;
   bottomGradientStyle?: React.CSSProperties;
+  spring?: SpringOptions;
 }
 
 export default function Counter({
@@ -147,7 +151,8 @@ export default function Counter({
   gradientFrom = 'black',
   gradientTo = 'transparent',
   topGradientStyle,
-  bottomGradientStyle
+  bottomGradientStyle,
+  spring
 }: CounterProps) {
   const height = fontSize + padding;
 
@@ -193,7 +198,7 @@ export default function Counter({
     <span style={{ ...defaultContainerStyle, ...containerStyle }}>
       <span style={{ ...defaultCounterStyle, ...counterStyle }}>
         {places.map(place => (
-          <Digit key={place} place={place} value={value} height={height} digitStyle={digitStyle} />
+          <Digit key={place} place={place} value={value} height={height} digitStyle={digitStyle} spring={spring} />
         ))}
       </span>
       <span style={gradientContainerStyle}>

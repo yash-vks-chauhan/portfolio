@@ -19,6 +19,47 @@ html {
   background: var(--blue-wash);
 }
 
+/* Dark hero chip: translucent white with an inset ring (unlayered so it beats the light default above). */
+:root[data-theme='dark'] .live-chip {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .live-chip {
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+}
+
+/* BlurText headline: motion renders the words hidden. Show them at once under reduced motion, and after 2.5 s
+   if JavaScript never arrives (the noscript rule in Base.astro covers no-JS). */
+.blur-break {
+  flex-basis: 100%;
+  height: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .blur-text .blur-word {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+.blur-text:not([data-hydrated]) .blur-word {
+  animation: blur-reveal 0.6s ease-out 2.5s forwards;
+}
+@keyframes blur-reveal {
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* Rolling numbers: when motion is allowed, the static final number waits for the Counter (RollingNumber.tsx). */
+.motion-ok .roll-static {
+  visibility: hidden;
+}
+
 /* The command bar's input sits in a row that is already the focus context: no extra ring. */
 .cmdk-input-row [cmdk-input]:focus-visible {
   outline: none;
@@ -384,6 +425,251 @@ html {
     font-weight: 600;
     letter-spacing: -0.012em;
     color: var(--label);
+  }
+
+
+  /* ── Home: hero ─────────────────────────────────────────────────────────── */
+  .hero-bg-host {
+    --hero-bleed: 40px;
+  }
+  .hero-inner {
+    padding: 184px 24px 300px;
+  }
+  .live-chip {
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px 0 12px;
+    border-radius: 999px;
+    background: #0b0b0c;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.006em;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+  .live-chip .live-dot {
+    width: 8px;
+    height: 8px;
+    flex: none;
+    border-radius: 50%;
+    background: #34c759;
+  }
+  .hero-name {
+    margin: 28px 0 0;
+    font-size: 21px;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .hero-title {
+    margin: 12px 0 0;
+    max-width: 1000px;
+    font-size: clamp(48px, 6.7vw, 96px);
+    line-height: 1.04;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .hero-lead {
+    margin: 22px 0 0;
+    max-width: 620px;
+    font-size: 21px;
+    line-height: 1.42;
+    letter-spacing: 0;
+    color: var(--ink2);
+  }
+  .hero-actions {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 28px;
+  }
+  .hero-cta {
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: var(--blue);
+    color: var(--on-accent);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+  .hero-link {
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 17px;
+    color: var(--link);
+  }
+  @media (width < 48rem) {
+    .hero-bg-host {
+      --hero-bleed: 20px;
+    }
+    .hero-inner {
+      padding: 112px 16px 210px;
+    }
+    .live-chip {
+      height: 32px;
+      gap: 8px;
+      padding: 0 14px 0 10px;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    .live-chip .live-dot {
+      width: 7px;
+      height: 7px;
+    }
+    .hero-name {
+      margin-top: 22px;
+      font-size: 17px;
+      letter-spacing: -0.012em;
+    }
+    .hero-title {
+      margin-top: 10px;
+      font-size: 44px;
+      line-height: 1.06;
+      letter-spacing: -0.018em;
+    }
+    .hero-lead {
+      margin-top: 16px;
+      font-size: 17px;
+      line-height: 1.45;
+      letter-spacing: -0.012em;
+    }
+    .hero-actions {
+      margin-top: 26px;
+      align-self: stretch;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+    }
+    .hero-cta {
+      height: 50px;
+      font-weight: 600;
+      letter-spacing: -0.016em;
+    }
+    .hero-link {
+      align-self: center;
+    }
+  }
+
+  /* ── Home: widgets ──────────────────────────────────────────────────────── */
+  .widgets {
+    margin-top: -236px;
+    padding: 0 24px;
+  }
+  .widgets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+    gap: 20px;
+  }
+  .widget {
+    height: 188px;
+    box-sizing: border-box;
+    padding: 20px 22px;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    color: var(--label);
+  }
+  .widget-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.006em;
+    color: var(--label2);
+  }
+  .widget-icon {
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 7px;
+  }
+  .widget-badge {
+    margin-left: auto;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--fill2);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .widget-value {
+    margin-top: auto;
+    display: inline-flex;
+    font-size: 46px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--label);
+  }
+  .widget-value-text {
+    font-size: 34px;
+    line-height: 1.05;
+  }
+  .widget-caption {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.35;
+    letter-spacing: -0.006em;
+    color: var(--label2);
+  }
+  @media (width < 48rem) {
+    .widgets {
+      margin-top: -170px;
+      padding: 0 16px;
+    }
+    .widgets-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .widget {
+      height: 168px;
+      padding: 14px 14px 16px;
+      border-radius: 24px;
+    }
+    .widget-head {
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    .widget-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+    }
+    .widget-badge {
+      min-width: 20px;
+      height: 20px;
+    }
+    .widget-value {
+      font-size: 34px;
+    }
+    .widget-value-text {
+      font-size: 26px;
+    }
+    .widget-caption {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
   }
 
   /* Rounded numerals: widgets, stat strips, ranks (SF Pro Rounded on Apple devices). */

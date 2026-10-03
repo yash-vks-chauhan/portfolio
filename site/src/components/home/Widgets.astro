@@ -1,0 +1,114 @@
+---
+// Four regular-glass widgets overlapping the hero's bottom edge, each with its source number. Tapping a widget opens
+// its source sheet (without JavaScript it jumps to the footnote). Desktop: 4 columns ≥ 232 px, 188 px tall, pulled up
+// 236 px. Phones: 2 × 2 at 168 px, pulled up 170 px, with the shorter labels drawn on the mobile artboard.
+import { Box, Check, GraduationCap } from 'lucide-react';
+import { Image } from 'astro:assets';
+import RollingNumber from './RollingNumber';
+import { images } from '../../lib/images';
+import { citeNumber, getSource, type Numbering } from '../../lib/citations';
+
+interface Props {
+  n: Numbering;
+}
+const { n } = Astro.props;
+
+const widgets = [
+  {
+    source: 'gridee-downloads',
+    label: 'Gridee',
+    labelPhone: 'Gridee',
+    icon: 'gridee',
+    value: '8,000+',
+    caption: 'downloads on Android and iOS',
+    captionPhone: 'downloads, Android and iOS',
+  },
+  {
+    source: 'glassbox-eval-v4',
+    label: 'GlassBox eval',
+    labelPhone: 'GlassBox',
+    icon: 'box',
+    value: '183/183',
+    roll: { value: 183, rest: '/183' },
+    caption: 'correct · 95% CI <span class="whitespace-nowrap">97.9–100%</span>',
+    captionPhone: 'correct · CI <span class="whitespace-nowrap">97.9–100%</span>',
+  },
+  {
+    source: 'glassbox-ci',
+    label: 'GlassBox tests',
+    labelPhone: 'Tests',
+    icon: 'check',
+    value: '254',
+    roll: { value: 254, rest: '' },
+    caption: 'backend tests passing in CI',
+    captionPhone: 'GlassBox backend tests in CI',
+  },
+  {
+    source: 'iitm-internship',
+    label: 'Research',
+    labelPhone: 'Research',
+    icon: 'cap',
+    value: 'IIT Madras',
+    text: true,
+    caption: 'Research intern, 2025–26',
+    captionPhone: 'Research intern, 2025–26',
+  },
+] as const;
+---
+
+<section aria-label="Highlights" class="widgets relative z-[2] mx-auto box-border w-full max-w-[1120px]">
+  <div class="widgets-grid">
+    {
+      widgets.map((w) => {
+        const num = citeNumber(n, w.source, 'the home page');
+        const plainCaption = w.caption.replace(/<[^>]+>/g, '');
+        return (
+          <a
+            href={`#fn-${num}`}
+            data-cite={w.source}
+            data-n={num}
+            class="widget glass-regular lift"
+            aria-label={`${w.label}: ${w.value} ${plainCaption}. Source ${num}: ${getSource(w.source).title}.`}
+          >
+            <span class="widget-head" aria-hidden="true">
+              {w.icon === 'gridee' ? (
+                <Image src={images['gridee-icon']} alt="" width={60} height={60} class="widget-icon" loading="eager" />
+              ) : (
+                <span
+                  class="widget-icon flex items-center justify-center text-white"
+                  style={{
+                    background:
+                      w.icon === 'box'
+                        ? 'linear-gradient(145deg, #4C8DFF, #1E3A8A)'
+                        : w.icon === 'check'
+                          ? 'linear-gradient(145deg, #4CD964, #1F8F3A)'
+                          : 'linear-gradient(145deg, #8E8BFF, #5149C9)',
+                  }}
+                >
+                  {w.icon === 'box' && <Box size={16} strokeWidth={2} className="max-md:size-3.5" />}
+                  {w.icon === 'check' && <Check size={17} strokeWidth={2.6} className="max-md:size-[15px]" />}
+                  {w.icon === 'cap' && <GraduationCap size={17} strokeWidth={2} className="max-md:size-[15px]" />}
+                </span>
+              )}
+              <span class="max-md:hidden">{w.label}</span>
+              <span class="md:hidden">{w.labelPhone}</span>
+              <span class="widget-badge">{num}</span>
+            </span>
+            <span class:list={['widget-value', 'text' in w && w.text ? 'widget-value-text' : 'num']} aria-hidden="true">
+              {'roll' in w && w.roll ? (
+                <>
+                  <RollingNumber client:load value={w.roll.value} />
+                  {w.roll.rest}
+                </>
+              ) : (
+                w.value
+              )}
+            </span>
+            <span class="widget-caption max-md:hidden" aria-hidden="true" set:html={w.caption} />
+            <span class="widget-caption md:hidden" aria-hidden="true" set:html={w.captionPhone} />
+          </a>
+        );
+      })
+    }
+  </div>
+</section>
