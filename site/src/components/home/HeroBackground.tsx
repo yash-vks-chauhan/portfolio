@@ -2,17 +2,28 @@
 // - The still frame (a CSS background chosen by the theme, see Hero.astro) shows first, so nothing flashes and nothing
 //   moves under reduced motion or Save-Data, where WebGL never loads.
 // - The WebGL component loads lazily once the hero is near the viewport, fades in over the still after its first
-//   frame, pauses when the hero is off-screen or the tab is hidden, and renders at 1x pixel density (cap: 1.5).
+//   frame, pauses when the hero is off-screen or the tab is hidden, and renders at the screen's pixel density up to 1.5.
+// - It needs a GPU: where WebGL would be software-rendered (SwiftShader, llvmpipe; headless Chrome, which is what
+//   Lighthouse and PageSpeed Insights use), every frame would run on the main thread, so the still frame stays.
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { watchTheme, type Theme } from '../../lib/theme';
 
 const Iridescence = lazy(() => import('../bits/Iridescence'));
 const SoftAurora = lazy(() => import('../bits/SoftAurora'));
 
+// Software renderers, by the names drivers report (Chrome's SwiftShader runs on Vulkan, so the caveat flag misses it).
+const SOFTWARE_GL = /swiftshader|llvmpipe|softpipe|software|basic render driver/i;
+
 function webglAvailable() {
   try {
     const c = document.createElement('canvas');
-    return Boolean(c.getContext('webgl2') || c.getContext('webgl'));
+    const options = { failIfMajorPerformanceCaveat: true };
+    const gl = (c.getContext('webgl2', options) ?? c.getContext('webgl', options)) as WebGLRenderingContext | null;
+    if (!gl) return false;
+    const info = gl.getExtension('WEBGL_debug_renderer_info');
+    const renderer = String(gl.getParameter(info ? info.UNMASKED_RENDERER_WEBGL : gl.RENDERER));
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+    return !SOFTWARE_GL.test(renderer);
   } catch {
     return false;
   }

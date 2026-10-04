@@ -5,11 +5,12 @@
  *
  * Site changes: `children` replace the built-in <img> (so Astro can pass an optimised <picture>); the tilt is off
  * under reduced motion and on devices without hover; `className` styles the moving layer.
+ * Motion's slim `m` component draws it, with only the DOM renderer loaded (LazyMotion + domMin).
  */
 
 import type { SpringOptions } from 'motion/react';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
+import { LazyMotion, domMin, m, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
 
 interface TiltedCardProps {
   children?: ReactNode;
@@ -107,65 +108,67 @@ export default function TiltedCard({
   }
 
   return (
-    <figure
-      ref={ref}
-      className="relative w-full h-full [perspective:800px] flex flex-col items-center justify-center"
-      style={{
-        height: containerHeight,
-        width: containerWidth
-      }}
-      onMouseMove={handleMouse}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {showMobileWarning && (
-        <div className="absolute top-4 text-center text-sm block sm:hidden">
-          This effect is not optimized for mobile. Check on desktop.
-        </div>
-      )}
-
-      <motion.div
-        className={`relative [transform-style:preserve-3d] ${className}`}
+    <LazyMotion features={domMin}>
+      <figure
+        ref={ref}
+        className="relative w-full h-full [perspective:800px] flex flex-col items-center justify-center"
         style={{
-          width: imageWidth,
-          height: imageHeight,
-          rotateX,
-          rotateY,
-          scale
+          height: containerHeight,
+          width: containerWidth
         }}
+        onMouseMove={handleMouse}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        {children ?? (
-          <motion.img
-            src={imageSrc}
-            alt={altText}
-            className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
-            style={{
-              width: imageWidth,
-              height: imageHeight
-            }}
-          />
+        {showMobileWarning && (
+          <div className="absolute top-4 text-center text-sm block sm:hidden">
+            This effect is not optimized for mobile. Check on desktop.
+          </div>
         )}
 
-        {displayOverlayContent && overlayContent && (
-          <motion.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]">
-            {overlayContent}
-          </motion.div>
-        )}
-      </motion.div>
-
-      {showTooltip && (
-        <motion.figcaption
-          className="pointer-events-none absolute left-0 top-0 rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 z-[3] hidden sm:block"
+        <m.div
+          className={`relative [transform-style:preserve-3d] ${className}`}
           style={{
-            x,
-            y,
-            opacity,
-            rotate: rotateFigcaption
+            width: imageWidth,
+            height: imageHeight,
+            rotateX,
+            rotateY,
+            scale
           }}
         >
-          {captionText}
-        </motion.figcaption>
-      )}
-    </figure>
+          {children ?? (
+            <m.img
+              src={imageSrc}
+              alt={altText}
+              className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
+              style={{
+                width: imageWidth,
+                height: imageHeight
+              }}
+            />
+          )}
+
+          {displayOverlayContent && overlayContent && (
+            <m.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]">
+              {overlayContent}
+            </m.div>
+          )}
+        </m.div>
+
+        {showTooltip && (
+          <m.figcaption
+            className="pointer-events-none absolute left-0 top-0 rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 z-[3] hidden sm:block"
+            style={{
+              x,
+              y,
+              opacity,
+              rotate: rotateFigcaption
+            }}
+          >
+            {captionText}
+          </m.figcaption>
+        )}
+      </figure>
+    </LazyMotion>
   );
 }

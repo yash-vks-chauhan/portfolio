@@ -7,6 +7,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { preferInter } from './fonts.mjs';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const out = path.join(root, 'shots', 'states');
@@ -33,10 +34,9 @@ try {
       await ctx.grantPermissions(['clipboard-read', 'clipboard-write']);
       const page = await ctx.newPage();
       await page.clock.setFixedTime(new Date('2026-10-04T15:34:00Z'));
+      await preferInter(page);
       await page.goto(base + '/', { waitUntil: 'networkidle' });
-      await hydrated(page, 'CommandBar');
-      await hydrated(page, 'SourceSheet');
-      await hydrated(page, 'Toaster');
+      await hydrated(page, 'Shell');
       await page.keyboard.press('Control+k');
       await page.waitForTimeout(300);
       await page.screenshot({ path: path.join(out, `command-${w}-${scheme}.png`) });

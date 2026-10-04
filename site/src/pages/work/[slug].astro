@@ -17,7 +17,7 @@ interface Props {
 const { study } = Astro.props;
 ---
 
-<Base title={study.title} description={study.description} section="work" phoneHeader="case" ogType="article">
+<Base title={study.title} description={study.description} section="work" phoneHeader="case" ogType="article" ogImage={`/og/${study.slug}.png`}>
   <CasePage study={study} />
   <Footer slot="footer" claim="page" sourcesHref="#sources" />
 </Base>

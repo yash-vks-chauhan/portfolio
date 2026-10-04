@@ -11,7 +11,9 @@ const site = process.env.SITE_URL || 'https://yashchauhan.dev';
 export default defineConfig({
   site,
   trailingSlash: 'never',
-  build: { format: 'file' },
+  // The stylesheet (about 22 KB gzipped) goes inline in every page: one round trip fewer before the first paint, which
+  // on a phone network matters more than caching it across the few pages a visitor opens.
+  build: { format: 'file', inlineStylesheets: 'always' },
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

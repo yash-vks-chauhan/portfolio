@@ -1,10 +1,10 @@
 ---
 // Contact: the iOS Contacts-style card (avatar, Email me, Résumé, copyable rows) and the magnifying Dock, as drawn.
 // Phones get the card's four tiles and the email row instead, and no Dock. A "Copy" control copies the address and
-// shows the "Email copied" toast; the Toaster island handles [data-copy-email], so it needs no island of its own.
+// shows the "Email copied" toast; the Shell island handles [data-copy-email], so it needs no island of its own.
 import { ArrowUpRight, Copy, Download, FileText, Mail } from 'lucide-react';
 import ContactDock from './ContactDock';
-import { Brand } from '../ui/Brand';
+import { Brand, brandGlyph } from '../ui/Brand';
 import { site } from '../../content/site';
 
 const mailto = `mailto:${site.email}`;
@@ -77,5 +77,13 @@ const profiles = [
     }
   </div>
 
-  <ContactDock client:visible className="max-md:hidden" email={site.email} github={site.links.github} linkedin={site.links.linkedin} resume={site.links.resume} />
+  <ContactDock
+    client:visible
+    className="max-md:hidden"
+    email={site.email}
+    github={site.links.github}
+    linkedin={site.links.linkedin}
+    resume={site.links.resume}
+    icons={{ github: brandGlyph('SiGithub'), linkedin: brandGlyph('SiLinkedin') }}
+  />
 </section>

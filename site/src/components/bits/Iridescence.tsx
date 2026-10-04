@@ -3,7 +3,8 @@
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
  *
- * Site changes: `paused` stops the render loop without losing the WebGL context (off-screen, hidden tab);
+ * Site changes: the pixel ratio follows the screen up to 1.5 (the design's cap; ogl's default is 1);
+ * `paused` stops the render loop without losing the WebGL context (off-screen, hidden tab);
  * `onReady` fires after the first frame so the hero can fade the canvas in over its still image.
  */
 
@@ -87,7 +88,7 @@ export default function Iridescence({
   useEffect(() => {
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
-    const renderer = new Renderer();
+    const renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio || 1, 1.5) });
     const gl = renderer.gl;
     gl.clearColor(1, 1, 1, 1);
 

@@ -1,30 +1,23 @@
 ---
-// Home hero: live chip, name line, BlurText headline, lead, résumé button and "See the work", over the animated
+// Home hero: live chip, name line, blur-in headline, lead, résumé button and "See the work", over the animated
 // background (Iridescence in light, Soft Aurora in dark) and its veil. Values from design/prototype GlassHome.html and
 // GlassMobile.html: 184 px top padding and 300 px bottom on desktop (the widgets overlap it), 112 / 210 on phones.
-import { getImage } from 'astro:assets';
 import { ChevronRight, Download } from 'lucide-react';
 import HeroBackground from './HeroBackground';
 import LiveChip from './LiveChip';
-import HeroHeadline from './HeroHeadline';
-import { images } from '../../lib/images';
+import HeroHeadline from './HeroHeadline.astro';
+import { heroStills, type Still } from '../../lib/hero-stills';
 import { site } from '../../content/site';
 
-const still = async (key: 'hero-iridescence' | 'hero-aurora') => ({
-  avif: (await getImage({ src: images[key], format: 'avif', quality: 60 })).src,
-  webp: (await getImage({ src: images[key], format: 'webp', quality: 72 })).src,
-});
-const light = await still('hero-iridescence');
-const dark = await still('hero-aurora');
-const set = (s: { avif: string; webp: string }) => `image-set(url("${s.avif}") type("image/avif"), url("${s.webp}") type("image/webp"))`;
+// The still frame is preloaded from <head> by HeroPreload.astro.
+const { light, dark } = await heroStills();
+const set = (s: Still) => `image-set(url("${s.avif}") type("image/avif"), url("${s.webp}") type("image/webp"))`;
 const css = `
 .hero-still{background-position:center;background-size:cover;background-repeat:no-repeat;background-image:${set(light)}}
 :root[data-theme="dark"] .hero-still{background-image:${set(dark)}}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero-still{background-image:${set(dark)}}}`;
 ---
 
-<link rel="preload" as="image" href={light.avif} type="image/avif" media="(prefers-color-scheme: light)" fetchpriority="high" />
-<link rel="preload" as="image" href={dark.avif} type="image/avif" media="(prefers-color-scheme: dark)" fetchpriority="high" />
 <style is:inline set:html={css}></style>
 
 <header id="top" class="relative overflow-hidden">
@@ -32,9 +25,9 @@ const css = `
     <HeroBackground client:idle />
   </div>
   <div class="hero-inner relative mx-auto flex max-w-[1120px] flex-col items-center text-center">
-    <LiveChip client:load />
+    <LiveChip client:idle />
     <p class="hero-name">{site.name} · {site.role}</p>
-    <HeroHeadline client:load />
+    <HeroHeadline />
     <p class="hero-lead">{site.lead}</p>
     <div class="hero-actions">
       <a href={site.links.resume} class="pill hero-cta">

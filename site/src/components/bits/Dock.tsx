@@ -6,13 +6,16 @@
  * Site changes: items are real links (`href`) instead of `role="button"` divs; the dock sits in the page under the
  * contact card instead of fixed to the viewport, so the panel keeps its height and a magnified icon rises out of it
  * (nothing below moves); sizes, radius (12/54 of the size), gaps and the glass panel are the design's; the label
- * shows above an icon on hover or keyboard focus. Without a fine pointer, or under reduced motion, there is no
- * magnification: a plain row. Distances use clientX (the original mixed pageX with viewport rects).
+ * shows above an icon on hover or keyboard focus, faded in by CSS (site.css .dock-label) rather than AnimatePresence.
+ * Without a fine pointer, or under reduced motion, there is no magnification: a plain row. Distances use clientX
+ * (the original mixed pageX with viewport rects). The spring is the design's (stiffness 300, damping 30), and
+ * Motion's slim `m` component draws the icons, with only the DOM renderer loaded (LazyMotion + domMin).
  */
 
 import {
-  AnimatePresence,
-  motion,
+  LazyMotion,
+  domMin,
+  m,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -51,10 +54,9 @@ type DockItemProps = {
   baseItemSize: number;
   magnification: number;
   magnify: boolean;
-  reduced: boolean;
 };
 
-function DockItem({ item, mouseX, spring, distance, magnification, baseItemSize, magnify, reduced }: DockItemProps) {
+function DockItem({ item, mouseX, spring, distance, magnification, baseItemSize, magnify }: DockItemProps) {
   const ref = useRef<HTMLAnchorElement>(null);
   const [showLabel, setShowLabel] = useState(false);
 
@@ -67,7 +69,7 @@ function DockItem({ item, mouseX, spring, distance, magnification, baseItemSize,
   const radius = useTransform(size, s => (s * 12) / 54);
 
   return (
-    <motion.a
+    <m.a
       ref={ref}
       href={item.href}
       aria-label={item.label}
@@ -80,30 +82,18 @@ function DockItem({ item, mouseX, spring, distance, magnification, baseItemSize,
         borderRadius: magnify ? radius : (baseItemSize * 12) / 54,
         background: item.background
       }}
-      onHoverStart={() => setShowLabel(true)}
-      onHoverEnd={() => setShowLabel(false)}
+      onPointerEnter={e => e.pointerType !== 'touch' && setShowLabel(true)}
+      onPointerLeave={() => setShowLabel(false)}
       onFocus={() => setShowLabel(true)}
       onBlur={() => setShowLabel(false)}
     >
       <span className="flex items-center justify-center" aria-hidden="true">
         {item.icon}
       </span>
-      <AnimatePresence>
-        {showLabel && (
-          <motion.span
-            initial={{ opacity: 0, y: reduced ? 0 : 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: reduced ? 0 : 4 }}
-            transition={{ duration: 0.2 }}
-            className="dock-label"
-            aria-hidden="true"
-            style={{ x: '-50%' }}
-          >
-            {item.label}
-          </motion.span>
-        )}
-      </AnimatePresence>
-    </motion.a>
+      <span className="dock-label" data-show={showLabel ? '' : undefined} aria-hidden="true">
+        {item.label}
+      </span>
+    </m.a>
   );
 }
 
@@ -111,7 +101,7 @@ export default function Dock({
   items,
   className = '',
   label = 'Elsewhere',
-  spring = { mass: 0.1, stiffness: 150, damping: 12 },
+  spring = { stiffness: 300, damping: 30 },
   magnification = 70,
   distance = 200,
   baseItemSize = 54
@@ -129,27 +119,28 @@ export default function Dock({
   const magnify = finePointer && !reduced;
 
   return (
-    <nav
-      aria-label={label}
-      className={`dock-panel ${className}`}
-      onMouseMove={e => {
-        if (magnify) mouseX.set(e.clientX);
-      }}
-      onMouseLeave={() => mouseX.set(Infinity)}
-    >
-      {items.map(item => (
-        <DockItem
-          key={item.label}
-          item={item}
-          mouseX={mouseX}
-          spring={spring}
-          distance={distance}
-          magnification={magnification}
-          baseItemSize={baseItemSize}
-          magnify={magnify}
-          reduced={reduced}
-        />
-      ))}
-    </nav>
+    <LazyMotion features={domMin}>
+      <nav
+        aria-label={label}
+        className={`dock-panel ${className}`}
+        onMouseMove={e => {
+          if (magnify) mouseX.set(e.clientX);
+        }}
+        onMouseLeave={() => mouseX.set(Infinity)}
+      >
+        {items.map(item => (
+          <DockItem
+            key={item.label}
+            item={item}
+            mouseX={mouseX}
+            spring={spring}
+            distance={distance}
+            magnification={magnification}
+            baseItemSize={baseItemSize}
+            magnify={magnify}
+          />
+        ))}
+      </nav>
+    </LazyMotion>
   );
 }

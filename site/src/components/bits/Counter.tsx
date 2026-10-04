@@ -4,9 +4,10 @@
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
  *
  * Site changes: `spring` sets the digits' spring (the design's motion spec is stiffness 300, damping 30).
+ * Motion's slim `m` component draws it, with only the DOM renderer loaded (LazyMotion + domMin).
  */
 
-import { MotionValue, motion, useSpring, useTransform, type SpringOptions } from 'motion/react';
+import { MotionValue, LazyMotion, domMin, m, useSpring, useTransform, type SpringOptions } from 'motion/react';
 import type React from 'react';
 import { useEffect } from 'react';
 
@@ -37,7 +38,7 @@ function Number({ mv, number, height }: NumberProps) {
     justifyContent: 'center'
   };
 
-  return <motion.span style={{ ...baseStyle, y }}>{number}</motion.span>;
+  return <m.span style={{ ...baseStyle, y }}>{number}</m.span>;
 }
 
 function normalizeNearInteger(num: number): number {
@@ -195,16 +196,18 @@ export default function Counter({
   };
 
   return (
-    <span style={{ ...defaultContainerStyle, ...containerStyle }}>
-      <span style={{ ...defaultCounterStyle, ...counterStyle }}>
-        {places.map(place => (
-          <Digit key={place} place={place} value={value} height={height} digitStyle={digitStyle} spring={spring} />
-        ))}
+    <LazyMotion features={domMin}>
+      <span style={{ ...defaultContainerStyle, ...containerStyle }}>
+        <span style={{ ...defaultCounterStyle, ...counterStyle }}>
+          {places.map(place => (
+            <Digit key={place} place={place} value={value} height={height} digitStyle={digitStyle} spring={spring} />
+          ))}
+        </span>
+        <span style={gradientContainerStyle}>
+          <span style={topGradientStyle ?? defaultTopGradientStyle} />
+          <span style={bottomGradientStyle ?? defaultBottomGradientStyle} />
+        </span>
       </span>
-      <span style={gradientContainerStyle}>
-        <span style={topGradientStyle ?? defaultTopGradientStyle} />
-        <span style={bottomGradientStyle ?? defaultBottomGradientStyle} />
-      </span>
-    </span>
+    </LazyMotion>
   );
 }

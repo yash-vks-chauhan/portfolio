@@ -1,0 +1,9 @@
+---
+// <head> preloads for the hero's still frame (see lib/hero-stills.ts): the AVIF for the OS theme, at high priority.
+import { heroStills } from '../../lib/hero-stills';
+
+const { light, dark } = await heroStills();
+---
+
+<link rel="preload" as="image" href={light.avif} type="image/avif" media="(prefers-color-scheme: light)" fetchpriority="high" />
+<link rel="preload" as="image" href={dark.avif} type="image/avif" media="(prefers-color-scheme: dark)" fetchpriority="high" />

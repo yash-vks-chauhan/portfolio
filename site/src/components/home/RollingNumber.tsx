@@ -1,7 +1,8 @@
 // A widget number that rolls once (React Bits Counter) when it first comes into view.
 // The server renders the final number. When motion is allowed, the head script marks <html class="motion-ok"> and CSS
-// hides that static number until this island swaps in the Counter, which rolls up from zero. Under reduced motion,
-// Save-Data or without JavaScript, the static final number is all there is.
+// hides that static number until this island (hydrated at idle, after the first paint) swaps in the Counter, which
+// rolls up from zero. Under reduced motion, Save-Data or without JavaScript, the static final number is all there is;
+// if the island arrives after CSS has already revealed the number (3 s), it leaves the number as it is.
 import { useEffect, useRef, useState } from 'react';
 import Counter from '../bits/Counter';
 
@@ -13,6 +14,8 @@ export default function RollingNumber({ value, fontSize = 46, phoneFontSize = 34
 
   useEffect(() => {
     if (!document.documentElement.classList.contains('motion-ok')) return;
+    const still = ref.current?.querySelector('.roll-static');
+    if (still && getComputedStyle(still).visibility === 'visible') return;
     const mq = window.matchMedia('(max-width: 47.99rem)');
     setSize(mq.matches ? phoneFontSize : fontSize);
     setMode('counter');

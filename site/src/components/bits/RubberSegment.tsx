@@ -8,10 +8,11 @@
  * keep their full colour (no 70% opacity); until the first measurement (and without JavaScript) the selected segment
  * is styled directly, so the server-rendered control never flashes a full-width thumb; segments inherit only the
  * font family (Tailwind v4 ordered the original `font: inherit` after the size and weight, resetting both).
+ * Motion's slim `m` component draws it, with only the DOM renderer loaded (LazyMotion + domMin).
  */
 
 import React, { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { animate, motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from 'motion/react';
+import { animate, LazyMotion, domMin, m, useMotionValue, useReducedMotion, useTransform, type MotionValue } from 'motion/react';
 
 export type RubberSegmentSize = 'sm' | 'md' | 'lg';
 export type RubberSegmentItem = string | { value: string; label: ReactNode; icon?: ReactNode };
@@ -356,73 +357,75 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
   const preset = SIZES[size] || SIZES.md;
 
   return (
-    <div
-      ref={trackRef}
-      role="radiogroup"
-      aria-label={ariaLabel}
-      aria-disabled={disabled || undefined}
-      data-equal={equalSlots ? '' : undefined}
-      data-ready={ready ? '' : undefined}
-      data-draggable={draggable && !disabled ? '' : undefined}
-      className={`rs-track group relative inline-grid grid-flow-col auto-cols-auto align-middle select-none touch-pan-y [font-family:inherit] [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] p-[var(--rs-inset)] rounded-[var(--rs-radius)] [background:var(--rs-track)] data-[equal]:auto-cols-[minmax(0,1fr)] data-[held]:cursor-grabbing aria-disabled:pointer-events-none aria-disabled:opacity-50${className ? ` ${className}` : ''}`}
-      style={
-        {
-          '--rs-track': trackColor,
-          '--rs-thumb': thumbColor,
-          '--rs-ink': textColor,
-          '--rs-ink-active': activeTextColor,
-          '--rs-radius': `${radius}px`,
-          '--rs-inset': `${inset}px`,
-          '--rs-thumb-radius': `${thumbRadius}px`,
-          '--rs-h': `${preset.height}px`,
-          '--rs-font': `${preset.font}px`,
-          '--rs-pad': `${pad ?? preset.pad}px`,
-          '--rs-thumb-shadow': thumbShadow ?? 'none',
-          '--rs-min': `${preset.min}px`,
-          '--rs-ease-out': 'cubic-bezier(0.23, 1, 0.32, 1)'
-        } as CSSProperties
-      }
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerCancel}
-      onLostPointerCapture={handlePointerCancel}
-    >
-      {list.map((item, i) => (
-        <button
-          key={item.value}
-          ref={el => {
-            itemRefs.current[i] = el;
-          }}
-          type="button"
-          role="radio"
-          aria-checked={i === index}
-          tabIndex={i === index ? 0 : -1}
-          disabled={disabled}
-          className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font-family:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-pointer [color:var(--rs-ink)] aria-checked:cursor-default group-data-[draggable]:aria-checked:cursor-grab group-data-[held]:cursor-grabbing data-[pressed]:[transform:scale(0.96)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:[outline-color:var(--rs-thumb)]"
-          onPointerDown={e => handlePointerDown(e, i)}
-          onKeyDown={handleKeyDown}
-        >
-          {item.icon}
-          {item.label}
-        </button>
-      ))}
-      <div className="rs-thumb pointer-events-none absolute inset-0 [filter:drop-shadow(var(--rs-thumb-shadow))]" aria-hidden="true">
-      <motion.div
-        className="pointer-events-none absolute inset-[var(--rs-inset)] grid grid-flow-col auto-cols-auto group-data-[equal]:auto-cols-[minmax(0,1fr)] [background:var(--rs-thumb)] [color:var(--rs-ink-active)]"
-        style={{ clipPath }}
+    <LazyMotion features={domMin}>
+      <div
+        ref={trackRef}
+        role="radiogroup"
+        aria-label={ariaLabel}
+        aria-disabled={disabled || undefined}
+        data-equal={equalSlots ? '' : undefined}
+        data-ready={ready ? '' : undefined}
+        data-draggable={draggable && !disabled ? '' : undefined}
+        className={`rs-track group relative inline-grid grid-flow-col auto-cols-auto align-middle select-none touch-pan-y [font-family:inherit] [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] p-[var(--rs-inset)] rounded-[var(--rs-radius)] [background:var(--rs-track)] data-[equal]:auto-cols-[minmax(0,1fr)] data-[held]:cursor-grabbing aria-disabled:pointer-events-none aria-disabled:opacity-50${className ? ` ${className}` : ''}`}
+        style={
+          {
+            '--rs-track': trackColor,
+            '--rs-thumb': thumbColor,
+            '--rs-ink': textColor,
+            '--rs-ink-active': activeTextColor,
+            '--rs-radius': `${radius}px`,
+            '--rs-inset': `${inset}px`,
+            '--rs-thumb-radius': `${thumbRadius}px`,
+            '--rs-h': `${preset.height}px`,
+            '--rs-font': `${preset.font}px`,
+            '--rs-pad': `${pad ?? preset.pad}px`,
+            '--rs-thumb-shadow': thumbShadow ?? 'none',
+            '--rs-min': `${preset.min}px`,
+            '--rs-ease-out': 'cubic-bezier(0.23, 1, 0.32, 1)'
+          } as CSSProperties
+        }
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+        onLostPointerCapture={handlePointerCancel}
       >
-        {list.map(item => (
-          <span
+        {list.map((item, i) => (
+          <button
             key={item.value}
-            className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font-family:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-default [color:inherit]"
+            ref={el => {
+              itemRefs.current[i] = el;
+            }}
+            type="button"
+            role="radio"
+            aria-checked={i === index}
+            tabIndex={i === index ? 0 : -1}
+            disabled={disabled}
+            className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font-family:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-pointer [color:var(--rs-ink)] aria-checked:cursor-default group-data-[draggable]:aria-checked:cursor-grab group-data-[held]:cursor-grabbing data-[pressed]:[transform:scale(0.96)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:[outline-color:var(--rs-thumb)]"
+            onPointerDown={e => handlePointerDown(e, i)}
+            onKeyDown={handleKeyDown}
           >
             {item.icon}
             {item.label}
-          </span>
+          </button>
         ))}
-      </motion.div>
+        <div className="rs-thumb pointer-events-none absolute inset-0 [filter:drop-shadow(var(--rs-thumb-shadow))]" aria-hidden="true">
+        <m.div
+          className="pointer-events-none absolute inset-[var(--rs-inset)] grid grid-flow-col auto-cols-auto group-data-[equal]:auto-cols-[minmax(0,1fr)] [background:var(--rs-thumb)] [color:var(--rs-ink-active)]"
+          style={{ clipPath }}
+        >
+          {list.map(item => (
+            <span
+              key={item.value}
+              className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font-family:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-default [color:inherit]"
+            >
+              {item.icon}
+              {item.label}
+            </span>
+          ))}
+        </m.div>
+        </div>
       </div>
-    </div>
+    </LazyMotion>
   );
 };
 

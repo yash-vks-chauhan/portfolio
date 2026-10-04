@@ -1,6 +1,7 @@
 // The ⌘K command bar (cmdk in a Radix dialog): search projects and pages, and run actions
-// (copy email, download résumé, switch theme). Opens with ⌘K / Ctrl+K, from any [data-command] button,
-// or from openCommandBar(). Radix traps focus while it's open; Esc closes it and focus returns to where it was.
+// (copy email, download résumé, switch theme). The Shell island opens it (⌘K / Ctrl+K, any [data-command] button,
+// openCommandBar()) and loads this module on first use. Radix traps focus while it's open; Esc closes it and focus
+// returns to where it was.
 import { useEffect, useState, type ReactNode } from 'react';
 import { Command } from 'cmdk';
 import {
@@ -21,9 +22,8 @@ import { projects } from '../../content/projects';
 import { site } from '../../content/site';
 import { glyph } from '../ui/glyphs';
 import { Brand } from '../ui/Brand';
-import { COMMAND_EVENT } from '../../lib/events';
+import { requestCopy } from '../../lib/events';
 import { currentTheme, setTheme } from '../../lib/theme';
-import { copyEmail } from '../../lib/copy';
 
 interface Entry {
   id: string;
@@ -55,37 +55,12 @@ export function commandFilter(value: string, search: string, keywords?: string[]
 const projectHint = (slug: string, href: string) =>
   href.startsWith('/research') ? 'Research' : ['glassbox', 'pulse', 'gridee', 'ems-research'].includes(slug) ? 'Case study' : 'Project';
 
-export default function CommandBar() {
-  const [open, setOpen] = useState(false);
+export default function CommandBar({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const [theme, setThemeState] = useState<'light' | 'dark'>('light');
-
   useEffect(() => {
-    const show = () => {
-      setThemeState(currentTheme());
-      setOpen(true);
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        if (open) setOpen(false);
-        else show();
-      }
-    };
-    const onClick = (e: MouseEvent) => {
-      if ((e.target as Element | null)?.closest('[data-command]')) {
-        e.preventDefault();
-        show();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    window.addEventListener(COMMAND_EVENT, show);
-    document.addEventListener('click', onClick);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      window.removeEventListener(COMMAND_EVENT, show);
-      document.removeEventListener('click', onClick);
-    };
+    if (open) setThemeState(currentTheme());
   }, [open]);
+  const setOpen = onOpenChange;
 
   const close = () => setOpen(false);
   const run = (fn: () => void) => () => {
@@ -114,7 +89,7 @@ export default function CommandBar() {
   ];
 
   const actionEntries: Entry[] = [
-    { id: 'copy-email', label: 'Copy email', keywords: ['contact', site.email], icon: <Copy size={16} strokeWidth={2} aria-hidden="true" />, run: () => void copyEmail() },
+    { id: 'copy-email', label: 'Copy email', keywords: ['contact', site.email], icon: <Copy size={16} strokeWidth={2} aria-hidden="true" />, run: () => requestCopy({ kind: 'email' }) },
     { id: 'resume', label: 'Download résumé', keywords: ['resume', 'cv', 'pdf'], icon: <Download size={16} strokeWidth={2} aria-hidden="true" />, run: go(site.links.resume) },
     { id: 'email', label: 'Email me', keywords: ['contact', 'mail'], icon: <Mail size={16} strokeWidth={2} aria-hidden="true" />, run: go(`mailto:${site.email}`) },
     theme === 'dark'

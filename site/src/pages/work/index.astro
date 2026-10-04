@@ -34,6 +34,7 @@ const legend: { status: Status; text: string }[] = [
   title="Work · Yash Chauhan"
   description="Everything Yash Chauhan has built: GlassBox, Pulse, Gridee, the IIT Madras EMS research and more, each with the one thing it guarantees and an honest status."
   section="work"
+  ogImage="/og/work.png"
 >
   <div id="work-list" data-filter="all">
     <header class="work-header">
@@ -48,13 +49,22 @@ const legend: { status: Status; text: string }[] = [
     <section aria-label="Featured" class="work-featured" data-featured>
       <div class="work-featured-grid">
         {
-          featured.map(({ project, kicker, image, alt, tone }) => (
+          featured.map(({ project, kicker, image, alt, tone }, i) => (
             <a class:list={['work-feature lift', `is-${tone}`]} href={project.href} data-cats={project.categories.join(' ')}>
               <span class="work-feature-kicker">{kicker}</span>
               <span class="work-feature-name">{project.name}</span>
               <span class="work-feature-text">{project.guarantee}</span>
               <span class="work-feature-shot">
-                <Picture src={image} formats={['avif', 'webp']} widths={[480, 960]} sizes="(max-width: 767px) 340px, 520px" alt={alt} class="work-feature-img" loading="lazy" />
+                <Picture
+                  src={image}
+                  formats={['avif', 'webp']}
+                  widths={[480, 960]}
+                  sizes="(max-width: 767px) 340px, 520px"
+                  alt={alt}
+                  class="work-feature-img"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
+                />
               </span>
             </a>
           ))

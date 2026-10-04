@@ -1,5 +1,6 @@
 // EMS operational drift (IIT Madras), on the GlassBox template. Facts: the README's EMS research deep-dive and
-// design/starter/content. The manuscript is under review, so no title or venue, and only aggregate findings; the
+// design/starter/content. The manuscript isn't published (its venue and review status are still to confirm), so no
+// title or venue, and only aggregate findings; the
 // record count stays a [placeholder] until the PI agrees it can be shown.
 import type { CaseStudy } from './types';
 
@@ -13,14 +14,14 @@ export const ems: CaseStudy = {
   leadPhone: 'IIT Madras research',
   icon: { glyph: 'ambulance', gradient: 'radial-gradient(120% 120% at 20% 0%, #FFA3A3 0%, rgba(255,163,163,0) 55%), linear-gradient(150deg, #FF6B6B 0%, #D7263D 60%, #8A1023 100%)' },
   actions: [{ label: 'All research', href: '/research', kind: 'case' }],
-  note: 'A manuscript under review: no title or venue until the decision, and aggregate results only.',
+  note: 'A manuscript, not yet published: no title or venue for now, and aggregate results only.',
   stats: [
     { label: 'Service legs', labelPhone: 'Legs', value: '5', note: 'response to return' },
     { label: 'Data', value: '5+ years', note: 'dispatch and road works', notePhone: 'dispatch data' },
     { label: 'Quality checks', labelPhone: 'Checks', value: '100+', note: 'on the raw data', notePhone: 'data quality' },
     { label: 'Model stages', labelPhone: 'Stages', value: '3', note: 'GNN, VAE, XGBoost' },
     { label: 'Equity', value: 'CBI', note: 'Composite Burden Index', notePhone: 'burden index' },
-    { label: 'Authorship', labelPhone: 'Author', value: '3rd of 3', note: 'manuscript in review', notePhone: 'in review' },
+    { label: 'Authorship', labelPhone: 'Author', value: '3rd of 3', note: 'manuscript', notePhone: 'manuscript' },
   ],
   summary: {
     icon: 'ambulance',
@@ -101,7 +102,7 @@ export const ems: CaseStudy = {
       title: 'Findings',
       phone: 3,
       numbered: true,
-      intro: 'Aggregate findings from the manuscript, which is under review.{{cite:ems-manuscript}}',
+      intro: 'Aggregate findings from the manuscript, which isn’t published yet.{{cite:ems-manuscript}}',
       items: [
         { text: 'Neonatal and paediatric cases bear the highest burden on the response and return legs.' },
         { text: 'Behavioural cases bear it at hospital handover.' },
@@ -127,7 +128,7 @@ export const ems: CaseStudy = {
       tone: 'warn',
       items: [
         { text: 'Government data: only aggregate results are shown, and only what the PI agrees to.' },
-        { text: 'The manuscript is under review; its title and venue come after the decision.' },
+        { text: 'The manuscript isn’t published yet; its title and venue come later.' },
         { text: '[What you’d do differently]', placeholder: true },
       ],
     },
@@ -139,7 +140,7 @@ export const ems: CaseStudy = {
       phone: 'more',
       items: [
         { status: 'Planned', text: 'Add aggregate charts and district maps once the PI confirms what can be shown.' },
-        { status: 'Planned', text: 'Name the venue and link the paper after the review decision.' },
+        { status: 'Planned', text: 'Name the venue and link the paper once it’s published.' },
       ],
     },
   ],
@@ -147,7 +148,7 @@ export const ems: CaseStudy = {
     { label: 'Role', value: 'Research intern · third of three authors', valuePhone: 'Intern · 3rd of 3 authors', phone: true },
     { label: 'Where', value: 'IIT Madras', phone: true },
     { label: 'Timeline', value: 'Mar 2025 – Mar 2026', phone: true },
-    { label: 'Status', value: 'Manuscript under review', phone: true },
+    { label: 'Status', value: 'Manuscript, not yet published', valuePhone: 'Manuscript', phone: true },
     { label: 'Stack', value: 'Python · GraphSAGE · VAE · XGBoost · SHAP', valuePhone: 'Python · GraphSAGE · XGBoost' },
     { label: 'Data', value: 'Tamil Nadu 108 ambulance service' },
     { label: 'Records', value: '[Record count, once the PI agrees it can be shown]' },

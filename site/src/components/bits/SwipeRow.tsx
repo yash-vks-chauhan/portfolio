@@ -8,10 +8,11 @@
  * the row's side padding reads --sr-pl / --sr-pr (default 16 px); `height="auto"` lets the row grow with its content
  * from a minimum of --sr-min (rows that don't collapse only). Buttons inherit only the font family (Tailwind v4 ordered
  * the original `font: inherit` after the text size, resetting it).
+ * Motion's slim `m` component draws it, with only the DOM renderer loaded (LazyMotion + domMin).
  */
 
 import React, { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 'motion/react';
+import { animate, LazyMotion, domMin, m, useMotionValue, useReducedMotion, useTransform } from 'motion/react';
 import { Trash2 } from 'lucide-react';
 
 const HYST = 10;
@@ -401,103 +402,105 @@ const SwipeRow: React.FC<SwipeRowProps> = ({
 
   const railId = `${uid}-rail`;
   return (
-    <div
-      ref={root}
-      role="group"
-      aria-label={label}
-      className={`group relative overflow-hidden [height:var(--sr-h)] [min-height:var(--sr-min,0px)] [transition:height_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),margin-bottom_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),opacity_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1)] data-[phase=collapsing]:h-0! data-[phase=collapsing]:mb-0! data-[phase=collapsing]:opacity-0 data-[disabled]:pointer-events-none data-[disabled]:opacity-55${className ? ` ${className}` : ''}`}
-      data-direction={direction}
-      data-open={open ? '' : undefined}
-      data-phase={phase}
-      data-disabled={disabled ? '' : undefined}
-      style={
-        {
-          '--sr-h': height === 'auto' ? 'auto' : `${height}px`,
-          '--sr-r': `${radius}px`,
-          '--sr-a': `${A}px`,
-          '--sr-row': rowColor,
-          '--sr-text': textColor,
-          '--sr-drawer': drawerColor,
-          '--sr-on-drawer': onColor(drawerColor),
-          '--sr-action': actionColor,
-          '--sr-on-action': onColor(actionColor),
-          '--sr-collapse': `${collapseMs}ms`,
-          ...style
-        } as CSSProperties
-      }
-    >
-      <div className="relative overflow-hidden [height:var(--sr-h)] [min-height:var(--sr-min,0px)] [border-radius:var(--sr-r)] [background:var(--sr-row)]">
-        <motion.div
-          id={railId}
-          className="absolute inset-0 [background:var(--sr-drawer)]"
-          style={{ transform: railXf }}
-          inert={!open || undefined}
-          aria-hidden={!open}
-        >
-          {actions.slice(1).map((a, i) => (
-            <button
-              key={a.id}
-              type="button"
-              className="group/action absolute top-0 grid h-full cursor-pointer touch-manipulation place-items-center border-0 p-0 [font-family:inherit] outline-none select-none [width:var(--sr-a)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] after:pointer-events-none after:absolute after:inset-0 after:bg-white after:opacity-0 after:content-[''] [@media(hover:hover)_and_(pointer:fine)]:after:[transition:opacity_150ms_ease] [@media(hover:hover)_and_(pointer:fine)]:hover:after:opacity-[0.08]"
-              onClick={e => act(a, e)}
-              style={
-                s < 0
-                  ? { right: (i + 1) * A, background: a.color ?? drawerColor, color: onColor(a.color ?? drawerColor) }
-                  : { left: (i + 1) * A, background: a.color ?? drawerColor, color: onColor(a.color ?? drawerColor) }
-              }
-            >
-              <span className="grid justify-items-center gap-1 text-[11px] leading-none font-medium tracking-[0.01em] [transition:transform_160ms_cubic-bezier(0.23,1,0.32,1)] group-active/action:scale-[0.97] motion-reduce:group-active/action:scale-100">
-                {a.icon ? <span className="inline-flex">{a.icon}</span> : null}
-                <span>{a.label}</span>
-              </span>
-            </button>
-          ))}
-          {primary ? (
-            <motion.div
-              className="absolute top-0 h-full w-full [background:var(--sr-action)] group-data-[direction=left]:[left:calc(100%-var(--sr-a))] group-data-[direction=right]:[right:calc(100%-var(--sr-a))]"
-              style={{ transform: blockXf }}
-            >
-              <motion.button
+    <LazyMotion features={domMin}>
+      <div
+        ref={root}
+        role="group"
+        aria-label={label}
+        className={`group relative overflow-hidden [height:var(--sr-h)] [min-height:var(--sr-min,0px)] [transition:height_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),margin-bottom_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1),opacity_var(--sr-collapse)_cubic-bezier(0.23,1,0.32,1)] data-[phase=collapsing]:h-0! data-[phase=collapsing]:mb-0! data-[phase=collapsing]:opacity-0 data-[disabled]:pointer-events-none data-[disabled]:opacity-55${className ? ` ${className}` : ''}`}
+        data-direction={direction}
+        data-open={open ? '' : undefined}
+        data-phase={phase}
+        data-disabled={disabled ? '' : undefined}
+        style={
+          {
+            '--sr-h': height === 'auto' ? 'auto' : `${height}px`,
+            '--sr-r': `${radius}px`,
+            '--sr-a': `${A}px`,
+            '--sr-row': rowColor,
+            '--sr-text': textColor,
+            '--sr-drawer': drawerColor,
+            '--sr-on-drawer': onColor(drawerColor),
+            '--sr-action': actionColor,
+            '--sr-on-action': onColor(actionColor),
+            '--sr-collapse': `${collapseMs}ms`,
+            ...style
+          } as CSSProperties
+        }
+      >
+        <div className="relative overflow-hidden [height:var(--sr-h)] [min-height:var(--sr-min,0px)] [border-radius:var(--sr-r)] [background:var(--sr-row)]">
+          <m.div
+            id={railId}
+            className="absolute inset-0 [background:var(--sr-drawer)]"
+            style={{ transform: railXf }}
+            inert={!open || undefined}
+            aria-hidden={!open}
+          >
+            {actions.slice(1).map((a, i) => (
+              <button
+                key={a.id}
                 type="button"
-                className="group/action absolute top-0 grid h-full cursor-pointer touch-manipulation place-items-center border-0 bg-transparent p-0 [font-family:inherit] outline-none select-none [width:var(--sr-a)] [color:var(--sr-on-action)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] group-data-[direction=left]:left-0 group-data-[direction=right]:right-0 after:pointer-events-none after:absolute after:inset-0 after:bg-white after:opacity-0 after:content-[''] [@media(hover:hover)_and_(pointer:fine)]:after:[transition:opacity_150ms_ease] [@media(hover:hover)_and_(pointer:fine)]:hover:after:opacity-[0.08]"
-                style={{ transform: glyphXf }}
-                onClick={e => act(primary, e)}
+                className="group/action absolute top-0 grid h-full cursor-pointer touch-manipulation place-items-center border-0 p-0 [font-family:inherit] outline-none select-none [width:var(--sr-a)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] after:pointer-events-none after:absolute after:inset-0 after:bg-white after:opacity-0 after:content-[''] [@media(hover:hover)_and_(pointer:fine)]:after:[transition:opacity_150ms_ease] [@media(hover:hover)_and_(pointer:fine)]:hover:after:opacity-[0.08]"
+                onClick={e => act(a, e)}
+                style={
+                  s < 0
+                    ? { right: (i + 1) * A, background: a.color ?? drawerColor, color: onColor(a.color ?? drawerColor) }
+                    : { left: (i + 1) * A, background: a.color ?? drawerColor, color: onColor(a.color ?? drawerColor) }
+                }
               >
                 <span className="grid justify-items-center gap-1 text-[11px] leading-none font-medium tracking-[0.01em] [transition:transform_160ms_cubic-bezier(0.23,1,0.32,1)] group-active/action:scale-[0.97] motion-reduce:group-active/action:scale-100">
-                  <span className="inline-flex">
-                    {primary.icon ?? <Trash2 size={20} strokeWidth={2} aria-hidden="true" />}
-                  </span>
-                  <span>{primary.label}</span>
+                  {a.icon ? <span className="inline-flex">{a.icon}</span> : null}
+                  <span>{a.label}</span>
                 </span>
-              </motion.button>
-            </motion.div>
-          ) : null}
-        </motion.div>
-        <motion.div
-          ref={surface}
-          className="relative z-[1] flex h-full [min-height:var(--sr-min,0px)] touch-pan-y items-center gap-3 pr-[var(--sr-pr,16px)] pl-[var(--sr-pl,16px)] [background:var(--sr-row)] [color:var(--sr-text)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] [@media(hover:hover)_and_(pointer:fine)]:cursor-grab [@media(hover:hover)_and_(pointer:fine)]:group-data-[dragging]:cursor-grabbing [@media(pointer:coarse)]:select-none group-data-[dragging]:select-none group-data-[dragging]:[&_*]:select-none"
-          style={{ transform: surfaceXf }}
-          onPointerDown={down}
-        >
-          {children}
-          <button
-            type="button"
-            className="absolute top-1/2 m-0 h-px w-px overflow-hidden border-0 bg-transparent p-0 [font-family:inherit] outline-none [clip-path:inset(50%)] [color:var(--sr-text)] group-data-[direction=left]:right-3 group-data-[direction=right]:left-3 focus-visible:h-6 focus-visible:w-auto focus-visible:-translate-y-1/2 focus-visible:overflow-visible focus-visible:rounded-xl focus-visible:px-2.5 focus-visible:text-xs focus-visible:whitespace-nowrap focus-visible:[clip-path:none] focus-visible:[background:color-mix(in_srgb,var(--sr-text)_12%,transparent)]"
-            tabIndex={disabled ? -1 : 0}
-            aria-expanded={open}
-            aria-controls={railId}
-            aria-keyshortcuts={s < 0 ? 'ArrowLeft' : 'ArrowRight'}
-            onKeyDown={onToggleKey}
-            onClick={onToggleClick}
+              </button>
+            ))}
+            {primary ? (
+              <m.div
+                className="absolute top-0 h-full w-full [background:var(--sr-action)] group-data-[direction=left]:[left:calc(100%-var(--sr-a))] group-data-[direction=right]:[right:calc(100%-var(--sr-a))]"
+                style={{ transform: blockXf }}
+              >
+                <m.button
+                  type="button"
+                  className="group/action absolute top-0 grid h-full cursor-pointer touch-manipulation place-items-center border-0 bg-transparent p-0 [font-family:inherit] outline-none select-none [width:var(--sr-a)] [color:var(--sr-on-action)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] group-data-[direction=left]:left-0 group-data-[direction=right]:right-0 after:pointer-events-none after:absolute after:inset-0 after:bg-white after:opacity-0 after:content-[''] [@media(hover:hover)_and_(pointer:fine)]:after:[transition:opacity_150ms_ease] [@media(hover:hover)_and_(pointer:fine)]:hover:after:opacity-[0.08]"
+                  style={{ transform: glyphXf }}
+                  onClick={e => act(primary, e)}
+                >
+                  <span className="grid justify-items-center gap-1 text-[11px] leading-none font-medium tracking-[0.01em] [transition:transform_160ms_cubic-bezier(0.23,1,0.32,1)] group-active/action:scale-[0.97] motion-reduce:group-active/action:scale-100">
+                    <span className="inline-flex">
+                      {primary.icon ?? <Trash2 size={20} strokeWidth={2} aria-hidden="true" />}
+                    </span>
+                    <span>{primary.label}</span>
+                  </span>
+                </m.button>
+              </m.div>
+            ) : null}
+          </m.div>
+          <m.div
+            ref={surface}
+            className="relative z-[1] flex h-full [min-height:var(--sr-min,0px)] touch-pan-y items-center gap-3 pr-[var(--sr-pr,16px)] pl-[var(--sr-pl,16px)] [background:var(--sr-row)] [color:var(--sr-text)] [-webkit-touch-callout:none] [-webkit-tap-highlight-color:transparent] [@media(hover:hover)_and_(pointer:fine)]:cursor-grab [@media(hover:hover)_and_(pointer:fine)]:group-data-[dragging]:cursor-grabbing [@media(pointer:coarse)]:select-none group-data-[dragging]:select-none group-data-[dragging]:[&_*]:select-none"
+            style={{ transform: surfaceXf }}
+            onPointerDown={down}
           >
-            {n} {n === 1 ? 'action' : 'actions'}
-          </button>
-        </motion.div>
+            {children}
+            <button
+              type="button"
+              className="absolute top-1/2 m-0 h-px w-px overflow-hidden border-0 bg-transparent p-0 [font-family:inherit] outline-none [clip-path:inset(50%)] [color:var(--sr-text)] group-data-[direction=left]:right-3 group-data-[direction=right]:left-3 focus-visible:h-6 focus-visible:w-auto focus-visible:-translate-y-1/2 focus-visible:overflow-visible focus-visible:rounded-xl focus-visible:px-2.5 focus-visible:text-xs focus-visible:whitespace-nowrap focus-visible:[clip-path:none] focus-visible:[background:color-mix(in_srgb,var(--sr-text)_12%,transparent)]"
+              tabIndex={disabled ? -1 : 0}
+              aria-expanded={open}
+              aria-controls={railId}
+              aria-keyshortcuts={s < 0 ? 'ArrowLeft' : 'ArrowRight'}
+              onKeyDown={onToggleKey}
+              onClick={onToggleClick}
+            >
+              {n} {n === 1 ? 'action' : 'actions'}
+            </button>
+          </m.div>
+        </div>
+        <span className="sr-only" aria-live="polite">
+          {say}
+        </span>
       </div>
-      <span className="sr-only" aria-live="polite">
-        {say}
-      </span>
-    </div>
+    </LazyMotion>
   );
 };
 

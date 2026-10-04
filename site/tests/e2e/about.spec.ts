@@ -12,7 +12,7 @@ test.describe('experience', () => {
   test('desktop: a row selects into the detail sheet, and its citation opens the source', async ({ page }, info) => {
     test.skip(info.project.name !== 'desktop', 'the docked sheet is the desktop layout');
     await page.goto('/#about');
-    await hydrated(page, 'ExperienceSection', 'SourceSheet');
+    await hydrated(page, 'ExperienceSection', 'Shell');
     const detail = page.getByRole('complementary', { name: /details$/ });
     await expect(exp(page).getByRole('link', { name: /^Gridee/ }).first()).toHaveAttribute('aria-current', 'true');
     await expect(detail).toHaveAccessibleName('Gridee details');
@@ -45,7 +45,7 @@ test.describe('experience', () => {
   test('phones: a row opens a bottom sheet; Esc closes it and focus returns to the row', async ({ page }, info) => {
     test.skip(info.project.name !== 'phone', 'the bottom sheet is the phone layout');
     await page.goto('/#about');
-    await hydrated(page, 'ExperienceSection', 'SourceSheet');
+    await hydrated(page, 'ExperienceSection', 'Shell');
     await expect(page.getByRole('link', { name: /AWS Certified/ })).toBeHidden();
     const row = exp(page).getByRole('link', { name: /^IIT Madras/ });
     await row.click();
@@ -104,7 +104,7 @@ test.describe('contact', () => {
   test('Copy copies the email and shows the toast', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto('/#contact');
-    await hydrated(page, 'Toaster');
+    await hydrated(page, 'Shell');
     await page.getByRole('button', { name: 'Copy email address' }).click();
     await expect(page.getByRole('status').filter({ hasText: 'Email copied' })).toBeVisible();
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('yash.vks.chauhan@gmail.com');

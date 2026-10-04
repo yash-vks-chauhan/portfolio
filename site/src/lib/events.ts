@@ -4,6 +4,14 @@
 export const SOURCE_EVENT = 'glass:source';
 /** Open the ⌘K command bar. */
 export const COMMAND_EVENT = 'glass:command';
+/** Copy something and confirm with a toast: `requestCopy({ kind: 'email' })`. */
+export const COPY_EVENT = 'glass:copy';
+
+export type CopyRequest = { kind: 'email' } | { kind: 'text'; text: string; message: string } | { kind: 'share' };
+
+export function requestCopy(req: CopyRequest): void {
+  window.dispatchEvent(new CustomEvent<CopyRequest>(COPY_EVENT, { detail: req }));
+}
 
 export interface SourceRequest {
   id: string;

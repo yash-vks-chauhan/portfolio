@@ -1,0 +1,31 @@
+---
+// JSON-LD: a ProfilePage whose main entity is the Person, with the profiles they own (sameAs). Placeholder links
+// (the LinkedIn handle until it's filled in) are left out rather than published broken.
+import { site, isPlaceholder } from '../../content/site';
+import { toolkit } from '../../content/toolkit';
+import { pagePath } from '../../lib/url';
+
+const url = new URL('/', Astro.site).href;
+const sameAs = [site.links.github, site.links.linkedin].filter((u) => !isPlaceholder(u));
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: new URL(pagePath(Astro.url.pathname), Astro.site).href,
+  mainEntity: {
+    '@type': 'Person',
+    '@id': `${url}#person`,
+    name: site.name,
+    url,
+    jobTitle: site.role,
+    description: site.bio,
+    email: `mailto:${site.email}`,
+    address: { '@type': 'PostalAddress', addressLocality: site.city, addressCountry: 'IN' },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'SRM Institute of Science and Technology' },
+    worksFor: { '@type': 'Organization', name: 'Gridee', url: 'https://www.gridee.in/' },
+    knowsAbout: toolkit.map((t) => t.name),
+    sameAs,
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

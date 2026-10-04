@@ -1,61 +1,31 @@
-// The source sheet: one vaul Drawer for the whole page. Any element with data-cite="<source id>" opens it
-// (number markers, widgets, citation chips), and so does openSource() from inside other islands.
+// The source sheet: one vaul Drawer for the whole page. The Shell island opens it for any element with
+// data-cite="<source id>" (number markers, widgets, citation chips) or openSource(), and loads this module on first use.
 // Markers are links to the page's footnote, so without JavaScript they still lead to the source.
 // vaul (Radix Dialog underneath) traps focus and closes on Esc; focus goes back to the marker.
-import { useCallback, useEffect, useRef, useState } from 'react';
 import { Drawer } from 'vaul';
 import { ArrowUpRight, CircleCheck, X } from 'lucide-react';
 import { sourceById } from '../../content/sources';
 import { formatChecked } from '../../lib/citations';
-import { SOURCE_EVENT, type SourceRequest } from '../../lib/events';
+import type { SourceRequest } from '../../lib/events';
 
 const isPlaceholder = (s?: string) => !s || /\[[^\]]+\]/.test(s);
 
-export default function SourceSheet() {
-  const [open, setOpen] = useState(false);
-  const [req, setReq] = useState<SourceRequest | null>(null);
-  const trigger = useRef<HTMLElement | null>(null);
-
-  const show = useCallback((r: SourceRequest) => {
-    if (!sourceById[r.id]) return;
-    trigger.current = r.trigger ?? (document.activeElement as HTMLElement | null);
-    setReq(r);
-    setOpen(true);
-  }, []);
-
-  useEffect(() => {
-    const onEvent = (e: Event) => show((e as CustomEvent<SourceRequest>).detail);
-    const onClick = (e: MouseEvent) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      const el = (e.target as Element | null)?.closest<HTMLElement>('[data-cite]');
-      if (!el) return;
-      const id = el.dataset.cite;
-      if (!id || !sourceById[id]) return;
-      e.preventDefault();
-      show({ id, n: el.dataset.n ? Number(el.dataset.n) : undefined, trigger: el });
-    };
-    window.addEventListener(SOURCE_EVENT, onEvent);
-    document.addEventListener('click', onClick);
-    return () => {
-      window.removeEventListener(SOURCE_EVENT, onEvent);
-      document.removeEventListener('click', onClick);
-    };
-  }, [show]);
-
+export default function SourceSheet({ req, open, onOpenChange }: { req: SourceRequest | null; open: boolean; onOpenChange: (open: boolean) => void }) {
+  const setOpen = onOpenChange;
   const source = req ? sourceById[req.id] : null;
   const checked = source && !isPlaceholder(source.checked) ? formatChecked(source.checked) : null;
   const label = req?.n ? `Source ${req.n}` : 'Source';
 
   return (
-    <Drawer.Root open={open} onOpenChange={setOpen}>
+    <Drawer.Root open={open} onOpenChange={setOpen} autoFocus>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 z-[60] bg-black/25" />
         <Drawer.Content
           className="fixed inset-x-0 bottom-0 z-[60] mx-auto max-w-xl rounded-t-[26px] bg-card px-6 pt-2.5 pb-8 text-label outline-none elev-floating max-md:pb-[calc(32px+env(safe-area-inset-bottom))]"
           onCloseAutoFocus={(e) => {
-            if (trigger.current?.isConnected) {
+            if (req?.trigger?.isConnected) {
               e.preventDefault();
-              trigger.current.focus({ preventScroll: true });
+              req.trigger.focus({ preventScroll: true });
             }
           }}
         >

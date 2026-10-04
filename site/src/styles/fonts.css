@@ -1,12 +1,39 @@
 /* Inter (SIL Open Font License), self-hosted from @fontsource-variable/inter.
    Only browsers without SF Pro use it: the token stack lists -apple-system first, so Apple devices never download it.
    Variable weight and optical size (opsz 14–32), like the Google Fonts URL in the design. Latin subset only:
-   the odd glyph outside it (₹, →) comes from the system font. */
+   the odd glyph outside it (₹, →) comes from the system font.
+   `optional`: if the file isn't there within about 100 ms (a first visit on a slow connection), the page keeps the
+   stand-in below for that view instead of re-flowing when Inter arrives (no layout shift); the file is cached, so the
+   next page uses Inter. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
   font-weight: 100 900;
   src: url('../../node_modules/@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2') format('woff2');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* The stand-in: Arial (Liberation Sans on Linux), resized and re-spaced to Inter's metrics, so a page that keeps it
+   looks and wraps close to Inter. The sizes were measured in Chromium on the site's own text: Inter's regular text at 15–17 px
+   is about 6% wider than Arial, and its semibold headings (optical size 32) about 6% narrower than Arial Bold. The
+   vertical metrics are Inter's (ascent 1984, descent 494, no line gap, on 2048 units) divided by each face's size
+   adjustment, as the descriptors expect. site.css puts "Inter Fallback" right after "Inter" in the font stacks. */
+@font-face {
+  font-family: 'Inter Fallback';
+  font-weight: 100 500;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans-Regular'), local('Helvetica');
+  size-adjust: 106%;
+  ascent-override: 91.39%;
+  descent-override: 22.75%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Inter Fallback';
+  font-weight: 600 900;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold'), local('Helvetica Bold');
+  size-adjust: 94%;
+  ascent-override: 103.06%;
+  descent-override: 25.66%;
+  line-gap-override: 0%;
 }

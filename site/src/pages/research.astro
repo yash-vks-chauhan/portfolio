@@ -1,0 +1,106 @@
+---
+// Research: the EMS work from the IIT Madras internship and the first-author manuscript under double-blind review.
+// There is no artboard for this page; it uses the system's parts (page header, cards, inset lists, the Research
+// folder from the home page). The double-blind manuscript shows no title, topic, venue name or PDF.
+import { ArrowRight, Check } from 'lucide-react';
+import Base from '../layouts/Base.astro';
+import Footer from '../components/shell/Footer.astro';
+import Rich from '../components/case/Rich.astro';
+import ResearchFolder from '../components/bits/ResearchFolder';
+import { StatusChip } from '../components/ui/StatusChip';
+import { glyph } from '../components/ui/glyphs';
+import { numberSources, footnotes } from '../lib/citations';
+import { projectBySlug } from '../content/projects';
+
+const n = numberSources(['iitm-internship', 'ems-manuscript']);
+const ems = projectBySlug['ems-research'];
+const ieee = projectBySlug['ieee-manuscript'];
+const Ambulance = glyph('ambulance');
+const Lock = glyph('lock');
+
+const rules = [
+  'No title, topic or venue for a manuscript before it’s accepted.',
+  'Nothing that could reveal an author while a paper is under double-blind review.',
+  'Aggregate results only from the EMS work: the data is government data.',
+  'Listed as manuscripts, never as publications.',
+];
+---
+
+<Base
+  title="Research · Yash Chauhan"
+  description="Yash Chauhan’s research: EMS operational drift and equity from an IIT Madras internship (graph embeddings, a VAE and counterfactual XGBoost), and a first-author manuscript under double-blind review at an IEEE conference."
+  section="research"
+  ogImage="/og/research.png"
+>
+  <header class="work-header research-hero">
+    <div class="min-w-0 flex-[1_1_480px]">
+      <p class="eyebrow">Research</p>
+      <h1 class="work-title">Two manuscripts, one I can’t name yet.</h1>
+      <p class="work-lead">One from my IIT Madras internship, one first-author paper under double-blind review. Neither is published, so neither is listed as a publication.</p>
+    </div>
+    <div class="max-md:hidden">
+      <ResearchFolder client:visible />
+    </div>
+  </header>
+
+  <section id="ems" aria-labelledby="ems-h" class="page-section">
+    <article class="page-card">
+      <div class="page-card-head">
+        <span class="page-card-icon" style={{ background: 'glyph' in ems.icon ? ems.icon.gradient : undefined }} aria-hidden="true">
+          <Ambulance size={26} strokeWidth={2} />
+        </span>
+        <span class="page-card-kicker">IIT Madras · third of three authors</span>
+        <StatusChip status={ems.status} className="ml-auto" />
+      </div>
+      <h2 id="ems-h" class="page-card-title">EMS operational drift</h2>
+      <p class="page-card-text">
+        <Rich
+          text="Tamil Nadu’s 108 ambulance service: graph embeddings, a VAE and counterfactual XGBoost separate real operational drift from context a district can’t control, then an equity check measures who bears the burden.{{cite:iitm-internship}}"
+          n={n}
+          where="the research page"
+        />
+      </p>
+      <ul class="card-chips" aria-label="Methods">
+        {ems.stack.map((s) => <li class="chip">{s}</li>)}
+      </ul>
+      <p class="page-card-note">
+        <Rich text="Aggregate findings only, and no title or venue until the manuscript is published.{{cite:ems-manuscript}}" n={n} where="the research page" />
+      </p>
+      <a href={ems.href} class="pill case-action-primary mt-6 self-start">
+        Read the case study<ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" />
+      </a>
+    </article>
+  </section>
+
+  <section id="ieee-manuscript" aria-labelledby="ieee-h" class="page-section page-section-tight">
+    <article class="page-card">
+      <div class="page-card-head">
+        <span class="page-card-icon" style={{ background: 'glyph' in ieee.icon ? ieee.icon.gradient : undefined }} aria-hidden="true">
+          <Lock size={24} strokeWidth={2} />
+        </span>
+        <span class="page-card-kicker">First author</span>
+        <StatusChip status={ieee.status} className="ml-auto" />
+      </div>
+      <h2 id="ieee-h" class="page-card-title">{ieee.name}</h2>
+      <p class="page-card-text">{ieee.guarantee} Its title, topic and paper stay off this site until the decision, as double-blind review asks.</p>
+    </article>
+  </section>
+
+  <section aria-labelledby="rules-h" class="page-section">
+    <h2 id="rules-h" class="case-h2-lg">How unpublished work is shown here</h2>
+    <ul class="plain-list">
+      {
+        rules.map((rule, i) => (
+          <li class:list={['plain-item', i > 0 && 'sep-top']}>
+            <span class="plain-icon tone-ok" aria-hidden="true">
+              <Check size={18} strokeWidth={2.2} />
+            </span>
+            <span>{rule}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <Footer slot="footer" notes={footnotes(n)} claim="page" sourcesHref="#footnotes" />
+</Base>

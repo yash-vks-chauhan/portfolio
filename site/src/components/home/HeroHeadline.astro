@@ -1,0 +1,24 @@
+---
+// The hero headline: React Bits BlurText's effect (words drop in through a blur, 80 ms apart, once), redone in CSS
+// (site.css .blur-word), so the first screen needs no script for it. The <h1> carries the full sentence as its name;
+// the words are hidden from screen readers. The words are inline blocks in ordinary text flow, separated by real
+// spaces, so lines wrap and centre exactly like plain text; on wide screens a line break sits where it's drawn.
+import { site } from '../../content/site';
+
+const words = site.headline.split(' ');
+const breakAfter = site.headlineLines[0].split(' ').length - 1;
+---
+
+<h1 class="blur-text hero-title" aria-label={site.headline}>
+  {
+    words.map((word, i) => (
+      <Fragment>
+        {i > 0 && ' '}
+        <span class="blur-word" aria-hidden="true" style={`--i: ${i}`}>
+          {word}
+        </span>
+        {i === breakAfter && <br class="max-md:hidden" />}
+      </Fragment>
+    ))
+  }
+</h1>

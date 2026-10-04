@@ -3,12 +3,13 @@
 // so a screen reader hears the projects when the selection changes.
 import { useState } from 'react';
 import GlassIcons from '../bits/GlassIcons';
-import { Brand } from '../ui/Brand';
+import { BrandSvg } from '../ui/BrandSvg';
+import type { BrandGlyph } from '../../lib/brand-icons';
 
 export interface ToolProp {
   name: string;
   shortName?: string;
-  icon: { brand: string; size: number } | { monogram: string; size: number };
+  icon: { brand: BrandGlyph; size: number } | { monogram: string; size: number };
   color: [string, string];
   glow: string;
   phone?: number;
@@ -31,7 +32,7 @@ export default function ToolkitGrid({ tools }: { tools: ToolProp[] }) {
           phoneOrder: t.phone,
           icon:
             'brand' in t.icon ? (
-              <Brand name={t.icon.brand} size={t.icon.size} />
+              <BrandSvg glyph={t.icon.brand} size={t.icon.size} />
             ) : (
               <span className="gi-mono" style={{ fontSize: t.icon.size }}>
                 {t.icon.monogram}

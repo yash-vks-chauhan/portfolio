@@ -24,6 +24,7 @@ test.describe('theme', () => {
     test.skip(info.project.name !== 'desktop', 'the switch lives in the desktop nav');
     await page.emulateMedia({ colorScheme: 'light' });
     await page.goto('/');
+    await hydrated(page, 'ThemeSwitch');
     await page.getByRole('button', { name: 'Dark appearance' }).first().click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     // Record the body colour at the earliest moment the parser reaches <body>, before any island runs.
@@ -81,7 +82,7 @@ test.describe('navigation', () => {
 test.describe('command bar', () => {
   test('⌘K opens it, it filters, Esc closes it', async ({ page }) => {
     await page.goto('/');
-    await hydrated(page, 'CommandBar');
+    await hydrated(page, 'Shell');
     const dialog = await openCommandBar(page);
     await page.keyboard.type('gridee');
     await expect(dialog.getByRole('option', { name: /Gridee/ })).toBeVisible();
@@ -93,7 +94,7 @@ test.describe('command bar', () => {
   test('"Copy email" copies and shows the toast', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto('/');
-    await hydrated(page, 'CommandBar', 'Toaster');
+    await hydrated(page, 'Shell');
     await openCommandBar(page);
     await page.keyboard.type('copy email');
     await page.keyboard.press('Enter');
@@ -105,7 +106,7 @@ test.describe('command bar', () => {
 test.describe('source sheet', () => {
   test('a source marker opens the sheet by keyboard; Esc closes it and focus returns', async ({ page }) => {
     await page.goto('/');
-    await hydrated(page, 'SourceSheet');
+    await hydrated(page, 'Shell');
     const marker = page.locator('[data-cite="glassbox-eval-v4"]').first();
     await marker.focus();
     await page.keyboard.press('Enter');

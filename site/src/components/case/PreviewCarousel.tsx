@@ -1,6 +1,7 @@
 // The "Preview" carousel (Embla): 560 px slides with a caption each, previous and next buttons; 300 px slides and
 // no buttons on phones, as drawn. Without JavaScript the strip scrolls natively (with snap points); under reduced
-// motion the buttons jump instead of gliding.
+// motion the buttons jump instead of gliding. The first slide is the page's largest image on load, so it loads
+// eagerly at high priority; the rest wait (lazy images on screen still load straight after layout).
 import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -56,9 +57,9 @@ export default function PreviewCarousel({ slides, variant = 'landscape', id = 'p
       </div>
       <div ref={viewportRef} className={`preview-viewport snap ${ready ? 'is-ready' : ''}`}>
         <div className={`preview-track preview-${variant}`}>
-          {slides.map((s) => (
+          {slides.map((s, i) => (
             <figure key={s.src} className="preview-slide">
-              <img src={s.src} srcSet={s.srcset} sizes={variant === 'portrait' ? '(max-width: 767px) 220px, 280px' : '(max-width: 767px) 300px, 560px'} width={s.width} height={s.height} alt={s.alt} loading="lazy" decoding="async" className="preview-img" style={{ aspectRatio: `${s.width} / ${s.height}` }} draggable={false} />
+              <img src={s.src} srcSet={s.srcset} sizes={variant === 'portrait' ? '(max-width: 767px) 220px, 280px' : '(max-width: 767px) 300px, 560px'} width={s.width} height={s.height} alt={s.alt} loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : undefined} decoding="async" className="preview-img" style={{ aspectRatio: `${s.width} / ${s.height}` }} draggable={false} />
               <figcaption className="preview-caption">
                 <strong>{s.title}</strong>{' '}
                 {s.captionPhone ? (

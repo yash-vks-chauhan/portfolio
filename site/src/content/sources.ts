@@ -251,10 +251,10 @@ export const sources: Source[] = [
     id: 'ems-manuscript',
     title: 'EMS manuscript',
     detail:
-      'An anonymised manuscript, third of three authors: five service legs, graph-neural-network stage embeddings, VAE anomaly detection, counterfactual XGBoost for anomaly magnitude and a Composite Burden Index for equity. Aggregate results only; title and venue after the review decision.',
-    where: 'Manuscript under review (available after the decision)',
+      'An anonymised manuscript, third of three authors: five service legs, graph-neural-network stage embeddings, VAE anomaly detection, counterfactual XGBoost for anomaly magnitude and a Composite Burden Index for equity. Aggregate results only; title and venue once it’s published.',
+    where: 'Unpublished manuscript (shared once it’s published)',
     checked: '[date checked]',
-    note: 'EMS manuscript (third of three authors), under review: method and aggregate findings only; title and venue after the decision.',
+    note: 'EMS manuscript (third of three authors), not yet published: method and aggregate findings only; title and venue later.',
     chip: 'EMS manuscript',
   },
   {

@@ -1,0 +1,136 @@
+---
+// About: a plain bio that search engines and assistants can quote, then every experience and education entry in
+// full (the home page's rows link here, to #gridee, #iitm, #hindalco and #srm), certifications and the contact links.
+// No artboard for this page; it reuses the Experience sheet's detail layout on solid cards.
+import { ArrowUpRight, Copy, FileText, Mail } from 'lucide-react';
+import Base from '../layouts/Base.astro';
+import Footer from '../components/shell/Footer.astro';
+import ProfileJsonLd from '../components/seo/ProfileJsonLd.astro';
+import { Detail } from '../components/home/ExperienceSection';
+import { Brand } from '../components/ui/Brand';
+import { glyph } from '../components/ui/glyphs';
+import { certRows, experienceDetails } from '../lib/experience';
+import { numberSources, footnotes } from '../lib/citations';
+import { site, isPlaceholder } from '../content/site';
+
+const n = numberSources(['gridee-downloads', 'iitm-internship', 'hindalco-report', 'srm-record']);
+const { work, education } = await experienceDetails(n, 'the about page');
+
+const elsewhere = [
+  { label: 'Email', value: site.email, href: `mailto:${site.email}`, icon: 'mail', copy: true },
+  { label: 'GitHub', value: site.display.github, href: site.links.github, icon: 'github' },
+  { label: 'LinkedIn', value: site.display.linkedin, href: site.links.linkedin, icon: 'linkedin' },
+  { label: 'Résumé', value: 'PDF', href: site.links.resume, icon: 'resume' },
+];
+---
+
+<Base
+  title="About · Yash Chauhan"
+  description={site.bio}
+  section="about"
+  ogType="profile"
+  ogImage="/og/about.png"
+>
+  <ProfileJsonLd slot="head" />
+  <header class="work-header">
+    <p class="eyebrow">About</p>
+    <h1 class="work-title">{site.name}</h1>
+    <p class="work-lead">{site.role} · {site.location}</p>
+    <p class="about-bio">{site.bio}</p>
+  </header>
+
+  <section aria-labelledby="experience-h" class="page-section">
+    <h2 id="experience-h" class="case-h2-lg">Experience</h2>
+    <div class="about-cards">
+      {
+        work.map((item, i) => (
+          <article id={item.id} class="page-card about-card" aria-label={item.title}>
+            <Detail item={item} iconLoading={i === 0 ? 'eager' : 'lazy'} />
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="education-h" class="page-section page-section-tight">
+    <h2 id="education-h" class="case-h2-lg">Education</h2>
+    <div class="about-cards">
+      {
+        education.map((item) => (
+          <article id={item.id} class="page-card about-card" aria-label={item.title}>
+            <Detail item={item} />
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="certifications" aria-labelledby="certifications-h" class="page-section page-section-tight">
+    <h2 id="certifications-h" class="case-h2-lg">Certifications</h2>
+    <div class="exp-list mt-5">
+      {
+        certRows.map((c, i) => {
+          const Glyph = 'glyph' in c.icon ? glyph(c.icon.glyph) : null;
+          return (
+            <a class="row exp-row exp-row-cert" href={c.url} target="_blank" rel="noreferrer">
+              <span class="exp-icon flex items-center justify-center text-white" style={{ background: c.icon.gradient, color: c.icon.color }} aria-hidden="true">
+                {'brand' in c.icon ? <Brand name={c.icon.brand} size={24} /> : Glyph && <Glyph size={22} strokeWidth={2} />}
+              </span>
+              <span class:list={['exp-row-body', i > 0 && 'border-t border-sep']}>
+                <span class="flex min-w-0 flex-1 flex-col">
+                  <span class="exp-row-title">{c.name}</span>
+                  <span class="exp-row-sub">
+                    {c.issuer} · {c.issued}
+                    {c.validUntil && ` – ${c.validUntil}`}
+                  </span>
+                </span>
+                <span class="flex text-label3" aria-hidden="true">
+                  <ArrowUpRight size={16} strokeWidth={2} />
+                </span>
+              </span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section id="elsewhere" aria-labelledby="elsewhere-h" class="page-section page-section-tight">
+    <h2 id="elsewhere-h" class="case-h2-lg">Elsewhere</h2>
+    <div class="exp-list mt-5">
+      {
+        elsewhere.map((e, i) => {
+          const external = /^https?:/.test(e.href);
+          return (
+            <div class="row exp-row exp-row-cert relative">
+              <span class="exp-icon flex items-center justify-center bg-fill2 text-link" aria-hidden="true">
+                {e.icon === 'mail' && <Mail size={20} strokeWidth={2} />}
+                {e.icon === 'github' && <Brand name="SiGithub" size={20} />}
+                {e.icon === 'linkedin' && <Brand name="SiLinkedin" size={18} />}
+                {e.icon === 'resume' && <FileText size={20} strokeWidth={2} />}
+              </span>
+              <span class:list={['exp-row-body', i > 0 && 'border-t border-sep']}>
+                <a href={e.href} class="card-stretch flex min-w-0 flex-1 flex-col" target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>
+                  <span class="exp-row-title">{e.label}</span>
+                  <span class:list={['exp-row-sub', !isPlaceholder(e.value) && 'text-link!']}>{e.value}</span>
+                </a>
+                {e.copy ? (
+                  <button type="button" class="contact-copy" data-copy-email aria-label="Copy email address">
+                    <Copy size={16} strokeWidth={2} aria-hidden="true" />
+                    <span class="max-md:hidden">Copy</span>
+                  </button>
+                ) : (
+                  <span class="flex text-label3" aria-hidden="true">
+                    <ArrowUpRight size={16} strokeWidth={2} />
+                  </span>
+                )}
+              </span>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <Footer slot="footer" notes={footnotes(n)} claim="page" sourcesHref="#footnotes" />
+</Base>

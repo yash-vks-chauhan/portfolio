@@ -2,6 +2,7 @@
 // More work: Autoscaler (In progress), Kalakraft (Live) and CT denoising (On hold) as an inset grouped list.
 import { ChevronRight } from 'lucide-react';
 import MoreWorkSwipe from './MoreWorkSwipe';
+import { brandGlyph } from '../ui/Brand';
 import { StatusChip } from '../ui/StatusChip';
 import { glyph } from '../ui/glyphs';
 import { projectBySlug } from '../../content/projects';
@@ -41,5 +42,9 @@ const line: Record<string, string> = {
   }
 </div>
 <div class="md:hidden">
-  <MoreWorkSwipe client:visible rows={rows.map(({ slug, name, tagline, status, href, icon, links }) => ({ slug, name, tagline, status, href, icon, links }))} />
+  <MoreWorkSwipe
+    client:visible
+    rows={rows.map(({ slug, name, tagline, status, href, icon, links }) => ({ slug, name, tagline, status, href, icon, links }))}
+    codeIcon={brandGlyph('SiGithub')}
+  />
 </div>

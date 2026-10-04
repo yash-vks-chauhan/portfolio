@@ -5,7 +5,7 @@ import { test, expect, type Page } from '@playwright/test';
 async function ready(page: Page) {
   await page.goto('/#ask');
   await page.waitForSelector('astro-island[component-url*="/AskPanel."]:not([ssr])', { state: 'attached' });
-  await page.waitForSelector('astro-island[component-url*="/SourceSheet."]:not([ssr])', { state: 'attached' });
+  await page.waitForSelector('astro-island[component-url*="/Shell."]:not([ssr])', { state: 'attached' });
 }
 
 const panel = (page: Page) => page.locator('.ask-panel');

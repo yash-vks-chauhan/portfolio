@@ -1,22 +1,14 @@
-// A Simple Icons glyph (CC0) in currentColor. Works statically in .astro files and inside islands.
-import { brandIcons } from '../../lib/brand-icons';
+// A Simple Icons glyph (CC0) in currentColor, by name. For .astro files (and the lazy command bar): it imports every
+// glyph, so islands use BrandSvg with the glyph passed in instead.
+import { brandIcons, type BrandGlyph } from '../../lib/brand-icons';
+import { BrandSvg } from './BrandSvg';
 
-export function Brand({ name, size = 16, className, title }: { name: string; size?: number; className?: string; title?: string }) {
+export function brandGlyph(name: string): BrandGlyph {
   const icon = brandIcons[name];
   if (!icon) throw new Error(`Unknown brand icon "${name}"`);
-  return (
-    <svg
-      viewBox={icon.viewBox}
-      width={size}
-      height={size}
-      fill="currentColor"
-      className={className}
-      role={title ? 'img' : undefined}
-      aria-hidden={title ? undefined : true}
-      aria-label={title}
-      focusable="false"
-    >
-      <path d={icon.d} />
-    </svg>
-  );
+  return icon;
+}
+
+export function Brand({ name, size = 16, className, title }: { name: string; size?: number; className?: string; title?: string }) {
+  return <BrandSvg glyph={brandGlyph(name)} size={size} className={className} title={title} />;
 }

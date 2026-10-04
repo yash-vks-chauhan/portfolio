@@ -38,7 +38,7 @@ for (const [path, name] of PAGES) {
 
 test('a citation opens its source sheet', async ({ page }) => {
   await page.goto('/work/glassbox');
-  await hydrated(page, 'SourceSheet');
+  await hydrated(page, 'Shell');
   await page.locator('.case-summary [data-cite]:visible').first().click();
   await expect(page.getByRole('dialog', { name: 'glassbox-eval-v4 report' })).toBeVisible();
   await page.keyboard.press('Escape');
@@ -100,7 +100,7 @@ test('share copies the link where there is no share sheet', async ({ page, conte
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.addInitScript(() => Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }));
   await page.goto('/work/pulse');
-  await hydrated(page, 'Toaster');
+  await hydrated(page, 'Shell');
   await page.getByRole('button', { name: /^Share this/ }).filter({ visible: true }).first().click();
   await expect(page.getByRole('status').filter({ hasText: 'Link copied' })).toBeVisible();
   expect(await page.evaluate(() => navigator.clipboard.readText())).toMatch(/\/work\/pulse$/);
@@ -110,7 +110,7 @@ test('the Reproduce block copies its command', async ({ page, context }, info) =
   test.skip(info.project.name !== 'desktop', 'the Reproduce block is desktop-only, as drawn');
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.goto('/work/glassbox#evaluation');
-  await hydrated(page, 'Toaster');
+  await hydrated(page, 'Shell');
   await page.getByRole('button', { name: 'Copy the command' }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Command copied' })).toBeVisible();
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('make eval');

@@ -1,11 +1,15 @@
 // Experience: inset grouped lists (Work, Education) next to a detail sheet for the selected row, Gridee shown open,
 // as drawn. Desktop keeps the sheet beside the lists and a row selects into it; phones open the same details in a
-// vaul bottom sheet. Rows are links to the About page, so without JavaScript they still lead to the details.
-// Certifications are plain links out to each credential, rendered by Astro and passed in as `children`.
-import { useRef, useState, type MouseEvent, type ReactNode } from 'react';
-import { Drawer } from 'vaul';
-import { ChevronRight, CircleCheck, X } from 'lucide-react';
-import { Brand } from '../ui/Brand';
+// vaul bottom sheet (ExperienceDrawer, loaded on the first tap). Rows are links to the About page, so without
+// JavaScript they still lead to the details. Certifications are plain links out to each credential, rendered by
+// Astro and passed in as `children`.
+import { lazy, Suspense, useRef, useState, type ElementType, type MouseEvent, type ReactNode } from 'react';
+import { ChevronRight, CircleCheck } from 'lucide-react';
+import { BrandSvg } from '../ui/BrandSvg';
+import type { BrandGlyph } from '../../lib/brand-icons';
+
+const loadDrawer = () => import('./ExperienceDrawer');
+const ExperienceDrawer = lazy(loadDrawer);
 
 export interface DetailCite {
   id: string;
@@ -26,16 +30,16 @@ export interface DetailItem {
   summary?: string;
   bullets: { text: string; cite?: DetailCite }[];
   stack?: string[];
-  links?: { label: string; href: string; kind?: string }[];
+  links?: { label: string; href: string; kind?: string; icon?: BrandGlyph }[];
   icon: { src: string } | { monogram: string; gradient: string; sizes: [number, number, number] };
   href: string;
 }
 
 const PHONE = '(max-width: 47.99rem)';
 
-function Icon({ item, size }: { item: DetailItem; size: 'row' | 'detail' }) {
+export function Icon({ item, size, loading = 'lazy' }: { item: DetailItem; size: 'row' | 'detail'; loading?: 'lazy' | 'eager' }) {
   const cls = size === 'row' ? 'exp-icon' : 'exp-icon-lg';
-  if ('src' in item.icon) return <img src={item.icon.src} alt="" className={cls} width={60} height={60} loading="lazy" decoding="async" />;
+  if ('src' in item.icon) return <img src={item.icon.src} alt="" className={cls} width={60} height={60} loading={loading} decoding="async" />;
   const [row, phone, detail] = item.icon.sizes;
   return (
     <span
@@ -48,12 +52,12 @@ function Icon({ item, size }: { item: DetailItem; size: 'row' | 'detail' }) {
   );
 }
 
-function Detail({ item, phone }: { item: DetailItem; phone?: boolean }) {
-  const Title = phone ? Drawer.Title : 'span';
+/** `Title` lets the phone sheet name its dialog with vaul's Drawer.Title; `iconLoading` is for a card on screen at load. */
+export function Detail({ item, Title = 'span', iconLoading }: { item: DetailItem; Title?: ElementType; iconLoading?: 'lazy' | 'eager' }) {
   return (
     <>
       <div className="flex items-center gap-3.5">
-        <Icon item={item} size="detail" />
+        <Icon item={item} size="detail" loading={iconLoading} />
         <div className="flex min-w-0 flex-col">
           <Title className="text-[22px] leading-[1.2] font-semibold tracking-normal">{item.title}</Title>
           <span className="text-[15px] tracking-[-0.012em] text-label2">{item.subtitle}</span>
@@ -100,8 +104,7 @@ function Detail({ item, phone }: { item: DetailItem; phone?: boolean }) {
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noreferrer' : undefined}
               >
-                {l.kind === 'play' && <Brand name="SiGoogleplay" size={15} />}
-                {l.kind === 'appstore' && <Brand name="SiAppstore" size={15} />}
+                {l.icon && <BrandSvg glyph={l.icon} size={15} />}
                 {l.label}
               </a>
             );
@@ -112,7 +115,17 @@ function Detail({ item, phone }: { item: DetailItem; phone?: boolean }) {
   );
 }
 
-function Rows({ items, selected, onPick }: { items: DetailItem[]; selected: string | null; onPick: (item: DetailItem, e: MouseEvent<HTMLAnchorElement>) => void }) {
+function Rows({
+  items,
+  selected,
+  onPick,
+  onPrefetch,
+}: {
+  items: DetailItem[];
+  selected: string | null;
+  onPick: (item: DetailItem, e: MouseEvent<HTMLAnchorElement>) => void;
+  onPrefetch: () => void;
+}) {
   return (
     <div className="exp-list">
       {items.map((item, i) => {
@@ -125,6 +138,7 @@ function Rows({ items, selected, onPick }: { items: DetailItem[]; selected: stri
             aria-current={on ? 'true' : undefined}
             aria-controls="exp-detail"
             onClick={(e) => onPick(item, e)}
+            onPointerDown={onPrefetch}
           >
             <Icon item={item} size="row" />
             <span className={`exp-row-body ${i > 0 ? 'border-t border-sep' : ''}`}>
@@ -169,6 +183,7 @@ export default function ExperienceSection({ work, education, children }: { work:
   const all = [...work, ...education];
   const [selected, setSelected] = useState(all[0].id);
   const [sheet, setSheet] = useState<DetailItem | null>(null);
+  const [sheetUsed, setSheetUsed] = useState(false);
   const [say, setSay] = useState('');
   const trigger = useRef<HTMLElement | null>(null);
   const current = all.find((x) => x.id === selected) ?? all[0];
@@ -178,6 +193,7 @@ export default function ExperienceSection({ work, education, children }: { work:
     e.preventDefault();
     if (window.matchMedia(PHONE).matches) {
       trigger.current = e.currentTarget;
+      setSheetUsed(true);
       setSheet(item);
     } else {
       setSelected(item.id);
@@ -185,16 +201,21 @@ export default function ExperienceSection({ work, education, children }: { work:
     }
   };
 
+  // Phones fetch the sheet as a finger lands on a row, so it's usually ready by the time the tap ends.
+  const prefetch = () => {
+    if (window.matchMedia(PHONE).matches) void loadDrawer();
+  };
+
   return (
     <div className="exp-layout">
       <div className="exp-lists">
         <div>
           <h3 className="exp-group">Work</h3>
-          <Rows items={work} selected={selected} onPick={pick} />
+          <Rows items={work} selected={selected} onPick={pick} onPrefetch={prefetch} />
         </div>
         <div>
           <h3 className="exp-group">Education</h3>
-          <Rows items={education} selected={selected} onPick={pick} />
+          <Rows items={education} selected={selected} onPick={pick} onPrefetch={prefetch} />
         </div>
         {children}
       </div>
@@ -207,30 +228,11 @@ export default function ExperienceSection({ work, education, children }: { work:
         {say}
       </p>
 
-      <Drawer.Root open={sheet !== null} onOpenChange={(o) => !o && setSheet(null)}>
-        <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 z-[55] bg-black/25" />
-          <Drawer.Content
-            aria-describedby={undefined}
-            className="exp-drawer fixed inset-x-0 bottom-0 z-[55] mx-auto max-w-xl rounded-t-[26px] bg-card px-5 pt-2.5 pb-[calc(28px+env(safe-area-inset-bottom))] text-label outline-none elev-floating"
-            onCloseAutoFocus={(e) => {
-              if (trigger.current?.isConnected) {
-                e.preventDefault();
-                trigger.current.focus({ preventScroll: true });
-              }
-            }}
-          >
-            <div className="flex items-center justify-between">
-              <span className="w-8" />
-              <Drawer.Handle className="h-[5px]! w-10! rounded-full bg-label3! opacity-40!" />
-              <Drawer.Close aria-label="Close" className="flex size-8 items-center justify-center rounded-full bg-fill2 text-label2">
-                <X size={16} strokeWidth={2.4} aria-hidden="true" />
-              </Drawer.Close>
-            </div>
-            <div className="mt-2">{sheet && <Detail item={sheet} phone />}</div>
-          </Drawer.Content>
-        </Drawer.Portal>
-      </Drawer.Root>
+      {sheetUsed && (
+        <Suspense fallback={null}>
+          <ExperienceDrawer item={sheet} onClose={() => setSheet(null)} trigger={trigger} />
+        </Suspense>
+      )}
     </div>
   );
 }

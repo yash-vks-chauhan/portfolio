@@ -1,0 +1,14 @@
+# Cloudflare (Workers static assets or Pages) reads this file at deploy time; other hosts ignore it.
+# Hashed build files never change under the same name, so browsers may keep them for a year. That includes Inter:
+# with font-display: optional, a cached font is what lets every page after the first render in Inter at once.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/og/*
+  Cache-Control: public, max-age=86400
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()

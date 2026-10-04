@@ -97,7 +97,7 @@ const widgets = [
             <span class:list={['widget-value', 'text' in w && w.text ? 'widget-value-text' : 'num']} aria-hidden="true">
               {'roll' in w && w.roll ? (
                 <>
-                  <RollingNumber client:load value={w.roll.value} />
+                  <RollingNumber client:idle value={w.roll.value} />
                   {w.roll.rest}
                 </>
               ) : (

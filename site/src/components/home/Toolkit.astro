@@ -4,11 +4,12 @@
 import ToolkitGrid, { type ToolProp } from './ToolkitGrid';
 import { toolkit, usedInLabel } from '../../content/toolkit';
 import { projectBySlug } from '../../content/projects';
+import { brandGlyph } from '../ui/Brand';
 
 const tools: ToolProp[] = toolkit.map((t) => ({
   name: t.name,
   shortName: t.shortName,
-  icon: t.icon,
+  icon: 'brand' in t.icon ? { brand: brandGlyph(t.icon.brand), size: t.icon.size } : t.icon,
   color: t.color,
   glow: t.glow,
   phone: t.phone,

@@ -1,0 +1,23 @@
+---
+// 404: what happened, and three ways on (home, the work index, ⌘K search). Not indexed.
+import { ArrowRight, Search } from 'lucide-react';
+import Base from '../layouts/Base.astro';
+import Footer from '../components/shell/Footer.astro';
+---
+
+<Base title="Page not found · Yash Chauhan" description="This page doesn’t exist. Try the home page, the work index or search." noindex>
+  <header class="work-header not-found">
+    <p class="eyebrow num">404</p>
+    <h1 class="work-title">This page doesn’t exist.</h1>
+    <p class="work-lead">It may have moved, or the link has a typo. One of these will get you somewhere.</p>
+    <div class="case-actions">
+      <a href="/" class="pill case-action-primary">Home<ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" /></a>
+      <a href="/work" class="pill case-action">All work</a>
+      <button type="button" class="pill case-action border-0" data-command aria-keyshortcuts="Control+K Meta+K">
+        <Search size={16} strokeWidth={2.2} aria-hidden="true" />Search
+      </button>
+    </div>
+  </header>
+
+  <Footer slot="footer" />
+</Base>

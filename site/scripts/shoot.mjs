@@ -10,6 +10,8 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { pretendGpu } from './gpu.mjs';
+import { preferInter } from './fonts.mjs';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const out = path.join(root, 'shots');
@@ -99,8 +101,11 @@ try {
           reducedMotion: motion ? 'no-preference' : 'reduce',
         });
         const page = await ctx.newPage();
+        // With --motion, show the WebGL hero as a GPU device would (headless Chromium's WebGL is software-rendered).
+        if (motion) await pretendGpu(page);
         // 15:34 UTC is 9:04 PM in Chennai.
         await page.clock.setFixedTime(new Date('2026-10-04T15:34:00Z'));
+        await preferInter(page);
         await page.goto(base + route, { waitUntil: 'networkidle' });
         await page.evaluate(() => document.fonts.ready);
         await page.waitForTimeout(motion ? 1500 : 400);

@@ -2,21 +2,22 @@
 // Keyboard users get the row's link and SwipeRow's own "actions" toggle.
 import { Play } from 'lucide-react';
 import SwipeRow, { type SwipeAction } from '../bits/SwipeRow';
-import { Brand } from '../ui/Brand';
+import { BrandSvg } from '../ui/BrandSvg';
 import { glyph } from '../ui/glyphs';
 import { StatusChip } from '../ui/StatusChip';
 import type { Project } from '../../content/types';
+import type { BrandGlyph } from '../../lib/brand-icons';
 
 type Row = Pick<Project, 'slug' | 'name' | 'tagline' | 'status' | 'href' | 'icon' | 'links'>;
 
-export default function MoreWorkSwipe({ rows }: { rows: Row[] }) {
+export default function MoreWorkSwipe({ rows, codeIcon }: { rows: Row[]; codeIcon: BrandGlyph }) {
   return (
     <div className="more-list">
       {rows.map((p, i) => {
         const Icon = 'glyph' in p.icon ? glyph(p.icon.glyph) : null;
         const actions: SwipeAction[] = [];
         if (p.links.demo) actions.push({ id: 'demo', label: 'Demo', color: '#0071E3', icon: <Play size={18} strokeWidth={2} aria-hidden="true" /> });
-        if (p.links.code) actions.push({ id: 'code', label: 'Code', color: '#636366', icon: <Brand name="SiGithub" size={18} /> });
+        if (p.links.code) actions.push({ id: 'code', label: 'Code', color: '#636366', icon: <BrandSvg glyph={codeIcon} size={18} /> });
         return (
           <SwipeRow
             key={p.slug}
