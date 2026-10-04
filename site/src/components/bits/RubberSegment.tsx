@@ -2,6 +2,12 @@
  * RubberSegment, from React Bits (https://reactbits.dev · github.com/DavidHDev/react-bits @ ca44b3f, TS + Tailwind variant).
  * Copyright (c) 2026 David Haz. MIT + Commons Clause: used inside this site only; the component itself is not
  * sold or redistributed. Full licence: ./LICENSE-react-bits.md. Site changes, if any, are noted below.
+ *
+ * Site changes: `pad` overrides the size preset's padding and `thumbShadow` draws a shadow under the thumb (the
+ * thumb is a clip-path, so the shadow sits on a wrapper), both for the work-index filter as drawn; unselected labels
+ * keep their full colour (no 70% opacity); until the first measurement (and without JavaScript) the selected segment
+ * is styled directly, so the server-rendered control never flashes a full-width thumb; segments inherit only the
+ * font family (Tailwind v4 ordered the original `font: inherit` after the size and weight, resetting both).
  */
 
 import React, { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
@@ -31,6 +37,8 @@ export interface RubberSegmentProps {
   disabled?: boolean;
   className?: string;
   'aria-label'?: string;
+  pad?: number;
+  thumbShadow?: string;
 }
 
 type Slot = { l: number; r: number };
@@ -104,7 +112,9 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
   draggable = true,
   disabled = false,
   className = '',
-  'aria-label': ariaLabel = 'Segmented control'
+  'aria-label': ariaLabel = 'Segmented control',
+  pad,
+  thumbShadow
 }) => {
   const list = items.map(item => (typeof item === 'string' ? { value: item, label: item } : item));
   const [inner, setInner] = useState<string | undefined>(defaultValue ?? list[0]?.value);
@@ -114,6 +124,7 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
     list.findIndex(item => item.value === current)
   );
   const reduce = useReducedMotion();
+  const [ready, setReady] = useState(false);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -156,6 +167,7 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
     });
     innerW.set(rect.width - inset * 2);
     jumpTo(committed.current);
+    setReady(true);
   };
 
   const listKey = list.map(item => item.value).join('|');
@@ -350,8 +362,9 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
       aria-label={ariaLabel}
       aria-disabled={disabled || undefined}
       data-equal={equalSlots ? '' : undefined}
+      data-ready={ready ? '' : undefined}
       data-draggable={draggable && !disabled ? '' : undefined}
-      className={`group relative inline-grid grid-flow-col auto-cols-auto align-middle select-none touch-pan-y [font-family:inherit] [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] p-[var(--rs-inset)] rounded-[var(--rs-radius)] [background:var(--rs-track)] data-[equal]:auto-cols-[minmax(0,1fr)] data-[held]:cursor-grabbing aria-disabled:pointer-events-none aria-disabled:opacity-50${className ? ` ${className}` : ''}`}
+      className={`rs-track group relative inline-grid grid-flow-col auto-cols-auto align-middle select-none touch-pan-y [font-family:inherit] [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] p-[var(--rs-inset)] rounded-[var(--rs-radius)] [background:var(--rs-track)] data-[equal]:auto-cols-[minmax(0,1fr)] data-[held]:cursor-grabbing aria-disabled:pointer-events-none aria-disabled:opacity-50${className ? ` ${className}` : ''}`}
       style={
         {
           '--rs-track': trackColor,
@@ -363,7 +376,8 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
           '--rs-thumb-radius': `${thumbRadius}px`,
           '--rs-h': `${preset.height}px`,
           '--rs-font': `${preset.font}px`,
-          '--rs-pad': `${preset.pad}px`,
+          '--rs-pad': `${pad ?? preset.pad}px`,
+          '--rs-thumb-shadow': thumbShadow ?? 'none',
           '--rs-min': `${preset.min}px`,
           '--rs-ease-out': 'cubic-bezier(0.23, 1, 0.32, 1)'
         } as CSSProperties
@@ -384,7 +398,7 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
           aria-checked={i === index}
           tabIndex={i === index ? 0 : -1}
           disabled={disabled}
-          className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-pointer [color:var(--rs-ink)] opacity-70 aria-checked:cursor-default group-data-[draggable]:aria-checked:cursor-grab group-data-[held]:cursor-grabbing data-[pressed]:[transform:scale(0.96)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:[outline-color:var(--rs-thumb)] [@media(hover:hover)_and_(pointer:fine)]:[&[aria-checked=false]:hover]:opacity-90"
+          className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font-family:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-pointer [color:var(--rs-ink)] aria-checked:cursor-default group-data-[draggable]:aria-checked:cursor-grab group-data-[held]:cursor-grabbing data-[pressed]:[transform:scale(0.96)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:[outline-color:var(--rs-thumb)]"
           onPointerDown={e => handlePointerDown(e, i)}
           onKeyDown={handleKeyDown}
         >
@@ -392,21 +406,22 @@ const RubberSegment: React.FC<RubberSegmentProps> = ({
           {item.label}
         </button>
       ))}
+      <div className="rs-thumb pointer-events-none absolute inset-0 [filter:drop-shadow(var(--rs-thumb-shadow))]" aria-hidden="true">
       <motion.div
         className="pointer-events-none absolute inset-[var(--rs-inset)] grid grid-flow-col auto-cols-auto group-data-[equal]:auto-cols-[minmax(0,1fr)] [background:var(--rs-thumb)] [color:var(--rs-ink-active)]"
-        aria-hidden="true"
         style={{ clipPath }}
       >
         {list.map(item => (
           <span
             key={item.value}
-            className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-default [color:inherit]"
+            className="inline-flex h-[calc(var(--rs-h)-var(--rs-inset)*2)] min-w-[var(--rs-min)] items-center justify-center gap-1.5 m-0 border-0 bg-transparent px-[var(--rs-pad)] py-0 rounded-[var(--rs-thumb-radius)] [font-family:inherit] text-[length:var(--rs-font)] font-medium leading-none whitespace-nowrap outline-none [transition:opacity_160ms_ease,transform_160ms_var(--rs-ease-out)] motion-reduce:[transition:opacity_160ms_ease] cursor-default [color:inherit]"
           >
             {item.icon}
             {item.label}
           </span>
         ))}
       </motion.div>
+      </div>
     </div>
   );
 };

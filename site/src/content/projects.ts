@@ -168,5 +168,6 @@ export const projectBySlug: Record<string, (typeof projects)[number]> = Object.f
 
 /** The work-index meta line: "FastAPI · Next.js · Postgres · 2026". */
 export function projectMeta(p: (typeof projects)[number]): string {
-  return p.meta ?? [...p.stack.slice(0, 3), p.year].join(' · ');
+  // Versions stay on the cards ("Next.js 16") but not in the meta line ("Next.js"), as drawn.
+  return p.meta ?? [...p.stack.slice(0, 3).map((s) => s.replace(/ \d+$/, '')), p.year].join(' · ');
 }

@@ -1,0 +1,118 @@
+---
+// The work index (design/prototype GlassWork.html, screenshots/work-index.jpg): the filter, two featured cards, every
+// project ranked "by how much they prove" with its guarantee and an honest status, then what the statuses mean.
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/shell/Footer.astro';
+import WorkFilter, { type FilterItem } from '../../components/work/WorkFilter';
+import { StatusChip } from '../../components/ui/StatusChip';
+import { glyph } from '../../components/ui/glyphs';
+import { images } from '../../lib/images';
+import { categoryLabels, projectMeta, projects, projectBySlug } from '../../content/projects';
+import type { Status } from '../../content/types';
+
+const filters: FilterItem[] = [
+  { value: 'all', label: 'All', count: projects.length },
+  ...Object.entries(categoryLabels).map(([value, label]) => ({ value, label, count: projects.filter((p) => p.categories.includes(value as never)).length })),
+];
+
+const featured = [
+  { project: projectBySlug.glassbox, kicker: 'Flagship · AI systems', image: images['glassbox-ask'], alt: 'GlassBox answering with numbered citations', tone: 'glassbox' },
+  { project: projectBySlug.pulse, kicker: 'Flagship · AI systems', image: images['pulse-insights'], alt: 'Pulse campaign insights on demo data', tone: 'pulse' },
+];
+
+const legend: { status: Status; text: string }[] = [
+  { status: 'live', text: 'Running now, with an uptime monitor.' },
+  { status: 'demo-may-sleep', text: 'Free-tier hosting; the first load can take about 45 s. A video is on the page.' },
+  { status: 'in-progress', text: 'Works end to end; parts are still being built. Stubs are labelled.' },
+  { status: 'manuscript', text: 'Written up, not yet published. Never listed as a publication.' },
+  { status: 'on-hold', text: 'Kept for history; numbers withheld until re-verified.' },
+];
+---
+
+<Base
+  title="Work · Yash Chauhan"
+  description="Everything Yash Chauhan has built: GlassBox, Pulse, Gridee, the IIT Madras EMS research and more, each with the one thing it guarantees and an honest status."
+  section="work"
+>
+  <div id="work-list" data-filter="all">
+    <header class="work-header">
+      <p class="eyebrow">Work</p>
+      <h1 class="work-title">Everything I’ve built.</h1>
+      <p class="work-lead">Each project, the one thing it guarantees, and an honest status.</p>
+      <div class="work-filter-scroll">
+        <WorkFilter client:load items={filters} target="work-list" />
+      </div>
+    </header>
+
+    <section aria-label="Featured" class="work-featured" data-featured>
+      <div class="work-featured-grid">
+        {
+          featured.map(({ project, kicker, image, alt, tone }) => (
+            <a class:list={['work-feature lift', `is-${tone}`]} href={project.href} data-cats={project.categories.join(' ')}>
+              <span class="work-feature-kicker">{kicker}</span>
+              <span class="work-feature-name">{project.name}</span>
+              <span class="work-feature-text">{project.guarantee}</span>
+              <span class="work-feature-shot">
+                <Picture src={image} formats={['avif', 'webp']} widths={[480, 960]} sizes="(max-width: 767px) 340px, 520px" alt={alt} class="work-feature-img" loading="lazy" />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="all-h" class="work-all">
+      <div class="flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
+        <h2 id="all-h" class="case-h2-lg">All projects</h2>
+        <span class="text-[15px] tracking-[-0.012em] text-label2">Sorted by how much they prove</span>
+      </div>
+      <ol class="work-list">
+        {
+          projects.map((p, i) => {
+            const Icon = 'glyph' in p.icon ? glyph(p.icon.glyph) : null;
+            return (
+              <li data-cats={p.categories.join(' ')}>
+                <a class="row work-row" href={p.href}>
+                  <span class="work-rank num" aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  {'image' in p.icon ? (
+                    <Picture src={images['gridee-icon']} formats={['avif', 'webp']} widths={[64, 128]} sizes="64px" alt="" class="work-icon" loading="lazy" />
+                  ) : (
+                    <span class="work-icon" style={{ background: p.icon.gradient }} aria-hidden="true">
+                      {Icon && <Icon size={30} strokeWidth={2} className="max-md:size-6" />}
+                    </span>
+                  )}
+                  <span class="work-row-body">
+                    <span class="work-row-name">{p.name}</span>
+                    <span class="work-row-text">{p.short}</span>
+                    <span class="work-row-meta">{projectMeta(p)}</span>
+                  </span>
+                  <StatusChip status={p.status} className="max-md:hidden" />
+                  <StatusChip status={p.status} size="sm" className="md:hidden" />
+                </a>
+              </li>
+            );
+          })
+        }
+      </ol>
+    </section>
+  </div>
+
+  <section aria-labelledby="status-h" class="work-legend">
+    <h2 id="status-h" class="case-h2-sm">What the statuses mean</h2>
+    <div class="work-legend-grid">
+      {
+        legend.map((l) => (
+          <div class="work-legend-card">
+            <StatusChip status={l.status} className="self-start" />
+            <span class="text-[15px] leading-[1.4] tracking-[-0.012em] text-label2">{l.text}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
