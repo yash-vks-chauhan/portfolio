@@ -98,7 +98,7 @@ const grideeIcon = await getImage({ src: images['gridee-icon'], width: 128, heig
             Preview
           </h2>
           <figure class="preview-single">
-            <img src={slides[0].src} srcset={slides[0].srcset} sizes="(max-width: 767px) 100vw, 1072px" width={slides[0].width} height={slides[0].height} alt={slides[0].alt} loading="lazy" decoding="async" class="preview-img" />
+            <img src={slides[0].src} srcset={slides[0].srcset} sizes="(max-width: 767px) 100vw, 1072px" width={slides[0].width} height={slides[0].height} alt={slides[0].alt} loading="lazy" decoding="async" class="preview-img" style={{ aspectRatio: `${slides[0].width} / ${slides[0].height}` }} />
             <figcaption class="preview-caption">
               <strong>{slides[0].title}</strong> {slides[0].caption}
             </figcaption>

@@ -107,6 +107,9 @@ try {
         const stem = `${name}-${w}-${theme}`;
         await page.screenshot({ path: path.join(out, `${stem}-first.png`) });
         await loadEverything(page);
+        // In a full-page capture a fixed tab bar would sit mid-page; the artboards draw it at the end of the page.
+        await page.addStyleTag({ content: 'body{position:relative}.tab-bar{position:absolute!important}' });
+        await page.waitForTimeout(100);
         await page.screenshot({ path: path.join(out, `${stem}-full.png`), fullPage: true });
         console.log('shot', stem);
         await ctx.close();

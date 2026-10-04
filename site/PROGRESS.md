@@ -22,7 +22,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - [x] **5. Experience, toolkit, contact:** inset lists plus a vaul side sheet (bottom sheet on phones), GlassIcons with a "used in" panel, the contact card and Dock. *Done when:* matches the bottom of `home-light.jpg`
 - [x] **6. Case study template:** app header, stat strip, Embla preview carousel, summary, sticky "On this page" (IntersectionObserver), diagram, decision cards, evaluation (`wilson.ts`), CI chain, information list, more work. *Done when:* GlassBox matches `case-study-light.jpg` and `case-study-dark.jpg`; Pulse, Gridee and EMS reuse it; short pages for Autoscaler, Kalakraft and CT denoising
 - [x] **7. Work index:** RubberSegment filter from `projects.ts` categories, two featured cards, the numbered list, the status legend. *Done when:* matches `work-index.jpg`; the filter counts read 8 · 3 · 3 · 2 · 1 · 1
-- [ ] **8. Phones:** 390 px layouts from the mobile artboards; tab bar; the first screen. *Done when:* matches `mobile-first-screen-light.jpg`, `mobile-first-screen-dark.jpg`, `mobile-home.jpg` and `mobile-case-study-dark.jpg`
+- [x] **8. Phones:** 390 px layouts from the mobile artboards; tab bar; the first screen. *Done when:* matches `mobile-first-screen-light.jpg`, `mobile-first-screen-dark.jpg`, `mobile-home.jpg` and `mobile-case-study-dark.jpg`
 - [ ] **9. Polish and launch:** springs, reduced motion, axe, performance budget, SEO, research, about and 404 pages, résumé link. *Done when:* every box below is ticked or listed under "Blocked on Yash"
 
 ## Pages (light and dark, 1440 and 390 px)
@@ -88,6 +88,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - **Stat strip:** cells use the drawing's content-box sizing, so at 1440 px the strip overflows by about 32 px and scrolls, as drawn.
 - **Placeholder links** (the 90-second video) render as disabled buttons until the link exists. Share uses the system share sheet where there is one, otherwise copies the link with a toast.
 - **Work index:** the RubberSegment filter sets `data-filter` and CSS hides what doesn't match (featured cards included), so the page is whole without JavaScript; the choice is kept in the URL (`/work?filter=mobile`) and announced. Two fixes to the copied component: segments inherit only the font family (Tailwind v4 let `font: inherit` reset their 14 px size), and the thumb's shadow sits on a wrapper (the thumb is a clip-path). On phones the filter strip scrolls sideways.
+- **Phone pass:** against the artboards rendered here with Inter, the phone first screen scores 0.52 (light) and 0.65 (dark) mean difference, the phone home 0.78 and the phone GlassBox page matches through Decisions; what's left is the extra footnotes, the phone footer row and the "More on …" disclosures. Full-page screenshots place the tab bar at the end of the page, as the artboards do. Preview images keep their source ratio (resized copies rounded 187.5 px to 188).
 - `Yash_Chauhan_Master_Resume.pdf` is never copied into `site/`. The site links `/resume.pdf`; that file is Yash's to add (a test fails if the master résumé ever lands in `public/`).
 
 ## Blocked on Yash

@@ -58,7 +58,7 @@ export default function PreviewCarousel({ slides, variant = 'landscape', id = 'p
         <div className={`preview-track preview-${variant}`}>
           {slides.map((s) => (
             <figure key={s.src} className="preview-slide">
-              <img src={s.src} srcSet={s.srcset} sizes={variant === 'portrait' ? '(max-width: 767px) 220px, 280px' : '(max-width: 767px) 300px, 560px'} width={s.width} height={s.height} alt={s.alt} loading="lazy" decoding="async" className="preview-img" draggable={false} />
+              <img src={s.src} srcSet={s.srcset} sizes={variant === 'portrait' ? '(max-width: 767px) 220px, 280px' : '(max-width: 767px) 300px, 560px'} width={s.width} height={s.height} alt={s.alt} loading="lazy" decoding="async" className="preview-img" style={{ aspectRatio: `${s.width} / ${s.height}` }} draggable={false} />
               <figcaption className="preview-caption">
                 <strong>{s.title}</strong>{' '}
                 {s.captionPhone ? (
