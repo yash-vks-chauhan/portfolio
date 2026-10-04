@@ -3,7 +3,7 @@
 Resume from the first unchecked box. Every milestone ends the same way: `npm run check`, `npm test` and `npm run build` pass; `npm run shots` captures the pages at 1440 and 390 px in light and dark; `npm run compare` puts them next to `design/screenshots/`; differences get fixed; the box gets ticked and the work is committed. Nothing is pushed, merged or deployed without asking Yash first.
 
 - **Stack:** Astro 7.3.5 (pinned) with React 19 islands and Tailwind CSS 4.3, in `site/`. Every dependency is pinned to an exact version in `package.json`.
-- **Branch:** `feat/glass-site`, made from `design/glass` (`main` doesn't have the design yet).
+- **Branch:** built on `feat/glass-site` (made from `design/glass`), fast-forwarded into `design/glass`, then into `main` on 4 Oct 2026. The built site lives on `gh-pages`, which GitHub Pages serves.
 - **Fonts in screenshots:** the design screenshots were rendered on a Mac with SF Pro and SF Pro Rounded (the rounded "+" in "8,000+" gives it away). This container has no SF Pro, so it renders the intended fallback, Inter. Text runs come out about 3% wider at large sizes; layout, spacing and colour are compared as drawn. For pixel diffs, `npm run compare` also renders the prototypes here with Inter.
 
 ## Setup
