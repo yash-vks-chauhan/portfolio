@@ -1,4 +1,5 @@
 // Site-wide copy. Values in [brackets] are placeholders to fill before launch.
+import { withBase } from '../lib/url';
 
 export const site = {
   name: 'Yash Chauhan',
@@ -17,7 +18,7 @@ export const site = {
   links: {
     github: 'https://github.com/yash-vks-chauhan',
     linkedin: 'https://www.linkedin.com/in/[handle]',
-    resume: '/resume.pdf',
+    resume: withBase('/resume.pdf'),
   },
   /** How the contact card prints the profile links. */
   display: {

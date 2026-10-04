@@ -3,9 +3,9 @@
 // (the LinkedIn handle until it's filled in) are left out rather than published broken.
 import { site, isPlaceholder } from '../../content/site';
 import { toolkit } from '../../content/toolkit';
-import { pagePath } from '../../lib/url';
+import { pagePath, withBase } from '../../lib/url';
 
-const url = new URL('/', Astro.site).href;
+const url = new URL(withBase('/'), Astro.site).href;
 const sameAs = [site.links.github, site.links.linkedin].filter((u) => !isPlaceholder(u));
 const data = {
   '@context': 'https://schema.org',

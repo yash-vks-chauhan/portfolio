@@ -10,7 +10,7 @@ import Shell from '../components/shell/Shell';
 import GradualBlur from '../components/bits/GradualBlur';
 import { site } from '../content/site';
 import type { Section } from '../lib/nav';
-import { pagePath } from '../lib/url';
+import { pagePath, withBase } from '../lib/url';
 
 interface Props {
   title: string;
@@ -27,7 +27,9 @@ interface Props {
 
 const { title, description, section = 'none', isHome = false, phoneHeader = 'default', ogImage = '/og/default.png', ogType = 'website', noindex = false } = Astro.props;
 const canonical = new URL(pagePath(Astro.url.pathname), Astro.site);
-const ogUrl = new URL(ogImage, Astro.site);
+const ogUrl = new URL(withBase(ogImage), Astro.site);
+// NOINDEX=1 at build time keeps a temporary deployment out of search results.
+const hidden = noindex || process.env.NOINDEX === '1';
 ---
 
 <!doctype html>
@@ -42,7 +44,7 @@ const ogUrl = new URL(ogImage, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {hidden && <meta name="robots" content="noindex" />}
     <meta name="author" content={site.name} />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
@@ -54,9 +56,9 @@ const ogUrl = new URL(ogImage, Astro.site);
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
     <link rel="me" href={site.links.github} />
     <noscript>
       <style>

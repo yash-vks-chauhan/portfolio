@@ -11,6 +11,7 @@ import MoreWork from './MoreWork.astro';
 import { Brand } from '../ui/Brand';
 import { images } from '../../lib/images';
 import { projectBySlug } from '../../content/projects';
+import { withBase } from '../../lib/url';
 
 const glassbox = projectBySlug.glassbox;
 const pulse = projectBySlug.pulse;
@@ -24,7 +25,7 @@ const ems = projectBySlug['ems-research'];
       <p class="eyebrow">Selected work</p>
       <h2 class="title1">Built, shipped, measured.</h2>
     </div>
-    <a href="/work" class="section-link max-md:hidden">All work (08)<ChevronRight size={18} strokeWidth={2} aria-hidden="true" /></a>
+    <a href={withBase('/work')} class="section-link max-md:hidden">All work (08)<ChevronRight size={18} strokeWidth={2} aria-hidden="true" /></a>
   </div>
 
   {/* ── GlassBox ── */}
@@ -139,7 +140,7 @@ const ems = projectBySlug['ems-research'];
   <article class="card-research lift max-md:hidden">
     <div class="card-research-copy">
       <span class="card-kicker text-card-k">Research · 2 manuscripts</span>
-      <h3 class="card-research-title"><a href="/research">Drift and equity in emergency medical services.</a></h3>
+      <h3 class="card-research-title"><a href={withBase('/research')}>Drift and equity in emergency medical services.</a></h3>
       <p class="card-research-lead">
         At IIT Madras: graph embeddings, a VAE and counterfactual XGBoost separate real operational drift from context a district can’t control. Plus a first-author manuscript under double-blind review at an IEEE conference (2026).
       </p>

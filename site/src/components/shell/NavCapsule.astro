@@ -5,6 +5,7 @@ import ThemeSwitch from './ThemeSwitch';
 import NavGlass from '../bits/NavGlass';
 import { navLinks, type Section } from '../../lib/nav';
 import { site } from '../../content/site';
+import { withBase } from '../../lib/url';
 
 interface Props {
   current: Section;
@@ -21,7 +22,7 @@ const links = navLinks(isHome);
     aria-label="Main"
     class="glass-thin pointer-events-auto mt-4 flex flex-wrap items-center justify-center gap-1 rounded-[28px] p-1.5"
   >
-    <a href={isHome ? '#top' : '/'} class="flex h-11 items-center gap-2.5 pr-3 pl-1 text-[15px] font-semibold tracking-[-0.012em]">
+    <a href={isHome ? '#top' : withBase('/')} class="flex h-11 items-center gap-2.5 pr-3 pl-1 text-[15px] font-semibold tracking-[-0.012em]">
       <span class="yc-mark" aria-hidden="true">{site.initials}</span>{site.name}
     </a>
     <div class="flex gap-0.5">

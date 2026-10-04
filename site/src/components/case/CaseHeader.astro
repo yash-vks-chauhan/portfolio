@@ -10,6 +10,7 @@ import { images } from '../../lib/images';
 import { isPlaceholder } from '../../content/site';
 import type { CaseAction, Stat } from '../../content/case-studies/types';
 import type { Status } from '../../content/types';
+import { withBase } from '../../lib/url';
 
 interface Props {
   name: string;
@@ -32,7 +33,7 @@ const compact = phoneLabelLength > 14;
 ---
 
 <header class="case-header">
-  <a href="/work" class="case-back max-md:hidden"><ChevronLeft size={20} strokeWidth={2} aria-hidden="true" />Work</a>
+  <a href={withBase('/work')} class="case-back max-md:hidden"><ChevronLeft size={20} strokeWidth={2} aria-hidden="true" />Work</a>
   <div class="case-title-row">
     {
       'image' in icon ? (

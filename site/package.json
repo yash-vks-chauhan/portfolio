@@ -20,7 +20,8 @@
     "verify": "npm run check && npm test && npm run build && npm run test:e2e",
     "og": "node scripts/og.mjs",
     "budget": "node scripts/budget.mjs",
-    "contrast": "node scripts/contrast.mjs"
+    "contrast": "node scripts/contrast.mjs",
+    "deploy:pages": "node scripts/deploy-pages.mjs"
   },
   "dependencies": {
     "@astrojs/react": "7.0.0",

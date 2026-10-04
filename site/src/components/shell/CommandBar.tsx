@@ -24,6 +24,7 @@ import { glyph } from '../ui/glyphs';
 import { Brand } from '../ui/Brand';
 import { requestCopy } from '../../lib/events';
 import { currentTheme, setTheme } from '../../lib/theme';
+import { withBase } from '../../lib/url';
 
 interface Entry {
   id: string;
@@ -53,7 +54,7 @@ export function commandFilter(value: string, search: string, keywords?: string[]
 }
 
 const projectHint = (slug: string, href: string) =>
-  href.startsWith('/research') ? 'Research' : ['glassbox', 'pulse', 'gridee', 'ems-research'].includes(slug) ? 'Case study' : 'Project';
+  href.includes('/research') ? 'Research' : ['glassbox', 'pulse', 'gridee', 'ems-research'].includes(slug) ? 'Case study' : 'Project';
 
 export default function CommandBar({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const [theme, setThemeState] = useState<'light' | 'dark'>('light');
@@ -81,11 +82,11 @@ export default function CommandBar({ open, onOpenChange }: { open: boolean; onOp
   });
 
   const pageEntries: Entry[] = [
-    { id: 'page-home', label: 'Home', icon: <House size={16} strokeWidth={2} aria-hidden="true" />, run: go('/') },
-    { id: 'page-work', label: 'All work', keywords: ['projects', 'index'], icon: <LayoutGrid size={16} strokeWidth={2} aria-hidden="true" />, run: go('/work') },
-    { id: 'page-ask', label: 'Ask my portfolio', keywords: ['question', 'chat'], icon: <Sparkles size={16} strokeWidth={2} aria-hidden="true" />, run: go('/#ask') },
-    { id: 'page-research', label: 'Research', keywords: ['manuscripts', 'papers'], icon: <FileText size={16} strokeWidth={2} aria-hidden="true" />, run: go('/research') },
-    { id: 'page-about', label: 'About', keywords: ['experience', 'education', 'certifications'], icon: <User size={16} strokeWidth={2} aria-hidden="true" />, run: go('/about') },
+    { id: 'page-home', label: 'Home', icon: <House size={16} strokeWidth={2} aria-hidden="true" />, run: go(withBase('/')) },
+    { id: 'page-work', label: 'All work', keywords: ['projects', 'index'], icon: <LayoutGrid size={16} strokeWidth={2} aria-hidden="true" />, run: go(withBase('/work')) },
+    { id: 'page-ask', label: 'Ask my portfolio', keywords: ['question', 'chat'], icon: <Sparkles size={16} strokeWidth={2} aria-hidden="true" />, run: go(withBase('/#ask')) },
+    { id: 'page-research', label: 'Research', keywords: ['manuscripts', 'papers'], icon: <FileText size={16} strokeWidth={2} aria-hidden="true" />, run: go(withBase('/research')) },
+    { id: 'page-about', label: 'About', keywords: ['experience', 'education', 'certifications'], icon: <User size={16} strokeWidth={2} aria-hidden="true" />, run: go(withBase('/about')) },
   ];
 
   const actionEntries: Entry[] = [

@@ -3,6 +3,7 @@
 // title or venue, and only aggregate findings; the
 // record count stays a [placeholder] until the PI agrees it can be shown.
 import type { CaseStudy } from './types';
+import { withBase } from '../../lib/url';
 
 export const ems: CaseStudy = {
   slug: 'ems-research',
@@ -13,7 +14,7 @@ export const ems: CaseStudy = {
   lead: 'IIT Madras research: real operational drift, separated from context a district can’t control.',
   leadPhone: 'IIT Madras research',
   icon: { glyph: 'ambulance', gradient: 'radial-gradient(120% 120% at 20% 0%, #FFA3A3 0%, rgba(255,163,163,0) 55%), linear-gradient(150deg, #FF6B6B 0%, #D7263D 60%, #8A1023 100%)' },
-  actions: [{ label: 'All research', href: '/research', kind: 'case' }],
+  actions: [{ label: 'All research', href: withBase('/research'), kind: 'case' }],
   note: 'A manuscript, not yet published: no title or venue for now, and aggregate results only.',
   stats: [
     { label: 'Service legs', labelPhone: 'Legs', value: '5', note: 'response to return' },

@@ -2,6 +2,7 @@
 // Phones: a floating glass header (YC, name, Résumé). Case studies swap it for round back and share buttons.
 import { ChevronLeft, Share } from 'lucide-react';
 import { site } from '../../content/site';
+import { withBase } from '../../lib/url';
 
 interface Props {
   variant?: 'default' | 'case';
@@ -10,14 +11,14 @@ interface Props {
   backLabel?: string;
 }
 
-const { variant = 'default', isHome = false, backHref = '/work', backLabel = 'Back to work' } = Astro.props;
+const { variant = 'default', isHome = false, backHref = withBase('/work'), backLabel = 'Back to work' } = Astro.props;
 ---
 
 {
   variant === 'default' ? (
     <div class="pointer-events-none fixed inset-x-0 top-0 z-50 flex px-3 md:hidden">
       <header class="glass-thin pointer-events-auto mt-2.5 flex h-14 flex-1 items-center gap-2 rounded-[28px] py-1.5 pr-1.5 pl-2">
-        <a href={isHome ? '#top' : '/'} class="flex h-11 min-w-0 flex-1 items-center gap-2.5 text-[15px] font-semibold tracking-[-0.012em]">
+        <a href={isHome ? '#top' : withBase('/')} class="flex h-11 min-w-0 flex-1 items-center gap-2.5 text-[15px] font-semibold tracking-[-0.012em]">
           <span class="yc-mark" aria-hidden="true">
             {site.initials}
           </span>

@@ -1,6 +1,7 @@
 // Experience, education and certifications, as drawn in the Experience section (desktop and phone rows).
 // A bullet with a number cites its source (bulletSources); the sheet shows the marker after the bullet.
 import type { Certification, ExperienceItem } from './types';
+import { withBase } from '../lib/url';
 
 export const work: ExperienceItem[] = [
   {
@@ -43,7 +44,7 @@ export const work: ExperienceItem[] = [
     bulletSources: { 0: 'iitm-internship' },
     stack: ['Python', 'XGBoost', 'SHAP', 'GraphSAGE'],
     icon: { monogram: 'IIT', gradient: 'linear-gradient(145deg, #8E8BFF, #5149C9)' },
-    links: [{ label: 'Case study', href: '/work/ems-research', kind: 'case' }],
+    links: [{ label: 'Case study', href: withBase('/work/ems-research'), kind: 'case' }],
     sources: ['iitm-internship'],
   },
   {

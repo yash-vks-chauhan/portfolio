@@ -2,6 +2,7 @@
 // Phones: the floating tab bar (Home, Work, About, Contact) with a separate round Ask button, 16 px above the bottom.
 import { House, LayoutGrid, Mail, Sparkles, User } from 'lucide-react';
 import { tabLinks, type Section } from '../../lib/nav';
+import { withBase } from '../../lib/url';
 
 interface Props {
   current: Section;
@@ -35,7 +36,7 @@ const tabs = tabLinks(isHome);
       })
     }
   </div>
-  <a href={isHome ? '#ask' : '/#ask'} aria-label="Ask my portfolio" class="tab-group flex size-16 flex-none items-center justify-center rounded-full text-[#AF52DE]">
+  <a href={isHome ? '#ask' : withBase('/#ask')} aria-label="Ask my portfolio" class="tab-group flex size-16 flex-none items-center justify-center rounded-full text-[#AF52DE]">
     <Sparkles size={24} strokeWidth={2} aria-hidden="true" />
   </a>
 </nav>

@@ -6,6 +6,7 @@ import { certifications, education, work } from '../content/experience';
 import type { ExperienceItem } from '../content/types';
 import type { DetailItem } from '../components/home/ExperienceSection';
 import { brandGlyph } from '../components/ui/Brand';
+import { withBase } from './url';
 
 const linkIcons: Record<string, string> = { play: 'SiGoogleplay', appstore: 'SiAppstore' };
 
@@ -39,7 +40,7 @@ export async function experienceDetails(n: Numbering, where: string): Promise<{ 
     stack: x.stack,
     links: x.links?.map((l) => (l.kind && linkIcons[l.kind] ? { ...l, icon: brandGlyph(linkIcons[l.kind]) } : l)),
     icon: 'image' in x.icon ? { src: grideeIcon.src } : { monogram: x.icon.monogram, gradient: x.icon.gradient, sizes: monoSizes[x.icon.monogram] ?? [13, 11, 18] },
-    href: `/about#${x.id}`,
+    href: withBase(`/about#${x.id}`),
   });
   return { work: work.map(detail), education: education.map(detail) };
 }

@@ -1,6 +1,7 @@
 // robots.txt: search engines and AI assistants are welcome (the site is written to be quoted), plus the sitemap.
 // Cloudflare's dashboard can block AI crawlers on its own; that switch is Yash's to turn off when deploying.
 import type { APIRoute } from 'astro';
+import { withBase } from '../lib/url';
 
 const AI_CRAWLERS = [
   'GPTBot',
@@ -17,7 +18,7 @@ const AI_CRAWLERS = [
 ];
 
 export const GET: APIRoute = ({ site }) => {
-  const sitemap = new URL('/sitemap-index.xml', site).href;
+  const sitemap = new URL(withBase('/sitemap-index.xml'), site).href;
   const body = [
     '# Search engines and AI assistants are welcome.',
     'User-agent: *',

@@ -3,6 +3,7 @@
 // `short` and `tagline` are the guarantee as the work index and the phone rows word it (from the artboards).
 // Image icons name a file in src/assets/images (see lib/images.ts).
 import type { Project } from './types';
+import { withBase } from '../lib/url';
 
 export const projects: Project[] = [
   {
@@ -18,9 +19,9 @@ export const projects: Project[] = [
     meta: 'FastAPI · Next.js · Postgres · 2026',
     year: '2026',
     icon: { glyph: 'box', gradient: 'linear-gradient(150deg, #2F6BFF 0%, #1E3A8A 60%, #0B1F4D 100%)' },
-    href: '/work/glassbox',
+    href: withBase('/work/glassbox'),
     links: {
-      caseStudy: '/work/glassbox',
+      caseStudy: withBase('/work/glassbox'),
       demo: 'https://glassbox.15-252-203-137.sslip.io',
       code: 'https://github.com/yash-vks-chauhan/Glassbox',
       video: '[90-second demo video]',
@@ -40,9 +41,9 @@ export const projects: Project[] = [
     stack: ['NestJS', 'BullMQ', 'Prisma'],
     year: '2026',
     icon: { glyph: 'activity', gradient: 'linear-gradient(145deg, #8E8BFF, #4B44C4)' },
-    href: '/work/pulse',
+    href: withBase('/work/pulse'),
     links: {
-      caseStudy: '/work/pulse',
+      caseStudy: withBase('/work/pulse'),
       demo: 'https://pulse-ai-crm.vercel.app/',
       code: 'https://github.com/yash-vks-chauhan/Pulse',
     },
@@ -61,9 +62,9 @@ export const projects: Project[] = [
     stack: ['Kotlin', 'CameraX', 'ML Kit', 'Razorpay'],
     year: '2026–',
     icon: { image: 'gridee-icon' },
-    href: '/work/gridee',
+    href: withBase('/work/gridee'),
     links: {
-      caseStudy: '/work/gridee',
+      caseStudy: withBase('/work/gridee'),
       site: 'https://www.gridee.in/',
       playStore: 'https://play.google.com/store/apps/details?id=com.gridee.parking',
       appStore: 'https://apps.apple.com/us/app/grideeapp/id6757460398',
@@ -83,8 +84,8 @@ export const projects: Project[] = [
     stack: ['GraphSAGE', 'VAE', 'XGBoost', 'SHAP'],
     year: '2025–26',
     icon: { glyph: 'ambulance', gradient: 'linear-gradient(145deg, #FF6B6B, #D7263D)' },
-    href: '/work/ems-research',
-    links: { caseStudy: '/work/ems-research' },
+    href: withBase('/work/ems-research'),
+    links: { caseStudy: withBase('/work/ems-research') },
     sources: ['iitm-internship'],
   },
   {
@@ -100,7 +101,7 @@ export const projects: Project[] = [
     meta: 'Details after the decision',
     year: '2026',
     icon: { glyph: 'lock', gradient: 'linear-gradient(145deg, #8E8BFF, #5149C9)' },
-    href: '/research#ieee-manuscript',
+    href: withBase('/research#ieee-manuscript'),
     links: {},
   },
   {
@@ -116,7 +117,7 @@ export const projects: Project[] = [
     meta: 'NestJS · FastAPI · Kubernetes · LSTM planned',
     year: '2026',
     icon: { glyph: 'gauge', gradient: 'linear-gradient(145deg, #64D2FF, #0A7CFF)' },
-    href: '/work/autoscaler',
+    href: withBase('/work/autoscaler'),
     links: { code: 'https://github.com/yash-vks-chauhan/Autoscaler' },
     sources: ['autoscaler-readme'],
   },
@@ -132,7 +133,7 @@ export const projects: Project[] = [
     stack: ['Next.js', 'Prisma', 'Firebase Auth'],
     year: '2025',
     icon: { glyph: 'palette', gradient: 'linear-gradient(145deg, #FFB340, #FF5E3A)' },
-    href: '/work/kalakraft',
+    href: withBase('/work/kalakraft'),
     links: {
       demo: 'https://kalakraftdev.vercel.app',
       code: 'https://github.com/yash-vks-chauhan/Kalakraftdev',
@@ -151,7 +152,7 @@ export const projects: Project[] = [
     stack: ['TensorFlow', 'Keras'],
     year: '2025',
     icon: { glyph: 'scan-line', gradient: 'linear-gradient(145deg, #AEAEB2, #636366)' },
-    href: '/work/ct-denoising',
+    href: withBase('/work/ct-denoising'),
     links: { code: 'https://github.com/yash-vks-chauhan/CT-Denoising-U-Net' },
   },
 ];

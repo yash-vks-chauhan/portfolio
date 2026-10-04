@@ -15,6 +15,7 @@ import { numberSources, footnotes } from '../../lib/citations';
 import { citesIn, plainText } from '../../lib/rich';
 import { projectBySlug } from '../../content/projects';
 import type { CaseStudy, Section, ShortPage } from '../../content/case-studies/types';
+import { withBase } from '../../lib/url';
 
 interface Props {
   study: CaseStudy | ShortPage;
@@ -258,7 +259,7 @@ const grideeIcon = await getImage({ src: images['gridee-icon'], width: 128, heig
 <section aria-labelledby="more-h" class="case-more max-md:hidden">
   <div class="flex items-end justify-between gap-4">
     <h2 id="more-h" class="case-h2-lg">More work</h2>
-    <a href="/work" class="section-link">See all<ChevronRight size={18} strokeWidth={2} aria-hidden="true" /></a>
+    <a href={withBase('/work')} class="section-link">See all<ChevronRight size={18} strokeWidth={2} aria-hidden="true" /></a>
   </div>
   <div class="case-more-grid">
     {
