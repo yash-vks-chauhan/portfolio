@@ -103,7 +103,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 
 ## Blocked on Yash
 
-Filled in as the build goes; the final list is at the end of the build.
+The final list, as of milestone 9 (all milestones done). Everything below needs Yash: a fact, a file, an account or a decision.
 
 Notes from the starter's project files (moved here so they never ship in the site's JavaScript):
 - GlassBox: your role on the case study (solo build?); a real domain for the demo instead of sslip.io; the "Over" alternative in each decision.
@@ -130,7 +130,7 @@ Before launch (IMPLEMENTATION.md §7):
 - `/resume.pdf`: add `public/resume.pdf`, a version without your phone number and without the double-blind paper's title (the master résumé shows both, so it stays out of the site).
 - Placeholders: `npm run placeholders` lists them: 21 on the pages (59 in all) and 25 source fields, mostly the `[date checked]` of each source. Besides the case-study ones above: your LinkedIn handle (`[handle]` in `src/content/site.ts`), the Gridee downloads screenshot and its date, and the GlassBox CI run link.
 - Domain: `SITE_URL` defaults to `https://yashchauhan.dev`, which isn't registered (availability not checked). Canonical links, the sitemap, robots.txt and Open Graph URLs come from it; set `SITE_URL` when building for the real domain.
-- Cloudflare deployment (Workers static assets or Pages, serving `site/dist/`): turn off the default AI-crawler block, so robots.txt's welcome to GPTBot, ClaudeBot and the rest applies; switch on Web Analytics (cookieless); after the domain is live, add it to Google Search Console and Bing Webmaster Tools (and IndexNow).
+- Cloudflare deployment (`site/wrangler.jsonc` is ready for Workers static assets: build with `SITE_URL`, then `npx wrangler deploy` from `site/`): turn off the default AI-crawler block, so robots.txt's welcome to GPTBot, ClaudeBot and the rest applies; switch on Web Analytics (cookieless); after the domain is live, add it to Google Search Console and Bing Webmaster Tools (and IndexNow).
 - Performance on a real phone: once deployed, run PageSpeed Insights on Home and `/work` (the LCP target is 2.0 s; here it measures 1.5–2.6 s in simulation), and watch field data for LCP and INP.
 
 Promises the site makes that need setting up:
