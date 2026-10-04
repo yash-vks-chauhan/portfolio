@@ -20,7 +20,7 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - [x] **3. Ask my portfolio:** `AskPanel` (v1, no server); optional CallChip "searching sources" step. *Done when:* the four suggestions behave like the Components artboard: three cited answers and one refusal
 - [x] **4. Selected work:** GlassBox card (TiltedCard screenshot plus the "Flagged for compliance" toast), Pulse DSL card, Gridee phone card, Research card with Folder, More-work `InsetList` with `StatusChip`. *Done when:* matches the middle of `home-light.jpg` and `home-dark.jpg`
 - [x] **5. Experience, toolkit, contact:** inset lists plus a vaul side sheet (bottom sheet on phones), GlassIcons with a "used in" panel, the contact card and Dock. *Done when:* matches the bottom of `home-light.jpg`
-- [ ] **6. Case study template:** app header, stat strip, Embla preview carousel, summary, sticky "On this page" (IntersectionObserver), diagram, decision cards, evaluation (`wilson.ts`), CI chain, information list, more work. *Done when:* GlassBox matches `case-study-light.jpg` and `case-study-dark.jpg`; Pulse, Gridee and EMS reuse it; short pages for Autoscaler, Kalakraft and CT denoising
+- [x] **6. Case study template:** app header, stat strip, Embla preview carousel, summary, sticky "On this page" (IntersectionObserver), diagram, decision cards, evaluation (`wilson.ts`), CI chain, information list, more work. *Done when:* GlassBox matches `case-study-light.jpg` and `case-study-dark.jpg`; Pulse, Gridee and EMS reuse it; short pages for Autoscaler, Kalakraft and CT denoising
 - [ ] **7. Work index:** RubberSegment filter from `projects.ts` categories, two featured cards, the numbered list, the status legend. *Done when:* matches `work-index.jpg`; the filter counts read 8 · 3 · 3 · 2 · 1 · 1
 - [ ] **8. Phones:** 390 px layouts from the mobile artboards; tab bar; the first screen. *Done when:* matches `mobile-first-screen-light.jpg`, `mobile-first-screen-dark.jpg`, `mobile-home.jpg` and `mobile-case-study-dark.jpg`
 - [ ] **9. Polish and launch:** springs, reduced motion, axe, performance budget, SEO, research, about and 404 pages, résumé link. *Done when:* every box below is ticked or listed under "Blocked on Yash"
@@ -29,8 +29,8 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 
 - [x] Home (`/`)
 - [ ] Work index (`/work`)
-- [ ] Case studies: GlassBox, Pulse, Gridee, EMS research (`/work/<slug>`)
-- [ ] Short pages: Autoscaler, Kalakraft, CT denoising (`/work/<slug>`)
+- [x] Case studies: GlassBox, Pulse, Gridee, EMS research (`/work/<slug>`)
+- [x] Short pages: Autoscaler, Kalakraft, CT denoising (`/work/<slug>`)
 - [ ] Research (`/research`), About (`/about`), 404
 
 ## Features
@@ -82,6 +82,11 @@ Resume from the first unchecked box. Every milestone ends the same way: `npm run
 - **Experience:** the detail sheet stays docked beside the lists on desktop, as drawn (Gridee open), and a row selects into it; phones open the same details in a vaul bottom sheet (the spec's "side sheet on desktop" is drawn docked, so the drawing wins). Rows link to `/about#<id>` without JavaScript. Certifications link out to each credential, as drawn. The home footer lists six notes, not the drawn four: the Hindalco and SRM details cite two more sources, and every number needs its note.
 - **Toolkit:** React Bits GlassIcons reshaped to the drawn tiles (72 px, 6 columns; 60 px, 4 columns and eight tools on phones); each tile is a toggle and the "used in" panel is a live region. Only public fields reach the page: `toolkit.ts`'s `verify` notes stay out (a unit test checks the build).
 - **Contact and Dock:** the Dock items are real links; the panel keeps its height and a magnified icon rises out of it. It rests at 54 px (the home artboard draws the pointer over GitHub; the Components artboard draws it at rest). No magnification without a fine pointer or under reduced motion. "Copy" copies the address with the "Email copied" toast.
+- **Case studies:** data files in `src/content/case-studies/` (one per page) rendered by one template (`src/components/case/`). GlassBox is the drawn page; Pulse, Gridee and EMS reuse its parts with the sections their facts support (no evaluation ring without an evaluation, no preview for EMS's government data). Intervals come from `lib/wilson.ts`; reading time is counted from the text (the drawing's "12 min" was illustrative).
+- **Which facts:** the README's deep-dives and claims audit, plus `design/starter/content`. The README's Experience section repeats résumé claims, so its extra details stay off the case studies and are listed under "Blocked on Yash" to confirm.
+- **Phones:** case studies show the drawn sections in the drawn order (problem, the flow as steps, evaluation, one decision plus "N more"), and keep every other section reachable behind "More on …" disclosures (the mobile artboard leaves them out). The phone footer and the full source list follow.
+- **Stat strip:** cells use the drawing's content-box sizing, so at 1440 px the strip overflows by about 32 px and scrolls, as drawn.
+- **Placeholder links** (the 90-second video) render as disabled buttons until the link exists. Share uses the system share sheet where there is one, otherwise copies the link with a toast.
 - `Yash_Chauhan_Master_Resume.pdf` is never copied into `site/`. The site links `/resume.pdf`; that file is Yash's to add (a test fails if the master résumé ever lands in `public/`).
 
 ## Blocked on Yash
@@ -97,6 +102,17 @@ Notes from the starter's project files (moved here so they never ship in the sit
 - Autoscaler: add tests on the safety rails; say "SHAP-style attribution", not SHAP; the LSTM is planned, not built.
 - Kalakraft: clarify ownership and whether it has real orders.
 - CT denoising: fix the noisy/clean pairing and re-run the metrics before quoting any number.
+
+Case-study placeholders (they show on the pages in grey until filled):
+- GlassBox: the 90-second demo video link; the real `make eval` command; the "Over" alternative in each decision; a real bug you hit; the AI-tool note; your role.
+- Pulse: your role; the "Over" and "Cost" of the state-machine and failover decisions; your next step; a real bug; the Origin row names Xeno, so confirm the assignment terms allow it (or drop the row).
+- Gridee: your role split with your co-founder; one hard engineering story; the AI-tool note.
+- EMS: the record count (once the PI agrees); what you'd do differently; and confirm with the PI that the five aggregate findings can be shown.
+- Kalakraft: who else built it, and whether it takes real orders.
+
+Résumé claims from the README's Experience section, left off until you confirm them:
+- EMS: 8,567 autoencoder outliers, 8.37% WMAPE, 5,000+ simulated routes, a 55-column matrix, the statistical tests.
+- Gridee: ZXing, Retrofit and OkHttp, email and Google sign-in, operator workflows for entry, exit and occupancy.
 
 Toolkit usages to confirm (from `src/content/toolkit.ts`, `verify`):
 - Python in the IEEE manuscript (the README names XGBoost and SHAP but not the language).

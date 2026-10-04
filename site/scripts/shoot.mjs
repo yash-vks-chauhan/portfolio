@@ -50,9 +50,13 @@ async function loadEverything(page) {
       window.scrollTo({ top: y, behavior: 'instant' });
       await new Promise((r) => setTimeout(r, 120));
     }
-    await Promise.all(
-      [...document.images].map((img) => (img.complete ? null : new Promise((r) => img.addEventListener('load', r, { once: true }) || img.addEventListener('error', r, { once: true })))),
-    );
+    // Wait for the images that are actually rendered (hidden ones, e.g. phone-only or in a closed disclosure,
+    // never load lazily), but not forever.
+    const pending = [...document.images].filter((img) => !img.complete && img.getClientRects().length > 0);
+    await Promise.race([
+      Promise.all(pending.map((img) => new Promise((r) => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); }))),
+      new Promise((r) => setTimeout(r, 8000)),
+    ]);
     window.scrollTo({ top: 0, behavior: 'instant' });
   });
   await page.waitForTimeout(400);

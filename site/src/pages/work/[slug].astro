@@ -1,0 +1,23 @@
+---
+// /work/<slug>: the four case studies (GlassBox, Pulse, Gridee, EMS research) and the short pages (Autoscaler,
+// Kalakraft, CT denoising), all on the case-study template.
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/shell/Footer.astro';
+import CasePage from '../../components/case/CasePage.astro';
+import { caseStudies, shortPages } from '../../content/case-studies';
+import type { CaseStudy, ShortPage } from '../../content/case-studies/types';
+
+export function getStaticPaths() {
+  return [...caseStudies, ...shortPages].map((study) => ({ params: { slug: study.slug }, props: { study } }));
+}
+
+interface Props {
+  study: CaseStudy | ShortPage;
+}
+const { study } = Astro.props;
+---
+
+<Base title={study.title} description={study.description} section="work" phoneHeader="case" ogType="article">
+  <CasePage study={study} />
+  <Footer slot="footer" claim="page" sourcesHref="#sources" />
+</Base>

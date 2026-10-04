@@ -1,0 +1,432 @@
+---
+// One case-study section, by kind. Desktop markup and sizes come from GlassCase.html; phone sizes and the condensed
+// variants (one decision plus "N more", the evaluation as rows) from GlassMobileCaseDark.html.
+// `inDisclosure` renders a section inside a phone disclosure: no id and no heading (the disclosure names it).
+import { Check, ChevronRight, CircleAlert, Copy, Info, Sparkles, Terminal } from 'lucide-react';
+import { glyph } from '../ui/glyphs';
+import Rich from './Rich.astro';
+import Diagram from './Diagram.astro';
+import { isWholePlaceholder } from '../../lib/rich';
+import { citeNumber, getSource, type Numbering } from '../../lib/citations';
+import type { Section } from '../../content/case-studies/types';
+
+interface Props {
+  section: Section;
+  n: Numbering;
+  slug: string;
+  inDisclosure?: boolean;
+}
+
+const { section: s, n, slug, inDisclosure = false } = Astro.props;
+const where = `the ${slug} page`;
+const ringCirc = (r: number) => 2 * Math.PI * r;
+---
+
+<section id={inDisclosure ? undefined : s.id} class:list={['case-section', `case-${s.kind}`, inDisclosure && 'in-disclosure']}>
+  {
+    !inDisclosure &&
+      (s.kind === 'architecture' ? (
+        <h2 class="case-h2">
+          <span class="max-md:hidden">{s.title}</span>
+          <span class="md:hidden">{s.titlePhone}</span>
+        </h2>
+      ) : (
+        <h2 class="case-h2">{s.title}</h2>
+      ))
+  }
+
+  {
+    s.kind === 'prose' && (
+      <>
+        <div class:list={[s.paragraphsPhone && 'max-md:hidden']}>
+          {s.paragraphs.map((p) => (
+            <p class:list={['case-p', isWholePlaceholder(p) && 'is-placeholder']}>
+              <Rich text={p} n={n} where={where} />
+            </p>
+          ))}
+        </div>
+        {s.paragraphsPhone && (
+          <div class="md:hidden">
+            {s.paragraphsPhone.map((p) => (
+              <p class:list={['case-p', isWholePlaceholder(p) && 'is-placeholder']}>
+                <Rich text={p} n={n} where={where} />
+              </p>
+            ))}
+          </div>
+        )}
+      </>
+    )
+  }
+
+  {
+    s.kind === 'constraints' && (
+      <div class="inset-list case-constraints-list">
+        {s.items.map((c, i) => {
+          const Icon = glyph(c.icon);
+          return (
+            <div class="constraint-row">
+              <span class="constraint-icon" style={{ background: c.gradient }} aria-hidden="true">
+                <Icon size={20} strokeWidth={2} />
+              </span>
+              <span class:list={['constraint-body', i > 0 && 'border-t border-sep']}>
+                <span>
+                  <strong class="font-semibold">{c.title}</strong> <span class="text-label2">{c.text}</span>
+                </span>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    )
+  }
+
+  {
+    s.kind === 'architecture' && (
+      <>
+        <p class="case-p max-md:hidden">
+          <Rich text={s.intro} n={n} where={where} />
+        </p>
+        <Diagram diagram={s.diagram} steps={s.steps} n={n} uid={slug} />
+      </>
+    )
+  }
+
+  {
+    s.kind === 'decisions' && (
+      <>
+        <div class="decisions max-md:hidden">
+          {s.items.map((d) => (
+            <div class="decision">
+              <div class="decision-head">
+                <span class="decision-chip">
+                  <Check size={13} strokeWidth={2.6} aria-hidden="true" />
+                  Accepted
+                </span>
+                <h3 class="decision-title">{d.title}</h3>
+              </div>
+              <dl class="decision-rows">
+                {(
+                  [
+                    ['Chose', d.chose],
+                    ['Over', d.over],
+                    ['Because', d.because],
+                    ['Cost', d.cost],
+                  ] as const
+                ).map(([label, text]) => (
+                  <div class="decision-row">
+                    <dt>{label}</dt>
+                    <dd class:list={[(label === 'Over' || isWholePlaceholder(text)) && 'text-label2']}>
+                      <Rich text={text} n={n} where={where} />
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+        <div class="md:hidden">
+          {s.items.slice(0, 1).map((d) => (
+            <div class="decision-phone">
+              <div class="decision-phone-head">
+                <span class="decision-chip">
+                  <Check size={12} strokeWidth={2.6} aria-hidden="true" />
+                  Accepted
+                </span>
+                <h3 class="decision-title">{d.title}</h3>
+              </div>
+              <div class="decision-phone-row">
+                <span class="decision-phone-label">Because</span>
+                <Rich text={d.becausePhone ?? d.because} n={n} where={where} />
+              </div>
+              <div class="decision-phone-row">
+                <span class="decision-phone-label">Cost</span>
+                <Rich text={d.costPhone ?? d.cost} n={n} where={where} />
+              </div>
+            </div>
+          ))}
+          {s.items.length > 1 && (
+            <details class="disclosure decision-more">
+              <summary class="disclosure-summary">
+                {s.items.length - 1} more {s.items.length - 1 === 1 ? 'decision' : 'decisions'}
+                <span class="disclosure-chevron" aria-hidden="true">
+                  <ChevronRight size={16} strokeWidth={2} />
+                </span>
+              </summary>
+              <div class="decision-more-list">
+                {s.items.slice(1).map((d) => (
+                  <div class="decision-phone">
+                    <div class="decision-phone-head">
+                      <span class="decision-chip">
+                        <Check size={12} strokeWidth={2.6} aria-hidden="true" />
+                        Accepted
+                      </span>
+                      <h3 class="decision-title">{d.title}</h3>
+                    </div>
+                    {(
+                      [
+                        ['Chose', d.chose],
+                        ['Over', d.over],
+                        ['Because', d.becausePhone ?? d.because],
+                        ['Cost', d.costPhone ?? d.cost],
+                      ] as const
+                    ).map(([label, text]) => (
+                      <div class:list={['decision-phone-row', (label === 'Over' || isWholePlaceholder(text)) && 'text-label2']}>
+                        <span class="decision-phone-label">{label}</span>
+                        <Rich text={text} n={n} where={where} />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </details>
+          )}
+        </div>
+      </>
+    )
+  }
+
+  {
+    s.kind === 'evaluation' &&
+      (() => {
+        const e = s.evaluation;
+        const pct = e.ring.k / e.ring.n;
+        return (
+          <>
+            <p class="case-p">
+              <span class:list={[e.introPhone && 'max-md:hidden']}>
+                <Rich text={e.intro} n={n} where={where} />
+              </span>
+              {e.introPhone && (
+                <span class="md:hidden">
+                  <Rich text={e.introPhone} n={n} where={where} />
+                </span>
+              )}
+            </p>
+            <div class="eval-grid max-md:hidden">
+              <div class="eval-ring-card">
+                <div class="eval-ring">
+                  <svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
+                    <circle cx="100" cy="100" r="88" fill="none" stroke="currentColor" stroke-opacity="0.16" stroke-width="16" />
+                    <circle
+                      cx="100"
+                      cy="100"
+                      r="88"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="16"
+                      stroke-linecap="round"
+                      stroke-dasharray={`${(ringCirc(88) * pct).toFixed(0)} ${ringCirc(88).toFixed(0)}`}
+                      transform="rotate(-90 100 100)"
+                    />
+                  </svg>
+                  <div class="eval-ring-center">
+                    <span class="num eval-ring-value">
+                      {e.ring.k}/{e.ring.n}
+                    </span>
+                    <span class="eval-ring-label">correct</span>
+                  </div>
+                </div>
+                <p class="eval-ring-caption">
+                  <Rich text={e.ring.caption} n={n} where={where} />
+                </p>
+              </div>
+              <div class="eval-metrics">
+                {e.metrics.map((m, i) => (
+                  <div class:list={['eval-metric', i > 0 && 'sep-top']}>
+                    <span class="flex min-w-0 flex-1 flex-col">
+                      <span class="eval-metric-label">{m.label}</span>
+                      <span class="eval-metric-note">{m.note}</span>
+                    </span>
+                    {m.bar && (
+                      <span class="eval-bar" aria-hidden="true">
+                        <span style={{ left: `${(m.bar.from * 100).toFixed(0)}%`, width: `${((m.bar.to - m.bar.from) * 100).toFixed(0)}%` }} />
+                      </span>
+                    )}
+                    <span class="eval-metric-value num">{m.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="eval-phone md:hidden">
+              <div class="eval-phone-top">
+                <div class="eval-phone-ring">
+                  <svg width="92" height="92" viewBox="0 0 92 92" aria-hidden="true">
+                    <circle cx="46" cy="46" r="39" fill="none" stroke="currentColor" stroke-opacity="0.16" stroke-width="10" />
+                    <circle
+                      cx="46"
+                      cy="46"
+                      r="39"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="10"
+                      stroke-linecap="round"
+                      stroke-dasharray={`${(ringCirc(39) * pct).toFixed(0)} ${ringCirc(39).toFixed(0)}`}
+                      transform="rotate(-90 46 46)"
+                    />
+                  </svg>
+                  <span class="num">
+                    {e.ring.k}/{e.ring.n}
+                  </span>
+                </div>
+                <span class="flex flex-col">
+                  <span class="eval-phone-title">{e.ring.title}</span>
+                  <span class="eval-phone-note">
+                    <Rich text={e.ring.notePhone} n={n} where={where} />
+                  </span>
+                </span>
+              </div>
+              {e.phoneRows.map((r) => (
+                <div class="eval-phone-row">
+                  <span>{r.label}</span>
+                  <span class="font-semibold">
+                    {r.value} {r.note && <span class="font-normal text-label2">{r.note}</span>}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div class="caveat">
+              <span class="caveat-icon" aria-hidden="true">
+                <Info size={20} strokeWidth={2} className="max-md:size-[18px]" />
+              </span>
+              <p class:list={[e.caveatPhone && 'max-md:hidden']}>
+                <Rich text={e.caveat} n={n} where={where} />
+              </p>
+              {e.caveatPhone && (
+                <p class="md:hidden">
+                  <Rich text={e.caveatPhone} n={n} where={where} />
+                </p>
+              )}
+            </div>
+
+            {e.reproduce && (
+              <div class="code-block max-md:hidden">
+                <div class="code-head">
+                  <span class="flex items-center gap-2">
+                    <Terminal size={14} strokeWidth={2} aria-hidden="true" />
+                    Reproduce
+                  </span>
+                  <button type="button" class="code-copy" data-copy-text={e.reproduce.command} data-copy-message="Command copied" aria-label="Copy the command">
+                    <Copy size={13} strokeWidth={2} aria-hidden="true" />
+                    Copy
+                  </button>
+                </div>
+                <pre class="code-pre"><span class="text-[#8E8E93]">$</span> {e.reproduce.command}{e.reproduce.comment && <span class="text-[#8E8E93]">{'   '}{e.reproduce.comment}</span>}{'\n'}<span class="text-[#30D158]">{e.reproduce.output}</span></pre>
+              </div>
+            )}
+          </>
+        );
+      })()
+  }
+
+  {
+    s.kind === 'ops' && (
+      <>
+        <div class="ops-cards">
+          {s.ops.cards.map((c) => (
+            <div class="ops-card">
+              <span class="ops-value num">
+                {c.value}
+                {c.cite &&
+                  (() => {
+                    const num = citeNumber(n, c.cite, where);
+                    return (
+                      <a href={`#fn-${num}`} class="cite cite-raised" data-cite={c.cite} data-n={num} aria-label={`Source ${num}: ${getSource(c.cite).title}`}>
+                        {num}
+                      </a>
+                    );
+                  })()}
+              </span>
+              <span class="ops-text">{c.text}</span>
+            </div>
+          ))}
+        </div>
+        <div class="ops-chain-card">
+          <p class="ops-chain-title">{s.ops.chainTitle}</p>
+          <ol class="ops-chain" aria-label={s.ops.chainTitle}>
+            {s.ops.chain.map((step, i) => {
+              const Icon = step.icon ? glyph(step.icon) : null;
+              return (
+                <li class="contents">
+                  <span class:list={['ops-step', step.tone === 'ok' && 'is-ok']}>
+                    {Icon && <Icon size={14} strokeWidth={step.tone === 'ok' ? 2.2 : 2} aria-hidden="true" />}
+                    {step.label}
+                  </span>
+                  {i < s.ops.chain.length - 1 && (
+                    <span class="flex text-label3" aria-hidden="true">
+                      <ChevronRight size={16} strokeWidth={2} />
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+          {s.ops.note && (
+            <p class="ops-note">
+              <Rich text={s.ops.note} n={n} where={where} />
+            </p>
+          )}
+        </div>
+      </>
+    )
+  }
+
+  {
+    s.kind === 'list' && (
+      <>
+        {s.intro && (
+          <p class="case-p">
+            <Rich text={s.intro} n={n} where={where} />
+          </p>
+        )}
+        <ul class="plain-list" role={s.numbered ? 'list' : undefined}>
+          {s.items.map((item, i) => (
+            <li class:list={['plain-item', i > 0 && 'sep-top', item.placeholder && 'text-label2']}>
+              {s.numbered ? (
+                <span class="plain-num" aria-hidden="true">
+                  {i + 1}
+                </span>
+              ) : (
+                <span class:list={['plain-icon', item.placeholder ? 'text-label3' : `tone-${s.tone ?? 'warn'}`]} aria-hidden="true">
+                  {s.tone === 'ok' ? <Check size={18} strokeWidth={2.2} /> : s.tone === 'cite' ? <ChevronRight size={18} strokeWidth={2} /> : <CircleAlert size={18} strokeWidth={2} />}
+                </span>
+              )}
+              <span>
+                <Rich text={item.text} n={n} where={where} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    s.kind === 'next' && (
+      <ul class="plain-list">
+        {s.items.map((item, i) => (
+          <li class:list={['plain-item items-start', i > 0 && 'sep-top', isWholePlaceholder(item.text) && 'text-label2']}>
+            <span class="next-chip">{item.status}</span>
+            <span>
+              <Rich text={item.text} n={n} where={where} />
+            </span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    s.kind === 'ai-note' && (
+      <div class="ai-note">
+        <span class="ai-note-icon" aria-hidden="true">
+          <Sparkles size={18} strokeWidth={2} />
+        </span>
+        <p class:list={[isWholePlaceholder(s.text) ? 'text-label2' : 'text-ink2']}>
+          <Rich text={s.text} n={n} where={where} />
+        </p>
+      </div>
+    )
+  }
+</section>

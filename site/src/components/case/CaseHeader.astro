@@ -1,0 +1,131 @@
+---
+// The App Store-style header: back to Work, the app icon (136 px; 104 on phones), name, lead, actions and the
+// small print, then the six-cell stat strip (scrolls sideways on narrow screens).
+import { Image } from 'astro:assets';
+import { ArrowUpRight, ChevronLeft, Globe, Play, Share } from 'lucide-react';
+import { Brand } from '../ui/Brand';
+import { StatusChip } from '../ui/StatusChip';
+import { glyph } from '../ui/glyphs';
+import { images } from '../../lib/images';
+import { isPlaceholder } from '../../content/site';
+import type { CaseAction, Stat } from '../../content/case-studies/types';
+import type { Status } from '../../content/types';
+
+interface Props {
+  name: string;
+  lead: string;
+  leadPhone: string;
+  icon: { glyph: string; gradient: string } | { image: keyof typeof images };
+  actions: CaseAction[];
+  note?: string;
+  stats?: Stat[];
+  /** Short pages: the project's status chip next to the name. */
+  status?: Status;
+}
+
+const { name, lead, leadPhone, icon, actions, note, stats = [], status } = Astro.props;
+const Glyph = 'glyph' in icon ? glyph(icon.glyph) : null;
+const external = (href: string) => /^https?:/.test(href);
+// Long labels (e.g. both store names) get slightly tighter buttons on phones, so they stay on one line.
+const phoneLabelLength = actions.filter((a) => !a.desktopOnly).reduce((sum, a) => sum + (a.labelPhone ?? a.label).length, 0);
+const compact = phoneLabelLength > 14;
+---
+
+<header class="case-header">
+  <a href="/work" class="case-back max-md:hidden"><ChevronLeft size={20} strokeWidth={2} aria-hidden="true" />Work</a>
+  <div class="case-title-row">
+    {
+      'image' in icon ? (
+        <Image src={images[icon.image]} alt="" width={136} height={136} class="case-icon case-icon-img" loading="eager" />
+      ) : (
+        <span aria-hidden="true" class="case-icon" style={{ background: icon.gradient }}>
+          {Glyph && <Glyph size={64} strokeWidth={1.5} className="case-icon-glyph" />}
+        </span>
+      )
+    }
+    <div class="case-title-col">
+      <h1 class="case-title">
+        {name}
+        {status && <StatusChip status={status} />}
+      </h1>
+      <p class="case-lead max-md:hidden">{lead}</p>
+      <p class="case-lead md:hidden">{leadPhone}</p>
+      {
+        actions.length > 0 && (
+          <div class:list={['case-actions', compact && 'is-compact']}>
+            {actions.map((a) => {
+              const pending = isPlaceholder(a.href);
+              const cls = ['pill', a.primary ? 'case-action-primary' : 'case-action', a.desktopOnly && 'max-md:hidden'];
+              const body = (
+                <>
+                  {a.kind === 'code' && <Brand name="SiGithub" size={16} className="max-md:size-[15px]" />}
+                  {a.kind === 'video' && <Play size={15} strokeWidth={2.2} aria-hidden="true" />}
+                  {a.kind === 'play' && <Brand name="SiGoogleplay" size={15} />}
+                  {a.kind === 'appstore' && <Brand name="SiAppstore" size={15} />}
+                  {a.kind === 'site' && <Globe size={16} strokeWidth={2} aria-hidden="true" />}
+                  {a.labelPhone ? (
+                    <>
+                      <span class="max-md:hidden">{a.label}</span>
+                      <span class="md:hidden">{a.labelPhone}</span>
+                    </>
+                  ) : (
+                    a.label
+                  )}
+                  {a.primary && a.kind !== 'play' && a.kind !== 'appstore' && <ArrowUpRight size={16} strokeWidth={2.2} aria-hidden="true" className="max-md:size-[15px]" />}
+                </>
+              );
+              // A link whose target is still a [placeholder] renders as a disabled control, labelled so.
+              return pending ? (
+                <span class:list={[...cls, 'is-pending']} aria-disabled="true" title={`${a.label}: ${a.href}`}>
+                  {body}
+                </span>
+              ) : (
+                <a href={a.href} class:list={cls} target={external(a.href) ? '_blank' : undefined} rel={external(a.href) ? 'noreferrer' : undefined}>
+                  {body}
+                </a>
+              );
+            })}
+            <button type="button" class="case-share max-md:hidden" aria-label="Share this page" data-share>
+              <Share size={18} strokeWidth={2} aria-hidden="true" />
+            </button>
+          </div>
+        )
+      }
+      {note && <p class="case-note max-md:hidden">{note}</p>}
+    </div>
+  </div>
+
+  {
+    stats.length > 0 && (
+      <div class="case-stats snap" role="region" aria-label="At a glance" tabindex="0">
+        <dl class="case-stats-row">
+          {stats.map((s) => (
+            <div class="case-stat">
+              <dt class="case-stat-label">
+                {s.labelPhone ? (
+                  <>
+                    <span class="max-md:hidden">{s.label}</span>
+                    <span class="md:hidden">{s.labelPhone}</span>
+                  </>
+                ) : (
+                  s.label
+                )}
+              </dt>
+              <dd class="case-stat-value num">{s.value}</dd>
+              <dd class="case-stat-note">
+                {s.notePhone ? (
+                  <>
+                    <span class="max-md:hidden">{s.note}</span>
+                    <span class="md:hidden">{s.notePhone}</span>
+                  </>
+                ) : (
+                  s.note
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    )
+  }
+</header>

@@ -1,0 +1,324 @@
+---
+// A case study or a short project page: header and stat strip, preview, "In short", then the sections beside a
+// sticky "On this page" (desktop), the Information list, the sources and More work. Phones show the drawn sections in
+// the drawn order and the rest behind disclosures, so nothing is lost on a small screen.
+import { getImage } from 'astro:assets';
+import { ArrowUpRight, ChevronRight } from 'lucide-react';
+import CaseHeader from './CaseHeader.astro';
+import CaseSection from './CaseSection.astro';
+import PreviewCarousel, { type SlideProp } from './PreviewCarousel';
+import Rich from './Rich.astro';
+import { glyph } from '../ui/glyphs';
+import { images } from '../../lib/images';
+import { isPlaceholder } from '../../content/site';
+import { numberSources, footnotes } from '../../lib/citations';
+import { citesIn, plainText } from '../../lib/rich';
+import { projectBySlug } from '../../content/projects';
+import type { CaseStudy, Section, ShortPage } from '../../content/case-studies/types';
+
+interface Props {
+  study: CaseStudy | ShortPage;
+}
+
+const { study } = Astro.props;
+const isCase = 'stats' in study;
+const project = projectBySlug[study.slug];
+const n = numberSources(study.sources);
+const notes = footnotes(n);
+type Placed = Section & { phone?: number | 'more' };
+const sections = study.sections as Placed[];
+
+// Every cite in the page must be in its source list (Rich throws otherwise); every listed source should be cited or
+// shown in the list, which it always is.
+const allText = JSON.stringify(study);
+for (const id of citesIn(allText)) if (!(id in n)) throw new Error(`${study.slug}: cites "${id}" but doesn't list it in sources`);
+
+// Reading time from the words a reader reads on desktop (phone variants and markup left out), at 230 a minute.
+const SKIP = new Set(['kind', 'id', 'icon', 'gradient', 'tone', 'dir', 'image', 'href', 'phone', 'status', 'size', 'align']);
+const collect = (value: unknown, key = ''): string[] => {
+  if (SKIP.has(key) || key.endsWith('Phone')) return [];
+  if (typeof value === 'string') return [value];
+  if (Array.isArray(value)) return value.flatMap((v) => collect(v));
+  if (value && typeof value === 'object') return Object.entries(value).flatMap(([k, v]) => collect(v, k));
+  return [];
+};
+const words = plainText(collect({ summary: study.summary, sections: study.sections }).join(' ')).split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 230));
+
+const slides: SlideProp[] = isCase && study.preview
+  ? await Promise.all(
+      study.preview.slides.map(async (s) => {
+        const meta = images[s.image];
+        const portrait = study.preview!.image === 'phone';
+        const img = await getImage({ src: meta, widths: portrait ? [220, 280, 440, 560] : [300, 560, 600, 1120], format: 'webp' });
+        return {
+          src: img.src,
+          srcset: img.srcSet.attribute,
+          width: meta.width,
+          height: meta.height,
+          alt: s.alt,
+          title: s.title,
+          caption: s.caption,
+          captionPhone: s.captionPhone,
+        };
+      }),
+    )
+  : [];
+const singleSlide = slides.length === 1;
+
+const toc = [...sections.map((s) => ({ id: s.id, label: s.toc ?? s.title })), { id: 'sources', label: 'Sources' }];
+const phoneMore = sections.filter((s) => s.phone === 'more');
+const phoneOrder = (s: Placed, i: number) => (typeof s.phone === 'number' ? s.phone : s.phone === 'more' ? 999 : 100 + i);
+
+const moreLine: Record<string, string> = {
+  pulse: 'The LLM proposes a validated DSL. It never writes SQL or sees PII.',
+  gridee: 'Smart parking I co-founded, with 8,000+ downloads.',
+};
+const more = study.more.map((slug) => projectBySlug[slug]);
+const grideeIcon = await getImage({ src: images['gridee-icon'], width: 128, height: 128, format: 'webp' });
+---
+
+<CaseHeader
+  name={study.name}
+  lead={study.lead}
+  leadPhone={study.leadPhone}
+  icon={study.icon}
+  actions={study.actions}
+  note={study.note}
+  stats={isCase ? study.stats : undefined}
+  status={!isCase && project ? project.status : undefined}
+/>
+
+{
+  slides.length > 0 && (
+    <section aria-labelledby="preview-h" class:list={['case-preview', singleSlide && 'is-single']}>
+      {singleSlide ? (
+        <>
+          <h2 id="preview-h" class="case-h2-lg">
+            Preview
+          </h2>
+          <figure class="preview-single">
+            <img src={slides[0].src} srcset={slides[0].srcset} sizes="(max-width: 767px) 100vw, 1072px" width={slides[0].width} height={slides[0].height} alt={slides[0].alt} loading="lazy" decoding="async" class="preview-img" />
+            <figcaption class="preview-caption">
+              <strong>{slides[0].title}</strong> {slides[0].caption}
+            </figcaption>
+          </figure>
+        </>
+      ) : (
+        <PreviewCarousel client:visible slides={slides} variant={isCase && study.preview?.image === 'phone' ? 'portrait' : 'landscape'} />
+      )}
+    </section>
+  )
+}
+
+<section aria-label="Summary" class="case-summary-wrap">
+  <div class="case-summary">
+    {
+      (() => {
+        const Icon = glyph(study.summary.icon);
+        return (
+          <span class="case-summary-icon max-md:hidden" style={{ background: study.summary.gradient }} aria-hidden="true">
+            <Icon size={24} strokeWidth={2} />
+          </span>
+        );
+      })()
+    }
+    <div class="min-w-0 flex-[1_1_480px]">
+      <p class="case-summary-kicker">In short</p>
+      <p class:list={['case-summary-text', study.summary.textPhone && 'max-md:hidden']}>
+        <Rich text={study.summary.text} n={n} where={`the ${study.slug} page`} marker="lg" />
+      </p>
+      {
+        study.summary.textPhone && (
+          <p class="case-summary-text md:hidden">
+            <Rich text={study.summary.textPhone} n={n} where={`the ${study.slug} page`} />
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<div class:list={['case-body', !isCase && 'is-short']}>
+  {
+    isCase && (
+      <nav class="toc max-md:hidden" aria-label="On this page" data-toc>
+        <span class="toc-title">On this page</span>
+        {toc.map((t) => (
+          <a href={`#${t.id}`} class="toc-link" data-toc-link={t.id}>
+            <span class="toc-bar" aria-hidden="true" />
+            {t.label}
+          </a>
+        ))}
+        <span class="toc-meta">
+          {minutes} min read · {notes.length} {notes.length === 1 ? 'source' : 'sources'}
+        </span>
+      </nav>
+    )
+  }
+
+  <article class="case-article">
+    {
+      sections.map((s, i) => (
+        <div class:list={['case-slot', s.phone === 'more' && 'max-md:hidden']} style={{ '--phone-order': phoneOrder(s, i) }}>
+          <CaseSection section={s} n={n} slug={study.slug} />
+        </div>
+      ))
+    }
+
+    {
+      phoneMore.length > 0 && (
+        <div class="case-slot md:hidden" style={{ '--phone-order': 500 }}>
+          <section aria-labelledby="more-on-h" class="case-section">
+            <h2 id="more-on-h" class="case-h2">
+              More on {study.name}
+            </h2>
+            <div class="disclosure-group">
+              {phoneMore.map((s) => (
+                <details class="disclosure">
+                  <summary class="disclosure-summary">
+                    {s.toc ?? s.title}
+                    <span class="disclosure-chevron" aria-hidden="true">
+                      <ChevronRight size={16} strokeWidth={2} />
+                    </span>
+                  </summary>
+                  <div class="disclosure-body">
+                    <CaseSection section={s} n={n} slug={study.slug} inDisclosure />
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
+        </div>
+      )
+    }
+
+    <div class="case-slot max-md:hidden" style={{ '--phone-order': 1000 }}>
+      <section id="sources" class="case-section case-sources">
+        <h2 class="case-h2-sm">Sources</h2>
+        <ol class="case-sources-list">
+          {
+            notes.map(({ n: num, source }) => (
+              <li id={`fn-${num}`}>
+                <span class="case-sources-num">{num}.</span>
+                <span>{source.noteShort ?? source.note}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+    </div>
+  </article>
+</div>
+
+<section aria-labelledby="info-h" class="case-info">
+  <h2 id="info-h" class="case-h2-lg">Information</h2>
+  <div class="case-info-grid">
+    {
+      study.info.map((row) => {
+        const value = (
+          <>
+            <span class="max-md:hidden">{row.value}</span>
+            <span class="md:hidden">{row.valuePhone ?? row.value}</span>
+          </>
+        );
+        const cls = ['case-info-row', !row.phone && 'max-md:hidden'];
+        return row.href ? (
+          <a class:list={['row', ...cls]} href={row.href} target={/^https?:/.test(row.href) ? '_blank' : undefined} rel="noreferrer">
+            <span class="text-label2">{row.label}</span>
+            <span class="case-info-link">
+              {value}
+              <ArrowUpRight size={14} strokeWidth={2} aria-hidden="true" />
+            </span>
+          </a>
+        ) : (
+          <div class:list={cls}>
+            <span class="text-label2">
+              <span class="max-md:hidden">{row.label}</span>
+              <span class="md:hidden">{row.labelPhone ?? row.label}</span>
+            </span>
+            <span class:list={['case-info-value', isPlaceholder(row.value) && 'text-label2']}>{value}</span>
+          </div>
+        );
+      })
+    }
+  </div>
+  <ol class="case-sources-phone md:hidden" aria-label="Sources">
+    {
+      notes.map(({ n: num, source }) => (
+        <li id={`fn-${num}-phone`}>
+          <span class="case-sources-num">{num}.</span>
+          <span>{source.noteShort ?? source.note}</span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<section aria-labelledby="more-h" class="case-more max-md:hidden">
+  <div class="flex items-end justify-between gap-4">
+    <h2 id="more-h" class="case-h2-lg">More work</h2>
+    <a href="/work" class="section-link">See all<ChevronRight size={18} strokeWidth={2} aria-hidden="true" /></a>
+  </div>
+  <div class="case-more-grid">
+    {
+      more.map((p) => {
+        const Icon = 'glyph' in p.icon ? glyph(p.icon.glyph) : null;
+        return (
+          <a class="case-more-card lift" href={p.href}>
+            {'image' in p.icon ? (
+              <img src={grideeIcon.src} alt="" width="64" height="64" class="case-more-icon" loading="lazy" decoding="async" />
+            ) : (
+              <span class="case-more-icon" style={{ background: p.icon.gradient }} aria-hidden="true">
+                {Icon && <Icon size={30} strokeWidth={2} />}
+              </span>
+            )}
+            <span class="flex min-w-0 flex-1 flex-col">
+              <span class="text-[17px] font-semibold tracking-[-0.016em]">{p.name}</span>
+              <span class="text-[15px] leading-[1.4] tracking-[-0.012em] text-label2">{moreLine[p.slug] ?? p.short}</span>
+            </span>
+            <span class="case-more-view">View</span>
+          </a>
+        );
+      })
+    }
+  </div>
+</section>
+
+<script>
+  // "On this page": the section nearest the top of the viewport is marked current (aria-current) as you read.
+  const nav = document.querySelector<HTMLElement>('[data-toc]');
+  if (nav) {
+    const links = new Map([...nav.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')].map((a) => [a.dataset.tocLink!, a]));
+    const targets = [...links.keys()].map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    const visible = new Set<string>();
+    let current = '';
+    const mark = (id: string) => {
+      if (id === current) return;
+      current = id;
+      for (const [key, a] of links) {
+        if (key === id) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      }
+    };
+    const pick = () => {
+      const first = targets.find((t) => visible.has(t.id));
+      if (first) return mark(first.id);
+      // Between sections: the last one whose top has scrolled past the band.
+      const passed = targets.filter((t) => t.getBoundingClientRect().top < window.innerHeight * 0.4);
+      mark((passed.at(-1) ?? targets[0]).id);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target.id);
+          else visible.delete(e.target.id);
+        }
+        pick();
+      },
+      { rootMargin: '-104px 0px -60% 0px' },
+    );
+    targets.forEach((t) => io.observe(t));
+    pick();
+  }
+</script>

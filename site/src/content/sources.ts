@@ -18,12 +18,12 @@ export const sources: Source[] = [
   },
   {
     id: 'gridee-app',
-    title: 'Gridee Android app',
+    title: 'Gridee app',
     detail:
-      'QR and number-plate check-in and check-out (CameraX, ML Kit OCR, ZXing), operator workflows for entry, exit and occupancy, JWT-secured calls over Retrofit and OkHttp, coin-based refundable bookings, email and Google sign-in, and Razorpay payments without storing card data.',
-    where: 'Gridee Android app source (private repository)',
+      'Live availability, advance and instant reservations, wallet and Razorpay payments; QR and number-plate check-in with CameraX and ML Kit OCR; JWT-secured API calls, refundable coin bookings and no stored card data.',
+    where: 'Gridee app source (private repository)',
     checked: '[date checked]',
-    note: 'Gridee Android app: CameraX, ML Kit OCR and ZXing check-in; JWT, Retrofit and OkHttp; Razorpay with no stored card data. Private repository.',
+    note: 'Gridee app: QR and number-plate check-in (CameraX, ML Kit OCR), JWT-secured calls, refundable coin bookings, Razorpay with no stored card data. Private repository.',
     chip: 'Gridee app · source',
   },
   {
@@ -125,11 +125,11 @@ export const sources: Source[] = [
     id: 'pulse-delivery',
     title: 'Pulse delivery pipeline',
     detail:
-      'A monorepo of three services with shared zod contracts. BullMQ batch dispatch with retries (backoff and jitter) and a dead-letter queue; a forward-only status state machine enforced in SQL WHERE clauses; HMAC-SHA256 on both directions of CRM ⇄ simulator traffic; idempotent receipts; failover to the next channel, made idempotent by a UNIQUE parent link; 72-hour last-touch attribution; AES-256-GCM PII encryption with a blind index.',
+      'A monorepo of three services with shared zod contracts. Messages go to a separate channel simulator (WhatsApp, SMS, email and RCS) that injects failures, latency, throttling, and duplicate and out-of-order callbacks, and retries webhooks with backoff. BullMQ batch dispatch with retries (backoff and jitter) and a dead-letter queue; a forward-only status state machine enforced in SQL WHERE clauses; HMAC-SHA256 on both directions of CRM ⇄ simulator traffic; idempotent receipts; failover to the next channel, made idempotent by a UNIQUE parent link; 72-hour last-touch attribution; AES-256-GCM PII encryption with a blind index.',
     where: 'Pulse / repository',
     checked: '[date checked]',
     url: 'https://github.com/yash-vks-chauhan/Pulse',
-    note: 'Pulse delivery pipeline: BullMQ dispatch, a forward-only state machine, HMAC-signed callbacks, idempotent failover, AES-256-GCM PII encryption. Pulse / repository.',
+    note: 'Pulse delivery pipeline: a fault-injecting channel simulator, BullMQ dispatch, a forward-only state machine, HMAC-signed callbacks, idempotent failover, AES-256-GCM PII encryption. Pulse / repository.',
     chip: 'Pulse · repository',
   },
   {
@@ -193,11 +193,12 @@ export const sources: Source[] = [
   {
     id: 'kalakraft-codebase',
     title: 'Kalakraft codebase',
-    detail: 'A Next.js 15 storefront and admin: 59 API route handlers and 20 Prisma models, Firebase Auth with JWT, Fuse.js search, Pusher real-time updates and Brevo low-stock alerts.',
+    detail:
+      'A Next.js 15 storefront and admin: about 73,000 lines of TypeScript, 59 API route handlers and 20 Prisma models, 1,195 commits. Firebase Auth with JWT, Fuse.js search, Pusher real-time updates, Brevo low-stock alerts.',
     where: 'Kalakraftdev / artcommerce',
     checked: '[date checked]',
     url: 'https://github.com/yash-vks-chauhan/Kalakraftdev',
-    note: 'Kalakraft codebase: 59 API route handlers and 20 Prisma models. Kalakraftdev / artcommerce.',
+    note: 'Kalakraft codebase: about 73,000 lines of TypeScript, 59 API route handlers, 20 Prisma models, 1,195 commits. Kalakraftdev / artcommerce.',
     chip: 'Kalakraftdev',
   },
   {
@@ -212,9 +213,21 @@ export const sources: Source[] = [
     chip: 'Autoscaler · README',
   },
   {
+    id: 'autoscaler-architecture',
+    title: 'Autoscaler architecture',
+    detail:
+      'A payment API with 10 Prometheus metrics and 6 chaos hooks; a NestJS control plane on TimescaleDB; a FastAPI engine (rolling 3σ baseline and Isolation Forest detection, a networkx dependency graph for root cause, Claude then OpenAI then an in-cluster Random Forest for reasoning, one JSON contract); rule-based decisions with an action whitelist; a Next.js dashboard with 7 live pages; 7 ADRs. Runs on a local Kind cluster.',
+    where: 'Autoscaler / README and docs',
+    checked: '[date checked]',
+    url: 'https://github.com/yash-vks-chauhan/Autoscaler',
+    note: 'Autoscaler architecture: detection, root cause, reasoning and the dashboard. Autoscaler / README and docs.',
+    chip: 'Autoscaler · docs',
+  },
+  {
     id: 'ct-repo',
     title: 'CT denoising repository',
-    detail: 'A TensorFlow/Keras grayscale U-Net (256×256 input, skip connections, mixed precision) with synthetic noise injection, CLI inference and a Streamlit app. Its metrics are withheld until the noisy/clean pairing is re-checked.',
+    detail:
+      'A TensorFlow/Keras grayscale U-Net (256 × 256 input, 32 to 512 filters, skip connections, mixed precision) with synthetic noise injection and augmentation, CLI inference and a Streamlit app. Its metrics are withheld until the noisy/clean pairing is re-checked.',
     where: 'CT-Denoising-U-Net / README',
     checked: '[date checked]',
     url: 'https://github.com/yash-vks-chauhan/CT-Denoising-U-Net',

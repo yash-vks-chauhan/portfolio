@@ -1,0 +1,106 @@
+---
+// The architecture diagram (cards and arrows, copied from the prototype's markup) and its text version. Phones get
+// the same flow as a numbered list of steps instead, as drawn.
+import { glyph } from '../ui/glyphs';
+import Rich from './Rich.astro';
+import type { Numbering } from '../../lib/citations';
+import type { Diagram, Step } from '../../content/case-studies/types';
+
+interface Props {
+  diagram: Diagram;
+  steps: Step[];
+  n: Numbering;
+  /** Unique per page: the arrowhead marker's id. */
+  uid: string;
+}
+
+const { diagram, steps, n, uid } = Astro.props;
+const marker = `${uid}-arrow`;
+const edgeBox = (e: Diagram['edges'][number]) => {
+  const horizontal = e.dir === 'right' || e.dir === 'left';
+  const w = horizontal ? e.len : 8;
+  const h = horizontal ? 8 : e.len;
+  const d = { right: `M 0 4 L ${e.len} 4`, left: `M ${e.len} 4 L 0 4`, down: `M 4 0 L 4 ${e.len}`, up: `M 4 ${e.len} L 4 0` }[e.dir];
+  return { w, h, d };
+};
+---
+
+<figure class="diagram max-md:hidden">
+  <div class="diagram-canvas" style={{ width: `${diagram.width}px`, height: `${diagram.height}px` }}>
+    <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id={marker} orient="auto" markerWidth="5" markerHeight="5" refX="3.2" refY="2" overflow="visible">
+          <path d="M0 0 L4 2 L0 4 Z" fill="#8E8E93" stroke="none"></path>
+        </marker>
+      </defs>
+    </svg>
+    {
+      diagram.edges.map((e) => {
+        const { w, h, d } = edgeBox(e);
+        return (
+          <svg
+            width={w}
+            height={h}
+            viewBox={`0 0 ${w} ${h}`}
+            preserveAspectRatio="none"
+            class="diagram-edge"
+            style={{ left: `${e.x}px`, top: `${e.y}px`, width: `${w}px`, height: `${h}px` }}
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d={d} marker-end={e.arrow ? `url(#${marker})` : undefined} />
+          </svg>
+        );
+      })
+    }
+    {
+      diagram.nodes.map((node) => {
+        const Icon = glyph(node.icon);
+        return (
+          <div
+            class:list={['diagram-node', `tone-${node.tone ?? 'fill'}`]}
+            style={{ left: `${node.x}px`, top: `${node.y}px`, width: `${node.w ?? 150}px`, height: `${node.h ?? 88}px` }}
+          >
+            <span class="diagram-node-icon" aria-hidden="true">
+              <Icon size={18} strokeWidth={2} />
+            </span>
+            <span>
+              <b class="font-semibold">{node.bold}</b> {node.text}
+            </span>
+          </div>
+        );
+      })
+    }
+    {
+      diagram.labels?.map((l) => (
+        <div
+          class:list={['diagram-label', l.size === 'note' ? 'diagram-note' : `tone-${l.tone ?? 'label2'}`]}
+          style={{ left: `${l.x}px`, top: `${l.y}px`, width: `${l.w}px`, textAlign: l.align ?? 'left' }}
+        >
+          {l.text}
+        </div>
+      ))
+    }
+  </div>
+  <figcaption class="diagram-caption">{diagram.text}</figcaption>
+</figure>
+
+<ol class="steps md:hidden" aria-label="The flow, step by step">
+  {
+    steps.map((s, i) => {
+      const Icon = s.icon ? glyph(s.icon) : null;
+      return (
+        <li class="step">
+          <span class:list={['step-badge', s.tone && `tone-${s.tone}`]} aria-hidden="true">
+            {Icon ? <Icon size={16} strokeWidth={2} /> : <span class="num">{i + 1}</span>}
+          </span>
+          <span class:list={['step-body', i > 0 && 'border-t border-sep']}>
+            <span>
+              <Rich text={s.text} n={n} />
+            </span>
+          </span>
+        </li>
+      );
+    })
+  }
+</ol>

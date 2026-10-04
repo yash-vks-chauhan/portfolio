@@ -1,0 +1,36 @@
+---
+// A content string with its markup rendered: **bold**, intervals that never break, and {{cite:id}} as a numbered
+// source marker (a link to the page's source list that opens the source sheet). Unknown or unlisted sources throw.
+import { parseRich } from '../../lib/rich';
+import { citeNumber, getSource, type Numbering } from '../../lib/citations';
+
+interface Props {
+  text: string;
+  n: Numbering;
+  where?: string;
+  /** The larger marker drawn in the summary card. */
+  marker?: 'sm' | 'lg';
+}
+
+const { text, n, where = 'this page', marker = 'sm' } = Astro.props;
+type Node = { t: 'text' | 'b' | 'nowrap'; v: string } | { t: 'cite'; id: string; num: number; title: string };
+const nodes: Node[] = parseRich(text).map((node) =>
+  node.t === 'cite' ? { t: 'cite', id: node.id, num: citeNumber(n, node.id, where), title: getSource(node.id).title } : node,
+);
+---
+
+{
+  nodes.map((node) =>
+    node.t === 'b' ? (
+      <strong class="font-semibold">{node.v}</strong>
+    ) : node.t === 'nowrap' ? (
+      <span class="whitespace-nowrap">{node.v}</span>
+    ) : node.t === 'cite' ? (
+      <a href={`#fn-${node.num}`} class:list={['cite', marker === 'lg' && 'cite-lg']} data-cite={node.id} data-n={node.num} aria-label={`Source ${node.num}: ${node.title}`}>
+        {node.num}
+      </a>
+    ) : (
+      node.v
+    ),
+  )
+}
