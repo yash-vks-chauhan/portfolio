@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime.DandsfUi.js";var t=e();function n({glyph:e,size:n=16,className:r,title:i}){return(0,t.jsx)(`svg`,{viewBox:e.viewBox,width:n,height:n,fill:`currentColor`,className:r,role:i?`img`:void 0,"aria-hidden":!i||void 0,"aria-label":i,focusable:`false`,children:(0,t.jsx)(`path`,{d:e.d})})}export{n as t};

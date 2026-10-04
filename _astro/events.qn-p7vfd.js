@@ -1,0 +1,1 @@
+var e=`glass:source`,t=`glass:command`,n=`glass:copy`;function r(e){window.dispatchEvent(new CustomEvent(n,{detail:e}))}function i(){return typeof window<`u`&&window.matchMedia(`(prefers-reduced-motion: reduce)`).matches}export{r as a,i,n,e as r,t};
